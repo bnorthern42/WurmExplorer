@@ -1,0 +1,36 @@
+servers:
+  xanadu:
+    map_image: "../svrMaps/Xanadu-topo-20250226.png"
+
+    # Xanadu is 8192x8192 tiles (32km server; 1 tile = 4m)
+    map_size_tiles: 8192
+
+    # Multi-scale template match (treasure-map crop vs server map)
+    # If you still see frequent mismatches, widen the scale range.
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    # Preprocess
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    # Scoring weights (edges + gray must roughly sum to 1)
+    score_weights:
+      edges: 0.81
+      gray: 0.19
+
+    # Heuristic: don't accept candidates that place the *treasure tile* in ocean.
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    # Hint behavior
+    # - hint_use_roi: restrict matching to the hint circle (faster)
+    # - hint_soft_bias: still re-rank candidates by proximity to the hint
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    # Output
+    topk: 20

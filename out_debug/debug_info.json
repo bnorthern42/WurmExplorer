@@ -1,0 +1,691 @@
+{
+  "x_pixel_500": {
+    "cx": 279.0,
+    "cy": 233.0,
+    "size": 50,
+    "score": 0.876189649105072
+  },
+  "offsets_tiles": {
+    "xOffset": -5.800000000000005,
+    "yOffset": 3.3999999999999977
+  },
+  "best": {
+    "rank": 1,
+    "match_score": 0.05964093655347824,
+    "match_scale": 0.6,
+    "match_center_px": [
+      5134.0,
+      5295.0
+    ],
+    "match_top_left": [
+      4984,
+      5145
+    ],
+    "match_patch_size": [
+      300,
+      300
+    ],
+    "map_center_tile": [
+      5134.0,
+      5295.0
+    ],
+    "offsets_tiles": [
+      -5.800000000000005,
+      3.3999999999999977
+    ],
+    "treasure_tile": [
+      5139.8,
+      5291.6
+    ],
+    "x_pixel_500": [
+      279.0,
+      233.0
+    ],
+    "hint_dist_tiles": 16.81564396555372,
+    "biased_score": null
+  },
+  "candidates": [
+    {
+      "rank": 1,
+      "match_score": 0.05964093655347824,
+      "match_scale": 0.6,
+      "match_center_px": [
+        5134.0,
+        5295.0
+      ],
+      "match_top_left": [
+        4984,
+        5145
+      ],
+      "match_patch_size": [
+        300,
+        300
+      ],
+      "map_center_tile": [
+        5134.0,
+        5295.0
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5139.8,
+        5291.6
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 16.81564396555372,
+      "biased_score": null
+    },
+    {
+      "rank": 2,
+      "match_score": 0.05343795195221901,
+      "match_scale": 0.55,
+      "match_center_px": [
+        5110.5,
+        5304.5
+      ],
+      "match_top_left": [
+        4973,
+        5167
+      ],
+      "match_patch_size": [
+        275,
+        275
+      ],
+      "map_center_tile": [
+        5110.5,
+        5304.5
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5116.3,
+        5301.1
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 26.898542960210865,
+      "biased_score": null
+    },
+    {
+      "rank": 3,
+      "match_score": 0.05281224101781845,
+      "match_scale": 0.65,
+      "match_center_px": [
+        5123.5,
+        5300.5
+      ],
+      "match_top_left": [
+        4961,
+        5138
+      ],
+      "match_patch_size": [
+        325,
+        325
+      ],
+      "map_center_tile": [
+        5123.5,
+        5300.5
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5129.3,
+        5297.1
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 19.16804242844135,
+      "biased_score": null
+    },
+    {
+      "rank": 4,
+      "match_score": 0.04952235147356987,
+      "match_scale": 0.7,
+      "match_center_px": [
+        5128.0,
+        5293.0
+      ],
+      "match_top_left": [
+        4953,
+        5118
+      ],
+      "match_patch_size": [
+        350,
+        350
+      ],
+      "map_center_tile": [
+        5128.0,
+        5293.0
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5133.8,
+        5289.6
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 12.263428176314282,
+      "biased_score": null
+    },
+    {
+      "rank": 5,
+      "match_score": 0.041781339794397354,
+      "match_scale": 0.55,
+      "match_center_px": [
+        5170.5,
+        5304.5
+      ],
+      "match_top_left": [
+        5033,
+        5167
+      ],
+      "match_patch_size": [
+        275,
+        275
+      ],
+      "map_center_tile": [
+        5170.5,
+        5304.5
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5176.3,
+        5301.1
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 51.77881030877714,
+      "biased_score": null
+    },
+    {
+      "rank": 6,
+      "match_score": 0.038000740110874176,
+      "match_scale": 0.75,
+      "match_center_px": [
+        5121.5,
+        5283.5
+      ],
+      "match_top_left": [
+        4934,
+        5096
+      ],
+      "match_patch_size": [
+        375,
+        375
+      ],
+      "map_center_tile": [
+        5121.5,
+        5283.5
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5127.3,
+        5280.1
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 3.4451629024713424,
+      "biased_score": null
+    },
+    {
+      "rank": 7,
+      "match_score": 0.037806186825037,
+      "match_scale": 0.6,
+      "match_center_px": [
+        5086.0,
+        5312.0
+      ],
+      "match_top_left": [
+        4936,
+        5162
+      ],
+      "match_patch_size": [
+        300,
+        300
+      ],
+      "map_center_tile": [
+        5086.0,
+        5312.0
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5091.8,
+        5308.6
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 48.969881206872586,
+      "biased_score": null
+    },
+    {
+      "rank": 8,
+      "match_score": 0.03417818993330002,
+      "match_scale": 0.6,
+      "match_center_px": [
+        5179.0,
+        5312.0
+      ],
+      "match_top_left": [
+        5029,
+        5162
+      ],
+      "match_patch_size": [
+        300,
+        300
+      ],
+      "map_center_tile": [
+        5179.0,
+        5312.0
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5184.8,
+        5308.6
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 62.80282891726087,
+      "biased_score": null
+    },
+    {
+      "rank": 9,
+      "match_score": 0.030914047732949257,
+      "match_scale": 0.55,
+      "match_center_px": [
+        5153.5,
+        5259.5
+      ],
+      "match_top_left": [
+        5016,
+        5122
+      ],
+      "match_patch_size": [
+        275,
+        275
+      ],
+      "map_center_tile": [
+        5153.5,
+        5259.5
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5159.3,
+        5256.1
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 36.55683460395418,
+      "biased_score": null
+    },
+    {
+      "rank": 10,
+      "match_score": 0.02877350151538849,
+      "match_scale": 0.55,
+      "match_center_px": [
+        5068.5,
+        5304.5
+      ],
+      "match_top_left": [
+        4931,
+        5167
+      ],
+      "match_patch_size": [
+        275,
+        275
+      ],
+      "map_center_tile": [
+        5068.5,
+        5304.5
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5074.3,
+        5301.1
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 60.309801067946644,
+      "biased_score": null
+    },
+    {
+      "rank": 11,
+      "match_score": 0.026333974674344063,
+      "match_scale": 0.6,
+      "match_center_px": [
+        5151.0,
+        5238.0
+      ],
+      "match_top_left": [
+        5001,
+        5088
+      ],
+      "match_patch_size": [
+        300,
+        300
+      ],
+      "map_center_tile": [
+        5151.0,
+        5238.0
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5156.8,
+        5234.6
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 50.967081736606744,
+      "biased_score": null
+    },
+    {
+      "rank": 12,
+      "match_score": 0.02194337174296379,
+      "match_scale": 0.6,
+      "match_center_px": [
+        5085.0,
+        5260.0
+      ],
+      "match_top_left": [
+        4935,
+        5110
+      ],
+      "match_patch_size": [
+        300,
+        300
+      ],
+      "map_center_tile": [
+        5085.0,
+        5260.0
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5090.8,
+        5256.6
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 44.62319869250751,
+      "biased_score": null
+    },
+    {
+      "rank": 13,
+      "match_score": 0.020431362092494965,
+      "match_scale": 0.55,
+      "match_center_px": [
+        5089.5,
+        5259.5
+      ],
+      "match_top_left": [
+        4952,
+        5122
+      ],
+      "match_patch_size": [
+        275,
+        275
+      ],
+      "map_center_tile": [
+        5089.5,
+        5259.5
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5095.3,
+        5256.1
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 40.99253184516473,
+      "biased_score": null
+    },
+    {
+      "rank": 14,
+      "match_score": 0.019383251667022705,
+      "match_scale": 0.65,
+      "match_center_px": [
+        5167.5,
+        5240.5
+      ],
+      "match_top_left": [
+        5005,
+        5078
+      ],
+      "match_patch_size": [
+        325,
+        325
+      ],
+      "map_center_tile": [
+        5167.5,
+        5240.5
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5173.3,
+        5237.1
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 59.5335050409705,
+      "biased_score": null
+    },
+    {
+      "rank": 15,
+      "match_score": 0.017066119238734245,
+      "match_scale": 0.55,
+      "match_center_px": [
+        5093.5,
+        5217.5
+      ],
+      "match_top_left": [
+        4956,
+        5080
+      ],
+      "match_patch_size": [
+        275,
+        275
+      ],
+      "map_center_tile": [
+        5093.5,
+        5217.5
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5099.3,
+        5214.1
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 70.83649243206746,
+      "biased_score": null
+    },
+    {
+      "rank": 16,
+      "match_score": 0.013678209856152534,
+      "match_scale": 0.65,
+      "match_center_px": [
+        5098.5,
+        5240.5
+      ],
+      "match_top_left": [
+        4936,
+        5078
+      ],
+      "match_patch_size": [
+        325,
+        325
+      ],
+      "map_center_tile": [
+        5098.5,
+        5240.5
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5104.3,
+        5237.1
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 48.250363742792054,
+      "biased_score": null
+    },
+    {
+      "rank": 17,
+      "match_score": 0.01049090176820755,
+      "match_scale": 0.55,
+      "match_center_px": [
+        5137.5,
+        5217.5
+      ],
+      "match_top_left": [
+        5000,
+        5080
+      ],
+      "match_patch_size": [
+        275,
+        275
+      ],
+      "map_center_tile": [
+        5137.5,
+        5217.5
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5143.3,
+        5214.1
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 65.21747174946574,
+      "biased_score": null
+    },
+    {
+      "rank": 18,
+      "match_score": -0.011837641708552837,
+      "match_scale": 0.55,
+      "match_center_px": [
+        5180.5,
+        5217.5
+      ],
+      "match_top_left": [
+        5043,
+        5080
+      ],
+      "match_patch_size": [
+        275,
+        275
+      ],
+      "map_center_tile": [
+        5180.5,
+        5217.5
+      ],
+      "offsets_tiles": [
+        -5.800000000000005,
+        3.3999999999999977
+      ],
+      "treasure_tile": [
+        5186.3,
+        5214.1
+      ],
+      "x_pixel_500": [
+        279.0,
+        233.0
+      ],
+      "hint_dist_tiles": 85.13050778841199,
+      "biased_score": null
+    }
+  ],
+  "roi": {
+    "x0": 4930,
+    "y0": 5078,
+    "x1": 5330,
+    "y1": 5478
+  },
+  "map_crop_auto": false,
+  "avoid_water": true,
+  "weights": {
+    "edges": 0.81,
+    "gray": 0.19
+  }
+}
