@@ -1,6 +1,6 @@
 servers:
   xanadu:
-    map_image: "../svrMaps/Xanadu-topo-20250226.png"
+    map_image: "../svrMaps/Xanadu-topo-20260224.png"
 
     # Xanadu is 8192x8192 tiles (32km server; 1 tile = 4m)
     map_size_tiles: 8192

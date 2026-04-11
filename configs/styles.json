@@ -1,0 +1,13 @@
+{
+  "deed_current_color": "#0069ff",
+  "deed_old_color": "#aaaaaa",
+  "road_current_color": "#a0522d",
+  "road_old_color": "#d2b48c",
+  "road_width": 6,
+  "bridge_current_color": "#8b4513",
+  "bridge_old_color": "#cd853f",
+  "bridge_width": 4,
+  "tunnel_current_color": "#808080",
+  "tunnel_old_color": "#a9a9a9",
+  "tunnel_width": 2
+}
