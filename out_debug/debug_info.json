@@ -1,691 +1,701 @@
 {
   "x_pixel_500": {
-    "cx": 279.0,
-    "cy": 233.0,
+    "cx": 163.0,
+    "cy": 282.0,
     "size": 50,
-    "score": 0.876189649105072
+    "score": 0.8623135685920715
   },
   "offsets_tiles": {
-    "xOffset": -5.800000000000005,
-    "yOffset": 3.3999999999999977
+    "xOffset": 17.4,
+    "yOffset": -6.399999999999995
   },
   "best": {
     "rank": 1,
-    "match_score": 0.05964093655347824,
-    "match_scale": 0.6,
+    "match_score": 0.09814443439245224,
+    "match_scale": 0.55,
     "match_center_px": [
-      5134.0,
-      5295.0
+      3250.5,
+      1416.5
     ],
     "match_top_left": [
-      4984,
-      5145
+      3113,
+      1279
     ],
     "match_patch_size": [
-      300,
-      300
+      275,
+      275
     ],
     "map_center_tile": [
-      5134.0,
-      5295.0
+      3250.5,
+      1416.5
     ],
     "offsets_tiles": [
-      -5.800000000000005,
-      3.3999999999999977
+      17.4,
+      -6.399999999999995
     ],
     "treasure_tile": [
-      5139.8,
-      5291.6
+      3233.1,
+      1422.9
     ],
     "x_pixel_500": [
-      279.0,
-      233.0
+      163.0,
+      282.0
     ],
-    "hint_dist_tiles": 16.81564396555372,
-    "biased_score": null
+    "hint_dist_tiles": 32.61901418398919,
+    "biased_score": 0.09392280939568662
   },
   "candidates": [
     {
       "rank": 1,
-      "match_score": 0.05964093655347824,
-      "match_scale": 0.6,
-      "match_center_px": [
-        5134.0,
-        5295.0
-      ],
-      "match_top_left": [
-        4984,
-        5145
-      ],
-      "match_patch_size": [
-        300,
-        300
-      ],
-      "map_center_tile": [
-        5134.0,
-        5295.0
-      ],
-      "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
-      ],
-      "treasure_tile": [
-        5139.8,
-        5291.6
-      ],
-      "x_pixel_500": [
-        279.0,
-        233.0
-      ],
-      "hint_dist_tiles": 16.81564396555372,
-      "biased_score": null
-    },
-    {
-      "rank": 2,
-      "match_score": 0.05343795195221901,
+      "match_score": 0.09814443439245224,
       "match_scale": 0.55,
       "match_center_px": [
-        5110.5,
-        5304.5
+        3250.5,
+        1416.5
       ],
       "match_top_left": [
-        4973,
-        5167
+        3113,
+        1279
       ],
       "match_patch_size": [
         275,
         275
       ],
       "map_center_tile": [
-        5110.5,
-        5304.5
+        3250.5,
+        1416.5
       ],
       "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
+        17.4,
+        -6.399999999999995
       ],
       "treasure_tile": [
-        5116.3,
-        5301.1
+        3233.1,
+        1422.9
       ],
       "x_pixel_500": [
-        279.0,
-        233.0
+        163.0,
+        282.0
       ],
-      "hint_dist_tiles": 26.898542960210865,
-      "biased_score": null
+      "hint_dist_tiles": 32.61901418398919,
+      "biased_score": 0.09392280939568662
+    },
+    {
+      "rank": 2,
+      "match_score": 0.07380978018045425,
+      "match_scale": 0.6,
+      "match_center_px": [
+        3278.0,
+        1420.0
+      ],
+      "match_top_left": [
+        3128,
+        1270
+      ],
+      "match_patch_size": [
+        300,
+        300
+      ],
+      "map_center_tile": [
+        3278.0,
+        1420.0
+      ],
+      "offsets_tiles": [
+        17.4,
+        -6.399999999999995
+      ],
+      "treasure_tile": [
+        3260.6,
+        1426.4
+      ],
+      "x_pixel_500": [
+        163.0,
+        282.0
+      ],
+      "hint_dist_tiles": 27.879360025577647,
+      "biased_score": 0.0714768139621018
     },
     {
       "rank": 3,
-      "match_score": 0.05281224101781845,
-      "match_scale": 0.65,
+      "match_score": 0.0811256393790245,
+      "match_scale": 0.6,
       "match_center_px": [
-        5123.5,
-        5300.5
+        3209.0,
+        1413.0
       ],
       "match_top_left": [
-        4961,
-        5138
+        3059,
+        1263
+      ],
+      "match_patch_size": [
+        300,
+        300
+      ],
+      "map_center_tile": [
+        3209.0,
+        1413.0
+      ],
+      "offsets_tiles": [
+        17.4,
+        -6.399999999999995
+      ],
+      "treasure_tile": [
+        3191.6,
+        1419.4
+      ],
+      "x_pixel_500": [
+        163.0,
+        282.0
+      ],
+      "hint_dist_tiles": 66.9032120849838,
+      "biased_score": 0.06742654172963884
+    },
+    {
+      "rank": 4,
+      "match_score": 0.06871362030506134,
+      "match_scale": 0.55,
+      "match_center_px": [
+        3292.5,
+        1413.5
+      ],
+      "match_top_left": [
+        3155,
+        1276
+      ],
+      "match_patch_size": [
+        275,
+        275
+      ],
+      "map_center_tile": [
+        3292.5,
+        1413.5
+      ],
+      "offsets_tiles": [
+        17.4,
+        -6.399999999999995
+      ],
+      "treasure_tile": [
+        3275.1,
+        1419.9
+      ],
+      "x_pixel_500": [
+        163.0,
+        282.0
+      ],
+      "hint_dist_tiles": 28.755008458483186,
+      "biased_score": 0.06640551171459379
+    },
+    {
+      "rank": 5,
+      "match_score": 0.07554756104946136,
+      "match_scale": 0.55,
+      "match_center_px": [
+        3197.5,
+        1419.5
+      ],
+      "match_top_left": [
+        3060,
+        1282
+      ],
+      "match_patch_size": [
+        275,
+        275
+      ],
+      "map_center_tile": [
+        3197.5,
+        1419.5
+      ],
+      "offsets_tiles": [
+        17.4,
+        -6.399999999999995
+      ],
+      "treasure_tile": [
+        3180.1,
+        1425.9
+      ],
+      "x_pixel_500": [
+        163.0,
+        282.0
+      ],
+      "hint_dist_tiles": 79.88177732826388,
+      "biased_score": 0.05803699520864473
+    },
+    {
+      "rank": 6,
+      "match_score": 0.06283378601074219,
+      "match_scale": 0.55,
+      "match_center_px": [
+        3273.5,
+        1336.5
+      ],
+      "match_top_left": [
+        3136,
+        1199
+      ],
+      "match_patch_size": [
+        275,
+        275
+      ],
+      "map_center_tile": [
+        3273.5,
+        1336.5
+      ],
+      "offsets_tiles": [
+        17.4,
+        -6.399999999999995
+      ],
+      "treasure_tile": [
+        3256.1,
+        1342.9
+      ],
+      "x_pixel_500": [
+        163.0,
+        282.0
+      ],
+      "hint_dist_tiles": 56.12958729961271,
+      "biased_score": 0.05516373203285947
+    },
+    {
+      "rank": 7,
+      "match_score": 0.060376204550266266,
+      "match_scale": 0.65,
+      "match_center_px": [
+        3219.5,
+        1407.5
+      ],
+      "match_top_left": [
+        3057,
+        1245
       ],
       "match_patch_size": [
         325,
         325
       ],
       "map_center_tile": [
-        5123.5,
-        5300.5
+        3219.5,
+        1407.5
       ],
       "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
+        17.4,
+        -6.399999999999995
       ],
       "treasure_tile": [
-        5129.3,
-        5297.1
+        3202.1,
+        1413.9
       ],
       "x_pixel_500": [
-        279.0,
-        233.0
+        163.0,
+        282.0
       ],
-      "hint_dist_tiles": 19.16804242844135,
-      "biased_score": null
+      "hint_dist_tiles": 55.264659904995774,
+      "biased_score": 0.053217600012170733
     },
     {
-      "rank": 4,
-      "match_score": 0.04952235147356987,
+      "rank": 8,
+      "match_score": 0.05587155371904373,
       "match_scale": 0.7,
       "match_center_px": [
-        5128.0,
-        5293.0
+        3231.0,
+        1402.0
       ],
       "match_top_left": [
-        4953,
-        5118
+        3056,
+        1227
       ],
       "match_patch_size": [
         350,
         350
       ],
       "map_center_tile": [
-        5128.0,
-        5293.0
+        3231.0,
+        1402.0
       ],
       "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
+        17.4,
+        -6.399999999999995
       ],
       "treasure_tile": [
-        5133.8,
-        5289.6
+        3213.6,
+        1408.4
       ],
       "x_pixel_500": [
-        279.0,
-        233.0
+        163.0,
+        282.0
       ],
-      "hint_dist_tiles": 12.263428176314282,
-      "biased_score": null
+      "hint_dist_tiles": 42.76535514669861,
+      "biased_score": 0.05180475812232574
     },
     {
-      "rank": 5,
-      "match_score": 0.041781339794397354,
-      "match_scale": 0.55,
+      "rank": 9,
+      "match_score": 0.049518831074237823,
+      "match_scale": 0.65,
       "match_center_px": [
-        5170.5,
-        5304.5
+        3271.5,
+        1431.5
       ],
       "match_top_left": [
-        5033,
-        5167
+        3109,
+        1269
       ],
       "match_patch_size": [
-        275,
-        275
+        325,
+        325
       ],
       "map_center_tile": [
-        5170.5,
-        5304.5
+        3271.5,
+        1431.5
       ],
       "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
+        17.4,
+        -6.399999999999995
       ],
       "treasure_tile": [
-        5176.3,
-        5301.1
+        3254.1,
+        1437.9
       ],
       "x_pixel_500": [
-        279.0,
-        233.0
+        163.0,
+        282.0
       ],
-      "hint_dist_tiles": 51.77881030877714,
-      "biased_score": null
+      "hint_dist_tiles": 38.895057718061864,
+      "biased_score": 0.04651801104708904
     },
     {
-      "rank": 6,
-      "match_score": 0.038000740110874176,
-      "match_scale": 0.75,
+      "rank": 10,
+      "match_score": 0.03993494063615799,
+      "match_scale": 0.6,
       "match_center_px": [
-        5121.5,
-        5283.5
+        3263.0,
+        1349.0
       ],
       "match_top_left": [
-        4934,
-        5096
+        3113,
+        1199
+      ],
+      "match_patch_size": [
+        300,
+        300
+      ],
+      "map_center_tile": [
+        3263.0,
+        1349.0
+      ],
+      "offsets_tiles": [
+        17.4,
+        -6.399999999999995
+      ],
+      "treasure_tile": [
+        3245.6,
+        1355.4
+      ],
+      "x_pixel_500": [
+        163.0,
+        282.0
+      ],
+      "hint_dist_tiles": 44.69506036460059,
+      "biased_score": 0.036770805092758825
+    },
+    {
+      "rank": 11,
+      "match_score": 0.03562001511454582,
+      "match_scale": 0.75,
+      "match_center_px": [
+        3242.5,
+        1395.5
+      ],
+      "match_top_left": [
+        3055,
+        1208
       ],
       "match_patch_size": [
         375,
         375
       ],
       "map_center_tile": [
-        5121.5,
-        5283.5
+        3242.5,
+        1395.5
       ],
       "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
+        17.4,
+        -6.399999999999995
       ],
       "treasure_tile": [
-        5127.3,
-        5280.1
+        3225.1,
+        1401.9
       ],
       "x_pixel_500": [
-        279.0,
-        233.0
+        163.0,
+        282.0
       ],
-      "hint_dist_tiles": 3.4451629024713424,
-      "biased_score": null
-    },
-    {
-      "rank": 7,
-      "match_score": 0.037806186825037,
-      "match_scale": 0.6,
-      "match_center_px": [
-        5086.0,
-        5312.0
-      ],
-      "match_top_left": [
-        4936,
-        5162
-      ],
-      "match_patch_size": [
-        300,
-        300
-      ],
-      "map_center_tile": [
-        5086.0,
-        5312.0
-      ],
-      "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
-      ],
-      "treasure_tile": [
-        5091.8,
-        5308.6
-      ],
-      "x_pixel_500": [
-        279.0,
-        233.0
-      ],
-      "hint_dist_tiles": 48.969881206872586,
-      "biased_score": null
-    },
-    {
-      "rank": 8,
-      "match_score": 0.03417818993330002,
-      "match_scale": 0.6,
-      "match_center_px": [
-        5179.0,
-        5312.0
-      ],
-      "match_top_left": [
-        5029,
-        5162
-      ],
-      "match_patch_size": [
-        300,
-        300
-      ],
-      "map_center_tile": [
-        5179.0,
-        5312.0
-      ],
-      "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
-      ],
-      "treasure_tile": [
-        5184.8,
-        5308.6
-      ],
-      "x_pixel_500": [
-        279.0,
-        233.0
-      ],
-      "hint_dist_tiles": 62.80282891726087,
-      "biased_score": null
-    },
-    {
-      "rank": 9,
-      "match_score": 0.030914047732949257,
-      "match_scale": 0.55,
-      "match_center_px": [
-        5153.5,
-        5259.5
-      ],
-      "match_top_left": [
-        5016,
-        5122
-      ],
-      "match_patch_size": [
-        275,
-        275
-      ],
-      "map_center_tile": [
-        5153.5,
-        5259.5
-      ],
-      "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
-      ],
-      "treasure_tile": [
-        5159.3,
-        5256.1
-      ],
-      "x_pixel_500": [
-        279.0,
-        233.0
-      ],
-      "hint_dist_tiles": 36.55683460395418,
-      "biased_score": null
-    },
-    {
-      "rank": 10,
-      "match_score": 0.02877350151538849,
-      "match_scale": 0.55,
-      "match_center_px": [
-        5068.5,
-        5304.5
-      ],
-      "match_top_left": [
-        4931,
-        5167
-      ],
-      "match_patch_size": [
-        275,
-        275
-      ],
-      "map_center_tile": [
-        5068.5,
-        5304.5
-      ],
-      "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
-      ],
-      "treasure_tile": [
-        5074.3,
-        5301.1
-      ],
-      "x_pixel_500": [
-        279.0,
-        233.0
-      ],
-      "hint_dist_tiles": 60.309801067946644,
-      "biased_score": null
-    },
-    {
-      "rank": 11,
-      "match_score": 0.026333974674344063,
-      "match_scale": 0.6,
-      "match_center_px": [
-        5151.0,
-        5238.0
-      ],
-      "match_top_left": [
-        5001,
-        5088
-      ],
-      "match_patch_size": [
-        300,
-        300
-      ],
-      "map_center_tile": [
-        5151.0,
-        5238.0
-      ],
-      "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
-      ],
-      "treasure_tile": [
-        5156.8,
-        5234.6
-      ],
-      "x_pixel_500": [
-        279.0,
-        233.0
-      ],
-      "hint_dist_tiles": 50.967081736606744,
-      "biased_score": null
+      "hint_dist_tiles": 30.361440001904565,
+      "biased_score": 0.034288708063985915
     },
     {
       "rank": 12,
-      "match_score": 0.02194337174296379,
-      "match_scale": 0.6,
+      "match_score": 0.035119324922561646,
+      "match_scale": 0.55,
       "match_center_px": [
-        5085.0,
-        5260.0
+        3204.5,
+        1374.5
       ],
       "match_top_left": [
-        4935,
-        5110
+        3067,
+        1237
+      ],
+      "match_patch_size": [
+        275,
+        275
+      ],
+      "map_center_tile": [
+        3204.5,
+        1374.5
+      ],
+      "offsets_tiles": [
+        17.4,
+        -6.399999999999995
+      ],
+      "treasure_tile": [
+        3187.1,
+        1380.9
+      ],
+      "x_pixel_500": [
+        163.0,
+        282.0
+      ],
+      "hint_dist_tiles": 70.59129134097549,
+      "biased_score": 0.02858371261661071
+    },
+    {
+      "rank": 13,
+      "match_score": 0.028776952996850014,
+      "match_scale": 0.6,
+      "match_center_px": [
+        3215.0,
+        1349.0
+      ],
+      "match_top_left": [
+        3065,
+        1199
       ],
       "match_patch_size": [
         300,
         300
       ],
       "map_center_tile": [
-        5085.0,
-        5260.0
+        3215.0,
+        1349.0
       ],
       "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
+        17.4,
+        -6.399999999999995
       ],
       "treasure_tile": [
-        5090.8,
-        5256.6
+        3197.6,
+        1355.4
       ],
       "x_pixel_500": [
-        279.0,
-        233.0
+        163.0,
+        282.0
       ],
-      "hint_dist_tiles": 44.62319869250751,
-      "biased_score": null
-    },
-    {
-      "rank": 13,
-      "match_score": 0.020431362092494965,
-      "match_scale": 0.55,
-      "match_center_px": [
-        5089.5,
-        5259.5
-      ],
-      "match_top_left": [
-        4952,
-        5122
-      ],
-      "match_patch_size": [
-        275,
-        275
-      ],
-      "map_center_tile": [
-        5089.5,
-        5259.5
-      ],
-      "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
-      ],
-      "treasure_tile": [
-        5095.3,
-        5256.1
-      ],
-      "x_pixel_500": [
-        279.0,
-        233.0
-      ],
-      "hint_dist_tiles": 40.99253184516473,
-      "biased_score": null
+      "hint_dist_tiles": 72.35497699166602,
+      "biased_score": 0.023178902288694615
     },
     {
       "rank": 14,
-      "match_score": 0.019383251667022705,
+      "match_score": 0.021521462127566338,
       "match_scale": 0.65,
       "match_center_px": [
-        5167.5,
-        5240.5
+        3275.5,
+        1378.5
       ],
       "match_top_left": [
-        5005,
-        5078
+        3113,
+        1216
       ],
       "match_patch_size": [
         325,
         325
       ],
       "map_center_tile": [
-        5167.5,
-        5240.5
+        3275.5,
+        1378.5
       ],
       "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
+        17.4,
+        -6.399999999999995
       ],
       "treasure_tile": [
-        5173.3,
-        5237.1
+        3258.1,
+        1384.9
       ],
       "x_pixel_500": [
-        279.0,
-        233.0
+        163.0,
+        282.0
       ],
-      "hint_dist_tiles": 59.5335050409705,
-      "biased_score": null
+      "hint_dist_tiles": 14.394269525420306,
+      "biased_score": 0.021337986733895406
     },
     {
       "rank": 15,
-      "match_score": 0.017066119238734245,
+      "match_score": 0.02936338447034359,
       "match_scale": 0.55,
       "match_center_px": [
-        5093.5,
-        5217.5
+        3192.5,
+        1460.5
       ],
       "match_top_left": [
-        4956,
-        5080
+        3055,
+        1323
       ],
       "match_patch_size": [
         275,
         275
       ],
       "map_center_tile": [
-        5093.5,
-        5217.5
+        3192.5,
+        1460.5
       ],
       "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
+        17.4,
+        -6.399999999999995
       ],
       "treasure_tile": [
-        5099.3,
-        5214.1
+        3175.1,
+        1466.9
       ],
       "x_pixel_500": [
-        279.0,
-        233.0
+        163.0,
+        282.0
       ],
-      "hint_dist_tiles": 70.83649243206746,
-      "biased_score": null
+      "hint_dist_tiles": 105.08644256350232,
+      "biased_score": 0.018604798464115
     },
     {
       "rank": 16,
-      "match_score": 0.013678209856152534,
-      "match_scale": 0.65,
+      "match_score": 0.02276933565735817,
+      "match_scale": 0.55,
       "match_center_px": [
-        5098.5,
-        5240.5
+        3246.5,
+        1457.5
       ],
       "match_top_left": [
-        4936,
-        5078
+        3109,
+        1320
       ],
       "match_patch_size": [
-        325,
-        325
+        275,
+        275
       ],
       "map_center_tile": [
-        5098.5,
-        5240.5
+        3246.5,
+        1457.5
       ],
       "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
+        17.4,
+        -6.399999999999995
       ],
       "treasure_tile": [
-        5104.3,
-        5237.1
+        3229.1,
+        1463.9
       ],
       "x_pixel_500": [
-        279.0,
-        233.0
+        163.0,
+        282.0
       ],
-      "hint_dist_tiles": 48.250363742792054,
-      "biased_score": null
+      "hint_dist_tiles": 69.97579772426404,
+      "biased_score": 0.018598396243667523
     },
     {
       "rank": 17,
-      "match_score": 0.01049090176820755,
+      "match_score": 0.018574118614196777,
       "match_scale": 0.55,
       "match_center_px": [
-        5137.5,
-        5217.5
+        3317.5,
+        1365.5
       ],
       "match_top_left": [
-        5000,
-        5080
+        3180,
+        1228
       ],
       "match_patch_size": [
         275,
         275
       ],
       "map_center_tile": [
-        5137.5,
-        5217.5
+        3317.5,
+        1365.5
       ],
       "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
+        17.4,
+        -6.399999999999995
       ],
       "treasure_tile": [
-        5143.3,
-        5214.1
+        3300.1,
+        1371.9
       ],
       "x_pixel_500": [
-        279.0,
-        233.0
+        163.0,
+        282.0
       ],
-      "hint_dist_tiles": 65.21747174946574,
-      "biased_score": null
+      "hint_dist_tiles": 52.350072949885686,
+      "biased_score": 0.01658542159522153
     },
     {
       "rank": 18,
-      "match_score": -0.011837641708552837,
+      "match_score": 0.01662040501832962,
       "match_scale": 0.55,
       "match_center_px": [
-        5180.5,
-        5217.5
+        3291.5,
+        1454.5
       ],
       "match_top_left": [
-        5043,
-        5080
+        3154,
+        1317
       ],
       "match_patch_size": [
         275,
         275
       ],
       "map_center_tile": [
-        5180.5,
-        5217.5
+        3291.5,
+        1454.5
       ],
       "offsets_tiles": [
-        -5.800000000000005,
-        3.3999999999999977
+        17.4,
+        -6.399999999999995
       ],
       "treasure_tile": [
-        5186.3,
-        5214.1
+        3274.1,
+        1460.9
       ],
       "x_pixel_500": [
-        279.0,
-        233.0
+        163.0,
+        282.0
       ],
-      "hint_dist_tiles": 85.13050778841199,
-      "biased_score": null
+      "hint_dist_tiles": 64.66152681544831,
+      "biased_score": 0.01398321793895091
     }
   ],
   "roi": {
-    "x0": 4930,
-    "y0": 5078,
-    "x1": 5330,
-    "y1": 5478
+    "x0": 3055,
+    "y0": 1199,
+    "x1": 3455,
+    "y1": 1599
   },
   "map_crop_auto": false,
   "avoid_water": true,
   "weights": {
     "edges": 0.81,
     "gray": 0.19
-  }
+  },
+  "water_hsv_lo": [
+    85,
+    20,
+    20
+  ],
+  "water_hsv_hi": [
+    140,
+    255,
+    255
+  ]
 }
