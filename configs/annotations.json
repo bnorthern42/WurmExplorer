@@ -63996,17 +63996,21 @@
     "influence_radius": 0
   },
   {
-    "id": "43bdae73-d4b0-418f-b62e-0a4c2e36eae2",
-    "server": "Chaos",
-    "type": "guard_tower",
+    "id": "9b4a9739-c371-4857-8a13-c31212ed43c1",
+    "server": "Xanadu",
+    "type": "tunnel",
     "status": "current",
-    "name": "polarbear 111",
-    "notes": "",
+    "name": "",
+    "notes": "Midsouth tunnel1",
     "tags": "",
     "points": [
       [
-        439.9772318618837,
-        773.8871806832576
+        5062.10808081548,
+        6995.7329235318275
+      ],
+      [
+        5105.342212610086,
+        6995.657421248857
       ]
     ],
     "source": "manual",
@@ -64016,7 +64020,415 @@
     "category": "",
     "imported_kind": "",
     "visible": true,
-    "kingdom": "HotDog",
-    "influence_radius": 50
+    "kingdom": "",
+    "influence_radius": 0
+  },
+  {
+    "id": "409c4b34-98c7-4a98-abe5-bc6703aaf125",
+    "server": "Xanadu",
+    "type": "tunnel",
+    "status": "current",
+    "name": "",
+    "notes": "midsouth tunnel 2 E/W",
+    "tags": "",
+    "points": [
+      [
+        5190.097581594683,
+        6993.138028459724
+      ],
+      [
+        5427.031428278412,
+        6993.138028459724
+      ],
+      [
+        5430.731704418892,
+        6995.800902324701
+      ]
+    ],
+    "source": "manual",
+    "source_name": "",
+    "source_key": "",
+    "source_sheet": "",
+    "category": "",
+    "imported_kind": "",
+    "visible": true,
+    "kingdom": "",
+    "influence_radius": 0
+  },
+  {
+    "id": "10492a95-c818-476d-bbd5-e83d3e2cd6a6",
+    "server": "Xanadu",
+    "type": "tunnel",
+    "status": "current",
+    "name": "",
+    "notes": "Midsouth tunnel 2 N/S",
+    "tags": "",
+    "points": [
+      [
+        5462.064962774592,
+        7215.07541556739
+      ],
+      [
+        5458.868921107925,
+        7215.104904906583
+      ],
+      [
+        5458.866553350764,
+        7210.501554483406
+      ],
+      [
+        5420.560461477309,
+        7173.171880744559
+      ],
+      [
+        5420.560461477309,
+        6993.241553277503
+      ]
+    ],
+    "source": "manual",
+    "source_name": "",
+    "source_key": "",
+    "source_sheet": "",
+    "category": "",
+    "imported_kind": "",
+    "visible": true,
+    "kingdom": "",
+    "influence_radius": 0
+  },
+  {
+    "id": "86d911a1-5b31-413d-9c2d-342323490d95",
+    "server": "Xanadu",
+    "type": "bridge",
+    "status": "planned",
+    "name": "Midsouth Short Bridge",
+    "notes": "Need mag or a little surface mine work,",
+    "tags": "",
+    "points": [
+      [
+        5469.727281266731,
+        7215.330010583143
+      ],
+      [
+        5500.5057114940155,
+        7215.330010583143
+      ],
+      [
+        5530.728498896659,
+        7215.330010583143
+      ],
+      [
+        5559.9689535994685,
+        7215.330010583143
+      ],
+      [
+        5589.005772177476,
+        7215.330010583143
+      ],
+      [
+        5620.874078877107,
+        7215.330010583143
+      ],
+      [
+        5634.431066755375,
+        7215.330010583143
+      ]
+    ],
+    "source": "manual",
+    "source_name": "",
+    "source_key": "",
+    "source_sheet": "",
+    "category": "",
+    "imported_kind": "",
+    "visible": true,
+    "kingdom": "",
+    "influence_radius": 0
+  },
+  {
+    "id": "f111a5b6-aecb-4a31-8065-8206a8704e0d",
+    "server": "Xanadu",
+    "type": "road",
+    "status": "planned",
+    "name": "MS S planned short road old deed",
+    "notes": "surface mining and close to clay",
+    "tags": "",
+    "points": [
+      [
+        5634.083043158224,
+        7215.803501914891
+      ],
+      [
+        5634.083043158224,
+        7246.47389048183
+      ]
+    ],
+    "source": "manual",
+    "source_name": "",
+    "source_key": "",
+    "source_sheet": "",
+    "category": "",
+    "imported_kind": "",
+    "visible": true,
+    "kingdom": "",
+    "influence_radius": 0
+  },
+  {
+    "id": "60d46267-23a4-4f46-baca-c9437f6887a2",
+    "server": "Xanadu",
+    "type": "bridge",
+    "status": "planned",
+    "name": "MS Long Bridge south",
+    "notes": "Lots of clay and marsh to go through",
+    "tags": "",
+    "points": [
+      [
+        5634.299709841642,
+        7248.468730544932
+      ],
+      [
+        5634.299709841642,
+        7279.411613124349
+      ]
+    ],
+    "source": "manual",
+    "source_name": "",
+    "source_key": "",
+    "source_sheet": "",
+    "category": "",
+    "imported_kind": "",
+    "visible": true,
+    "kingdom": "",
+    "influence_radius": 0
+  },
+  {
+    "id": "c05fee91-f621-4571-966f-22168905470b",
+    "server": "Xanadu",
+    "type": "tunnel",
+    "status": "planned",
+    "name": "MS South Tunnel",
+    "notes": "bypass marsh nonsense",
+    "tags": "",
+    "points": [
+      [
+        5634.133185988125,
+        7280.194280453883
+      ],
+      [
+        5634.133185988125,
+        7341.373464356525
+      ],
+      [
+        5641.614570589869,
+        7341.235188457354
+      ]
+    ],
+    "source": "manual",
+    "source_name": "",
+    "source_key": "",
+    "source_sheet": "",
+    "category": "",
+    "imported_kind": "",
+    "visible": true,
+    "kingdom": "",
+    "influence_radius": 0
+  },
+  {
+    "id": "141a9273-6f19-4008-b6b7-e1daee15c445",
+    "server": "Xanadu",
+    "type": "road",
+    "status": "planned",
+    "name": "MS Fill in road",
+    "notes": "fill in toward mtn to not look jank",
+    "tags": "",
+    "points": [
+      [
+        5643.134947024073,
+        7341.648699241538
+      ],
+      [
+        5683.745261696889,
+        7382.259013914355
+      ],
+      [
+        5709.200537820706,
+        7374.778946225937
+      ]
+    ],
+    "source": "manual",
+    "source_name": "",
+    "source_key": "",
+    "source_sheet": "",
+    "category": "",
+    "imported_kind": "",
+    "visible": true,
+    "kingdom": "",
+    "influence_radius": 0
+  },
+  {
+    "id": "f57ee986-b541-4bc7-b0fd-4e315ffd73da",
+    "server": "Xanadu",
+    "type": "bridge",
+    "status": "planned",
+    "name": "Early 2027 project bridge",
+    "notes": "need an ungodly amount of dirt, bring bouys as cant see bottom in places",
+    "tags": "",
+    "points": [
+      [
+        5432.836883399872,
+        6997.633503498143
+      ],
+      [
+        5838.164411022052,
+        6997.633503498143
+      ]
+    ],
+    "source": "manual",
+    "source_name": "",
+    "source_key": "",
+    "source_sheet": "",
+    "category": "",
+    "imported_kind": "",
+    "visible": true,
+    "kingdom": "",
+    "influence_radius": 0
+  },
+  {
+    "id": "e5396d47-c642-4a39-8d10-3705337ae958",
+    "server": "Xanadu",
+    "type": "tunnel",
+    "status": "planned",
+    "name": "Mid 2027 Tunnel Project",
+    "notes": "",
+    "tags": "",
+    "points": [
+      [
+        5838.863563438632,
+        6999.074205807612
+      ],
+      [
+        6107.324172005693,
+        6998.415638869833
+      ]
+    ],
+    "source": "manual",
+    "source_name": "",
+    "source_key": "",
+    "source_sheet": "",
+    "category": "",
+    "imported_kind": "",
+    "visible": true,
+    "kingdom": "",
+    "influence_radius": 0
+  },
+  {
+    "id": "de98ada7-561b-4d2c-b50d-530cc77ba153",
+    "server": "Xanadu",
+    "type": "tunnel",
+    "status": "planned",
+    "name": "Late 2027 Wishful tunnel",
+    "notes": "",
+    "tags": "",
+    "points": [
+      [
+        6352.617568847963,
+        6860.29549955446
+      ],
+      [
+        6182.285845266386,
+        6860.29549955446
+      ]
+    ],
+    "source": "manual",
+    "source_name": "",
+    "source_key": "",
+    "source_sheet": "",
+    "category": "",
+    "imported_kind": "",
+    "visible": true,
+    "kingdom": "",
+    "influence_radius": 0
+  },
+  {
+    "id": "6085b4b3-4378-486e-b037-ca9397adfe1f",
+    "server": "Xanadu",
+    "type": "bridge",
+    "status": "planned",
+    "name": "Wishy bridge Late 2027",
+    "notes": "",
+    "tags": "",
+    "points": [
+      [
+        6182.205230129095,
+        6861.125835468553
+      ],
+      [
+        6119.783777680066,
+        6861.125835468553
+      ]
+    ],
+    "source": "manual",
+    "source_name": "",
+    "source_key": "",
+    "source_sheet": "",
+    "category": "",
+    "imported_kind": "",
+    "visible": true,
+    "kingdom": "",
+    "influence_radius": 0
+  },
+  {
+    "id": "5bc7179d-6fe1-40d3-ba57-58c6c389ae6e",
+    "server": "Xanadu",
+    "type": "road",
+    "status": "planned",
+    "name": "2028 Bridge/tunnels/roads North hunting project",
+    "notes": "",
+    "tags": "",
+    "points": [
+      [
+        5419.212944928267,
+        6992.821139201774
+      ],
+      [
+        5419.212944928267,
+        6475.630615059116
+      ],
+      [
+        5419.212944928267,
+        6048.339020404932
+      ]
+    ],
+    "source": "manual",
+    "source_name": "",
+    "source_key": "",
+    "source_sheet": "",
+    "category": "",
+    "imported_kind": "",
+    "visible": true,
+    "kingdom": "",
+    "influence_radius": 0
+  },
+  {
+    "id": "05bb1ddf-dd69-4db0-a95a-f1c780571f06",
+    "server": "Harmony",
+    "type": "deed",
+    "status": "current",
+    "name": "Obsidian Legion",
+    "notes": "",
+    "tags": "",
+    "points": [
+      [
+        841.0866070128559,
+        1163.0766345290444
+      ]
+    ],
+    "source": "manual",
+    "source_name": "",
+    "source_key": "",
+    "source_sheet": "",
+    "category": "",
+    "imported_kind": "",
+    "visible": true,
+    "kingdom": "",
+    "influence_radius": 0
   }
 ]

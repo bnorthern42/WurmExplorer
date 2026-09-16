@@ -1,7 +1,7 @@
 servers:
   Chaos:
-    map_image: "../svrMaps/Chaos-classic-20260224.png"
-    map_size_tiles: 2048
+    map_image: "../svrMaps/Chaos-terrain-20260224.png"
+    map_size_tiles: 4096
     server_mode: "pvp"
     supports_kingdoms: true
     guard_tower_influence_radius_tiles: 50
@@ -12,8 +12,8 @@ servers:
     canny2: 130
 
     score_weights:
-      edges: 0.81
-      gray: 0.19
+      edges: 1.0
+      gray: 0.0
 
     avoid_water: true
     water_hsv_lo: [85, 20, 20]
@@ -27,8 +27,34 @@ servers:
     topk: 20
 
   Xanadu:
-    map_image: "../svrMaps/Xanadu-classic-20260224.png"
+    map_image: "../svrMaps/Xanadu-terrain-20260224.png"
     map_size_tiles: 8192
+    server_mode: "pve"
+    supports_kingdoms: false
+    scales: [0.18, 0.19, 0.20, 0.21, 0.22, 0.23]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Cadence:
+    map_image: "../svrMaps/Cadence-terrain-20260224.png"
+    map_size_tiles: 4096
     server_mode: "pve"
     supports_kingdoms: false
     scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
@@ -38,8 +64,351 @@ servers:
     canny2: 130
 
     score_weights:
-      edges: 0.81
-      gray: 0.19
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Affliction:
+    map_image: "../svrMaps/Affliction-terrain-20260224.png"
+    map_size_tiles: 2048
+    server_mode: "pvp"
+    supports_kingdoms: true
+    guard_tower_influence_radius_tiles: 50
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Celebration:
+    map_image: "../svrMaps/Celebration-terrain-20260224.png"
+    map_size_tiles: 2048
+    server_mode: "pve"
+    supports_kingdoms: false
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Defiance:
+    map_image: "../svrMaps/Defiance-terrain-20260224.png"
+    map_size_tiles: 4096
+    server_mode: "pvp"
+    supports_kingdoms: true
+    guard_tower_influence_radius_tiles: 50
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Deliverance:
+    map_image: "../svrMaps/Deliverance-terrain-20260224.png"
+    map_size_tiles: 2048
+    server_mode: "pve"
+    supports_kingdoms: false
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Desertion:
+    map_image: "../svrMaps/Desertion-terrain-20260224.png"
+    map_size_tiles: 2048
+    server_mode: "pvp"
+    supports_kingdoms: true
+    guard_tower_influence_radius_tiles: 50
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Elevation:
+    map_image: "../svrMaps/Elevation-terrain-20260224.png"
+    map_size_tiles: 2048
+    server_mode: "pvp"
+    supports_kingdoms: true
+    guard_tower_influence_radius_tiles: 50
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Exodus:
+    map_image: "../svrMaps/Exodus-terrain-20260224.png"
+    map_size_tiles: 2048
+    server_mode: "pve"
+    supports_kingdoms: false
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Harmony:
+    map_image: "../svrMaps/Harmony-terrain-20260224.png"
+    map_size_tiles: 4096
+    server_mode: "pve"
+    supports_kingdoms: false
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Independence:
+    map_image: "../svrMaps/Independence-terrain-20260224.png"
+    map_size_tiles: 4096
+    server_mode: "pve"
+    supports_kingdoms: false
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Melody:
+    map_image: "../svrMaps/Melody-terrain-20260224.png"
+    map_size_tiles: 2048
+    server_mode: "pve"
+    supports_kingdoms: false
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Pristine:
+    map_image: "../svrMaps/Pristine-terrain-20260224.png"
+    map_size_tiles: 2048
+    server_mode: "pve"
+    supports_kingdoms: false
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Release:
+    map_image: "../svrMaps/Release-terrain-20260224.png"
+    map_size_tiles: 2048
+    server_mode: "pve"
+    supports_kingdoms: false
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
+
+    avoid_water: true
+    water_hsv_lo: [85, 20, 20]
+    water_hsv_hi: [140, 255, 255]
+
+    hint_use_roi: true
+    hint_soft_bias: true
+    hint_bias_sigma: 0.55
+    hint_bias_min_weight: 0.25
+
+    topk: 20
+
+  Serenity:
+    map_image: "../svrMaps/Serenity-terrain-20260224.png"
+    map_size_tiles: 2048
+    server_mode: "pvp"
+    supports_kingdoms: true
+    guard_tower_influence_radius_tiles: 50
+    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+
+    blur_ksize: 11
+    canny1: 40
+    canny2: 130
+
+    score_weights:
+      edges: 1.0
+      gray: 0.0
 
     avoid_water: true
     water_hsv_lo: [85, 20, 20]

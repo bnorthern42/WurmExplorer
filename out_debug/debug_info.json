@@ -1,697 +1,727 @@
 {
   "x_pixel_500": {
-    "cx": 163.0,
-    "cy": 282.0,
+    "cx": 305.0,
+    "cy": 249.0,
     "size": 50,
-    "score": 0.8623135685920715
+    "score": 0.8746539354324341
   },
   "offsets_tiles": {
-    "xOffset": 17.4,
-    "yOffset": -6.399999999999995
+    "xOffset": 0.0,
+    "yOffset": 0.0
   },
   "best": {
     "rank": 1,
-    "match_score": 0.09814443439245224,
-    "match_scale": 0.55,
+    "match_score": 0.9094713926315308,
+    "match_scale": 0.18,
     "match_center_px": [
-      3250.5,
-      1416.5
+      3339.0,
+      6722.5
     ],
     "match_top_left": [
-      3113,
-      1279
+      3292,
+      6686
     ],
     "match_patch_size": [
-      275,
-      275
+      94,
+      73
     ],
     "map_center_tile": [
-      3250.5,
-      1416.5
+      3339.0,
+      6722.5
     ],
     "offsets_tiles": [
-      17.4,
-      -6.399999999999995
+      0.0,
+      0.0
     ],
     "treasure_tile": [
-      3233.1,
-      1422.9
+      3346.9,
+      6730.82
     ],
     "x_pixel_500": [
-      163.0,
-      282.0
+      305.0,
+      249.0
     ],
-    "hint_dist_tiles": 32.61901418398919,
-    "biased_score": 0.09392280939568662
+    "hint_dist_tiles": null,
+    "biased_score": null
   },
   "candidates": [
     {
       "rank": 1,
-      "match_score": 0.09814443439245224,
-      "match_scale": 0.55,
+      "match_score": 0.9094713926315308,
+      "match_scale": 0.18,
       "match_center_px": [
-        3250.5,
-        1416.5
+        3339.0,
+        6722.5
       ],
       "match_top_left": [
-        3113,
-        1279
+        3292,
+        6686
       ],
       "match_patch_size": [
-        275,
-        275
+        94,
+        73
       ],
       "map_center_tile": [
-        3250.5,
-        1416.5
+        3339.0,
+        6722.5
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3233.1,
-        1422.9
+        3346.9,
+        6730.82
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 32.61901418398919,
-      "biased_score": 0.09392280939568662
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 2,
-      "match_score": 0.07380978018045425,
-      "match_scale": 0.6,
+      "match_score": 0.9077281355857849,
+      "match_scale": 0.19,
       "match_center_px": [
-        3278.0,
-        1420.0
+        1533.5,
+        6379.0
       ],
       "match_top_left": [
-        3128,
-        1270
+        1484,
+        6340
       ],
       "match_patch_size": [
-        300,
-        300
+        99,
+        78
       ],
       "map_center_tile": [
-        3278.0,
-        1420.0
+        1533.5,
+        6379.0
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3260.6,
-        1426.4
+        1541.95,
+        6387.31
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 27.879360025577647,
-      "biased_score": 0.0714768139621018
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 3,
-      "match_score": 0.0811256393790245,
-      "match_scale": 0.6,
+      "match_score": 0.893644392490387,
+      "match_scale": 0.18,
       "match_center_px": [
-        3209.0,
-        1413.0
+        2032.0,
+        4112.5
       ],
       "match_top_left": [
-        3059,
-        1263
+        1985,
+        4076
       ],
       "match_patch_size": [
-        300,
-        300
+        94,
+        73
       ],
       "map_center_tile": [
-        3209.0,
-        1413.0
+        2032.0,
+        4112.5
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3191.6,
-        1419.4
+        2039.9,
+        4120.82
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 66.9032120849838,
-      "biased_score": 0.06742654172963884
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 4,
-      "match_score": 0.06871362030506134,
-      "match_scale": 0.55,
+      "match_score": 0.8933323621749878,
+      "match_scale": 0.18,
       "match_center_px": [
-        3292.5,
-        1413.5
+        4938.0,
+        3058.5
       ],
       "match_top_left": [
-        3155,
-        1276
+        4891,
+        3022
       ],
       "match_patch_size": [
-        275,
-        275
+        94,
+        73
       ],
       "map_center_tile": [
-        3292.5,
-        1413.5
+        4938.0,
+        3058.5
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3275.1,
-        1419.9
+        4945.9,
+        3066.82
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 28.755008458483186,
-      "biased_score": 0.06640551171459379
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 5,
-      "match_score": 0.07554756104946136,
-      "match_scale": 0.55,
+      "match_score": 0.8931626677513123,
+      "match_scale": 0.18,
       "match_center_px": [
-        3197.5,
-        1419.5
+        1985.0,
+        5323.5
       ],
       "match_top_left": [
-        3060,
-        1282
+        1938,
+        5287
       ],
       "match_patch_size": [
-        275,
-        275
+        94,
+        73
       ],
       "map_center_tile": [
-        3197.5,
-        1419.5
+        1985.0,
+        5323.5
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3180.1,
-        1425.9
+        1992.9,
+        5331.82
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 79.88177732826388,
-      "biased_score": 0.05803699520864473
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 6,
-      "match_score": 0.06283378601074219,
-      "match_scale": 0.55,
+      "match_score": 0.8901954889297485,
+      "match_scale": 0.18,
       "match_center_px": [
-        3273.5,
-        1336.5
+        4777.0,
+        1181.5
       ],
       "match_top_left": [
-        3136,
-        1199
+        4730,
+        1145
       ],
       "match_patch_size": [
-        275,
-        275
+        94,
+        73
       ],
       "map_center_tile": [
-        3273.5,
-        1336.5
+        4777.0,
+        1181.5
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3256.1,
-        1342.9
+        4784.9,
+        1189.82
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 56.12958729961271,
-      "biased_score": 0.05516373203285947
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 7,
-      "match_score": 0.060376204550266266,
-      "match_scale": 0.65,
+      "match_score": 0.8896743655204773,
+      "match_scale": 0.18,
       "match_center_px": [
-        3219.5,
-        1407.5
+        6186.0,
+        5906.5
       ],
       "match_top_left": [
-        3057,
-        1245
+        6139,
+        5870
       ],
       "match_patch_size": [
-        325,
-        325
+        94,
+        73
       ],
       "map_center_tile": [
-        3219.5,
-        1407.5
+        6186.0,
+        5906.5
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3202.1,
-        1413.9
+        6193.9,
+        5914.82
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 55.264659904995774,
-      "biased_score": 0.053217600012170733
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 8,
-      "match_score": 0.05587155371904373,
-      "match_scale": 0.7,
+      "match_score": 0.8849548697471619,
+      "match_scale": 0.18,
       "match_center_px": [
-        3231.0,
-        1402.0
+        1986.0,
+        1280.5
       ],
       "match_top_left": [
-        3056,
-        1227
+        1939,
+        1244
       ],
       "match_patch_size": [
-        350,
-        350
+        94,
+        73
       ],
       "map_center_tile": [
-        3231.0,
-        1402.0
+        1986.0,
+        1280.5
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3213.6,
-        1408.4
+        1993.9,
+        1288.82
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 42.76535514669861,
-      "biased_score": 0.05180475812232574
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 9,
-      "match_score": 0.049518831074237823,
-      "match_scale": 0.65,
+      "match_score": 0.8836181163787842,
+      "match_scale": 0.18,
       "match_center_px": [
-        3271.5,
-        1431.5
+        1383.0,
+        1196.5
       ],
       "match_top_left": [
-        3109,
-        1269
+        1336,
+        1160
       ],
       "match_patch_size": [
-        325,
-        325
+        94,
+        73
       ],
       "map_center_tile": [
-        3271.5,
-        1431.5
+        1383.0,
+        1196.5
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3254.1,
-        1437.9
+        1390.9,
+        1204.82
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 38.895057718061864,
-      "biased_score": 0.04651801104708904
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 10,
-      "match_score": 0.03993494063615799,
-      "match_scale": 0.6,
+      "match_score": 0.8800142407417297,
+      "match_scale": 0.18,
       "match_center_px": [
-        3263.0,
-        1349.0
+        1793.0,
+        2561.5
       ],
       "match_top_left": [
-        3113,
-        1199
+        1746,
+        2525
       ],
       "match_patch_size": [
-        300,
-        300
+        94,
+        73
       ],
       "map_center_tile": [
-        3263.0,
-        1349.0
+        1793.0,
+        2561.5
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3245.6,
-        1355.4
+        1800.9,
+        2569.82
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 44.69506036460059,
-      "biased_score": 0.036770805092758825
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 11,
-      "match_score": 0.03562001511454582,
-      "match_scale": 0.75,
+      "match_score": 0.8765841722488403,
+      "match_scale": 0.19,
       "match_center_px": [
-        3242.5,
-        1395.5
+        3023.5,
+        1364.0
       ],
       "match_top_left": [
-        3055,
-        1208
+        2974,
+        1325
       ],
       "match_patch_size": [
-        375,
-        375
+        99,
+        78
       ],
       "map_center_tile": [
-        3242.5,
-        1395.5
+        3023.5,
+        1364.0
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3225.1,
-        1401.9
+        3031.95,
+        1372.31
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 30.361440001904565,
-      "biased_score": 0.034288708063985915
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 12,
-      "match_score": 0.035119324922561646,
-      "match_scale": 0.55,
+      "match_score": 0.876059353351593,
+      "match_scale": 0.21,
       "match_center_px": [
-        3204.5,
-        1374.5
+        1067.5,
+        2220.0
       ],
       "match_top_left": [
-        3067,
-        1237
+        1013,
+        2177
       ],
       "match_patch_size": [
-        275,
-        275
+        109,
+        86
       ],
       "map_center_tile": [
-        3204.5,
-        1374.5
+        1067.5,
+        2220.0
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3187.1,
-        1380.9
+        1077.05,
+        2229.29
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 70.59129134097549,
-      "biased_score": 0.02858371261661071
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 13,
-      "match_score": 0.028776952996850014,
-      "match_scale": 0.6,
+      "match_score": 0.8731639981269836,
+      "match_scale": 0.19,
       "match_center_px": [
-        3215.0,
-        1349.0
+        6433.5,
+        7042.0
       ],
       "match_top_left": [
-        3065,
-        1199
+        6384,
+        7003
       ],
       "match_patch_size": [
-        300,
-        300
+        99,
+        78
       ],
       "map_center_tile": [
-        3215.0,
-        1349.0
+        6433.5,
+        7042.0
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3197.6,
-        1355.4
+        6441.95,
+        7050.31
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 72.35497699166602,
-      "biased_score": 0.023178902288694615
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 14,
-      "match_score": 0.021521462127566338,
-      "match_scale": 0.65,
+      "match_score": 0.8713698387145996,
+      "match_scale": 0.2,
       "match_center_px": [
-        3275.5,
-        1378.5
+        5130.0,
+        3025.0
       ],
       "match_top_left": [
-        3113,
-        1216
+        5078,
+        2984
       ],
       "match_patch_size": [
-        325,
-        325
+        104,
+        82
       ],
       "map_center_tile": [
-        3275.5,
-        1378.5
+        5130.0,
+        3025.0
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3258.1,
-        1384.9
+        5139.0,
+        3033.8
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 14.394269525420306,
-      "biased_score": 0.021337986733895406
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 15,
-      "match_score": 0.02936338447034359,
-      "match_scale": 0.55,
+      "match_score": 0.8686719536781311,
+      "match_scale": 0.2,
       "match_center_px": [
-        3192.5,
-        1460.5
+        6106.0,
+        1384.0
       ],
       "match_top_left": [
-        3055,
-        1323
+        6054,
+        1343
       ],
       "match_patch_size": [
-        275,
-        275
+        104,
+        82
       ],
       "map_center_tile": [
-        3192.5,
-        1460.5
+        6106.0,
+        1384.0
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3175.1,
-        1466.9
+        6115.0,
+        1392.8
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 105.08644256350232,
-      "biased_score": 0.018604798464115
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 16,
-      "match_score": 0.02276933565735817,
-      "match_scale": 0.55,
+      "match_score": 0.8686649799346924,
+      "match_scale": 0.23,
       "match_center_px": [
-        3246.5,
-        1457.5
+        3745.0,
+        5849.0
       ],
       "match_top_left": [
-        3109,
-        1320
+        3685,
+        5802
       ],
       "match_patch_size": [
-        275,
-        275
+        120,
+        94
       ],
       "map_center_tile": [
-        3246.5,
-        1457.5
+        3745.0,
+        5849.0
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3229.1,
-        1463.9
+        3755.15,
+        5859.27
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 69.97579772426404,
-      "biased_score": 0.018598396243667523
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 17,
-      "match_score": 0.018574118614196777,
-      "match_scale": 0.55,
+      "match_score": 0.863281786441803,
+      "match_scale": 0.21,
       "match_center_px": [
-        3317.5,
-        1365.5
+        2221.5,
+        2276.0
       ],
       "match_top_left": [
-        3180,
-        1228
+        2167,
+        2233
       ],
       "match_patch_size": [
-        275,
-        275
+        109,
+        86
       ],
       "map_center_tile": [
-        3317.5,
-        1365.5
+        2221.5,
+        2276.0
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3300.1,
-        1371.9
+        2231.05,
+        2285.29
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 52.350072949885686,
-      "biased_score": 0.01658542159522153
+      "hint_dist_tiles": null,
+      "biased_score": null
     },
     {
       "rank": 18,
-      "match_score": 0.01662040501832962,
-      "match_scale": 0.55,
+      "match_score": 0.8624812960624695,
+      "match_scale": 0.22,
       "match_center_px": [
-        3291.5,
-        1454.5
+        1733.5,
+        5022.0
       ],
       "match_top_left": [
-        3154,
-        1317
+        1676,
+        4977
       ],
       "match_patch_size": [
-        275,
-        275
+        115,
+        90
       ],
       "map_center_tile": [
-        3291.5,
-        1454.5
+        1733.5,
+        5022.0
       ],
       "offsets_tiles": [
-        17.4,
-        -6.399999999999995
+        0.0,
+        0.0
       ],
       "treasure_tile": [
-        3274.1,
-        1460.9
+        1743.1,
+        5031.78
       ],
       "x_pixel_500": [
-        163.0,
-        282.0
+        305.0,
+        249.0
       ],
-      "hint_dist_tiles": 64.66152681544831,
-      "biased_score": 0.01398321793895091
+      "hint_dist_tiles": null,
+      "biased_score": null
+    },
+    {
+      "rank": 19,
+      "match_score": 0.8539111614227295,
+      "match_scale": 0.23,
+      "match_center_px": [
+        1561.0,
+        4815.0
+      ],
+      "match_top_left": [
+        1501,
+        4768
+      ],
+      "match_patch_size": [
+        120,
+        94
+      ],
+      "map_center_tile": [
+        1561.0,
+        4815.0
+      ],
+      "offsets_tiles": [
+        0.0,
+        0.0
+      ],
+      "treasure_tile": [
+        1571.15,
+        4825.27
+      ],
+      "x_pixel_500": [
+        305.0,
+        249.0
+      ],
+      "hint_dist_tiles": null,
+      "biased_score": null
     }
   ],
-  "roi": {
-    "x0": 3055,
-    "y0": 1199,
-    "x1": 3455,
-    "y1": 1599
-  },
+  "roi": null,
   "map_crop_auto": false,
   "avoid_water": true,
   "weights": {
-    "edges": 0.81,
-    "gray": 0.19
+    "edges": 1.0,
+    "gray": 0.0
   },
   "water_hsv_lo": [
-    85,
-    20,
-    20
+    90,
+    40,
+    30
   ],
   "water_hsv_hi": [
     140,

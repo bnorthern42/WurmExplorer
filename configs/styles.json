@@ -9,7 +9,7 @@
   "bridge_width": 4,
   "tunnel_current_color": "#808080",
   "tunnel_old_color": "#a9a9a9",
-  "tunnel_width": 2,
+  "tunnel_width": 6,
   "mapdata_deed_color": "#4cff4c",
   "mapdata_deed_show_labels": true,
   "mapdata_guard_tower_color": "#a882ee",
