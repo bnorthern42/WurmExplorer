@@ -37,7 +37,7 @@ void PillarElevationCanvas::setResult(const PillarResult& res) {
 }
 
 void PillarElevationCanvas::updateGeometryForViewport(const QSize& viewportSize) {
-    if (m_result.baseW <= 0 || m_result.baseL <= 0) {
+    if (m_result.cornerW <= 0 || m_result.cornerL <= 0) {
         int w = std::max(280, viewportSize.width());
         int h = std::max(280, viewportSize.height());
         setFixedSize(w, h);
@@ -45,32 +45,33 @@ void PillarElevationCanvas::updateGeometryForViewport(const QSize& viewportSize)
     }
 
     double cellW = std::max(static_cast<double>(theme::CELL_MIN_WIDTH_PX),
-                            viewportSize.width() > 0 ? static_cast<double>(viewportSize.width()) / m_result.baseW : static_cast<double>(theme::CELL_MIN_WIDTH_PX));
+                            viewportSize.width() > 0 ? static_cast<double>(viewportSize.width()) / m_result.cornerW : static_cast<double>(theme::CELL_MIN_WIDTH_PX));
     double cellH = std::max(static_cast<double>(theme::CELL_MIN_HEIGHT_PX),
-                            viewportSize.height() > 0 ? static_cast<double>(viewportSize.height()) / m_result.baseL : static_cast<double>(theme::CELL_MIN_HEIGHT_PX));
+                            viewportSize.height() > 0 ? static_cast<double>(viewportSize.height()) / m_result.cornerL : static_cast<double>(theme::CELL_MIN_HEIGHT_PX));
 
-    int totalW = static_cast<int>(std::ceil(cellW * m_result.baseW));
-    int totalH = static_cast<int>(std::ceil(cellH * m_result.baseL));
+    int totalW = static_cast<int>(std::ceil(cellW * m_result.cornerW));
+    int totalH = static_cast<int>(std::ceil(cellH * m_result.cornerL));
     setFixedSize(totalW, totalH);
     update();
 }
 
 void PillarElevationCanvas::mouseMoveEvent(QMouseEvent* event) {
-    if (m_result.baseW <= 0 || m_result.baseL <= 0) return;
+    if (m_result.cornerW <= 0 || m_result.cornerL <= 0) return;
 
-    double cellW = static_cast<double>(width()) / m_result.baseW;
-    double cellH = static_cast<double>(height()) / m_result.baseL;
+    double cellW = static_cast<double>(width()) / m_result.cornerW;
+    double cellH = static_cast<double>(height()) / m_result.cornerL;
 
-    int tx = static_cast<int>(event->position().x() / cellW);
-    int ty = static_cast<int>(event->position().y() / cellH);
+    int cx = static_cast<int>(event->position().x() / cellW);
+    int cy = static_cast<int>(event->position().y() / cellH);
 
-    if (tx >= 0 && tx < m_result.baseW && ty >= 0 && ty < m_result.baseL) {
-        if (tx != m_hoverX || ty != m_hoverY) {
-            m_hoverX = tx;
-            m_hoverY = ty;
-            int height = m_result.tileGrid[ty][tx];
-            emit tileHovered(tx, ty, height);
-            setToolTip(QString("Tile [%1, %2] | Height: %3 dirt").arg(tx).arg(ty).arg(height));
+    if (cx >= 0 && cx < m_result.cornerW && cy >= 0 && cy < m_result.cornerL) {
+        if (cx != m_hoverX || cy != m_hoverY) {
+            m_hoverX = cx;
+            m_hoverY = cy;
+            int height = m_result.cornerGrid[cy][cx];
+            emit cornerHovered(cx, cy, height);
+            emit tileHovered(cx, cy, height);
+            setToolTip(QString("Corner [%1, %2] | Height: %3 dirt").arg(cx).arg(cy).arg(height));
             update();
         }
     } else {
@@ -82,6 +83,7 @@ void PillarElevationCanvas::leaveEvent(QEvent*) {
     if (m_hoverX != -1 || m_hoverY != -1) {
         m_hoverX = -1;
         m_hoverY = -1;
+        emit cornerHovered(-1, -1, 0);
         emit tileHovered(-1, -1, 0);
         setToolTip(QString());
         update();
@@ -94,19 +96,19 @@ void PillarElevationCanvas::paintEvent(QPaintEvent*) {
 
     painter.fillRect(rect(), QColor(theme::BG_DARK));
 
-    if (m_result.baseW <= 0 || m_result.baseL <= 0 || m_result.tileGrid.empty()) {
+    if (m_result.cornerW <= 0 || m_result.cornerL <= 0 || m_result.cornerGrid.empty()) {
         painter.setPen(QColor(theme::TEXT_SECONDARY));
         painter.drawText(rect(), Qt::AlignCenter, "Enter pillar dimensions to view heightmap");
         return;
     }
 
-    double cellW = static_cast<double>(width()) / m_result.baseW;
-    double cellH = static_cast<double>(height()) / m_result.baseL;
+    double cellW = static_cast<double>(width()) / m_result.cornerW;
+    double cellH = static_cast<double>(height()) / m_result.cornerL;
     double maxH = std::max(1, m_result.targetHeight);
 
-    for (int y = 0; y < m_result.baseL; ++y) {
-        for (int x = 0; x < m_result.baseW; ++x) {
-            int h = m_result.tileGrid[y][x];
+    for (int y = 0; y < m_result.cornerL; ++y) {
+        for (int x = 0; x < m_result.cornerW; ++x) {
+            int h = m_result.cornerGrid[y][x];
             double norm = static_cast<double>(h) / maxH; // 0.0 to 1.0
 
             QColor fillColor;
@@ -155,7 +157,7 @@ void PillarElevationCanvas::paintEvent(QPaintEvent*) {
     }
 
     // Highlight hovered cell
-    if (m_hoverX >= 0 && m_hoverY >= 0 && m_hoverX < m_result.baseW && m_hoverY < m_result.baseL) {
+    if (m_hoverX >= 0 && m_hoverY >= 0 && m_hoverX < m_result.cornerW && m_hoverY < m_result.cornerL) {
         QRectF hoverRect(m_hoverX * cellW, m_hoverY * cellH, cellW, cellH);
         painter.setPen(QPen(QColor(theme::ACCENT_MINT), 2));
         painter.setBrush(Qt::NoBrush);
@@ -273,9 +275,9 @@ void BridgePillarWidget::setupUi() {
     rightLayout->setSpacing(8);
 
     auto* canvasHeader = new QHBoxLayout();
-    auto* mapTitle = new QLabel("Interactive 2D Elevation Map", rightCol);
+    auto* mapTitle = new QLabel("Interactive 2D Elevation Map (Corners)", rightCol);
     mapTitle->setStyleSheet(QString("font-weight: bold; color: %1;").arg(theme::ACCENT_MINT));
-    m_hoverDetailLabel = new QLabel("Hover over a tile for details", rightCol);
+    m_hoverDetailLabel = new QLabel("Hover over a corner for details", rightCol);
     m_hoverDetailLabel->setStyleSheet(QString("color: %1; font-size: 11px;").arg(theme::TEXT_SECONDARY));
     canvasHeader->addWidget(mapTitle);
     canvasHeader->addStretch(1);
@@ -283,11 +285,11 @@ void BridgePillarWidget::setupUi() {
     rightLayout->addLayout(canvasHeader);
 
     m_canvas = new PillarElevationCanvas();
-    connect(m_canvas, &PillarElevationCanvas::tileHovered, this, [this](int x, int y, int h) {
+    connect(m_canvas, &PillarElevationCanvas::cornerHovered, this, [this](int x, int y, int h) {
         if (x < 0 || y < 0) {
-            m_hoverDetailLabel->setText("Hover over a tile for details");
+            m_hoverDetailLabel->setText("Hover over a corner for details");
         } else {
-            m_hoverDetailLabel->setText(QString("Tile [%1, %2] | Height: %3 dirt").arg(x).arg(y).arg(h));
+            m_hoverDetailLabel->setText(QString("Corner [%1, %2] | Height: %3 dirt").arg(x).arg(y).arg(h));
         }
     });
 
@@ -342,7 +344,9 @@ void BridgePillarWidget::recalculate() {
     QLocale locale;
     m_totalDirtLabel->setText(locale.toString(m_lastResult.totalDirt) + " dirt");
     m_cratesLabel->setText(locale.toString(m_lastResult.crates) + " crates");
-    m_radiusLabel->setText(QString("Slope: %1 | Radius: %2 tiles").arg(m_lastResult.effectiveSlope).arg(m_lastResult.spreadRadius));
+    m_radiusLabel->setText(QString("Plateau: %1x%2 corners | Radius: %3 tiles (Slope: %4)")
+        .arg(m_lastResult.plateauCornersX).arg(m_lastResult.plateauCornersY)
+        .arg(m_lastResult.spreadRadius).arg(m_lastResult.effectiveSlope));
     m_footprintLabel->setText(QString("Base: %1x%2 tiles (%3x%4 corners)")
         .arg(m_lastResult.baseW).arg(m_lastResult.baseL)
         .arg(m_lastResult.cornerW).arg(m_lastResult.cornerL));
@@ -353,14 +357,17 @@ void BridgePillarWidget::recalculate() {
 
 void BridgePillarWidget::copyHeightmap() {
     QString out;
-    out += QString("Wurm Dirt Pillar (%1x%2 Top, %3 Height, Base: %4x%5 tiles)\n")
-        .arg(m_lastResult.topW).arg(m_lastResult.topL).arg(m_lastResult.targetHeight)
-        .arg(m_lastResult.baseW).arg(m_lastResult.baseL);
+    out += QString("Wurm Dirt Pillar (%1x%2 Top Tiles [%3x%4 Corners], %5 Height, Base: %6x%7 Tiles [%8x%9 Corners])\n")
+        .arg(m_lastResult.topW).arg(m_lastResult.topL)
+        .arg(m_lastResult.plateauCornersX).arg(m_lastResult.plateauCornersY)
+        .arg(m_lastResult.targetHeight)
+        .arg(m_lastResult.baseW).arg(m_lastResult.baseL)
+        .arg(m_lastResult.cornerW).arg(m_lastResult.cornerL);
     out += QString("Total Dirt: %1 (%2 Crates)\n\n").arg(m_lastResult.totalDirt).arg(m_lastResult.crates);
 
-    for (int y = 0; y < m_lastResult.baseL; ++y) {
-        for (int x = 0; x < m_lastResult.baseW; ++x) {
-            out += QString("%1\t").arg(m_lastResult.tileGrid[y][x]);
+    for (int y = 0; y < m_lastResult.cornerL; ++y) {
+        for (int x = 0; x < m_lastResult.cornerW; ++x) {
+            out += QString("%1\t").arg(m_lastResult.cornerGrid[y][x]);
         }
         out += "\n";
     }

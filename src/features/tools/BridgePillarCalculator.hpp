@@ -11,6 +11,8 @@ struct PillarResult {
     int targetHeight = 0;
     double effectiveSlope = 300.0;
     int spreadRadius = 0;
+    int plateauCornersX = 0;
+    int plateauCornersY = 0;
     int baseW = 0;
     int baseL = 0;
     int cornerW = 0;

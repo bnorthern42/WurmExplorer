@@ -30,16 +30,24 @@ PillarResult BridgePillarCalculator::calculate(int topW, int topL, int targetHei
     const int r = (targetHeight + maxSlope - 1) / maxSlope;
     res.spreadRadius = r;
 
-    res.baseW = topW + 2 * r;
-    res.baseL = topL + 2 * r;
+    // Correct tile to corner conversion
+    int plateauCornersX = topW + 1;
+    int plateauCornersY = topL + 1;
+    res.plateauCornersX = plateauCornersX;
+    res.plateauCornersY = plateauCornersY;
 
-    res.cornerW = res.baseW + 1;
-    res.cornerL = res.baseL + 1;
+    int baseCornersX = plateauCornersX + (2 * r);
+    int baseCornersY = plateauCornersY + (2 * r);
+
+    res.cornerW = baseCornersX;
+    res.cornerL = baseCornersY;
+    res.baseW = baseCornersX - 1; // topW + 2 * r
+    res.baseL = baseCornersY - 1; // topL + 2 * r
 
     const int px0 = r;
     const int py0 = r;
-    const int px1 = r + topW;
-    const int py1 = r + topL;
+    const int px1 = px0 + plateauCornersX - 1; // r + topW
+    const int py1 = py0 + plateauCornersY - 1; // r + topL
 
     res.cornerGrid.assign(res.cornerL, std::vector<int>(res.cornerW, 0));
 

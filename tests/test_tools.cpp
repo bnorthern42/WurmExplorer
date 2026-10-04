@@ -304,16 +304,58 @@ void testBridgePillarSlopeAndDigSkillLimit() {
 }
 
 void testDifficultyPresets();
+void testBridgePillarPlateauDimensions();
 
 int main() {
     testImpCalculator();
     testBridgePillarCalculator();
     testBridgePillarSlopeAndDigSkillLimit();
+    testBridgePillarPlateauDimensions();
     testGrinderEngine();
     testGrinderActionModes();
     testDifficultyPresets();
     std::cout << "\nALL TOOLS TESTS PASSED!" << std::endl;
     return 0;
+}
+
+void testBridgePillarPlateauDimensions() {
+    std::cout << "Testing BridgePillar plateau tile-to-corner mapping..." << std::endl;
+
+    // Plateau size: 1x2 tiles -> exactly (1+1)x(2+1) = 2x3 corners at target height
+    auto res = BridgePillarCalculator::calculate(1, 2, 1800, std::nullopt);
+    assert(res.topW == 1);
+    assert(res.topL == 2);
+    assert(res.plateauCornersX == 2);
+    assert(res.plateauCornersY == 3);
+
+    // Count corners at target height in cornerGrid
+    int maxHeightCorners = 0;
+    int minPlateauX = 9999, maxPlateauX = -1;
+    int minPlateauY = 9999, maxPlateauY = -1;
+    for (int y = 0; y < res.cornerL; ++y) {
+        for (int x = 0; x < res.cornerW; ++x) {
+            if (res.cornerGrid[y][x] == 1800) {
+                maxHeightCorners++;
+                minPlateauX = std::min(minPlateauX, x);
+                maxPlateauX = std::max(maxPlateauX, x);
+                minPlateauY = std::min(minPlateauY, y);
+                maxPlateauY = std::max(maxPlateauY, y);
+            }
+        }
+    }
+    // Must be exactly 2 columns and 3 rows = 6 corners
+    assert(maxHeightCorners == 6);
+    assert((maxPlateauX - minPlateauX + 1) == 2);
+    assert((maxPlateauY - minPlateauY + 1) == 3);
+
+    // Footprint dimensions: baseCorners = plateauCorners + 2 * r
+    // r = 6 -> baseCornersX = 2 + 12 = 14, baseCornersY = 3 + 12 = 15
+    assert(res.cornerW == 14);
+    assert(res.cornerL == 15);
+    assert(res.baseW == 13);
+    assert(res.baseL == 14);
+
+    std::cout << "BridgePillar plateau dimensions tests passed!" << std::endl;
 }
 
 void testDifficultyPresets() {

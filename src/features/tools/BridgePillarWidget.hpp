@@ -19,6 +19,7 @@ public:
     void updateGeometryForViewport(const QSize& viewportSize);
 
 signals:
+    void cornerHovered(int x, int y, int height);
     void tileHovered(int x, int y, int height);
 
 protected:
