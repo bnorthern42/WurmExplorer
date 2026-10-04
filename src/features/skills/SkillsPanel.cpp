@@ -46,26 +46,8 @@ void SkillsPanel::setupUi() {
     m_watchingLabel = new QLabel("Watching: Initializing...", this);
     m_watchingLabel->setStyleSheet(QString("color: %1; font-size: 11px;").arg(theme::TEXT_SECONDARY));
 
-    auto* reloadBtn = new QPushButton("🔄", this);
-    reloadBtn->setToolTip("Reload entire log file from beginning");
-    reloadBtn->setFixedWidth(30);
-    connect(reloadBtn, &QPushButton::clicked, this, &SkillsPanel::onReloadClicked);
-
-    m_pauseBtn = new QPushButton("⏸", this);
-    m_pauseBtn->setToolTip("Pause / Resume live log tailing");
-    m_pauseBtn->setFixedWidth(30);
-    connect(m_pauseBtn, &QPushButton::clicked, this, &SkillsPanel::onTogglePauseClicked);
-
-    auto* settingsBtn = new QPushButton("⚙ Settings", this);
-    settingsBtn->setToolTip("Configure Wurm logs path and active player");
-    settingsBtn->setStyleSheet(QString("background-color: %1; color: %2; border: 1px solid %3; border-radius: 4px; font-size: 11px; padding: 4px 8px;").arg(theme::SURFACE_CARD, theme::TEXT_PRIMARY, theme::BORDER_MUTED));
-    connect(settingsBtn, &QPushButton::clicked, this, &SkillsPanel::onSettingsClicked);
-
     headerRow->addWidget(m_statusBadge);
     headerRow->addWidget(m_watchingLabel, 1);
-    headerRow->addWidget(reloadBtn);
-    headerRow->addWidget(m_pauseBtn);
-    headerRow->addWidget(settingsBtn);
 
     mainLayout->addLayout(headerRow);
 
@@ -116,34 +98,10 @@ void SkillsPanel::setupUi() {
     mainLayout->addWidget(m_table, 1);
 }
 
-void SkillsPanel::onSettingsClicked() {
-    ui::SettingsDialog dlg(this);
-    connect(&dlg, &ui::SettingsDialog::settingsSaved, this, &SkillsPanel::onSettingsSaved);
-    dlg.exec();
-}
-
 void SkillsPanel::onSettingsSaved() {
     int intervalSec = ui::SettingsDialog::getPollIntervalSec();
     m_pollTimer->setInterval(intervalSec * 1000);
     reloadFile();
-}
-
-void SkillsPanel::onReloadClicked() {
-    reloadFile();
-}
-
-void SkillsPanel::onTogglePauseClicked() {
-    m_paused = !m_paused;
-    if (m_paused) {
-        m_statusBadge->setText("⏸ PAUSED");
-        m_statusBadge->setStyleSheet(QString("color: %1; font-weight: bold; font-size: 11px;").arg(theme::STATUS_WARNING));
-        m_pauseBtn->setText("▶");
-    } else {
-        m_statusBadge->setText("● LIVE");
-        m_statusBadge->setStyleSheet(QString("color: %1; font-weight: bold; font-size: 11px;").arg(theme::STATUS_SUCCESS));
-        m_pauseBtn->setText("⏸");
-        pollFile();
-    }
 }
 
 void SkillsPanel::onSearchChanged(const QString&) {

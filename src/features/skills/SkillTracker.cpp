@@ -3,8 +3,14 @@
 
 namespace skills {
 
-SkillTracker::SkillTracker() {
+SkillTracker::SkillTracker(QObject* parent)
+    : QObject(parent) {
     reset();
+}
+
+SkillTracker& SkillTracker::instance() {
+    static SkillTracker s_instance;
+    return s_instance;
 }
 
 void SkillTracker::reset() {
@@ -49,6 +55,7 @@ void SkillTracker::processLine(const std::string& line) {
     }
 
     m_dirty = true;
+    emit skillUpdated(QString::fromStdString(entry.skill_name), entry.level);
 }
 
 void SkillTracker::recomputeStats() const {

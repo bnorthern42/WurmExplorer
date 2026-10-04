@@ -1,5 +1,6 @@
 #include "ImpCalculatorWidget.hpp"
 #include "ImpCalculator.hpp"
+#include "../skills/SkillTracker.hpp"
 #include "../../ui/ThemeTokens.hpp"
 
 #include <QVBoxLayout>
@@ -7,14 +8,48 @@
 #include <QGridLayout>
 #include <QGroupBox>
 #include <QHeaderView>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QCompleter>
 
 namespace tools {
 
 using namespace treasure::ui;
 
+static const QStringList s_standardSkills = {
+    "Armour smithing",
+    "Blacksmithing",
+    "Bladesmithing",
+    "Bowyery",
+    "Butchering",
+    "Carpentry",
+    "Cooking",
+    "Digging",
+    "Fine carpentry",
+    "First aid",
+    "Fletching",
+    "Forestry",
+    "Jewelry smithing",
+    "Leatherworking",
+    "Locksmithing",
+    "Masonry",
+    "Mining",
+    "Paving",
+    "Pottery",
+    "Ropemaking",
+    "Ship building",
+    "Stone cutting",
+    "Tailoring",
+    "Toy making",
+    "Weapon smithing",
+    "Woodcutting"
+};
+
 ImpCalculatorWidget::ImpCalculatorWidget(QWidget* parent)
     : QWidget(parent) {
     setupUi();
+    connect(&skills::SkillTracker::instance(), &skills::SkillTracker::skillUpdated,
+            this, &ImpCalculatorWidget::onSkillUpdated);
     recalculate();
 }
 
@@ -37,6 +72,41 @@ void ImpCalculatorWidget::setupUi() {
     auto* inputGrid = new QGridLayout(inputGroup);
     inputGrid->setContentsMargins(14, 16, 14, 14);
     inputGrid->setSpacing(12);
+
+    // Live Sync Checkbox
+    m_liveSyncCheck = new QCheckBox("🔗 Live Sync with Character Skill Log", inputGroup);
+    m_liveSyncCheck->setObjectName("liveSyncCheckBox");
+    m_liveSyncCheck->setChecked(false);
+    m_liveSyncCheck->setStyleSheet(QString(
+        "QCheckBox { color: %1; font-weight: 600; margin-bottom: 4px; } "
+        "QCheckBox::indicator:checked { background-color: %2; border: 1px solid %3; }"
+    ).arg(theme::TEXT_PRIMARY, theme::ACCENT_EMERALD, theme::ACCENT_MINT));
+    connect(m_liveSyncCheck, &QCheckBox::toggled, this, &ImpCalculatorWidget::onLiveSyncToggled);
+
+    // Skill Selection ComboBox with Fuzzy Matching
+    auto* skillComboLabel = new QLabel("Select Skill:", inputGroup);
+    skillComboLabel->setStyleSheet(QString("color: %1; font-weight: 600;").arg(theme::TEXT_PRIMARY));
+    m_skillCombo = new QComboBox(inputGroup);
+    m_skillCombo->setObjectName("skillComboBox");
+    m_skillCombo->setEditable(true);
+    m_skillCombo->addItems(s_standardSkills);
+    m_skillCombo->setStyleSheet(QString(
+        "QComboBox { background-color: %1; color: %2; border: 1px solid %3; border-radius: 4px; padding: 4px 8px; font-size: 12px; }"
+        "QComboBox:focus { border: 1px solid %4; }"
+        "QComboBox QAbstractItemView { background-color: %1; color: %2; selection-background-color: %4; }"
+    ).arg(theme::SURFACE_DARK, theme::TEXT_PRIMARY, theme::BORDER_MUTED, theme::ACCENT_EMERALD));
+
+    auto* completer = new QCompleter(m_skillCombo->model(), this);
+    completer->setCompletionMode(QCompleter::PopupCompletion);
+    completer->setFilterMode(Qt::MatchContains);
+    completer->setCaseSensitivity(Qt::CaseInsensitive);
+    m_skillCombo->setCompleter(completer);
+
+    int blackIdx = m_skillCombo->findText("Blacksmithing");
+    if (blackIdx >= 0) {
+        m_skillCombo->setCurrentIndex(blackIdx);
+    }
+    connect(m_skillCombo, &QComboBox::currentTextChanged, this, &ImpCalculatorWidget::onSkillSelectionChanged);
 
     // 1: Current Skill
     auto* skillLabel = new QLabel("Current Skill:", inputGroup);
@@ -66,12 +136,15 @@ void ImpCalculatorWidget::setupUi() {
     m_imbueSpin->setValue(0);
     connect(m_imbueSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, &ImpCalculatorWidget::recalculate);
 
-    inputGrid->addWidget(skillLabel, 0, 0);
-    inputGrid->addWidget(m_skillSpin, 0, 1);
-    inputGrid->addWidget(qlLabel, 1, 0);
-    inputGrid->addWidget(m_targetQlSpin, 1, 1);
-    inputGrid->addWidget(imbueLabel, 2, 0);
-    inputGrid->addWidget(m_imbueSpin, 2, 1);
+    inputGrid->addWidget(m_liveSyncCheck, 0, 0, 1, 2);
+    inputGrid->addWidget(skillComboLabel, 1, 0);
+    inputGrid->addWidget(m_skillCombo, 1, 1);
+    inputGrid->addWidget(skillLabel, 2, 0);
+    inputGrid->addWidget(m_skillSpin, 2, 1);
+    inputGrid->addWidget(qlLabel, 3, 0);
+    inputGrid->addWidget(m_targetQlSpin, 3, 1);
+    inputGrid->addWidget(imbueLabel, 4, 0);
+    inputGrid->addWidget(m_imbueSpin, 4, 1);
 
     mainLayout->addWidget(inputGroup);
 
@@ -168,6 +241,56 @@ void ImpCalculatorWidget::recalculate() {
     } else {
         m_skillNeededOutput->setText(QString::number(skillNeeded, 'f', 2));
     }
+}
+
+void ImpCalculatorWidget::onLiveSyncToggled(bool checked) {
+    if (checked && m_skillCombo) {
+        QString selected = m_skillCombo->currentText().trimmed();
+        const auto* stat = skills::SkillTracker::instance().getSkillStats(selected.toStdString());
+        if (stat && stat->current_level > 0.0) {
+            m_skillSpin->setValue(stat->current_level);
+        }
+    }
+}
+
+void ImpCalculatorWidget::onSkillSelectionChanged(const QString& skillName) {
+    if (m_liveSyncCheck && m_liveSyncCheck->isChecked()) {
+        const auto* stat = skills::SkillTracker::instance().getSkillStats(skillName.trimmed().toStdString());
+        if (stat && stat->current_level > 0.0) {
+            m_skillSpin->setValue(stat->current_level);
+        }
+    }
+}
+
+void ImpCalculatorWidget::onSkillUpdated(const QString& name, double level) {
+    if (!m_liveSyncCheck || !m_liveSyncCheck->isChecked()) {
+        return;
+    }
+    if (!m_skillCombo) {
+        return;
+    }
+    QString selected = m_skillCombo->currentText().trimmed();
+    if (name.compare(selected, Qt::CaseInsensitive) == 0) {
+        if (m_skillSpin) {
+            m_skillSpin->setValue(level);
+        }
+    }
+}
+
+bool ImpCalculatorWidget::isLiveSyncEnabled() const {
+    return m_liveSyncCheck && m_liveSyncCheck->isChecked();
+}
+
+double ImpCalculatorWidget::currentSkill() const {
+    return m_skillSpin ? m_skillSpin->value() : 0.0;
+}
+
+double ImpCalculatorWidget::maxImpQl() const {
+    return m_maxQlOutput ? m_maxQlOutput->text().toDouble() : 0.0;
+}
+
+void ImpCalculatorWidget::setCurrentSkill(double skill) {
+    if (m_skillSpin) m_skillSpin->setValue(skill);
 }
 
 } // namespace tools

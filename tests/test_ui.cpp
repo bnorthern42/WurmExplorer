@@ -7,8 +7,14 @@
 #include "../src/ui/panels/ArtifactPanel.hpp"
 #include "../src/features/treasure/TreasurePanel.hpp"
 #include "../src/features/drawing/DrawingPanel.hpp"
+#include "../src/features/skills/SkillsPanel.hpp"
+#include "../src/features/skills/SkillTracker.hpp"
+#include "../src/features/tools/ImpCalculatorWidget.hpp"
 #include <QSpinBox>
 #include <QDoubleSpinBox>
+#include <QComboBox>
+#include <QCheckBox>
+#include <QCompleter>
 
 class TestUI : public QObject {
     Q_OBJECT
@@ -63,6 +69,56 @@ private slots:
         
         QVERIFY(dragBtn != nullptr); // Drag button must exist
         QVERIFY(dragBtn->isChecked()); // Should be checked by default
+    }
+
+    void testSkillsPanelHeaderButtonsRemoved() {
+        skills::SkillsPanel panel;
+        QList<QPushButton*> buttons = panel.findChildren<QPushButton*>();
+        for (auto* btn : buttons) {
+            QVERIFY(btn->toolTip() != "Reload entire log file from beginning");
+            QVERIFY(btn->toolTip() != "Pause / Resume live log tailing");
+            QVERIFY(!btn->text().contains("Settings"));
+        }
+    }
+
+    void testImpCalculatorLiveSyncAndFuzzySearch() {
+        tools::ImpCalculatorWidget widget;
+
+        // 1. Verify Live Sync checkbox exists
+        auto* liveSyncCheck = widget.findChild<QCheckBox*>("liveSyncCheckBox");
+        QVERIFY(liveSyncCheck != nullptr);
+        QVERIFY(!liveSyncCheck->isChecked());
+
+        // 2. Verify Skill QComboBox exists, is editable, and has fuzzy completer
+        auto* skillCombo = widget.findChild<QComboBox*>("skillComboBox");
+        QVERIFY(skillCombo != nullptr);
+        QVERIFY(skillCombo->isEditable());
+        QVERIFY(skillCombo->completer() != nullptr);
+        QCOMPARE(skillCombo->completer()->filterMode(), Qt::MatchContains);
+
+        // 3. Select Blacksmithing
+        int idx = skillCombo->findText("Blacksmithing");
+        QVERIFY(idx >= 0);
+        skillCombo->setCurrentIndex(idx);
+
+        // 4. Toggle Live Sync ON
+        liveSyncCheck->setChecked(true);
+        QVERIFY(widget.isLiveSyncEnabled());
+
+        // 5. Simulate a live log update via SkillTracker
+        skills::SkillTracker::instance().processLine("[14:30:00] Blacksmithing increased by 0.0050 to 52.3400");
+
+        // Spinbox should automatically update to 52.34
+        QCOMPARE(widget.currentSkill(), 52.34);
+        QVERIFY(widget.maxImpQl() > 0.0);
+
+        // 6. When Live Sync is unchecked, manual edit should work and not be overwritten
+        liveSyncCheck->setChecked(false);
+        widget.setCurrentSkill(80.0);
+        QCOMPARE(widget.currentSkill(), 80.0);
+
+        skills::SkillTracker::instance().processLine("[14:35:00] Blacksmithing increased by 0.0050 to 52.3450");
+        QCOMPARE(widget.currentSkill(), 80.0);
     }
 
     void cleanupTestCase() {}

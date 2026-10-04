@@ -32,16 +32,13 @@ public slots:
 private slots:
     void onTimerTick();
     void onSearchChanged(const QString& text);
-    void onTogglePauseClicked();
-    void onReloadClicked();
-    void onSettingsClicked();
 
 private:
     void setupUi();
     void pollFile();
     void updateTable();
 
-    SkillTracker m_tracker;
+    SkillTracker& m_tracker = SkillTracker::instance();
     QTimer* m_pollTimer = nullptr;
 
     QString m_currentFilePath;
@@ -54,7 +51,6 @@ private:
     QLabel* m_metricsLabel = nullptr;
     QLineEdit* m_searchEdit = nullptr;
     QTableWidget* m_table = nullptr;
-    QPushButton* m_pauseBtn = nullptr;
 };
 
 } // namespace skills

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <QObject>
+#include <QString>
 #include "SkillLogParser.hpp"
 #include <string>
 #include <vector>
@@ -33,9 +35,12 @@ struct InternalSkillData {
     int64_t last_time = -1;
 };
 
-class SkillTracker {
+class SkillTracker : public QObject {
+    Q_OBJECT
 public:
-    SkillTracker();
+    explicit SkillTracker(QObject* parent = nullptr);
+
+    static SkillTracker& instance();
 
     void reset();
     void processLine(const std::string& line);
@@ -43,6 +48,9 @@ public:
     std::vector<SkillStats> getStats() const;
     const SkillStats* getSkillStats(const std::string& skillName) const;
     int64_t getGlobalLastTime() const { return m_globalLastTime; }
+
+signals:
+    void skillUpdated(const QString& name, double level);
 
 private:
     void recomputeStats() const;

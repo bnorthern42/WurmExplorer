@@ -80,6 +80,7 @@ moc_headers = [
   'src/features/granger/GrangerPanel.hpp',
   'src/features/granger/TraitSelectionDialog.hpp',
   'src/features/skills/SkillsPanel.hpp',
+  'src/features/skills/SkillTracker.hpp',
   'src/ui/dialogs/SettingsDialog.hpp',
   'src/features/tools/ImpCalculatorWidget.hpp',
   'src/features/tools/BridgePillarWidget.hpp',
@@ -122,12 +123,27 @@ test_ui_src = [
   'src/features/treasure/TreasurePanel.cpp',
   'src/features/drawing/DrawingPanel.cpp',
   'src/models/DrawingStore.cpp',
-  'src/models/AnnotationStore.cpp'
+  'src/models/AnnotationStore.cpp',
+  'src/features/skills/SkillsPanel.cpp',
+  'src/features/skills/SkillTracker.cpp',
+  'src/features/skills/SkillLogParser.cpp',
+  'src/features/skills/SkillPathResolver.cpp',
+  'src/features/tools/ImpCalculatorWidget.cpp',
+  'src/features/tools/ImpCalculator.cpp',
+  'src/ui/dialogs/SettingsDialog.cpp'
 ]
 
 test_ui_moc = qt6.preprocess(
   moc_sources: ['tests/test_ui.cpp'],
-  moc_headers: ['src/ui/panels/ArtifactPanel.hpp', 'src/features/treasure/TreasurePanel.hpp', 'src/features/drawing/DrawingPanel.hpp'],
+  moc_headers: [
+    'src/ui/panels/ArtifactPanel.hpp',
+    'src/features/treasure/TreasurePanel.hpp',
+    'src/features/drawing/DrawingPanel.hpp',
+    'src/features/skills/SkillsPanel.hpp',
+    'src/features/skills/SkillTracker.hpp',
+    'src/features/tools/ImpCalculatorWidget.hpp',
+    'src/ui/dialogs/SettingsDialog.hpp'
+  ],
   dependencies: qt6_dep
 )
 
@@ -147,12 +163,18 @@ test_granger = executable('test_granger',
 )
 test('granger', test_granger, workdir: meson.project_source_root())
 
+test_skills_moc = qt6.preprocess(
+  moc_headers: ['src/features/skills/SkillTracker.hpp'],
+  dependencies: qt6_dep
+)
+
 test_skills = executable('test_skills',
   ['tests/test_skills.cpp',
    'src/features/skills/SkillLogParser.cpp',
    'src/features/skills/SkillTracker.cpp',
-   'src/features/skills/SkillPathResolver.cpp'],
-  dependencies: [json_dep],
+   'src/features/skills/SkillPathResolver.cpp',
+   test_skills_moc],
+  dependencies: [qt6_dep, json_dep],
   include_directories: incdir
 )
 test('skills', test_skills, workdir: meson.project_source_root())
