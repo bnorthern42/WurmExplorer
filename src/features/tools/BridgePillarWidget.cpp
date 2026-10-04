@@ -69,9 +69,10 @@ void PillarElevationCanvas::mouseMoveEvent(QMouseEvent* event) {
             m_hoverX = cx;
             m_hoverY = cy;
             int height = m_result.cornerGrid[cy][cx];
+            int tier = BridgePillarCalculator::getElevationTier(height);
             emit cornerHovered(cx, cy, height);
             emit tileHovered(cx, cy, height);
-            setToolTip(QString("Corner [%1, %2] | Height: %3 dirt").arg(cx).arg(cy).arg(height));
+            setToolTip(QString("Corner [%1, %2] | Height: %3 dirt (Tier %4)").arg(cx).arg(cy).arg(height).arg(tier));
             update();
         }
     } else {
@@ -104,27 +105,19 @@ void PillarElevationCanvas::paintEvent(QPaintEvent*) {
 
     double cellW = static_cast<double>(width()) / m_result.cornerW;
     double cellH = static_cast<double>(height()) / m_result.cornerL;
-    double maxH = std::max(1, m_result.targetHeight);
 
     for (int y = 0; y < m_result.cornerL; ++y) {
         for (int x = 0; x < m_result.cornerW; ++x) {
             int h = m_result.cornerGrid[y][x];
-            double norm = static_cast<double>(h) / maxH; // 0.0 to 1.0
 
-            QColor fillColor;
-            if (h == 0) {
-                fillColor = QColor(theme::SURFACE_DARK);
-            } else {
-                // Color ramp: slate -> emerald -> mint
-                int r = static_cast<int>(13 + norm * (55 - 13));
-                int g = static_cast<int>(56 + norm * (239 - 56));
-                int b = static_cast<int>(41 + norm * (186 - 41));
-                fillColor = QColor(r, g, b);
-            }
+            auto style = BridgePillarCalculator::getElevationStyle(h);
+            QColor fillColor(style.fill.r, style.fill.g, style.fill.b);
+            QColor borderColor(style.border.r, style.border.g, style.border.b);
+            QColor textColor(style.text.r, style.text.g, style.text.b);
 
             QRectF cellRect(x * cellW, y * cellH, cellW, cellH);
             painter.fillRect(cellRect, fillColor);
-            painter.setPen(QColor(theme::BORDER_MUTED));
+            painter.setPen(QPen(borderColor, 1));
             painter.drawRect(cellRect);
 
             // Constrain text rendering within cell bounds with padding
@@ -149,7 +142,7 @@ void PillarElevationCanvas::paintEvent(QPaintEvent*) {
                 // Strictly enforce that text fits within textRect bounds without overlapping borders
                 if (fm.horizontalAdvance(text) <= textRect.width() && fm.height() <= textRect.height()) {
                     painter.setFont(f);
-                    painter.setPen(norm > 0.5 ? QColor(theme::TEXT_ON_ACCENT) : QColor(theme::TEXT_PRIMARY));
+                    painter.setPen(textColor);
                     painter.drawText(textRect, Qt::AlignCenter, text);
                 }
             }
@@ -289,7 +282,8 @@ void BridgePillarWidget::setupUi() {
         if (x < 0 || y < 0) {
             m_hoverDetailLabel->setText("Hover over a corner for details");
         } else {
-            m_hoverDetailLabel->setText(QString("Corner [%1, %2] | Height: %3 dirt").arg(x).arg(y).arg(h));
+            int tier = BridgePillarCalculator::getElevationTier(h);
+            m_hoverDetailLabel->setText(QString("Corner [%1, %2] | Height: %3 dirt (Tier %4)").arg(x).arg(y).arg(h).arg(tier));
         }
     });
 

@@ -23,9 +23,24 @@ struct PillarResult {
     std::vector<std::vector<int>> tileGrid;   // [baseL][baseW]
 };
 
+struct ElevationRgb {
+    int r = 0;
+    int g = 0;
+    int b = 0;
+};
+
+struct ElevationStyle {
+    ElevationRgb fill;
+    ElevationRgb border;
+    ElevationRgb text;
+    int tier = 0;
+};
+
 class BridgePillarCalculator {
 public:
     static PillarResult calculate(int topW, int topL, int targetHeight, std::optional<double> digSkill = std::nullopt);
+    static int getElevationTier(int height);
+    static ElevationStyle getElevationStyle(int height);
 };
 
 } // namespace tools

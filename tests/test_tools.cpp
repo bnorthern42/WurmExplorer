@@ -305,12 +305,14 @@ void testBridgePillarSlopeAndDigSkillLimit() {
 
 void testDifficultyPresets();
 void testBridgePillarPlateauDimensions();
+void testBridgePillarRgbColormapAndLoopBounds();
 
 int main() {
     testImpCalculator();
     testBridgePillarCalculator();
     testBridgePillarSlopeAndDigSkillLimit();
     testBridgePillarPlateauDimensions();
+    testBridgePillarRgbColormapAndLoopBounds();
     testGrinderEngine();
     testGrinderActionModes();
     testDifficultyPresets();
@@ -419,3 +421,61 @@ void testDifficultyPresets() {
 
     std::cout << "DifficultyPresets tests passed!" << std::endl;
 }
+
+void testBridgePillarRgbColormapAndLoopBounds() {
+    std::cout << "Testing BridgePillar RGB colormap and loop bounds..." << std::endl;
+
+    // 1. Test elevation tiers for every 300 dirt (Wurm slope limits)
+    assert(BridgePillarCalculator::getElevationTier(0) == 0);
+    assert(BridgePillarCalculator::getElevationTier(150) == 1);
+    assert(BridgePillarCalculator::getElevationTier(300) == 1);
+    assert(BridgePillarCalculator::getElevationTier(301) == 2);
+    assert(BridgePillarCalculator::getElevationTier(600) == 2);
+    assert(BridgePillarCalculator::getElevationTier(900) == 3);
+    assert(BridgePillarCalculator::getElevationTier(1200) == 4);
+    assert(BridgePillarCalculator::getElevationTier(1500) == 5);
+    assert(BridgePillarCalculator::getElevationTier(1800) == 6);
+
+    // 2. Test RGB color styling for every 300 on the border of each
+    auto style0 = BridgePillarCalculator::getElevationStyle(0);
+    assert(style0.tier == 0);
+
+    auto style300 = BridgePillarCalculator::getElevationStyle(300);
+    assert(style300.tier == 1);
+    assert(style300.border.b > style300.border.r && style300.border.b > style300.border.g);
+
+    auto style600 = BridgePillarCalculator::getElevationStyle(600);
+    assert(style600.tier == 2);
+    assert(style600.border.g > 150 && style600.border.b > 150 && style600.border.r < 80);
+
+    auto style900 = BridgePillarCalculator::getElevationStyle(900);
+    assert(style900.tier == 3);
+    assert(style900.border.g > style900.border.r && style900.border.g > style900.border.b);
+
+    auto style1200 = BridgePillarCalculator::getElevationStyle(1200);
+    assert(style1200.tier == 4);
+    assert(style1200.border.r > 200 && style1200.border.g > 120 && style1200.border.b < 80);
+
+    auto style1500 = BridgePillarCalculator::getElevationStyle(1500);
+    assert(style1500.tier == 5);
+    assert(style1500.border.r > 200 && style1500.border.g > 80 && style1500.border.b < 80);
+
+    auto style1800 = BridgePillarCalculator::getElevationStyle(1800);
+    assert(style1800.tier == 6);
+    assert(style1800.border.r > 200 && style1800.border.g < 100 && style1800.border.b < 100);
+
+    // 3. Test loop bounds: 2x2 tile plateau must produce exactly 3x3 max-height corners
+    auto res2x2 = BridgePillarCalculator::calculate(2, 2, 1800, std::nullopt);
+    assert(res2x2.plateauCornersX == 3);
+    assert(res2x2.plateauCornersY == 3);
+    int count1800 = 0;
+    for (int y = 0; y < res2x2.cornerL; ++y) {
+        for (int x = 0; x < res2x2.cornerW; ++x) {
+            if (res2x2.cornerGrid[y][x] == 1800) count1800++;
+        }
+    }
+    assert(count1800 == 9);
+
+    std::cout << "BridgePillar RGB colormap and loop bounds tests passed!" << std::endl;
+}
+
