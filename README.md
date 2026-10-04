@@ -87,24 +87,12 @@ Whether you are sailing treacherous ocean borders, calculating exact dirt crates
 
 ---
 
-## Screenshot Automation (Wayland / Niri)
+## Project Scope & Non-Goals
 
-WurmExplorer includes an automated screenshot capture script designed for Wayland compositors (such as Niri or Sway) using `grim`:
-
-```bash
-# Ensure execution permissions
-chmod +x scripts/capture_docs.sh
-
-# Run full interactive sequential capture for all docs
-./scripts/capture_docs.sh
-
-# Or capture a specific tab with a custom countdown delay (in seconds)
-./scripts/capture_docs.sh grinder 3
-./scripts/capture_docs.sh main 5
-./scripts/capture_docs.sh bridge 3
-```
-
-All screenshots are automatically saved into `assets/docs/` for clean, tracked documentation.
+> **A Note on Cooking & Recipes:**  
+> Please note that WurmExplorer will **not** include a cooking calculator or recipe helper. There are already 900,000 cooking apps, web spreadsheets, and recipe sites out there in the Wurm ecosystem—we will not add another one to the pile, so please don't ask!  
+>  
+> WurmExplorer is strictly purpose-built for heavy cartography, computer-vision treasure hunting, deep mechanics probability modeling, terraforming math, livestock breeding genetics, and real-time client log telemetry. For culinary crafting, we encourage players to use the many dedicated cooking tools already available in the community.
 
 ---
 

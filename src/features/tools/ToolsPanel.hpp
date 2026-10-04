@@ -13,6 +13,7 @@ class ToolsPanel : public QWidget {
 public:
     explicit ToolsPanel(QWidget* parent = nullptr);
     GrinderWidget* getGrinderWidget() const { return m_grinderWidget; }
+    void selectToolTab(int id);
 
 private slots:
     void onTabChanged(int id);

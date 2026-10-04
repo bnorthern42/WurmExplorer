@@ -95,4 +95,13 @@ void ToolsPanel::onTabChanged(int id) {
     }
 }
 
+void ToolsPanel::selectToolTab(int id) {
+    if (m_tabGroup) {
+        if (auto* btn = m_tabGroup->button(id)) {
+            btn->setChecked(true);
+            onTabChanged(id);
+        }
+    }
+}
+
 } // namespace tools

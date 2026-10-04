@@ -53,6 +53,20 @@ capture_target() {
 # If arguments are passed, capture only specified targets
 if [ "$#" -gt 0 ]; then
     case "$1" in
+        auto|--auto)
+            if [ -x "$REPO_ROOT/builddir/wurm_explorer" ]; then
+                echo "Running automated capture with $REPO_ROOT/builddir/wurm_explorer --capture-docs..."
+                "$REPO_ROOT/builddir/wurm_explorer" --capture-docs "$OUTPUT_DIR"
+                exit 0
+            elif [ -x "$HOME/.local/bin/wurm_explorer" ]; then
+                echo "Running automated capture with $HOME/.local/bin/wurm_explorer --capture-docs..."
+                "$HOME/.local/bin/wurm_explorer" --capture-docs "$OUTPUT_DIR"
+                exit 0
+            else
+                echo "wurm_explorer binary not found. Please compile first or use manual mode."
+                exit 1
+            fi
+            ;;
         main|main_ui)
             capture_target "main_ui.png" "Main Cartography & Navigation UI" "${2:-$DEFAULT_DELAY}"
             ;;
@@ -75,9 +89,9 @@ if [ "$#" -gt 0 ]; then
             capture_target "skills_tracker.png" "Skills Tracker & Real-Time Log Sync" "${2:-$DEFAULT_DELAY}"
             ;;
         help|--help|-h)
-            echo "Usage: $0 [target] [delay_in_seconds]"
-            echo "Available targets: main, sailing, grinder, bridge, imp, livestock, skills"
-            echo "Run without arguments to sequentially capture all document screenshots."
+            echo "Usage: $0 [--auto | target] [delay_in_seconds]"
+            echo "Available targets: --auto, main, sailing, grinder, bridge, imp, livestock, skills"
+            echo "Run without arguments to sequentially capture all document screenshots using grim."
             exit 0
             ;;
         *)

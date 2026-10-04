@@ -43,6 +43,14 @@ int main(int argc, char *argv[]) {
     
     MainWindow window;
     window.resize(1200, 800);
+
+    if (argc > 1 && QString::fromUtf8(argv[1]) == "--capture-docs") {
+        QString outDir = (argc > 2) ? QString::fromUtf8(argv[2]) : "assets/docs";
+        window.captureDocScreenshots(outDir);
+        vips_shutdown();
+        return 0;
+    }
+
     window.show();
     
     int result = app.exec();

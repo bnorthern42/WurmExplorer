@@ -53,6 +53,7 @@ class MainWindow : public QMainWindow {
 public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
+    void captureDocScreenshots(const QString& outputDir);
 
 private slots:
     void onLocateRequested(const QString& screenshotPath);

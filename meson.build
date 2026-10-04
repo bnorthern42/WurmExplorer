@@ -44,6 +44,7 @@ sources = [
   'src/core/Config.cpp',
   'src/core/MapVariants.cpp',
   'src/ui/MainWindowLocate.cpp',
+  'src/ui/MainWindowCapture.cpp',
   'src/features/granger/GrangerTraits.cpp',
   'src/features/granger/BreedingEvaluator.cpp',
   'src/features/granger/GrangerStore.cpp',
@@ -212,6 +213,17 @@ test_tools = executable('test_tools',
   include_directories: incdir
 )
 test('tools', test_tools, suite: 'tools', workdir: meson.project_source_root())
+
+test_docs_moc = qt6.preprocess(
+  moc_sources: ['tests/test_docs.cpp'],
+  dependencies: qt6_dep
+)
+test_docs = executable('test_docs',
+  ['tests/test_docs.cpp', test_docs_moc],
+  dependencies: [qt6_dep],
+  include_directories: incdir
+)
+test('docs', test_docs, suite: 'docs', workdir: meson.project_source_root())
 
 # Install desktop and icon integration
 install_data('assets/icons/wurm_explorer.svg',
