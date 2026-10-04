@@ -8,9 +8,12 @@
 
 #include <QMessageBox>
 #include <QtConcurrent>
+#pragma push_macro("signals")
+#undef signals
 #include <opencv2/imgproc.hpp>
 #include <opencv2/photo.hpp>
 #include <opencv2/imgcodecs.hpp>
+#pragma pop_macro("signals")
 #include <algorithm>
 
 void MainWindow::onLocateRequested(const QString& screenshotPath) {

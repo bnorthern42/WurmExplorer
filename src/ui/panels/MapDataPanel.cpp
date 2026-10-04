@@ -64,7 +64,7 @@ void MapDataPanel::setupUi() {
     for (size_t i = 0; i < toggles.size(); ++i) {
         toggles[i]->setChecked(true);
         layerLayout->addWidget(toggles[i], i / 2, i % 2);
-        connect(toggles[i], &QCheckBox::checkStateChanged, this, &MapDataPanel::refreshList);
+        connect(toggles[i], &QCheckBox::stateChanged, this, [this](int) { refreshList(); });
     }
     outer->addWidget(layerBox);
 

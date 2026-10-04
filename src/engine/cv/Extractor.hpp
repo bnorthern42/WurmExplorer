@@ -1,6 +1,9 @@
 #pragma once
 
+#pragma push_macro("signals")
+#undef signals
 #include <opencv2/opencv.hpp>
+#pragma pop_macro("signals")
 #include <map>
 #include <string>
 

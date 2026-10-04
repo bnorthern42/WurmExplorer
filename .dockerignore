@@ -1,0 +1,10 @@
+build/
+builddir/
+.venv/
+.git/
+.cache/
+.agents/
+.idea/
+.vscode/
+out_debug/
+out_debug_locate/

@@ -68,16 +68,29 @@ std::shared_ptr<ServerMapVariants> discoverServerMapVariants(const std::shared_p
     auto variants = std::make_shared<ServerMapVariants>();
     variants->server = cfg->name;
 
-    if (!fs::exists(directory) || !fs::is_directory(directory)) {
+    std::vector<fs::path> searchDirs;
+    if (fs::exists(directory) && fs::is_directory(directory)) {
+        searchDirs.push_back(directory);
+    }
+    for (const auto& alt : {fs::path("assets/maps"), fs::path("../assets/maps"), fs::path("svrMaps"), fs::path("../svrMaps")}) {
+        if (fs::exists(alt) && fs::is_directory(alt) && std::find(searchDirs.begin(), searchDirs.end(), alt) == searchDirs.end()) {
+            searchDirs.push_back(alt);
+        }
+    }
+
+    if (searchDirs.empty()) {
         variants->paths["classic"] = basePath.string();
         variants->default_type = "classic";
         return variants;
     }
 
     std::vector<fs::path> candidates;
-    for (const auto& entry : fs::directory_iterator(directory)) {
-        if (entry.is_regular_file() && entry.path().extension() == ".png") {
-            candidates.push_back(entry.path());
+    for (const auto& dir : searchDirs) {
+        std::error_code ec;
+        for (const auto& entry : fs::recursive_directory_iterator(dir, fs::directory_options::skip_permission_denied, ec)) {
+            if (entry.is_regular_file() && entry.path().extension() == ".png") {
+                candidates.push_back(entry.path());
+            }
         }
     }
     std::sort(candidates.begin(), candidates.end());

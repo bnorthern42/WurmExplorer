@@ -36,7 +36,16 @@ jobs:
             libyaml-cpp-dev \
             nlohmann-json3-dev \
             libtesseract-dev \
-            libomp-dev
+            libomp-dev \
+            python3 \
+            python3-pip
+
+      - name: Fetch Map Assets
+        env:
+          MAP_FOLDER_ID: "0B6J_aGQ6URL8UURFN2VadWxtSWs"
+        run: |
+          pip3 install --break-system-packages gdown requests || pip install gdown requests
+          python3 scripts/fetch_maps.py --folder-id $MAP_FOLDER_ID --dest assets/maps/
 
       - name: Setup Meson Build
         run: meson setup builddir --buildtype=debug
@@ -74,8 +83,17 @@ jobs:
             nlohmann-json3-dev \
             libtesseract-dev \
             libomp-dev \
+            python3 \
+            python3-pip \
             curl \
             file
+
+      - name: Fetch Map Assets
+        env:
+          MAP_FOLDER_ID: "0B6J_aGQ6URL8UURFN2VadWxtSWs"
+        run: |
+          pip3 install --break-system-packages gdown requests || pip install gdown requests
+          python3 scripts/fetch_maps.py --folder-id $MAP_FOLDER_ID --dest assets/maps/
 
       - name: Build AppImage
         env:

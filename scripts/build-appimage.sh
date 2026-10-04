@@ -24,6 +24,12 @@ mkdir -p "$APPDIR/usr/share/icons/hicolor/scalable/apps"
 cp "$ROOT_DIR/builddir/wurm_explorer" "$APPDIR/usr/bin/wurm_explorer"
 cp -r "$ROOT_DIR/resources" "$APPDIR/usr/bin/"
 cp -r "$ROOT_DIR/configs" "$APPDIR/usr/bin/"
+if [ -d "$ROOT_DIR/assets" ]; then
+    cp -r "$ROOT_DIR/assets" "$APPDIR/usr/bin/"
+fi
+if [ -d "$ROOT_DIR/svrMaps" ]; then
+    cp -r "$ROOT_DIR/svrMaps" "$APPDIR/usr/bin/"
+fi
 
 # Copy desktop file and icon
 cp "$ROOT_DIR/resources/wurmexplorer.desktop" "$APPDIR/wurmexplorer.desktop"

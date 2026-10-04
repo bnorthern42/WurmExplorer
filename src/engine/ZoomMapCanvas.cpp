@@ -5,7 +5,10 @@
 #include <QMouseEvent>
 #include <QPainterPath>
 #include <QPainterPathStroker>
+#pragma push_macro("signals")
+#undef signals
 #include <vips/vips8>
+#pragma pop_macro("signals")
 #include <algorithm>
 #include <cmath>
 

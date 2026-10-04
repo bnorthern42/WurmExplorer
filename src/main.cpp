@@ -1,9 +1,12 @@
 #include <QApplication>
 #include <QIcon>
-#include <vips/vips8>
+#include <QFontDatabase>
 #include "ui/MainWindow.hpp"
 #include "ui/Theme.hpp"
-#include <QFontDatabase>
+#pragma push_macro("signals")
+#undef signals
+#include <vips/vips8>
+#pragma pop_macro("signals")
 
 int main(int argc, char *argv[]) {
     if (VIPS_INIT(argv[0])) {
