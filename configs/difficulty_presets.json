@@ -1,0 +1,2890 @@
+{
+  "MiningPower": [
+    {
+      "name": "Stone Vein",
+      "difficulty": 2.0
+    },
+    {
+      "name": "Zinc Vein",
+      "difficulty": 2.0
+    },
+    {
+      "name": "Iron Vein",
+      "difficulty": 3.0
+    },
+    {
+      "name": "Tin Vein",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Copper Vein",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Slate Vein",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Lead Vein",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Silver Vein",
+      "difficulty": 35.0
+    },
+    {
+      "name": "Gold Vein",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Reinforced Vein",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Marble Vein",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Sandstone Vein",
+      "difficulty": 45.0
+    },
+    {
+      "name": "Glimmersteel Vein",
+      "difficulty": 55.0
+    },
+    {
+      "name": "Adamantine Vein",
+      "difficulty": 60.0
+    }
+  ],
+  "MiningQl": [
+    {
+      "name": "Stone Vein",
+      "difficulty": 2.0
+    },
+    {
+      "name": "Zinc Vein",
+      "difficulty": 2.0
+    },
+    {
+      "name": "Iron Vein",
+      "difficulty": 3.0
+    },
+    {
+      "name": "Tin Vein",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Copper Vein",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Slate Vein",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Lead Vein",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Silver Vein",
+      "difficulty": 35.0
+    },
+    {
+      "name": "Gold Vein",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Reinforced Vein",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Marble Vein",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Sandstone Vein",
+      "difficulty": 45.0
+    },
+    {
+      "name": "Glimmersteel Vein",
+      "difficulty": 55.0
+    },
+    {
+      "name": "Adamantine Vein",
+      "difficulty": 60.0
+    }
+  ],
+  "Taming": [
+    {
+      "name": "Chicken",
+      "difficulty": 5.0
+    },
+    {
+      "name": "Chicken (Young)",
+      "difficulty": 4.5
+    },
+    {
+      "name": "Chicken (Adolescent)",
+      "difficulty": 5.0
+    },
+    {
+      "name": "Chicken (Mature)",
+      "difficulty": 5.5
+    },
+    {
+      "name": "Chicken (Aged)",
+      "difficulty": 6.0
+    },
+    {
+      "name": "Chicken (Old)",
+      "difficulty": 6.5
+    },
+    {
+      "name": "Chicken (Venerable)",
+      "difficulty": 7.0
+    },
+    {
+      "name": "Hen",
+      "difficulty": 5.0
+    },
+    {
+      "name": "Hen (Young)",
+      "difficulty": 4.5
+    },
+    {
+      "name": "Hen (Adolescent)",
+      "difficulty": 5.0
+    },
+    {
+      "name": "Hen (Mature)",
+      "difficulty": 5.5
+    },
+    {
+      "name": "Hen (Aged)",
+      "difficulty": 6.0
+    },
+    {
+      "name": "Hen (Old)",
+      "difficulty": 6.5
+    },
+    {
+      "name": "Hen (Venerable)",
+      "difficulty": 7.0
+    },
+    {
+      "name": "Lamb",
+      "difficulty": 5.0
+    },
+    {
+      "name": "Lamb (Young)",
+      "difficulty": 4.5
+    },
+    {
+      "name": "Lamb (Adolescent)",
+      "difficulty": 5.0
+    },
+    {
+      "name": "Lamb (Mature)",
+      "difficulty": 5.5
+    },
+    {
+      "name": "Lamb (Aged)",
+      "difficulty": 6.0
+    },
+    {
+      "name": "Lamb (Old)",
+      "difficulty": 6.5
+    },
+    {
+      "name": "Lamb (Venerable)",
+      "difficulty": 7.0
+    },
+    {
+      "name": "Brown Cow",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Cow",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Brown Cow (Young)",
+      "difficulty": 9.0
+    },
+    {
+      "name": "Cow (Young)",
+      "difficulty": 9.0
+    },
+    {
+      "name": "Brown Cow (Adolescent)",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Cow (Adolescent)",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Brown Cow (Mature)",
+      "difficulty": 11.0
+    },
+    {
+      "name": "Cow (Mature)",
+      "difficulty": 11.0
+    },
+    {
+      "name": "Brown Cow (Aged)",
+      "difficulty": 12.0
+    },
+    {
+      "name": "Cow (Aged)",
+      "difficulty": 12.0
+    },
+    {
+      "name": "Brown Cow (Old)",
+      "difficulty": 13.0
+    },
+    {
+      "name": "Cow (Old)",
+      "difficulty": 13.0
+    },
+    {
+      "name": "Brown Cow (Venerable)",
+      "difficulty": 14.0
+    },
+    {
+      "name": "Cow (Venerable)",
+      "difficulty": 14.0
+    },
+    {
+      "name": "Pheasant",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Pheasant (Young)",
+      "difficulty": 9.0
+    },
+    {
+      "name": "Pheasant (Adolescent)",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Pheasant (Mature)",
+      "difficulty": 11.0
+    },
+    {
+      "name": "Pheasant (Aged)",
+      "difficulty": 12.0
+    },
+    {
+      "name": "Pheasant (Old)",
+      "difficulty": 13.0
+    },
+    {
+      "name": "Pheasant (Venerable)",
+      "difficulty": 14.0
+    },
+    {
+      "name": "Rooster",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Rooster (Young)",
+      "difficulty": 9.0
+    },
+    {
+      "name": "Rooster (Adolescent)",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Rooster (Mature)",
+      "difficulty": 11.0
+    },
+    {
+      "name": "Rooster (Aged)",
+      "difficulty": 12.0
+    },
+    {
+      "name": "Rooster (Old)",
+      "difficulty": 13.0
+    },
+    {
+      "name": "Rooster (Venerable)",
+      "difficulty": 14.0
+    },
+    {
+      "name": "Seal Cub",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Seal Cub (Young)",
+      "difficulty": 9.0
+    },
+    {
+      "name": "Seal Cub (Adolescent)",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Seal Cub (Mature)",
+      "difficulty": 11.0
+    },
+    {
+      "name": "Seal Cub (Aged)",
+      "difficulty": 12.0
+    },
+    {
+      "name": "Seal Cub (Old)",
+      "difficulty": 13.0
+    },
+    {
+      "name": "Seal Cub (Venerable)",
+      "difficulty": 14.0
+    },
+    {
+      "name": "Sheep",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Sheep (Young)",
+      "difficulty": 9.0
+    },
+    {
+      "name": "Sheep (Adolescent)",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Sheep (Mature)",
+      "difficulty": 11.0
+    },
+    {
+      "name": "Sheep (Aged)",
+      "difficulty": 12.0
+    },
+    {
+      "name": "Sheep (Old)",
+      "difficulty": 13.0
+    },
+    {
+      "name": "Sheep (Venerable)",
+      "difficulty": 14.0
+    },
+    {
+      "name": "Calf",
+      "difficulty": 15.0
+    },
+    {
+      "name": "Calf (Young)",
+      "difficulty": 13.5
+    },
+    {
+      "name": "Calf (Adolescent)",
+      "difficulty": 15.0
+    },
+    {
+      "name": "Calf (Mature)",
+      "difficulty": 16.5
+    },
+    {
+      "name": "Calf (Aged)",
+      "difficulty": 18.0
+    },
+    {
+      "name": "Calf (Old)",
+      "difficulty": 19.5
+    },
+    {
+      "name": "Calf (Venerable)",
+      "difficulty": 21.0
+    },
+    {
+      "name": "Foal",
+      "difficulty": 15.0
+    },
+    {
+      "name": "Foal (Young)",
+      "difficulty": 13.5
+    },
+    {
+      "name": "Foal (Adolescent)",
+      "difficulty": 15.0
+    },
+    {
+      "name": "Foal (Mature)",
+      "difficulty": 16.5
+    },
+    {
+      "name": "Foal (Aged)",
+      "difficulty": 18.0
+    },
+    {
+      "name": "Foal (Old)",
+      "difficulty": 19.5
+    },
+    {
+      "name": "Foal (Venerable)",
+      "difficulty": 21.0
+    },
+    {
+      "name": "Kid",
+      "difficulty": 15.0
+    },
+    {
+      "name": "Kid (Young)",
+      "difficulty": 13.5
+    },
+    {
+      "name": "Kid (Adolescent)",
+      "difficulty": 15.0
+    },
+    {
+      "name": "Kid (Mature)",
+      "difficulty": 16.5
+    },
+    {
+      "name": "Kid (Aged)",
+      "difficulty": 18.0
+    },
+    {
+      "name": "Kid (Old)",
+      "difficulty": 19.5
+    },
+    {
+      "name": "Kid (Venerable)",
+      "difficulty": 21.0
+    },
+    {
+      "name": "Deer",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Deer (Young)",
+      "difficulty": 18.0
+    },
+    {
+      "name": "Deer (Adolescent)",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Deer (Mature)",
+      "difficulty": 22.0
+    },
+    {
+      "name": "Deer (Aged)",
+      "difficulty": 24.0
+    },
+    {
+      "name": "Deer (Old)",
+      "difficulty": 26.0
+    },
+    {
+      "name": "Deer (Venerable)",
+      "difficulty": 28.0
+    },
+    {
+      "name": "Pig",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Pig (Young)",
+      "difficulty": 18.0
+    },
+    {
+      "name": "Pig (Adolescent)",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Pig (Mature)",
+      "difficulty": 22.0
+    },
+    {
+      "name": "Pig (Aged)",
+      "difficulty": 24.0
+    },
+    {
+      "name": "Pig (Old)",
+      "difficulty": 26.0
+    },
+    {
+      "name": "Pig (Venerable)",
+      "difficulty": 28.0
+    },
+    {
+      "name": "Large Rat",
+      "difficulty": 30.0
+    },
+    {
+      "name": "Large Rat (Young)",
+      "difficulty": 27.0
+    },
+    {
+      "name": "Large Rat (Adolescent)",
+      "difficulty": 30.0
+    },
+    {
+      "name": "Large Rat (Mature)",
+      "difficulty": 33.0
+    },
+    {
+      "name": "Large Rat (Aged)",
+      "difficulty": 36.0
+    },
+    {
+      "name": "Large Rat (Old)",
+      "difficulty": 39.0
+    },
+    {
+      "name": "Large Rat (Venerable)",
+      "difficulty": 42.0
+    },
+    {
+      "name": "Bison",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Bison (Young)",
+      "difficulty": 36.0
+    },
+    {
+      "name": "Bison (Adolescent)",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Bison (Mature)",
+      "difficulty": 44.0
+    },
+    {
+      "name": "Bison (Aged)",
+      "difficulty": 48.0
+    },
+    {
+      "name": "Bison (Old)",
+      "difficulty": 52.0
+    },
+    {
+      "name": "Bison (Venerable)",
+      "difficulty": 56.0
+    },
+    {
+      "name": "Bull",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Bull (Young)",
+      "difficulty": 36.0
+    },
+    {
+      "name": "Bull (Adolescent)",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Bull (Mature)",
+      "difficulty": 44.0
+    },
+    {
+      "name": "Bull (Aged)",
+      "difficulty": 48.0
+    },
+    {
+      "name": "Bull (Old)",
+      "difficulty": 52.0
+    },
+    {
+      "name": "Bull (Venerable)",
+      "difficulty": 56.0
+    },
+    {
+      "name": "Wild Cat",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Wild Cat (Young)",
+      "difficulty": 36.0
+    },
+    {
+      "name": "Wild Cat (Adolescent)",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Wild Cat (Mature)",
+      "difficulty": 44.0
+    },
+    {
+      "name": "Wild Cat (Aged)",
+      "difficulty": 48.0
+    },
+    {
+      "name": "Wild Cat (Old)",
+      "difficulty": 52.0
+    },
+    {
+      "name": "Wild Cat (Venerable)",
+      "difficulty": 56.0
+    },
+    {
+      "name": "Dog",
+      "difficulty": 45.0
+    },
+    {
+      "name": "Dog (Young)",
+      "difficulty": 40.5
+    },
+    {
+      "name": "Dog (Adolescent)",
+      "difficulty": 45.0
+    },
+    {
+      "name": "Dog (Mature)",
+      "difficulty": 49.5
+    },
+    {
+      "name": "Dog (Aged)",
+      "difficulty": 54.0
+    },
+    {
+      "name": "Dog (Old)",
+      "difficulty": 58.5
+    },
+    {
+      "name": "Dog (Venerable)",
+      "difficulty": 63.0
+    },
+    {
+      "name": "Spawn of Uttacha",
+      "difficulty": 48.0
+    },
+    {
+      "name": "Spawn of Uttacha (Young)",
+      "difficulty": 43.2
+    },
+    {
+      "name": "Spawn of Uttacha (Adolescent)",
+      "difficulty": 48.0
+    },
+    {
+      "name": "Spawn of Uttacha (Mature)",
+      "difficulty": 52.8
+    },
+    {
+      "name": "Spawn of Uttacha (Aged)",
+      "difficulty": 57.6
+    },
+    {
+      "name": "Spawn of Uttacha (Old)",
+      "difficulty": 62.4
+    },
+    {
+      "name": "Spawn of Uttacha (Venerable)",
+      "difficulty": 67.2
+    },
+    {
+      "name": "Seal",
+      "difficulty": 70.0
+    },
+    {
+      "name": "Seal (Young)",
+      "difficulty": 63.0
+    },
+    {
+      "name": "Seal (Adolescent)",
+      "difficulty": 70.0
+    },
+    {
+      "name": "Seal (Mature)",
+      "difficulty": 77.0
+    },
+    {
+      "name": "Seal (Aged)",
+      "difficulty": 84.0
+    },
+    {
+      "name": "Seal (Old)",
+      "difficulty": 91.0
+    },
+    {
+      "name": "Seal (Venerable)",
+      "difficulty": 98.0
+    },
+    {
+      "name": "Mountain Lion",
+      "difficulty": 75.0
+    },
+    {
+      "name": "Mountain Lion (Young)",
+      "difficulty": 67.5
+    },
+    {
+      "name": "Mountain Lion (Adolescent)",
+      "difficulty": 75.0
+    },
+    {
+      "name": "Mountain Lion (Mature)",
+      "difficulty": 82.5
+    },
+    {
+      "name": "Mountain Lion (Aged)",
+      "difficulty": 90.0
+    },
+    {
+      "name": "Mountain Lion (Old)",
+      "difficulty": 97.5
+    },
+    {
+      "name": "Mountain Lion (Venerable)",
+      "difficulty": 105.0
+    },
+    {
+      "name": "Skeleton",
+      "difficulty": 80.0
+    },
+    {
+      "name": "Skeleton (Young)",
+      "difficulty": 72.0
+    },
+    {
+      "name": "Skeleton (Adolescent)",
+      "difficulty": 80.0
+    },
+    {
+      "name": "Skeleton (Mature)",
+      "difficulty": 88.0
+    },
+    {
+      "name": "Skeleton (Aged)",
+      "difficulty": 96.0
+    },
+    {
+      "name": "Skeleton (Old)",
+      "difficulty": 104.0
+    },
+    {
+      "name": "Skeleton (Venerable)",
+      "difficulty": 112.0
+    },
+    {
+      "name": "Crab",
+      "difficulty": 100.0
+    },
+    {
+      "name": "Crab (Young)",
+      "difficulty": 90.0
+    },
+    {
+      "name": "Crab (Adolescent)",
+      "difficulty": 100.0
+    },
+    {
+      "name": "Crab (Mature)",
+      "difficulty": 110.0
+    },
+    {
+      "name": "Crab (Aged)",
+      "difficulty": 120.0
+    },
+    {
+      "name": "Crab (Old)",
+      "difficulty": 130.0
+    },
+    {
+      "name": "Crab (Venerable)",
+      "difficulty": 140.0
+    },
+    {
+      "name": "Ram",
+      "difficulty": 100.0
+    },
+    {
+      "name": "Ram (Young)",
+      "difficulty": 90.0
+    },
+    {
+      "name": "Ram (Adolescent)",
+      "difficulty": 100.0
+    },
+    {
+      "name": "Ram (Mature)",
+      "difficulty": 110.0
+    },
+    {
+      "name": "Ram (Aged)",
+      "difficulty": 120.0
+    },
+    {
+      "name": "Ram (Old)",
+      "difficulty": 130.0
+    },
+    {
+      "name": "Ram (Venerable)",
+      "difficulty": 140.0
+    },
+    {
+      "name": "Black Wolf",
+      "difficulty": 120.0
+    },
+    {
+      "name": "Black Wolf (Young)",
+      "difficulty": 108.0
+    },
+    {
+      "name": "Black Wolf (Adolescent)",
+      "difficulty": 120.0
+    },
+    {
+      "name": "Black Wolf (Mature)",
+      "difficulty": 132.0
+    },
+    {
+      "name": "Black Wolf (Aged)",
+      "difficulty": 144.0
+    },
+    {
+      "name": "Black Wolf (Old)",
+      "difficulty": 156.0
+    },
+    {
+      "name": "Black Wolf (Venerable)",
+      "difficulty": 168.0
+    },
+    {
+      "name": "Horse",
+      "difficulty": 132.0
+    },
+    {
+      "name": "Horse (Young)",
+      "difficulty": 118.8
+    },
+    {
+      "name": "Horse (Adolescent)",
+      "difficulty": 132.0
+    },
+    {
+      "name": "Horse (Mature)",
+      "difficulty": 145.2
+    },
+    {
+      "name": "Horse (Aged)",
+      "difficulty": 158.4
+    },
+    {
+      "name": "Horse (Old)",
+      "difficulty": 171.6
+    },
+    {
+      "name": "Horse (Venerable)",
+      "difficulty": 184.8
+    },
+    {
+      "name": "Goblin",
+      "difficulty": 156.0
+    },
+    {
+      "name": "Goblin (Young)",
+      "difficulty": 140.4
+    },
+    {
+      "name": "Goblin (Adolescent)",
+      "difficulty": 156.0
+    },
+    {
+      "name": "Goblin (Mature)",
+      "difficulty": 171.6
+    },
+    {
+      "name": "Goblin (Aged)",
+      "difficulty": 187.2
+    },
+    {
+      "name": "Goblin (Old)",
+      "difficulty": 202.8
+    },
+    {
+      "name": "Goblin (Venerable)",
+      "difficulty": 218.4
+    },
+    {
+      "name": "Zombie",
+      "difficulty": 160.0
+    },
+    {
+      "name": "Zombie (Young)",
+      "difficulty": 144.0
+    },
+    {
+      "name": "Zombie (Adolescent)",
+      "difficulty": 160.0
+    },
+    {
+      "name": "Zombie (Mature)",
+      "difficulty": 176.0
+    },
+    {
+      "name": "Zombie (Aged)",
+      "difficulty": 192.0
+    },
+    {
+      "name": "Zombie (Old)",
+      "difficulty": 208.0
+    },
+    {
+      "name": "Zombie (Venerable)",
+      "difficulty": 224.0
+    },
+    {
+      "name": "Son of Nogump",
+      "difficulty": 180.0
+    },
+    {
+      "name": "Son of Nogump (Young)",
+      "difficulty": 162.0
+    },
+    {
+      "name": "Son of Nogump (Adolescent)",
+      "difficulty": 180.0
+    },
+    {
+      "name": "Son of Nogump (Mature)",
+      "difficulty": 198.0
+    },
+    {
+      "name": "Son of Nogump (Aged)",
+      "difficulty": 216.0
+    },
+    {
+      "name": "Son of Nogump (Old)",
+      "difficulty": 234.0
+    },
+    {
+      "name": "Son of Nogump (Venerable)",
+      "difficulty": 252.0
+    },
+    {
+      "name": "Cave Bug",
+      "difficulty": 200.0
+    },
+    {
+      "name": "Cave Bug (Young)",
+      "difficulty": 180.0
+    },
+    {
+      "name": "Cave Bug (Adolescent)",
+      "difficulty": 200.0
+    },
+    {
+      "name": "Cave Bug (Mature)",
+      "difficulty": 220.0
+    },
+    {
+      "name": "Cave Bug (Aged)",
+      "difficulty": 240.0
+    },
+    {
+      "name": "Cave Bug (Old)",
+      "difficulty": 260.0
+    },
+    {
+      "name": "Cave Bug (Venerable)",
+      "difficulty": 280.0
+    },
+    {
+      "name": "Black Bear",
+      "difficulty": 270.0
+    },
+    {
+      "name": "Black Bear (Young)",
+      "difficulty": 243.0
+    },
+    {
+      "name": "Black Bear (Adolescent)",
+      "difficulty": 270.0
+    },
+    {
+      "name": "Black Bear (Mature)",
+      "difficulty": 297.0
+    },
+    {
+      "name": "Black Bear (Aged)",
+      "difficulty": 324.0
+    },
+    {
+      "name": "Black Bear (Old)",
+      "difficulty": 351.0
+    },
+    {
+      "name": "Black Bear (Venerable)",
+      "difficulty": 378.0
+    },
+    {
+      "name": "Brown Bear",
+      "difficulty": 270.0
+    },
+    {
+      "name": "Brown Bear (Young)",
+      "difficulty": 243.0
+    },
+    {
+      "name": "Brown Bear (Adolescent)",
+      "difficulty": 270.0
+    },
+    {
+      "name": "Brown Bear (Mature)",
+      "difficulty": 297.0
+    },
+    {
+      "name": "Brown Bear (Aged)",
+      "difficulty": 324.0
+    },
+    {
+      "name": "Brown Bear (Old)",
+      "difficulty": 351.0
+    },
+    {
+      "name": "Brown Bear (Venerable)",
+      "difficulty": 378.0
+    },
+    {
+      "name": "Worg",
+      "difficulty": 280.0
+    },
+    {
+      "name": "Worg (Young)",
+      "difficulty": 252.0
+    },
+    {
+      "name": "Worg (Adolescent)",
+      "difficulty": 280.0
+    },
+    {
+      "name": "Worg (Mature)",
+      "difficulty": 308.0
+    },
+    {
+      "name": "Worg (Aged)",
+      "difficulty": 336.0
+    },
+    {
+      "name": "Worg (Old)",
+      "difficulty": 364.0
+    },
+    {
+      "name": "Worg (Venerable)",
+      "difficulty": 392.0
+    },
+    {
+      "name": "Scorpion",
+      "difficulty": 320.0
+    },
+    {
+      "name": "Scorpion (Young)",
+      "difficulty": 288.0
+    },
+    {
+      "name": "Scorpion (Adolescent)",
+      "difficulty": 320.0
+    },
+    {
+      "name": "Scorpion (Mature)",
+      "difficulty": 352.0
+    },
+    {
+      "name": "Scorpion (Aged)",
+      "difficulty": 384.0
+    },
+    {
+      "name": "Scorpion (Old)",
+      "difficulty": 416.0
+    },
+    {
+      "name": "Scorpion (Venerable)",
+      "difficulty": 448.0
+    },
+    {
+      "name": "Dolphin",
+      "difficulty": 360.0
+    },
+    {
+      "name": "Dolphin (Young)",
+      "difficulty": 324.0
+    },
+    {
+      "name": "Dolphin (Adolescent)",
+      "difficulty": 360.0
+    },
+    {
+      "name": "Dolphin (Mature)",
+      "difficulty": 396.0
+    },
+    {
+      "name": "Dolphin (Aged)",
+      "difficulty": 432.0
+    },
+    {
+      "name": "Dolphin (Old)",
+      "difficulty": 468.0
+    },
+    {
+      "name": "Dolphin (Venerable)",
+      "difficulty": 504.0
+    },
+    {
+      "name": "Octopus",
+      "difficulty": 360.0
+    },
+    {
+      "name": "Octopus (Young)",
+      "difficulty": 324.0
+    },
+    {
+      "name": "Octopus (Adolescent)",
+      "difficulty": 360.0
+    },
+    {
+      "name": "Octopus (Mature)",
+      "difficulty": 396.0
+    },
+    {
+      "name": "Octopus (Aged)",
+      "difficulty": 432.0
+    },
+    {
+      "name": "Octopus (Old)",
+      "difficulty": 468.0
+    },
+    {
+      "name": "Octopus (Venerable)",
+      "difficulty": 504.0
+    },
+    {
+      "name": "Tortoise",
+      "difficulty": 360.0
+    },
+    {
+      "name": "Tortoise (Young)",
+      "difficulty": 324.0
+    },
+    {
+      "name": "Tortoise (Adolescent)",
+      "difficulty": 360.0
+    },
+    {
+      "name": "Tortoise (Mature)",
+      "difficulty": 396.0
+    },
+    {
+      "name": "Tortoise (Aged)",
+      "difficulty": 432.0
+    },
+    {
+      "name": "Tortoise (Old)",
+      "difficulty": 468.0
+    },
+    {
+      "name": "Tortoise (Venerable)",
+      "difficulty": 504.0
+    },
+    {
+      "name": "Anadonda",
+      "difficulty": 390.0
+    },
+    {
+      "name": "Anadonda (Young)",
+      "difficulty": 351.0
+    },
+    {
+      "name": "Anadonda (Adolescent)",
+      "difficulty": 390.0
+    },
+    {
+      "name": "Anadonda (Mature)",
+      "difficulty": 429.0
+    },
+    {
+      "name": "Anadonda (Aged)",
+      "difficulty": 468.0
+    },
+    {
+      "name": "Anadonda (Old)",
+      "difficulty": 507.0
+    },
+    {
+      "name": "Anadonda (Venerable)",
+      "difficulty": 546.0
+    },
+    {
+      "name": "Spider",
+      "difficulty": 400.0
+    },
+    {
+      "name": "Spider (Young)",
+      "difficulty": 360.0
+    },
+    {
+      "name": "Spider (Adolescent)",
+      "difficulty": 400.0
+    },
+    {
+      "name": "Spider (Mature)",
+      "difficulty": 440.0
+    },
+    {
+      "name": "Spider (Aged)",
+      "difficulty": 480.0
+    },
+    {
+      "name": "Spider (Old)",
+      "difficulty": 520.0
+    },
+    {
+      "name": "Spider (Venerable)",
+      "difficulty": 560.0
+    },
+    {
+      "name": "Death Crawler Minion",
+      "difficulty": 420.0
+    },
+    {
+      "name": "Death Crawler Minion (Young)",
+      "difficulty": 378.0
+    },
+    {
+      "name": "Death Crawler Minion (Adolescent)",
+      "difficulty": 420.0
+    },
+    {
+      "name": "Death Crawler Minion (Mature)",
+      "difficulty": 462.0
+    },
+    {
+      "name": "Death Crawler Minion (Aged)",
+      "difficulty": 504.0
+    },
+    {
+      "name": "Death Crawler Minion (Old)",
+      "difficulty": 546.0
+    },
+    {
+      "name": "Death Crawler Minion (Venerable)",
+      "difficulty": 588.0
+    },
+    {
+      "name": "Gorilla Magranon",
+      "difficulty": 420.0
+    },
+    {
+      "name": "Gorilla Magranon (Young)",
+      "difficulty": 378.0
+    },
+    {
+      "name": "Gorilla Magranon (Adolescent)",
+      "difficulty": 420.0
+    },
+    {
+      "name": "Gorilla Magranon (Mature)",
+      "difficulty": 462.0
+    },
+    {
+      "name": "Gorilla Magranon (Aged)",
+      "difficulty": 504.0
+    },
+    {
+      "name": "Gorilla Magranon (Old)",
+      "difficulty": 546.0
+    },
+    {
+      "name": "Gorilla Magranon (Venerable)",
+      "difficulty": 588.0
+    },
+    {
+      "name": "Wraith",
+      "difficulty": 456.0
+    },
+    {
+      "name": "Wraith (Young)",
+      "difficulty": 410.4
+    },
+    {
+      "name": "Wraith (Adolescent)",
+      "difficulty": 456.0
+    },
+    {
+      "name": "Wraith (Mature)",
+      "difficulty": 501.6
+    },
+    {
+      "name": "Wraith (Aged)",
+      "difficulty": 547.2
+    },
+    {
+      "name": "Wraith (Old)",
+      "difficulty": 592.8
+    },
+    {
+      "name": "Wraith (Venerable)",
+      "difficulty": 638.4
+    },
+    {
+      "name": "Troll",
+      "difficulty": 468.0
+    },
+    {
+      "name": "Troll (Young)",
+      "difficulty": 421.2
+    },
+    {
+      "name": "Troll (Adolescent)",
+      "difficulty": 468.0
+    },
+    {
+      "name": "Troll (Mature)",
+      "difficulty": 514.8
+    },
+    {
+      "name": "Troll (Aged)",
+      "difficulty": 561.6
+    },
+    {
+      "name": "Troll (Old)",
+      "difficulty": 608.4
+    },
+    {
+      "name": "Troll (Venerable)",
+      "difficulty": 655.2
+    },
+    {
+      "name": "Boar Fo",
+      "difficulty": 476.0
+    },
+    {
+      "name": "Boar Fo (Young)",
+      "difficulty": 428.4
+    },
+    {
+      "name": "Boar Fo (Adolescent)",
+      "difficulty": 476.0
+    },
+    {
+      "name": "Boar Fo (Mature)",
+      "difficulty": 523.6
+    },
+    {
+      "name": "Boar Fo (Aged)",
+      "difficulty": 571.2
+    },
+    {
+      "name": "Boar Fo (Old)",
+      "difficulty": 618.8
+    },
+    {
+      "name": "Boar Fo (Venerable)",
+      "difficulty": 666.4
+    },
+    {
+      "name": "Huge Shark",
+      "difficulty": 480.0
+    },
+    {
+      "name": "Huge Shark (Young)",
+      "difficulty": 432.0
+    },
+    {
+      "name": "Huge Shark (Adolescent)",
+      "difficulty": 480.0
+    },
+    {
+      "name": "Huge Shark (Mature)",
+      "difficulty": 528.0
+    },
+    {
+      "name": "Huge Shark (Aged)",
+      "difficulty": 576.0
+    },
+    {
+      "name": "Huge Shark (Old)",
+      "difficulty": 624.0
+    },
+    {
+      "name": "Huge Shark (Venerable)",
+      "difficulty": 672.0
+    },
+    {
+      "name": "Lava Spider",
+      "difficulty": 520.0
+    },
+    {
+      "name": "Lava Spider (Young)",
+      "difficulty": 468.0
+    },
+    {
+      "name": "Lava Spider (Adolescent)",
+      "difficulty": 520.0
+    },
+    {
+      "name": "Lava Spider (Mature)",
+      "difficulty": 572.0
+    },
+    {
+      "name": "Lava Spider (Aged)",
+      "difficulty": 624.0
+    },
+    {
+      "name": "Lava Spider (Old)",
+      "difficulty": 676.0
+    },
+    {
+      "name": "Lava Spider (Venerable)",
+      "difficulty": 728.0
+    },
+    {
+      "name": "Hyena Libila",
+      "difficulty": 560.0
+    },
+    {
+      "name": "Hyena Libila (Young)",
+      "difficulty": 504.0
+    },
+    {
+      "name": "Hyena Libila (Adolescent)",
+      "difficulty": 560.0
+    },
+    {
+      "name": "Hyena Libila (Mature)",
+      "difficulty": 616.0
+    },
+    {
+      "name": "Hyena Libila (Aged)",
+      "difficulty": 672.0
+    },
+    {
+      "name": "Hyena Libila (Old)",
+      "difficulty": 728.0
+    },
+    {
+      "name": "Hyena Libila (Venerable)",
+      "difficulty": 784.0
+    },
+    {
+      "name": "Crocodile",
+      "difficulty": 585.0
+    },
+    {
+      "name": "Crocodile (Young)",
+      "difficulty": 526.5
+    },
+    {
+      "name": "Crocodile (Adolescent)",
+      "difficulty": 585.0
+    },
+    {
+      "name": "Crocodile (Mature)",
+      "difficulty": 643.5
+    },
+    {
+      "name": "Crocodile (Aged)",
+      "difficulty": 702.0
+    },
+    {
+      "name": "Crocodile (Old)",
+      "difficulty": 760.5
+    },
+    {
+      "name": "Crocodile (Venerable)",
+      "difficulty": 819.0
+    },
+    {
+      "name": "Hell Horse",
+      "difficulty": 648.0
+    },
+    {
+      "name": "Hell Horse (Young)",
+      "difficulty": 583.2
+    },
+    {
+      "name": "Hell Horse (Adolescent)",
+      "difficulty": 648.0
+    },
+    {
+      "name": "Hell Horse (Mature)",
+      "difficulty": 712.8
+    },
+    {
+      "name": "Hell Horse (Aged)",
+      "difficulty": 777.6
+    },
+    {
+      "name": "Hell Horse (Old)",
+      "difficulty": 842.4
+    },
+    {
+      "name": "Hell Horse (Venerable)",
+      "difficulty": 907.2
+    },
+    {
+      "name": "Unicorn",
+      "difficulty": 660.0
+    },
+    {
+      "name": "Unicorn (Young)",
+      "difficulty": 594.0
+    },
+    {
+      "name": "Unicorn (Adolescent)",
+      "difficulty": 660.0
+    },
+    {
+      "name": "Unicorn (Mature)",
+      "difficulty": 726.0
+    },
+    {
+      "name": "Unicorn (Aged)",
+      "difficulty": 792.0
+    },
+    {
+      "name": "Unicorn (Old)",
+      "difficulty": 858.0
+    },
+    {
+      "name": "Unicorn (Venerable)",
+      "difficulty": 924.0
+    },
+    {
+      "name": "Demon Sol",
+      "difficulty": 700.0
+    },
+    {
+      "name": "Demon Sol (Young)",
+      "difficulty": 630.0
+    },
+    {
+      "name": "Demon Sol (Adolescent)",
+      "difficulty": 700.0
+    },
+    {
+      "name": "Demon Sol (Mature)",
+      "difficulty": 770.0
+    },
+    {
+      "name": "Demon Sol (Aged)",
+      "difficulty": 840.0
+    },
+    {
+      "name": "Demon Sol (Old)",
+      "difficulty": 910.0
+    },
+    {
+      "name": "Demon Sol (Venerable)",
+      "difficulty": 980.0
+    },
+    {
+      "name": "Blue Whale",
+      "difficulty": 720.0
+    },
+    {
+      "name": "Blue Whale (Young)",
+      "difficulty": 648.0
+    },
+    {
+      "name": "Blue Whale (Adolescent)",
+      "difficulty": 720.0
+    },
+    {
+      "name": "Blue Whale (Mature)",
+      "difficulty": 792.0
+    },
+    {
+      "name": "Blue Whale (Aged)",
+      "difficulty": 864.0
+    },
+    {
+      "name": "Blue Whale (Old)",
+      "difficulty": 936.0
+    },
+    {
+      "name": "Blue Whale (Venerable)",
+      "difficulty": 1008.0
+    },
+    {
+      "name": "Eagle Spirit",
+      "difficulty": 750.0
+    },
+    {
+      "name": "Eagle Spirit (Young)",
+      "difficulty": 675.0
+    },
+    {
+      "name": "Eagle Spirit (Adolescent)",
+      "difficulty": 750.0
+    },
+    {
+      "name": "Eagle Spirit (Mature)",
+      "difficulty": 825.0
+    },
+    {
+      "name": "Eagle Spirit (Aged)",
+      "difficulty": 900.0
+    },
+    {
+      "name": "Eagle Spirit (Old)",
+      "difficulty": 975.0
+    },
+    {
+      "name": "Eagle Spirit (Venerable)",
+      "difficulty": 1050.0
+    },
+    {
+      "name": "Hell Hound",
+      "difficulty": 840.0
+    },
+    {
+      "name": "Hell Hound (Young)",
+      "difficulty": 756.0
+    },
+    {
+      "name": "Hell Hound (Adolescent)",
+      "difficulty": 840.0
+    },
+    {
+      "name": "Hell Hound (Mature)",
+      "difficulty": 924.0
+    },
+    {
+      "name": "Hell Hound (Aged)",
+      "difficulty": 1008.0
+    },
+    {
+      "name": "Hell Hound (Old)",
+      "difficulty": 1092.0
+    },
+    {
+      "name": "Hell Hound (Venerable)",
+      "difficulty": 1176.0
+    },
+    {
+      "name": "Easter Bunny",
+      "difficulty": 1000.0
+    },
+    {
+      "name": "Easter Bunny (Young)",
+      "difficulty": 900.0
+    },
+    {
+      "name": "Easter Bunny (Adolescent)",
+      "difficulty": 1000.0
+    },
+    {
+      "name": "Easter Bunny (Mature)",
+      "difficulty": 1100.0
+    },
+    {
+      "name": "Easter Bunny (Aged)",
+      "difficulty": 1200.0
+    },
+    {
+      "name": "Easter Bunny (Old)",
+      "difficulty": 1300.0
+    },
+    {
+      "name": "Easter Bunny (Venerable)",
+      "difficulty": 1400.0
+    },
+    {
+      "name": "Hell Scorpion",
+      "difficulty": 1260.0
+    },
+    {
+      "name": "Hell Scorpion (Young)",
+      "difficulty": 1134.0
+    },
+    {
+      "name": "Hell Scorpion (Adolescent)",
+      "difficulty": 1260.0
+    },
+    {
+      "name": "Hell Scorpion (Mature)",
+      "difficulty": 1386.0
+    },
+    {
+      "name": "Hell Scorpion (Aged)",
+      "difficulty": 1512.0
+    },
+    {
+      "name": "Hell Scorpion (Old)",
+      "difficulty": 1638.0
+    },
+    {
+      "name": "Hell Scorpion (Venerable)",
+      "difficulty": 1764.0
+    },
+    {
+      "name": "Lava Creature",
+      "difficulty": 1440.0
+    },
+    {
+      "name": "Lava Creature (Young)",
+      "difficulty": 1296.0
+    },
+    {
+      "name": "Lava Creature (Adolescent)",
+      "difficulty": 1440.0
+    },
+    {
+      "name": "Lava Creature (Mature)",
+      "difficulty": 1584.0
+    },
+    {
+      "name": "Lava Creature (Aged)",
+      "difficulty": 1728.0
+    },
+    {
+      "name": "Lava Creature (Old)",
+      "difficulty": 1872.0
+    },
+    {
+      "name": "Lava Creature (Venerable)",
+      "difficulty": 2016.0
+    },
+    {
+      "name": "Magranon Juggernaut",
+      "difficulty": 1920.0
+    },
+    {
+      "name": "Magranon Juggernaut (Young)",
+      "difficulty": 1728.0
+    },
+    {
+      "name": "Magranon Juggernaut (Adolescent)",
+      "difficulty": 1920.0
+    },
+    {
+      "name": "Magranon Juggernaut (Mature)",
+      "difficulty": 2112.0
+    },
+    {
+      "name": "Magranon Juggernaut (Aged)",
+      "difficulty": 2304.0
+    },
+    {
+      "name": "Magranon Juggernaut (Old)",
+      "difficulty": 2496.0
+    },
+    {
+      "name": "Magranon Juggernaut (Venerable)",
+      "difficulty": 2688.0
+    },
+    {
+      "name": "Drake Spirit",
+      "difficulty": 2160.0
+    },
+    {
+      "name": "Drake Spirit (Young)",
+      "difficulty": 1944.0
+    },
+    {
+      "name": "Drake Spirit (Adolescent)",
+      "difficulty": 2160.0
+    },
+    {
+      "name": "Drake Spirit (Mature)",
+      "difficulty": 2376.0
+    },
+    {
+      "name": "Drake Spirit (Aged)",
+      "difficulty": 2592.0
+    },
+    {
+      "name": "Drake Spirit (Old)",
+      "difficulty": 2808.0
+    },
+    {
+      "name": "Drake Spirit (Venerable)",
+      "difficulty": 3024.0
+    },
+    {
+      "name": "White Drake",
+      "difficulty": 3325.0
+    },
+    {
+      "name": "White Drake (Young)",
+      "difficulty": 2992.5
+    },
+    {
+      "name": "White Drake (Adolescent)",
+      "difficulty": 3325.0
+    },
+    {
+      "name": "White Drake (Mature)",
+      "difficulty": 3657.5
+    },
+    {
+      "name": "White Drake (Aged)",
+      "difficulty": 3990.0
+    },
+    {
+      "name": "White Drake (Old)",
+      "difficulty": 4322.5
+    },
+    {
+      "name": "White Drake (Venerable)",
+      "difficulty": 4655.0
+    },
+    {
+      "name": "Incarnation of Libila",
+      "difficulty": 3440.0
+    },
+    {
+      "name": "Incarnation of Libila (Young)",
+      "difficulty": 3096.0
+    },
+    {
+      "name": "Incarnation of Libila (Adolescent)",
+      "difficulty": 3440.0
+    },
+    {
+      "name": "Incarnation of Libila (Mature)",
+      "difficulty": 3784.0
+    },
+    {
+      "name": "Incarnation of Libila (Aged)",
+      "difficulty": 4128.0
+    },
+    {
+      "name": "Incarnation of Libila (Old)",
+      "difficulty": 4472.0
+    },
+    {
+      "name": "Incarnation of Libila (Venerable)",
+      "difficulty": 4816.0
+    },
+    {
+      "name": "Red Drake",
+      "difficulty": 3800.0
+    },
+    {
+      "name": "Red Drake (Young)",
+      "difficulty": 3420.0
+    },
+    {
+      "name": "Red Drake (Adolescent)",
+      "difficulty": 3800.0
+    },
+    {
+      "name": "Red Drake (Mature)",
+      "difficulty": 4180.0
+    },
+    {
+      "name": "Red Drake (Aged)",
+      "difficulty": 4560.0
+    },
+    {
+      "name": "Red Drake (Old)",
+      "difficulty": 4940.0
+    },
+    {
+      "name": "Red Drake (Venerable)",
+      "difficulty": 5320.0
+    },
+    {
+      "name": "Troll King",
+      "difficulty": 3870.0
+    },
+    {
+      "name": "Troll King (Young)",
+      "difficulty": 3483.0
+    },
+    {
+      "name": "Troll King (Adolescent)",
+      "difficulty": 3870.0
+    },
+    {
+      "name": "Troll King (Mature)",
+      "difficulty": 4257.0
+    },
+    {
+      "name": "Troll King (Aged)",
+      "difficulty": 4644.0
+    },
+    {
+      "name": "Troll King (Old)",
+      "difficulty": 5031.0
+    },
+    {
+      "name": "Troll King (Venerable)",
+      "difficulty": 5418.0
+    },
+    {
+      "name": "Goblin Leader",
+      "difficulty": 4080.0
+    },
+    {
+      "name": "Goblin Leader (Young)",
+      "difficulty": 3672.0
+    },
+    {
+      "name": "Goblin Leader (Adolescent)",
+      "difficulty": 4080.0
+    },
+    {
+      "name": "Goblin Leader (Mature)",
+      "difficulty": 4488.0
+    },
+    {
+      "name": "Goblin Leader (Aged)",
+      "difficulty": 4896.0
+    },
+    {
+      "name": "Goblin Leader (Old)",
+      "difficulty": 5304.0
+    },
+    {
+      "name": "Goblin Leader (Venerable)",
+      "difficulty": 5712.0
+    },
+    {
+      "name": "Manifestation of Fo",
+      "difficulty": 4300.0
+    },
+    {
+      "name": "Manifestation of Fo (Young)",
+      "difficulty": 3870.0
+    },
+    {
+      "name": "Manifestation of Fo (Adolescent)",
+      "difficulty": 4300.0
+    },
+    {
+      "name": "Manifestation of Fo (Mature)",
+      "difficulty": 4730.0
+    },
+    {
+      "name": "Manifestation of Fo (Aged)",
+      "difficulty": 5160.0
+    },
+    {
+      "name": "Manifestation of Fo (Old)",
+      "difficulty": 5590.0
+    },
+    {
+      "name": "Manifestation of Fo (Venerable)",
+      "difficulty": 6020.0
+    },
+    {
+      "name": "Forest Giant",
+      "difficulty": 4560.0
+    },
+    {
+      "name": "Forest Giant (Young)",
+      "difficulty": 4104.0
+    },
+    {
+      "name": "Forest Giant (Adolescent)",
+      "difficulty": 4560.0
+    },
+    {
+      "name": "Forest Giant (Mature)",
+      "difficulty": 5016.0
+    },
+    {
+      "name": "Forest Giant (Aged)",
+      "difficulty": 5472.0
+    },
+    {
+      "name": "Forest Giant (Old)",
+      "difficulty": 5928.0
+    },
+    {
+      "name": "Forest Giant (Venerable)",
+      "difficulty": 6384.0
+    },
+    {
+      "name": "Cyclops",
+      "difficulty": 4730.0
+    },
+    {
+      "name": "Cyclops (Young)",
+      "difficulty": 4257.0
+    },
+    {
+      "name": "Cyclops (Adolescent)",
+      "difficulty": 4730.0
+    },
+    {
+      "name": "Cyclops (Mature)",
+      "difficulty": 5203.0
+    },
+    {
+      "name": "Cyclops (Aged)",
+      "difficulty": 5676.0
+    },
+    {
+      "name": "Cyclops (Old)",
+      "difficulty": 6149.0
+    },
+    {
+      "name": "Cyclops (Venerable)",
+      "difficulty": 6622.0
+    },
+    {
+      "name": "Green Drake",
+      "difficulty": 4800.0
+    },
+    {
+      "name": "Green Drake (Young)",
+      "difficulty": 4320.0
+    },
+    {
+      "name": "Green Drake (Adolescent)",
+      "difficulty": 4800.0
+    },
+    {
+      "name": "Green Drake (Mature)",
+      "difficulty": 5280.0
+    },
+    {
+      "name": "Green Drake (Aged)",
+      "difficulty": 5760.0
+    },
+    {
+      "name": "Green Drake (Old)",
+      "difficulty": 6240.0
+    },
+    {
+      "name": "Green Drake (Venerable)",
+      "difficulty": 6720.0
+    },
+    {
+      "name": "Black Drake",
+      "difficulty": 5390.0
+    },
+    {
+      "name": "Black Drake (Young)",
+      "difficulty": 4851.0
+    },
+    {
+      "name": "Black Drake (Adolescent)",
+      "difficulty": 5390.0
+    },
+    {
+      "name": "Black Drake (Mature)",
+      "difficulty": 5929.0
+    },
+    {
+      "name": "Black Drake (Aged)",
+      "difficulty": 6468.0
+    },
+    {
+      "name": "Black Drake (Old)",
+      "difficulty": 7007.0
+    },
+    {
+      "name": "Black Drake (Venerable)",
+      "difficulty": 7546.0
+    },
+    {
+      "name": "Blue Drake",
+      "difficulty": 5700.0
+    },
+    {
+      "name": "Blue Drake (Young)",
+      "difficulty": 5130.0
+    },
+    {
+      "name": "Blue Drake (Adolescent)",
+      "difficulty": 5700.0
+    },
+    {
+      "name": "Blue Drake (Mature)",
+      "difficulty": 6270.0
+    },
+    {
+      "name": "Blue Drake (Aged)",
+      "difficulty": 6840.0
+    },
+    {
+      "name": "Blue Drake (Old)",
+      "difficulty": 7410.0
+    },
+    {
+      "name": "Blue Drake (Venerable)",
+      "difficulty": 7980.0
+    },
+    {
+      "name": "Blue Dragon",
+      "difficulty": 6000.0
+    },
+    {
+      "name": "Blue Dragon (Young)",
+      "difficulty": 5400.0
+    },
+    {
+      "name": "Blue Dragon (Adolescent)",
+      "difficulty": 6000.0
+    },
+    {
+      "name": "Blue Dragon (Mature)",
+      "difficulty": 6600.0
+    },
+    {
+      "name": "Blue Dragon (Aged)",
+      "difficulty": 7200.0
+    },
+    {
+      "name": "Blue Dragon (Old)",
+      "difficulty": 7800.0
+    },
+    {
+      "name": "Blue Dragon (Venerable)",
+      "difficulty": 8400.0
+    },
+    {
+      "name": "Green Dragon",
+      "difficulty": 6000.0
+    },
+    {
+      "name": "Green Dragon (Young)",
+      "difficulty": 5400.0
+    },
+    {
+      "name": "Green Dragon (Adolescent)",
+      "difficulty": 6000.0
+    },
+    {
+      "name": "Green Dragon (Mature)",
+      "difficulty": 6600.0
+    },
+    {
+      "name": "Green Dragon (Aged)",
+      "difficulty": 7200.0
+    },
+    {
+      "name": "Green Dragon (Old)",
+      "difficulty": 7800.0
+    },
+    {
+      "name": "Green Dragon (Venerable)",
+      "difficulty": 8400.0
+    },
+    {
+      "name": "Red Dragon",
+      "difficulty": 6000.0
+    },
+    {
+      "name": "Red Dragon (Young)",
+      "difficulty": 5400.0
+    },
+    {
+      "name": "Red Dragon (Adolescent)",
+      "difficulty": 6000.0
+    },
+    {
+      "name": "Red Dragon (Mature)",
+      "difficulty": 6600.0
+    },
+    {
+      "name": "Red Dragon (Aged)",
+      "difficulty": 7200.0
+    },
+    {
+      "name": "Red Dragon (Old)",
+      "difficulty": 7800.0
+    },
+    {
+      "name": "Red Dragon (Venerable)",
+      "difficulty": 8400.0
+    },
+    {
+      "name": "Avenger of Light",
+      "difficulty": 6080.0
+    },
+    {
+      "name": "Avenger of Light (Young)",
+      "difficulty": 5472.0
+    },
+    {
+      "name": "Avenger of Light (Adolescent)",
+      "difficulty": 6080.0
+    },
+    {
+      "name": "Avenger of Light (Mature)",
+      "difficulty": 6688.0
+    },
+    {
+      "name": "Avenger of Light (Aged)",
+      "difficulty": 7296.0
+    },
+    {
+      "name": "Avenger of Light (Old)",
+      "difficulty": 7904.0
+    },
+    {
+      "name": "Avenger of Light (Venerable)",
+      "difficulty": 8512.0
+    },
+    {
+      "name": "Sea Serpent",
+      "difficulty": 6080.0
+    },
+    {
+      "name": "Sea Serpent (Young)",
+      "difficulty": 5472.0
+    },
+    {
+      "name": "Sea Serpent (Adolescent)",
+      "difficulty": 6080.0
+    },
+    {
+      "name": "Sea Serpent (Mature)",
+      "difficulty": 6688.0
+    },
+    {
+      "name": "Sea Serpent (Aged)",
+      "difficulty": 7296.0
+    },
+    {
+      "name": "Sea Serpent (Old)",
+      "difficulty": 7904.0
+    },
+    {
+      "name": "Sea Serpent (Venerable)",
+      "difficulty": 8512.0
+    },
+    {
+      "name": "Salesman",
+      "difficulty": 6930.0
+    },
+    {
+      "name": "Salesman (Young)",
+      "difficulty": 6237.0
+    },
+    {
+      "name": "Salesman (Adolescent)",
+      "difficulty": 6930.0
+    },
+    {
+      "name": "Salesman (Mature)",
+      "difficulty": 7623.0
+    },
+    {
+      "name": "Salesman (Aged)",
+      "difficulty": 8316.0
+    },
+    {
+      "name": "Salesman (Old)",
+      "difficulty": 9009.0
+    },
+    {
+      "name": "Salesman (Venerable)",
+      "difficulty": 9702.0
+    },
+    {
+      "name": "Black Dragon",
+      "difficulty": 7000.0
+    },
+    {
+      "name": "Black Dragon (Young)",
+      "difficulty": 6300.0
+    },
+    {
+      "name": "Black Dragon (Adolescent)",
+      "difficulty": 7000.0
+    },
+    {
+      "name": "Black Dragon (Mature)",
+      "difficulty": 7700.0
+    },
+    {
+      "name": "Black Dragon (Aged)",
+      "difficulty": 8400.0
+    },
+    {
+      "name": "Black Dragon (Old)",
+      "difficulty": 9100.0
+    },
+    {
+      "name": "Black Dragon (Venerable)",
+      "difficulty": 9800.0
+    },
+    {
+      "name": "White Dragon",
+      "difficulty": 7000.0
+    },
+    {
+      "name": "White Dragon (Young)",
+      "difficulty": 6300.0
+    },
+    {
+      "name": "White Dragon (Adolescent)",
+      "difficulty": 7000.0
+    },
+    {
+      "name": "White Dragon (Mature)",
+      "difficulty": 7700.0
+    },
+    {
+      "name": "White Dragon (Aged)",
+      "difficulty": 8400.0
+    },
+    {
+      "name": "White Dragon (Old)",
+      "difficulty": 9100.0
+    },
+    {
+      "name": "White Dragon (Venerable)",
+      "difficulty": 9800.0
+    },
+    {
+      "name": "Epiphany of Vynora",
+      "difficulty": 7680.0
+    },
+    {
+      "name": "Epiphany of Vynora (Young)",
+      "difficulty": 6912.0
+    },
+    {
+      "name": "Epiphany of Vynora (Adolescent)",
+      "difficulty": 7680.0
+    },
+    {
+      "name": "Epiphany of Vynora (Mature)",
+      "difficulty": 8448.0
+    },
+    {
+      "name": "Epiphany of Vynora (Aged)",
+      "difficulty": 9216.0
+    },
+    {
+      "name": "Epiphany of Vynora (Old)",
+      "difficulty": 9984.0
+    },
+    {
+      "name": "Epiphany of Vynora (Venerable)",
+      "difficulty": 10752.0
+    },
+    {
+      "name": "Bartender",
+      "difficulty": 7821.0
+    },
+    {
+      "name": "Bartender (Young)",
+      "difficulty": 7038.9
+    },
+    {
+      "name": "Bartender (Adolescent)",
+      "difficulty": 7821.0
+    },
+    {
+      "name": "Bartender (Mature)",
+      "difficulty": 8603.1
+    },
+    {
+      "name": "Bartender (Aged)",
+      "difficulty": 9385.2
+    },
+    {
+      "name": "Bartender (Old)",
+      "difficulty": 10167.3
+    },
+    {
+      "name": "Bartender (Venerable)",
+      "difficulty": 10949.4
+    },
+    {
+      "name": "King Cobra",
+      "difficulty": 8613.0
+    },
+    {
+      "name": "King Cobra (Young)",
+      "difficulty": 7751.7
+    },
+    {
+      "name": "King Cobra (Adolescent)",
+      "difficulty": 8613.0
+    },
+    {
+      "name": "King Cobra (Mature)",
+      "difficulty": 9474.3
+    },
+    {
+      "name": "King Cobra (Aged)",
+      "difficulty": 10335.6
+    },
+    {
+      "name": "King Cobra (Old)",
+      "difficulty": 11196.9
+    },
+    {
+      "name": "King Cobra (Venerable)",
+      "difficulty": 12058.2
+    },
+    {
+      "name": "Lady of the Lake",
+      "difficulty": 8910.0
+    },
+    {
+      "name": "Lady of the Lake (Young)",
+      "difficulty": 8019.0
+    },
+    {
+      "name": "Lady of the Lake (Adolescent)",
+      "difficulty": 8910.0
+    },
+    {
+      "name": "Lady of the Lake (Mature)",
+      "difficulty": 9801.0
+    },
+    {
+      "name": "Lady of the Lake (Aged)",
+      "difficulty": 10692.0
+    },
+    {
+      "name": "Lady of the Lake (Old)",
+      "difficulty": 11583.0
+    },
+    {
+      "name": "Lady of the Lake (Venerable)",
+      "difficulty": 12474.0
+    },
+    {
+      "name": "Evil Santa",
+      "difficulty": 9801.0
+    },
+    {
+      "name": "Evil Santa (Young)",
+      "difficulty": 8820.9
+    },
+    {
+      "name": "Evil Santa (Adolescent)",
+      "difficulty": 9801.0
+    },
+    {
+      "name": "Evil Santa (Mature)",
+      "difficulty": 10781.1
+    },
+    {
+      "name": "Evil Santa (Aged)",
+      "difficulty": 11761.2
+    },
+    {
+      "name": "Evil Santa (Old)",
+      "difficulty": 12741.3
+    },
+    {
+      "name": "Evil Santa (Venerable)",
+      "difficulty": 13721.4
+    },
+    {
+      "name": "Santa Claus",
+      "difficulty": 9801.0
+    },
+    {
+      "name": "Santa Claus (Young)",
+      "difficulty": 8820.9
+    },
+    {
+      "name": "Santa Claus (Adolescent)",
+      "difficulty": 9801.0
+    },
+    {
+      "name": "Santa Claus (Mature)",
+      "difficulty": 10781.1
+    },
+    {
+      "name": "Santa Claus (Aged)",
+      "difficulty": 11761.2
+    },
+    {
+      "name": "Santa Claus (Old)",
+      "difficulty": 12741.3
+    },
+    {
+      "name": "Santa Claus (Venerable)",
+      "difficulty": 13721.4
+    }
+  ],
+  "Farming": [
+    {
+      "name": "Potato",
+      "difficulty": 4.0
+    },
+    {
+      "name": "Cotton",
+      "difficulty": 7.0
+    },
+    {
+      "name": "Rye",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Wemp",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Cucumber",
+      "difficulty": 15.0
+    },
+    {
+      "name": "Oat",
+      "difficulty": 15.0
+    },
+    {
+      "name": "Pumpkin",
+      "difficulty": 15.0
+    },
+    {
+      "name": "Barley",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Reed",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Carrots",
+      "difficulty": 25.0
+    },
+    {
+      "name": "Wheat",
+      "difficulty": 30.0
+    },
+    {
+      "name": "Cabbage",
+      "difficulty": 35.0
+    },
+    {
+      "name": "Corn",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Tomatos",
+      "difficulty": 45.0
+    },
+    {
+      "name": "Lettuce",
+      "difficulty": 55.0
+    },
+    {
+      "name": "Onion",
+      "difficulty": 60.0
+    },
+    {
+      "name": "Strawberries",
+      "difficulty": 60.0
+    },
+    {
+      "name": "Peas",
+      "difficulty": 65.0
+    },
+    {
+      "name": "Garlic",
+      "difficulty": 70.0
+    },
+    {
+      "name": "Rice",
+      "difficulty": 80.0
+    },
+    {
+      "name": "Sugar beet",
+      "difficulty": 85.0
+    }
+  ],
+  "Digging": [
+    {
+      "name": "Moss",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Sand",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Clay",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Tundra",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Marsh",
+      "difficulty": 30.0
+    },
+    {
+      "name": "Tar",
+      "difficulty": 35.0
+    },
+    {
+      "name": "Steppe",
+      "difficulty": 40.0
+    }
+  ],
+  "WoodcuttingQl": [
+    {
+      "name": "Birch Tree",
+      "difficulty": 2.0
+    },
+    {
+      "name": "Pine Tree",
+      "difficulty": 2.0
+    },
+    {
+      "name": "Apple Tree",
+      "difficulty": 2.0
+    },
+    {
+      "name": "Lemon Tree",
+      "difficulty": 2.0
+    },
+    {
+      "name": "Olive Tree",
+      "difficulty": 2.0
+    },
+    {
+      "name": "Cherry Tree",
+      "difficulty": 2.0
+    },
+    {
+      "name": "Oleander Tree",
+      "difficulty": 2.0
+    },
+    {
+      "name": "Camelia Tree",
+      "difficulty": 3.0
+    },
+    {
+      "name": "Maple Tree",
+      "difficulty": 4.0
+    },
+    {
+      "name": "Lavender Tree",
+      "difficulty": 4.0
+    },
+    {
+      "name": "Cedar Tree",
+      "difficulty": 5.0
+    },
+    {
+      "name": "Fir Tree",
+      "difficulty": 5.0
+    },
+    {
+      "name": "Rose Tree",
+      "difficulty": 5.0
+    },
+    {
+      "name": "Grape Tree",
+      "difficulty": 5.0
+    },
+    {
+      "name": "Chestnut Tree",
+      "difficulty": 12.0
+    },
+    {
+      "name": "Linden Tree",
+      "difficulty": 12.0
+    },
+    {
+      "name": "Walnut Tree",
+      "difficulty": 15.0
+    },
+    {
+      "name": "Thorn Tree",
+      "difficulty": 15.0
+    },
+    {
+      "name": "Willow Tree",
+      "difficulty": 18.0
+    },
+    {
+      "name": "Oak Tree",
+      "difficulty": 20.0
+    }
+  ],
+  "GenericCheck": [
+    {
+      "name": "Very Easy",
+      "difficulty": 5.0
+    },
+    {
+      "name": "Easy Task",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Standard Task",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Challenging Task",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Hard Task",
+      "difficulty": 60.0
+    },
+    {
+      "name": "Extreme Task",
+      "difficulty": 80.0
+    }
+  ],
+  "Meditation": [
+    {
+      "name": "Level 1 Path",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Level 3 Path",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Level 5 Path",
+      "difficulty": 30.0
+    },
+    {
+      "name": "Level 7 Path",
+      "difficulty": 45.0
+    },
+    {
+      "name": "Level 9 Path",
+      "difficulty": 60.0
+    },
+    {
+      "name": "Level 11 Path",
+      "difficulty": 75.0
+    }
+  ],
+  "Creation": [
+    {
+      "name": "Shaft / Handle",
+      "difficulty": 5.0
+    },
+    {
+      "name": "Simple Tool",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Carving Knife",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Large Cart",
+      "difficulty": 30.0
+    },
+    {
+      "name": "Small Wooden Shacks",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Rowing Boat",
+      "difficulty": 50.0
+    },
+    {
+      "name": "Corbita",
+      "difficulty": 70.0
+    }
+  ],
+  "Imping": [
+    {
+      "name": "Low QL < 30",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Mid QL 30-60",
+      "difficulty": 25.0
+    },
+    {
+      "name": "High QL 60-80",
+      "difficulty": 45.0
+    },
+    {
+      "name": "Master QL 80-90",
+      "difficulty": 65.0
+    },
+    {
+      "name": "Supreme QL 90+",
+      "difficulty": 85.0
+    }
+  ],
+  "SmithingSteps": [
+    {
+      "name": "Pelt / Needle",
+      "difficulty": 5.0
+    },
+    {
+      "name": "Carving Knife Blade",
+      "difficulty": 15.0
+    },
+    {
+      "name": "Horseshoe",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Large Anvil",
+      "difficulty": 30.0
+    },
+    {
+      "name": "Longsword",
+      "difficulty": 40.0
+    },
+    {
+      "name": "Plate Armor",
+      "difficulty": 60.0
+    }
+  ],
+  "Fileting": [
+    {
+      "name": "Roach / Perch",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Trout / Bass",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Pike / Catfish",
+      "difficulty": 30.0
+    },
+    {
+      "name": "Shark / Marlin",
+      "difficulty": 50.0
+    }
+  ],
+  "Forestry": [
+    {
+      "name": "Sprout Picking",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Pruning Young Tree",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Pruning Mature Tree",
+      "difficulty": 30.0
+    },
+    {
+      "name": "Pruning Old Tree",
+      "difficulty": 45.0
+    }
+  ],
+  "Shearing": [
+    {
+      "name": "Lamb (< 3 yrs)",
+      "difficulty": 10.0
+    },
+    {
+      "name": "Young Sheep (< 8 yrs)",
+      "difficulty": 15.0
+    },
+    {
+      "name": "Adolescent Sheep (< 12 yrs)",
+      "difficulty": 20.0
+    },
+    {
+      "name": "Adult Sheep (< 30 yrs)",
+      "difficulty": 25.0
+    },
+    {
+      "name": "Mature Sheep (< 40 yrs)",
+      "difficulty": 30.0
+    },
+    {
+      "name": "Old / Overgrown Fleece",
+      "difficulty": 35.0
+    }
+  ]
+}

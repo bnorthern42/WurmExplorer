@@ -10,6 +10,7 @@ scratch_refactor.py
 fix_imports.py
 configs/workspace.json
 configs/*.json
+!configs/difficulty_presets.json
 !configs/servers.yaml
 configs/*.yaml
 .agents/

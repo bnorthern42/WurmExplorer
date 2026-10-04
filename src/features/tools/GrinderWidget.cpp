@@ -30,7 +30,8 @@ void GrinderWidget::setupUi() {
 
     auto* leftScroll = new QScrollArea(this);
     leftScroll->setWidgetResizable(true);
-    leftScroll->setFixedWidth(340);
+    leftScroll->setMinimumWidth(360);
+    leftScroll->setMaximumWidth(400);
     leftScroll->setStyleSheet(QString("QScrollArea { border: none; background: transparent; }"));
 
     auto* leftCol = new QWidget(leftScroll);
@@ -42,6 +43,9 @@ void GrinderWidget::setupUi() {
     auto* modeBox = new QGroupBox("Action Mode", leftCol);
     auto* mbLayout = new QVBoxLayout(modeBox);
     m_actionCombo = new QComboBox(modeBox);
+    m_actionCombo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    m_actionCombo->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon);
+    m_actionCombo->setMinimumContentsLength(10);
     m_actionCombo->addItems({
         "Fixed / Generic Skill Check",
         "Mining (Action Power)",
@@ -80,7 +84,9 @@ void GrinderWidget::setupUi() {
     auto* paramBox = new QGroupBox("Parameters", leftCol);
     m_form = new QFormLayout(paramBox);
     m_form->setSpacing(6);
-    m_form->setContentsMargins(6, 10, 6, 8);
+    m_form->setContentsMargins(8, 10, 8, 8);
+    m_form->setFieldGrowthPolicy(QFormLayout::ExpandingFieldsGrow);
+    m_form->setLabelAlignment(Qt::AlignLeft);
 
     auto createDblSpin = [this](double val, double minV, double maxV, double step = 1.0, int dec = 2) {
         auto* sb = new QDoubleSpinBox(this);
@@ -100,25 +106,27 @@ void GrinderWidget::setupUi() {
         return sb;
     };
 
-    m_primarySkillLabel = new QLabel("Primary Skill:", paramBox);
-    m_primarySkillSpin = createDblSpin(50.0, 1.0, 100.0, 0.5, 2);
-    m_form->addRow(m_primarySkillLabel, m_primarySkillSpin);
+    auto addDbl = [&](QLabel*& lbl, const QString& title, QDoubleSpinBox*& spin, double val, double minV, double maxV, double step = 1.0, int dec = 2) {
+        lbl = new QLabel(title, paramBox);
+        spin = createDblSpin(val, minV, maxV, step, dec);
+        m_form->addRow(lbl, spin);
+    };
 
-    m_secondarySkillLabel = new QLabel("Secondary Skill:", paramBox);
-    m_secondarySkillSpin = createDblSpin(50.0, 1.0, 100.0, 0.5, 2);
-    m_form->addRow(m_secondarySkillLabel, m_secondarySkillSpin);
+    auto addInt = [&](QLabel*& lbl, const QString& title, QSpinBox*& spin, int val, int minV, int maxV) {
+        lbl = new QLabel(title, paramBox);
+        spin = createIntSpin(val, minV, maxV);
+        m_form->addRow(lbl, spin);
+    };
 
-    m_tertiarySkillLabel = new QLabel("Tertiary Skill:", paramBox);
-    m_tertiarySkillSpin = createDblSpin(40.0, 1.0, 100.0, 0.5, 2);
-    m_form->addRow(m_tertiarySkillLabel, m_tertiarySkillSpin);
-
-    m_toolQlLabel = new QLabel("Tool / Item QL:", paramBox);
-    m_toolQlSpin = createDblSpin(50.0, 1.0, 100.0, 1.0, 2);
-    m_form->addRow(m_toolQlLabel, m_toolQlSpin);
+    addDbl(m_primarySkillLabel, "Primary Skill:", m_primarySkillSpin, 50.0, 1.0, 100.0, 0.5, 2);
+    addDbl(m_secondarySkillLabel, "Secondary Skill:", m_secondarySkillSpin, 50.0, 1.0, 100.0, 0.5, 2);
+    addDbl(m_tertiarySkillLabel, "Tertiary Skill:", m_tertiarySkillSpin, 40.0, 1.0, 100.0, 0.5, 2);
+    addDbl(m_toolQlLabel, "Tool / Item QL:", m_toolQlSpin, 50.0, 1.0, 100.0, 1.0, 2);
 
     m_difficultyLabel = new QLabel("Difficulty:", paramBox);
 
     m_difficultyContainer = new QWidget(paramBox);
+    m_difficultyContainer->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
     auto* diffLayout = new QHBoxLayout(m_difficultyContainer);
     diffLayout->setContentsMargins(0, 0, 0, 0);
     diffLayout->setSpacing(6);
@@ -126,17 +134,22 @@ void GrinderWidget::setupUi() {
     m_difficultyCombo = new QComboBox(m_difficultyContainer);
     m_difficultyCombo->setStyleSheet(QString("QComboBox { background-color: %1; color: %2; border: 1px solid %3; border-radius: 4px; padding: 4px 6px; }")
         .arg(theme::SURFACE_CARD, theme::TEXT_PRIMARY, theme::BORDER_MUTED));
-    m_difficultyCombo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    m_difficultyCombo->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
+    m_difficultyCombo->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon);
+    m_difficultyCombo->setMinimumContentsLength(8);
 
     m_difficultySpin = new QDoubleSpinBox(m_difficultyContainer);
-    m_difficultySpin->setRange(0.0, 500.0);
+    m_difficultySpin->setStyleSheet(QString("QDoubleSpinBox { background-color: %1; color: %2; border: 1px solid %3; border-radius: 4px; padding: 4px; }")
+        .arg(theme::SURFACE_CARD, theme::TEXT_PRIMARY, theme::BORDER_MUTED));
+    m_difficultySpin->setRange(0.0, 10000.0);
     m_difficultySpin->setValue(20.0);
     m_difficultySpin->setSingleStep(1.0);
     m_difficultySpin->setDecimals(2);
-    m_difficultySpin->setFixedWidth(90);
+    m_difficultySpin->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Fixed);
+    m_difficultySpin->setMinimumWidth(75);
 
-    diffLayout->addWidget(m_difficultyCombo, 1);
-    diffLayout->addWidget(m_difficultySpin);
+    diffLayout->addWidget(m_difficultyCombo, 2);
+    diffLayout->addWidget(m_difficultySpin, 1);
     m_form->addRow(m_difficultyLabel, m_difficultyContainer);
 
     connect(m_difficultyCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
@@ -146,6 +159,9 @@ void GrinderWidget::setupUi() {
 
     m_mobLabel = new QLabel("Target Creature:", paramBox);
     m_mobCombo = new QComboBox(paramBox);
+    m_mobCombo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+    m_mobCombo->setSizeAdjustPolicy(QComboBox::AdjustToMinimumContentsLengthWithIcon);
+    m_mobCombo->setMinimumContentsLength(10);
     const auto& mobs = getTamingMobs();
     std::vector<std::string> mobNames;
     for (const auto& [name, _] : mobs) mobNames.push_back(name);
@@ -157,45 +173,16 @@ void GrinderWidget::setupUi() {
     connect(m_mobCombo, &QComboBox::currentIndexChanged, this, &GrinderWidget::onMobChanged);
     m_form->addRow(m_mobLabel, m_mobCombo);
 
-    m_materialQlLabel = new QLabel("Material QL:", paramBox);
-    m_materialQlSpin = createDblSpin(50.0, 1.0, 100.0);
-    m_form->addRow(m_materialQlLabel, m_materialQlSpin);
-
-    m_startQlLabel = new QLabel("Start QL:", paramBox);
-    m_startQlSpin = createDblSpin(30.0, 1.0, 99.0);
-    m_form->addRow(m_startQlLabel, m_startQlSpin);
-
-    m_targetQlLabel = new QLabel("Target QL:", paramBox);
-    m_targetQlSpin = createDblSpin(70.0, 1.0, 100.0);
-    m_form->addRow(m_targetQlLabel, m_targetQlSpin);
-
-    m_veinQlLabel = new QLabel("Vein QL:", paramBox);
-    m_veinQlSpin = createDblSpin(50.0, 1.0, 100.0);
-    m_form->addRow(m_veinQlLabel, m_veinQlSpin);
-
-    m_imbueLabel = new QLabel("Tool Imbue:", paramBox);
-    m_imbueSpin = createIntSpin(0, 0, 100);
-    m_form->addRow(m_imbueLabel, m_imbueSpin);
-
-    m_rarityLabel = new QLabel("Tool Rarity:", paramBox);
-    m_raritySpin = createDblSpin(0.0, 0.0, 3.0, 1.0, 0);
-    m_form->addRow(m_rarityLabel, m_raritySpin);
-
-    m_runeLabel = new QLabel("Rune Bonus:", paramBox);
-    m_runeSpin = createDblSpin(0.0, 0.0, 1.0, 0.05, 2);
-    m_form->addRow(m_runeLabel, m_runeSpin);
-
-    m_slopeLabel = new QLabel("Dig Slope:", paramBox);
-    m_slopeSpin = createDblSpin(0.0, 0.0, 300.0, 5.0, 1);
-    m_form->addRow(m_slopeLabel, m_slopeSpin);
-
-    m_pathLevelLabel = new QLabel("Path Level:", paramBox);
-    m_pathLevelSpin = createIntSpin(5, 1, 15);
-    m_form->addRow(m_pathLevelLabel, m_pathLevelSpin);
-
-    m_sheepAgeLabel = new QLabel("Sheep Age:", paramBox);
-    m_sheepAgeSpin = createIntSpin(15, 1, 50);
-    m_form->addRow(m_sheepAgeLabel, m_sheepAgeSpin);
+    addDbl(m_materialQlLabel, "Material QL:", m_materialQlSpin, 50.0, 1.0, 100.0);
+    addDbl(m_startQlLabel, "Start QL:", m_startQlSpin, 30.0, 1.0, 99.0);
+    addDbl(m_targetQlLabel, "Target QL:", m_targetQlSpin, 70.0, 1.0, 100.0);
+    addDbl(m_veinQlLabel, "Vein QL:", m_veinQlSpin, 50.0, 1.0, 100.0);
+    addInt(m_imbueLabel, "Tool Imbue:", m_imbueSpin, 0, 0, 100);
+    addDbl(m_rarityLabel, "Tool Rarity:", m_raritySpin, 0.0, 0.0, 3.0, 1.0, 0);
+    addDbl(m_runeLabel, "Rune Bonus:", m_runeSpin, 0.0, 0.0, 1.0, 0.05, 2);
+    addDbl(m_slopeLabel, "Dig Slope:", m_slopeSpin, 0.0, 0.0, 300.0, 5.0, 1);
+    addInt(m_pathLevelLabel, "Path Level:", m_pathLevelSpin, 5, 1, 15);
+    addInt(m_sheepAgeLabel, "Sheep Age:", m_sheepAgeSpin, 15, 1, 50);
 
     auto makeCheck = [this](const QString& text) {
         auto* cb = new QCheckBox(text, this);

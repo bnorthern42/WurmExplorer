@@ -359,31 +359,56 @@ void testBridgePillarPlateauDimensions() {
 }
 
 void testDifficultyPresets() {
-    std::cout << "Testing DifficultyPresets provider..." << std::endl;
+    std::cout << "Testing DifficultyPresets provider with real Wurm data..." << std::endl;
 
-    // Test Mining presets exist and contain Iron Vein (20)
-    auto miningPresets = DifficultyProvider::getPresetsForMode(ActionMode::MiningPower);
-    assert(!miningPresets.empty());
+    // Test Mining presets exist and contain exact Google Sheet difficulties
+    // MiningPower: Stone 2.0, Iron 3.0, Sandstone 45.0, Marble 40.0, Adamantine 60.0
+    auto miningPower = DifficultyProvider::getPresetsForMode(ActionMode::MiningPower);
+    assert(!miningPower.empty());
     bool foundIron = false;
-    for (const auto& [name, diff] : miningPresets) {
-        if (name.contains("Iron") && approxEqual(diff, 20.0)) {
-            foundIron = true;
-            break;
-        }
+    bool foundSandstone = false;
+    bool foundMarble = false;
+    bool foundAdamantine = false;
+    for (const auto& [name, diff] : miningPower) {
+        if (name.contains("Iron") && approxEqual(diff, 3.0)) foundIron = true;
+        if (name.contains("Sandstone") && approxEqual(diff, 45.0)) foundSandstone = true;
+        if (name.contains("Marble") && approxEqual(diff, 40.0)) foundMarble = true;
+        if (name.contains("Adamantine") && approxEqual(diff, 60.0)) foundAdamantine = true;
     }
     assert(foundIron);
+    assert(foundSandstone);
+    assert(foundMarble);
+    assert(foundAdamantine);
 
-    // Test Taming presets exist and contain Cow (20) and Hell Horse (80)
+    // Test MiningQl presets also contain exact values
+    auto miningQl = DifficultyProvider::getPresetsForMode(ActionMode::MiningQl);
+    assert(!miningQl.empty());
+    bool foundGlimmersteel = false;
+    for (const auto& [name, diff] : miningQl) {
+        if (name.contains("Glimmersteel") && approxEqual(diff, 55.0)) foundGlimmersteel = true;
+    }
+    assert(foundGlimmersteel);
+
+    // Test Taming presets exist and contain exact Google Sheet data & aged variants
     auto tamingPresets = DifficultyProvider::getPresetsForMode(ActionMode::Taming);
     assert(!tamingPresets.empty());
     bool foundCow = false;
+    bool foundHorse = false;
     bool foundHellHorse = false;
+    bool foundHorseYoung = false;
+    bool foundHorseMature = false;
     for (const auto& [name, diff] : tamingPresets) {
-        if (name.contains("Cow") && approxEqual(diff, 20.0)) foundCow = true;
-        if (name.contains("Hell Horse") && approxEqual(diff, 80.0)) foundHellHorse = true;
+        if (name.contains("Cow") && approxEqual(diff, 10.0)) foundCow = true;
+        if (name == "Horse" && approxEqual(diff, 132.0)) foundHorse = true;
+        if (name.contains("Hell Horse") && (approxEqual(diff, 648.0) || approxEqual(diff, 712.8))) foundHellHorse = true;
+        if (name.contains("Horse (Young)") && approxEqual(diff, 118.8)) foundHorseYoung = true;
+        if (name.contains("Horse (Mature)") && approxEqual(diff, 145.2)) foundHorseMature = true;
     }
     assert(foundCow);
+    assert(foundHorse);
     assert(foundHellHorse);
+    assert(foundHorseYoung);
+    assert(foundHorseMature);
 
     // Test all 14 action modes return non-empty presets
     for (int m = 0; m <= static_cast<int>(ActionMode::Shearing); ++m) {

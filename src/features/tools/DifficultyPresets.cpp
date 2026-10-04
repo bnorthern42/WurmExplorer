@@ -1,9 +1,31 @@
 #include "DifficultyPresets.hpp"
 #include <unordered_map>
+#include <QFile>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+#include <mutex>
 
 namespace tools {
 
-static const std::unordered_map<ActionMode, std::vector<DifficultyPreset>> s_presets = {
+static const std::unordered_map<std::string, ActionMode> s_modeMap = {
+    {"GenericCheck", ActionMode::GenericCheck},
+    {"MiningPower", ActionMode::MiningPower},
+    {"MiningQl", ActionMode::MiningQl},
+    {"Farming", ActionMode::Farming},
+    {"Digging", ActionMode::Digging},
+    {"Meditation", ActionMode::Meditation},
+    {"Creation", ActionMode::Creation},
+    {"WoodcuttingQl", ActionMode::WoodcuttingQl},
+    {"Imping", ActionMode::Imping},
+    {"SmithingSteps", ActionMode::SmithingSteps},
+    {"Taming", ActionMode::Taming},
+    {"Fileting", ActionMode::Fileting},
+    {"Forestry", ActionMode::Forestry},
+    {"Shearing", ActionMode::Shearing}
+};
+
+static const std::unordered_map<ActionMode, std::vector<DifficultyPreset>> s_fallbackPresets = {
     {
         ActionMode::GenericCheck,
         {
@@ -18,45 +40,62 @@ static const std::unordered_map<ActionMode, std::vector<DifficultyPreset>> s_pre
     {
         ActionMode::MiningPower,
         {
-            {"Copper Vein", 10.0},
-            {"Iron Vein", 20.0},
-            {"Tin Vein", 20.0},
-            {"Lead / Zinc", 25.0},
-            {"Silver Vein", 30.0},
-            {"Gold Vein", 40.0}
+            {"Stone Vein", 2.0},
+            {"Zinc Vein", 2.0},
+            {"Iron Vein", 3.0},
+            {"Tin Vein", 10.0},
+            {"Copper Vein", 20.0},
+            {"Slate Vein", 20.0},
+            {"Lead Vein", 20.0},
+            {"Silver Vein", 35.0},
+            {"Gold Vein", 40.0},
+            {"Reinforced Vein", 40.0},
+            {"Marble Vein", 40.0},
+            {"Sandstone Vein", 45.0},
+            {"Glimmersteel Vein", 55.0},
+            {"Adamantine Vein", 60.0}
         }
     },
     {
         ActionMode::MiningQl,
         {
-            {"Rock Tile", 10.0},
-            {"Iron Vein", 20.0},
-            {"Tin Vein", 20.0},
-            {"Slate Vein", 15.0},
-            {"Silver Vein", 30.0},
-            {"Marble Vein", 35.0},
-            {"Gold Vein", 40.0}
+            {"Stone Vein", 2.0},
+            {"Zinc Vein", 2.0},
+            {"Iron Vein", 3.0},
+            {"Tin Vein", 10.0},
+            {"Copper Vein", 20.0},
+            {"Slate Vein", 20.0},
+            {"Lead Vein", 20.0},
+            {"Silver Vein", 35.0},
+            {"Gold Vein", 40.0},
+            {"Reinforced Vein", 40.0},
+            {"Marble Vein", 40.0},
+            {"Sandstone Vein", 45.0},
+            {"Glimmersteel Vein", 55.0},
+            {"Adamantine Vein", 60.0}
         }
     },
     {
         ActionMode::Farming,
         {
-            {"Corn / Rye / Wheat", 10.0},
-            {"Barley / Oat", 15.0},
-            {"Potato / Carrot", 20.0},
-            {"Cotton / Hemp", 25.0},
-            {"Strawberries", 30.0},
-            {"Garlic", 40.0}
+            {"Potato", 4.0},
+            {"Cotton", 7.0},
+            {"Rye", 10.0},
+            {"Barley", 20.0},
+            {"Wheat", 30.0},
+            {"Corn", 40.0}
         }
     },
     {
         ActionMode::Digging,
         {
-            {"Dirt / Grass", 10.0},
-            {"Clay / Peat", 20.0},
-            {"Tar / Moss", 30.0},
-            {"Underwater Dirt", 40.0},
-            {"Steep Slope", 50.0}
+            {"Moss", 10.0},
+            {"Sand", 10.0},
+            {"Clay", 20.0},
+            {"Tundra", 20.0},
+            {"Marsh", 30.0},
+            {"Tar", 35.0},
+            {"Steppe", 40.0}
         }
     },
     {
@@ -85,11 +124,12 @@ static const std::unordered_map<ActionMode, std::vector<DifficultyPreset>> s_pre
     {
         ActionMode::WoodcuttingQl,
         {
-            {"Pine / Birch", 15.0},
-            {"Cedar / Fir", 20.0},
-            {"Oak / Willow", 30.0},
-            {"Walnut / Chestnut", 35.0},
-            {"Linden / Maple", 40.0}
+            {"Birch Tree", 2.0},
+            {"Pine Tree", 2.0},
+            {"Maple Tree", 4.0},
+            {"Cedar Tree", 5.0},
+            {"Oak Tree", 20.0},
+            {"Willow Tree", 18.0}
         }
     },
     {
@@ -117,16 +157,36 @@ static const std::unordered_map<ActionMode, std::vector<DifficultyPreset>> s_pre
         ActionMode::Taming,
         {
             {"Chicken", 5.0},
-            {"Pig", 15.0},
-            {"Cow", 20.0},
-            {"Dog", 25.0},
-            {"Bull", 30.0},
-            {"Brown Bear", 40.0},
-            {"Crocodile", 50.0},
-            {"Black Bear", 55.0},
-            {"Cave Bug", 65.0},
-            {"Hell Horse", 80.0},
-            {"Unicorn", 90.0}
+            {"Lamb", 5.0},
+            {"Brown Cow", 10.0},
+            {"Cow", 10.0},
+            {"Cow (Young)", 9.0},
+            {"Cow (Adolescent)", 10.0},
+            {"Cow (Mature)", 11.0},
+            {"Cow (Aged)", 12.0},
+            {"Cow (Old)", 13.0},
+            {"Cow (Venerable)", 14.0},
+            {"Pig", 20.0},
+            {"Pig (Young)", 18.0},
+            {"Pig (Mature)", 22.0},
+            {"Dog", 45.0},
+            {"Dog (Young)", 40.5},
+            {"Dog (Mature)", 49.5},
+            {"Horse", 132.0},
+            {"Horse (Young)", 118.8},
+            {"Horse (Adolescent)", 132.0},
+            {"Horse (Mature)", 145.2},
+            {"Horse (Aged)", 158.4},
+            {"Horse (Old)", 171.6},
+            {"Horse (Venerable)", 184.8},
+            {"Cave Bug", 200.0},
+            {"Brown Bear", 270.0},
+            {"Black Bear", 270.0},
+            {"Crocodile", 585.0},
+            {"Hell Horse", 648.0},
+            {"Hell Horse (Young)", 583.2},
+            {"Hell Horse (Mature)", 712.8},
+            {"Unicorn", 660.0}
         }
     },
     {
@@ -150,25 +210,81 @@ static const std::unordered_map<ActionMode, std::vector<DifficultyPreset>> s_pre
     {
         ActionMode::Shearing,
         {
-            {"Lamb", 10.0},
-            {"Young Sheep", 15.0},
-            {"Adult Sheep", 20.0},
-            {"Overgrown Fleece", 30.0}
+            {"Lamb (< 3 yrs)", 10.0},
+            {"Young Sheep (< 8 yrs)", 15.0},
+            {"Adolescent Sheep (< 12 yrs)", 20.0},
+            {"Adult Sheep (< 30 yrs)", 25.0},
+            {"Mature Sheep (< 40 yrs)", 30.0},
+            {"Old / Overgrown Fleece", 35.0}
         }
     }
 };
 
+static std::unordered_map<ActionMode, std::vector<DifficultyPreset>> s_jsonPresets;
+static std::once_flag s_once;
+
+static void loadJsonPresets() {
+    const QStringList candidates = {
+        "configs/difficulty_presets.json",
+        "../configs/difficulty_presets.json",
+        "../../configs/difficulty_presets.json"
+    };
+    for (const auto& path : candidates) {
+        QFile file(path);
+        if (file.open(QIODevice::ReadOnly)) {
+            QByteArray data = file.readAll();
+            QJsonDocument doc = QJsonDocument::fromJson(data);
+            if (doc.isObject()) {
+                QJsonObject root = doc.object();
+                for (auto it = root.begin(); it != root.end(); ++it) {
+                    auto mIt = s_modeMap.find(it.key().toStdString());
+                    if (mIt != s_modeMap.end()) {
+                        ActionMode mode = mIt->second;
+                        if (it.value().isArray()) {
+                            QJsonArray arr = it.value().toArray();
+                            std::vector<DifficultyPreset> list;
+                            for (const auto& itemVal : arr) {
+                                if (itemVal.isObject()) {
+                                    QJsonObject obj = itemVal.toObject();
+                                    DifficultyPreset dp;
+                                    dp.name = obj.value("name").toString();
+                                    dp.difficulty = obj.value("difficulty").toDouble();
+                                    list.push_back(dp);
+                                }
+                            }
+                            if (!list.empty()) {
+                                s_jsonPresets[mode] = std::move(list);
+                            }
+                        }
+                    }
+                }
+                return;
+            }
+        }
+    }
+}
+
 std::vector<DifficultyPreset> DifficultyProvider::getPresetsForMode(ActionMode mode) {
-    auto it = s_presets.find(mode);
-    if (it != s_presets.end()) {
+    std::call_once(s_once, loadJsonPresets);
+    auto it = s_jsonPresets.find(mode);
+    if (it != s_jsonPresets.end() && !it->second.empty()) {
         return it->second;
+    }
+    auto fIt = s_fallbackPresets.find(mode);
+    if (fIt != s_fallbackPresets.end()) {
+        return fIt->second;
     }
     return {};
 }
 
 bool DifficultyProvider::hasPresetsForMode(ActionMode mode) {
-    auto it = s_presets.find(mode);
-    return it != s_presets.end() && !it->second.empty();
+    std::call_once(s_once, loadJsonPresets);
+    auto it = s_jsonPresets.find(mode);
+    if (it != s_jsonPresets.end() && !it->second.empty()) {
+        return true;
+    }
+    auto fIt = s_fallbackPresets.find(mode);
+    return fIt != s_fallbackPresets.end() && !fIt->second.empty();
 }
 
 } // namespace tools
