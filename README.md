@@ -5,130 +5,108 @@
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
 
-A high-performance desktop map and companion tool for Wurm Online written in modern C++ with Qt6.
+The **Ultimate Pro Workstation** and Swiss Army knife for *Wurm Online* players, deed mayors, breeders, and cartographers. Engineered natively in modern C++23 with Qt6, WurmExplorer turns raw client logs, multi-gigapixel topographic maps, and game formulas into high-performance desktop intelligence.
 
-Features include:
-- Treasure map locating and screenshot template matching
-- Map annotation and imported data layers
-- Vector drawing and route planning tools
-- Artifact search triangulation
-- Animal husbandry, breeding compatibility, and Granger trait evaluator
-- Live skill gain tracker tailing client log files in real-time
-- Kingdom and guard tower influence overlays
+Whether you are sailing treacherous ocean borders, calculating exact dirt crates for a massive stone bridge, or min-maxing your smithing grind with Monte Carlo simulations, WurmExplorer delivers instantaneous calculations without browser lag or cloud dependencies.
 
+---
 
-## Features
+## Feature Highlights
 
-### Treasure locating
+### Cartography, Navigation & Sailing Routes
+> *"Never get lost at sea. Cross-server routing, topographic deep-zooming, and automated live-tracking via OCR."*
 
-The locator can:
+![Cartography & Sailing](assets/docs/sailing_cluster.png)
 
-1. Extract the inner map area from a Wurm client screenshot
-2. Detect the black X overlay inside that map
-3. Remove overlays such as the X and compass
-4. Match the cleaned patch against a full server map image
-5. Convert the best match into tile coordinates
-6. Undo treasure offset math to estimate the treasure tile
+- **Cluster-Wide Sailing Navigator:** Seamless cross-server route plotting across Northern, Southern, and Epic clusters. Automatically identifies contiguous border transitions, exit edges, and arrival coordinates with dynamically centered cluster layouts.
+- **Deep Zoom Map Engine:** High-performance tile rendering with multi-scale pyramid caching for multi-gigapixel maps (`terrain`, `topo`, and `classic`).
+- **Live Location Tracking:** Built-in OCR detects your client coordinates in real-time and anchors your viewport.
+- **Deed & Highway Overlays:** Visualize deed borders, perimeter fences, highway networks, tunnels, and guard tower influence ranges across PvP and PvE servers.
 
-The matcher is designed to still work when the in-game map is stylized with blur, sepia, contours, or similar effects by using normalized matching based on edges and grayscale and by searching multiple scales.
+### Computer Vision Treasure Locator
+> *"Pinpoint buried treasure maps in seconds with sub-tile template matching."*
 
-### Desktop GUI
+![Treasure Locator](assets/docs/main_ui.png)
 
-The GUI is built with modern C++ and Qt6 and includes these tabs:
+- **Automated Clue Ingestion:** Paste or load in-game treasure map screenshots directly from your Wurm screenshots directory.
+- **Patch Extraction & Desymbolization:** Automatically filters out the compass rose, stylized sepia artifacts, and the target "X" overlay.
+- **Multi-Scale Normalized Matching:** Matches candidate terrain features across multiple scale factors against the server's master heightmap, reversing directional distance offsets to yield the exact digging tile.
 
-- **Annotations**
-  - add and edit manual deeds, roads, bridges, and tunnels
-  - on PvP-enabled servers, add manual guard towers with kingdom ownership and influence radius
-  - search and filter manual annotations
+### Mechanics Grinder Simulation Engine
+> *"Min-max your grind. Full Monte Carlo simulations for 14 action modes, including custom difficulties for veins and taming."*
 
-- **Drawing**
-  - create reusable drawing objects for planning and map markup
-  - add multiple items to the same object
-  - supported item types:
-    - polyline
-    - rectangle
-    - circle
-    - arrow
-    - text
-  - each object can contain mixed item types, colors, widths, and labels
-  - text items support:
-    - multi-line text
-    - font family
-    - font size
-    - bold
-    - italic
-  - in pan mode, existing text items can be selected and dragged to move them
-  - `Ctrl+S` saves the current item in the Drawing tab
+![Mechanics Grinder Simulator](assets/docs/grinder.png)
 
-- **Map Data**
-  - browse imported read-only map layers
-  - deeds
-  - guard towers
-  - resources
-  - special points of interest
-  - highways
-  - bridges
-  - tunnels
-  - search, filter, and toggle layers
+- **Lightning-Fast Monte Carlo:** Simulates 5,000+ continuous actions in milliseconds to calculate expected skill gains, skill tick probabilities, and stamina efficiency.
+- **Comprehensive Action Modes:** Full mathematical models for Mining, Woodcutting, Carpentry, Blacksmithing, Animal Taming, Masonry, and more.
+- **Vein & Difficulty Tuning:** Adjust effective tool QL, metal vein difficulty, slope penalties, and character skill levels with Gaussian distribution modeling.
+- **Interactive Visualizations:** Live Gaussian curves and probability density charts showing success rates and QL outcome distributions.
 
-- **Artifacts**
-  - track artifact locate casts
-  - place a caster position
-  - record clue distance bands and facing
-  - intersect clue areas on the map
+### Terraforming Math & Bridge Dirt Pillar Calculator
+> *"Perfect bridge pillars every time. Calculates exact dirt crates and corner matrices constrained by your digging skill."*
 
-- **Treasure**
-  - load a screenshot
-  - locate the map position
-  - set a manual hint
-  - review top candidate matches
+![Bridge Dirt Pillar Calculator](assets/docs/bridge_pillar.png)
 
-- **Tools**
-  - **Imp & Skill Calculator**: Bidirectional QL <-> Skill calculations with imbue enhancement bonuses and quick lookup reference matrix.
-  - **Bridge Pillar Calculator**: 2D elevation grid heatmap, slope falloff modeling, corner height computation, and dirt crate requirements for terraforming bridge foundations.
-  - **Grinder Engine**: Real-time Monte Carlo skill check and action mechanics simulator (5,000 iterations in milliseconds) modeling Gaussian distributions, item effective skill, mining QL, and multi-step blacksmithing.
+- **(Width + 1) x (Length + 1) Corner Matrix:** Formulates the exact 2D elevation grid required to raise stable dirt plateaus for stone and marble bridges.
+- **Digging Skill Constraint Modeling:** Applies maximum slope limits based on your character's Digging skill to prevent plateau collapse.
+- **Crate & Slope Falloff Calculations:** Computes the precise volume of dirt crates needed, step-by-step corner elevations, and visual slope heatmaps.
 
-- **Settings**
-  - adjust layer colors
-  - adjust widths
-  - toggle labels for imported map layers
+### Imping Calculator & Live Skill Sync
+> *"Maximize your target QL while minimizing damage risks and tool wear."*
 
-### Map variants
+![Imping Calculator](assets/docs/imp_calc.png)
 
-The GUI supports switching between multiple map variants such as:
+- **Bidirectional Calculations:** Solve for target item Quality Level (QL) from current skill, or find the skill requirement needed for guaranteed improvements.
+- **Real-Time Log Sync:** Automatically detects active character skill levels by tailing client logs in real-time.
+- **Fuzzy Skill Search:** Instantly filters all Wurm crafting and improvement skills.
+- **Imbue & Tool Bonuses:** Accounts for priest spells, circle of cunning, and tool QL multipliers to recommend optimal improvement sequences.
 
-- classic
-- topo
-- terrain
+### Granger Livestock & Husbandry Evaluator
+> *"Optimize your bloodlines and eliminate negative traits before breeding."*
 
-If your server maps follow a naming format like:
+![Granger Livestock Evaluator](assets/docs/livestock.png)
 
-```text
-<server>-<type>-<creationDate>.png
-````
+- **Pedigree & Trait Evaluator:** Full trait analysis for horses, cows, sheep, and dogs.
+- **Breeding Compatibility Matrix:** Cross-analyzes sire and dam traits to calculate child trait probabilities while flagging inbreeding penalties.
+- **Deed Herd Management:** Track pregnancy timers, groom states, and pregnant animal locations across your deed pastures.
 
-the app can discover and switch between available variants automatically.
+### Real-Time Skills Monitor
+> *"Track every skill tick, sleep bonus phase, and hour-by-hour gain rate."*
 
-Current behavior:
+![Skills Monitor](assets/docs/skills_tracker.png)
 
-* the **Treasure** tab always prefers `topo` when a topo map exists
-* the other tabs prefer `terrain`
-* if a preferred variant does not exist, the app falls back cleanly
+- **Log File Tailing:** Zero-overhead background watcher for Wurm Online client logs.
+- **Milestone Projections:** Estimates time-to-target for major milestones (50, 70, 90).
+- **Session Gain Analytics:** Tracks active session skill growth, sleep bonus multipliers, and ticks per action.
 
-### Importing external map data
+### Artifact Triangulation & Clue Hunter
+> *"Pinpoint elusive server artifacts across multiple locate casts."*
 
-The project can import external map data from a `window.sheetData` / `valueRanges` style dump, such as map sites that expose Google Sheets-backed data.
+- **Multi-Cast Geometry:** Records caster tile positions, distance bands, and bearings from `locate` casts.
+- **Polygon Intersections:** Computes the overlapping geometric probability zones to dramatically shrink your search radius.
 
-Supported imported sheets include:
+---
 
-* `Deeds`
-* `Highways`
-* `Bridges`
-* `Tunnels`
-* `Resources`
-* `Special`
+## Screenshot Automation (Wayland / Niri)
 
-Imported data is kept separate from manual annotations in the GUI.
+WurmExplorer includes an automated screenshot capture script designed for Wayland compositors (such as Niri or Sway) using `grim`:
+
+```bash
+# Ensure execution permissions
+chmod +x scripts/capture_docs.sh
+
+# Run full interactive sequential capture for all docs
+./scripts/capture_docs.sh
+
+# Or capture a specific tab with a custom countdown delay (in seconds)
+./scripts/capture_docs.sh grinder 3
+./scripts/capture_docs.sh main 5
+./scripts/capture_docs.sh bridge 3
+```
+
+All screenshots are automatically saved into `assets/docs/` for clean, tracked documentation.
+
+---
 
 ## Installation & Running
 
@@ -140,23 +118,22 @@ Run the automated installer script:
 ./install.sh
 ```
 
-This compiles the release binary with Meson/Ninja and deploys `wurm_explorer` to `~/.local/bin/` with desktop menu icons and `.desktop` launcher.
+This compiles the release binary with Meson/Ninja and deploys `wurm_explorer` to `~/.local/bin/` with desktop menu icons and standard desktop launcher registration.
 
-To launch from terminal:
+Launch from your desktop application menu or run from terminal:
 ```bash
 wurm_explorer
 ```
 
 ### Option 2: Standalone AppImage
 
-Download `WurmExplorer-x86_64.AppImage` from GitHub Releases (or build locally):
+Build and run a self-contained AppImage:
 
 ```bash
 chmod +x scripts/build-appimage.sh
 ./scripts/build-appimage.sh
 
-# Run AppImage
-chmod +x builddir/WurmExplorer-x86_64.AppImage
+# Execute
 ./builddir/WurmExplorer-x86_64.AppImage
 ```
 
@@ -169,61 +146,32 @@ chmod +x run-container.sh
 ./run-container.sh
 ```
 
-Or manually:
+### Option 4: Manual Build with Meson
 
 ```bash
-# Build
-podman build -t wurmexplorer .
-
-# Run with GUI display forwarding
-podman run --rm -it \
-  --net=host \
-  --ipc=host \
-  -e DISPLAY=$DISPLAY \
-  -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
-  -v ~/.config/wurm:/root/.config/wurm:rw \
-  wurmexplorer:latest
+meson setup builddir
+meson compile -C builddir
+./builddir/wurm_explorer
 ```
 
-## Project layout
+---
 
-Important config and data files:
+## Configuration & Server Setup
 
-* `configs/servers.yaml` - server definitions
-* `configs/annotations.json` - manual annotations and imported map data
-* `configs/artifacts.json` - saved artifact clues
-* `configs/kingdoms.json` - saved kingdom definitions for PvP servers
-* `configs/styles.json` - saved GUI style settings
-* `configs/drawings.json` - saved drawing/planning objects
+Server definitions, coordinate bounds, and map file paths are managed in `configs/servers.yaml`:
 
-## Configure servers
+```bash
+cp configs/servers.example.yaml configs/servers.yaml
+```
 
-Edit `configs/servers.yaml`.
-
-Important fields per server:
-
-* `map_image` - path to the default server map image
-* `map_size_tiles` - tiles per side
-* `scales` - scale factors to try for treasure matching
-* `server_mode` - `pve` or `pvp`
-* `supports_kingdoms` - enable manual kingdom-owned guard towers
-* `guard_tower_influence_radius_tiles` - default manual tower influence radius
-* treasure-matching parameters such as:
-
-  * `canny1`
-  * `canny2`
-  * `blur_ksize`
-  * `score_weights`
-  * `topk`
-
-Example:
+Key configuration properties per server:
 
 ```yaml
 servers:
-  Xanadu:
-    map_image: "../svrMaps/Xanadu-terrain-20260224.png"
-    map_size_tiles: 8192
-    scales: [0.55, 0.60, 0.65, 0.70, 0.75, 0.80, 0.85, 0.90]
+  Harmony:
+    map_image: "../svrMaps/Harmony-terrain-20260224.png"
+    map_size_tiles: 4096
+    scales: [0.70, 0.75, 0.80, 0.85, 0.90, 0.95, 1.0]
     server_mode: "pve"
     supports_kingdoms: false
 
@@ -236,125 +184,21 @@ servers:
     guard_tower_influence_radius_tiles: 50
 ```
 
-## Build & Run
+### Imported Community Data
+External community map dumps (e.g. Google Sheets / `window.sheetData`) can be imported into separate read-only layers (`Deeds`, `Highways`, `Bridges`, `Tunnels`, `Resources`) keeping them organized separately from your personal annotations.
 
-### Quick Start
+---
 
-```bash
-./run.sh
-```
+## Architecture & Tech Stack
 
-### Build with Meson
+WurmExplorer is built from the ground up for responsiveness and memory safety:
+- **Language:** ISO C++23 (`-std=c++23`)
+- **UI Framework:** Qt 6.6+ with custom Dark Slate & Emerald design system
+- **Computer Vision:** OpenCV for high-throughput normalized template matching and morphological edge filtering
+- **Map Rendering:** High-performance QPainter & QImage pipeline with mipmap scaling and tiled pyramids
+- **Persistence:** Local JSON and YAML serialization
 
-```bash
-meson setup builddir
-meson compile -C builddir
-./builddir/wurm_explorer
-```
-
-### Installation
-
-```bash
-./install.sh
-```
-This builds and installs WurmExplorer into `~/MyApps/WurmExplorer`, symlinks `~/.local/bin/wurm_explorer`, installs vector and raster icons to standard `~/.local/share/icons/hicolor/` directories, and registers `~/.local/share/applications/wurmexplorer.desktop`.
-
-## Imported map data behavior
-
-Imported data is treated as read-only map data and shown through the **Map Data** tab.
-
-Manual annotations are edited through the **Annotations** tab.
-
-This split keeps imported site data separate from your own hand-made edits.
-
-## PvP and kingdoms
-
-Only servers that enable kingdom support in `servers.yaml` expose kingdom-aware guard tower editing.
-
-On PvP-enabled servers you can:
-
-* place manual guard towers
-* assign a kingdom from a saved list
-* add a new kingdom and reuse it later
-* draw tower influence circles using the kingdom color
-
-On PvE servers, kingdom-specific tower editing is hidden.
-
-## Artifact workflow
-
-The Artifacts tab is intended for narrowing artifact locations over multiple casts.
-
-Each clue stores:
-
-* artifact
-* caster tile
-* facing direction
-* distance band
-
-The app converts clues into geometric search areas and overlays their intersections on the map.
-
-## Drawing workflow
-
-The Drawing tab is intended for planning, markup, and general map sketching.
-
-### Object model
-
-A drawing object can contain multiple saved items, such as:
-
-* several circles
-* several arrows
-* several text labels
-* mixed colors
-* mixed widths
-
-This makes it possible to keep related markup grouped together as a single object.
-
-### Text editing
-
-Text items support:
-
-* multi-line content
-* font family selection
-* font size
-* bold
-* italic
-
-In **Pan** mode, you can select an existing text item by clicking near its anchor point, drag it to move it, then press **Save Item** to commit text and style changes.
-
-### Shortcuts
-
-Inside the Drawing tab:
-
-* `Ctrl+S` - save current item
-
-## Notes and limitations
-
-* Matching quality still depends on how similar the server map image is to the in-game cartography map.
-* Out-of-date server maps, heavy terraforming, or mismatched map styles can reduce treasure matching accuracy.
-* Large imported datasets can reduce pan performance.
-* Highway and resource imports depend on the structure of the external `window.sheetData` source. Some sites may need importer adjustments if their sheet layout differs.
-* The Drawing tab currently focuses on vector-style planning and markup, not full raster painting.
-
-## Status
-
-This project is actively evolving beyond treasure matching into a broader Wurm Online desktop map tool.
-
-
-## Architecture
-
-WurmExplorer is written in modern C++ (C++20/C++23) with Qt6 for native desktop performance. Multi-gigapixel server maps are handled with libvips and OpenCV for high-throughput image rendering, pyramid caching, and normalized computer vision template matching. Local state is managed with modern JSON and YAML serialization.
-
-## Local config
-
-This repo does not track personal runtime data or local server config.
-
-Create your local server config from the example:
-
-```bash
-cp configs/servers.example.yaml configs/servers.yaml
-```
-
-Local saved data such as drawings, annotations, artifacts, styles, and kingdoms is stored in configs/*.json and is ignored by Git.
+---
 
 ## Acknowledgments & Data Sourcing
 
@@ -363,7 +207,8 @@ All game data, skill rates, item difficulties, and mechanics formulas are derive
 * The **Mechanics Grinder Simulator** is heavily inspired by the original web-based [Dreamsleeve Grinder](https://www.dreamsleeve.org/wurm/grinder/).
 * Sincere appreciation to the generations of Wurm Online players and cartographers whose public research, tool development, and community documentation paved the way for this project.
 
+---
+
 ## Disclaimer
 
 WurmExplorer is a community-driven, third-party tool. It is strictly unofficial and is **not associated with, endorsed by, or affiliated with GameThrill AB, Code Club AB**, or any of their partners or subsidiaries. All game titles, registered trademarks, logos, and game assets are the property of their respective owners.
-
