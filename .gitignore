@@ -13,7 +13,8 @@ configs/*.json
 !configs/difficulty_presets.json
 !configs/servers.yaml
 configs/*.yaml
-.agents/
+.agents/*
+!.agents/AGENTS.md
 python/
 .gemini/
 .cache/

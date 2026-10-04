@@ -20,3 +20,10 @@
 - Status: Danger Red (`#ef4444`), Warning Amber (`#f59e0b`), Success Green (`#10b981`).
 - Absolutely no blue, navy, or purple shades (no legacy Catppuccin Macchiato `#8aadf4`, `#313244`, `#1e1e2e`, etc.).
 
+## Execution & Verification Rules
+- **DO NOT** run `scripts/fetch_maps.py` or any Docker builds autonomously.
+- Never run `scripts/fetch_maps.py` or execute `docker build` commands autonomously.
+- **DEFAULT VERIFICATION:** For post-task verification, only perform a fast local compile (e.g., `ninja -C builddir`) and run `./install.sh`, unless the user explicitly requests a full Docker build or map fetch.
+- Execute heavy scripts or tests only if explicitly requested in the prompt.
+
+
