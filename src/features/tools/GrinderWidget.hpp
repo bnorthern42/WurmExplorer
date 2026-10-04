@@ -28,11 +28,14 @@ private slots:
     void onActionChanged(int index);
     void onLinkSkillsToggled(bool checked);
     void onMobChanged(int index);
+    void onDifficultyPresetChanged(int index);
+    void onDifficultySpinChanged(double val);
     void runSimulation();
 
 private:
     void setupUi();
     void updateModeVisibility();
+    void populateDifficultyPresets(ActionMode mode);
     void syncSkillsFromStats();
 
     QComboBox* m_actionCombo = nullptr;
@@ -56,6 +59,8 @@ private:
     QDoubleSpinBox* m_toolQlSpin = nullptr;
 
     QLabel* m_difficultyLabel = nullptr;
+    QWidget* m_difficultyContainer = nullptr;
+    QComboBox* m_difficultyCombo = nullptr;
     QDoubleSpinBox* m_difficultySpin = nullptr;
 
     // Mode-specific rows

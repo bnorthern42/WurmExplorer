@@ -4,6 +4,7 @@
 #include "../src/features/tools/ImpCalculator.hpp"
 #include "../src/features/tools/BridgePillarCalculator.hpp"
 #include "../src/features/tools/GrinderEngine.hpp"
+#include "../src/features/tools/DifficultyPresets.hpp"
 
 using namespace tools;
 
@@ -302,12 +303,52 @@ void testBridgePillarSlopeAndDigSkillLimit() {
     std::cout << "BridgePillar slope tests passed!" << std::endl;
 }
 
+void testDifficultyPresets();
+
 int main() {
     testImpCalculator();
     testBridgePillarCalculator();
     testBridgePillarSlopeAndDigSkillLimit();
     testGrinderEngine();
     testGrinderActionModes();
+    testDifficultyPresets();
     std::cout << "\nALL TOOLS TESTS PASSED!" << std::endl;
     return 0;
+}
+
+void testDifficultyPresets() {
+    std::cout << "Testing DifficultyPresets provider..." << std::endl;
+
+    // Test Mining presets exist and contain Iron Vein (20)
+    auto miningPresets = DifficultyProvider::getPresetsForMode(ActionMode::MiningPower);
+    assert(!miningPresets.empty());
+    bool foundIron = false;
+    for (const auto& [name, diff] : miningPresets) {
+        if (name.contains("Iron") && approxEqual(diff, 20.0)) {
+            foundIron = true;
+            break;
+        }
+    }
+    assert(foundIron);
+
+    // Test Taming presets exist and contain Cow (20) and Hell Horse (80)
+    auto tamingPresets = DifficultyProvider::getPresetsForMode(ActionMode::Taming);
+    assert(!tamingPresets.empty());
+    bool foundCow = false;
+    bool foundHellHorse = false;
+    for (const auto& [name, diff] : tamingPresets) {
+        if (name.contains("Cow") && approxEqual(diff, 20.0)) foundCow = true;
+        if (name.contains("Hell Horse") && approxEqual(diff, 80.0)) foundHellHorse = true;
+    }
+    assert(foundCow);
+    assert(foundHellHorse);
+
+    // Test all 14 action modes return non-empty presets
+    for (int m = 0; m <= static_cast<int>(ActionMode::Shearing); ++m) {
+        auto mode = static_cast<ActionMode>(m);
+        auto p = DifficultyProvider::getPresetsForMode(mode);
+        assert(!p.empty());
+    }
+
+    std::cout << "DifficultyPresets tests passed!" << std::endl;
 }

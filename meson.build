@@ -57,6 +57,7 @@ sources = [
   'src/features/tools/ImpCalculator.cpp',
   'src/features/tools/BridgePillarCalculator.cpp',
   'src/features/tools/GrinderEngine.cpp',
+  'src/features/tools/DifficultyPresets.cpp',
   'src/features/tools/ImpCalculatorWidget.cpp',
   'src/features/tools/BridgePillarWidget.cpp',
   'src/features/tools/GrinderChartWidget.cpp',
@@ -183,7 +184,9 @@ test_tools = executable('test_tools',
   ['tests/test_tools.cpp',
    'src/features/tools/ImpCalculator.cpp',
    'src/features/tools/BridgePillarCalculator.cpp',
-   'src/features/tools/GrinderEngine.cpp'],
+   'src/features/tools/GrinderEngine.cpp',
+   'src/features/tools/DifficultyPresets.cpp'],
+  dependencies: [qt6_dep],
   include_directories: incdir
 )
 test('tools', test_tools, suite: 'tools', workdir: meson.project_source_root())

@@ -2,6 +2,7 @@
 #include "GrinderChartWidget.hpp"
 #include "GrinderMobData.hpp"
 #include "GrinderModeConfig.hpp"
+#include "DifficultyPresets.hpp"
 #include "../../ui/ThemeTokens.hpp"
 
 #include <QVBoxLayout>
@@ -18,6 +19,7 @@ GrinderWidget::GrinderWidget(QWidget* parent)
     : QWidget(parent) {
     setupUi();
     m_initialized = true;
+    populateDifficultyPresets(static_cast<ActionMode>(m_actionCombo->currentIndex()));
     updateModeVisibility();
 }
 
@@ -115,8 +117,32 @@ void GrinderWidget::setupUi() {
     m_form->addRow(m_toolQlLabel, m_toolQlSpin);
 
     m_difficultyLabel = new QLabel("Difficulty:", paramBox);
-    m_difficultySpin = createDblSpin(20.0, 0.0, 200.0, 1.0, 2);
-    m_form->addRow(m_difficultyLabel, m_difficultySpin);
+
+    m_difficultyContainer = new QWidget(paramBox);
+    auto* diffLayout = new QHBoxLayout(m_difficultyContainer);
+    diffLayout->setContentsMargins(0, 0, 0, 0);
+    diffLayout->setSpacing(6);
+
+    m_difficultyCombo = new QComboBox(m_difficultyContainer);
+    m_difficultyCombo->setStyleSheet(QString("QComboBox { background-color: %1; color: %2; border: 1px solid %3; border-radius: 4px; padding: 4px 6px; }")
+        .arg(theme::SURFACE_CARD, theme::TEXT_PRIMARY, theme::BORDER_MUTED));
+    m_difficultyCombo->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
+
+    m_difficultySpin = new QDoubleSpinBox(m_difficultyContainer);
+    m_difficultySpin->setRange(0.0, 500.0);
+    m_difficultySpin->setValue(20.0);
+    m_difficultySpin->setSingleStep(1.0);
+    m_difficultySpin->setDecimals(2);
+    m_difficultySpin->setFixedWidth(90);
+
+    diffLayout->addWidget(m_difficultyCombo, 1);
+    diffLayout->addWidget(m_difficultySpin);
+    m_form->addRow(m_difficultyLabel, m_difficultyContainer);
+
+    connect(m_difficultyCombo, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, &GrinderWidget::onDifficultyPresetChanged);
+    connect(m_difficultySpin, QOverload<double>::of(&QDoubleSpinBox::valueChanged),
+            this, &GrinderWidget::onDifficultySpinChanged);
 
     m_mobLabel = new QLabel("Target Creature:", paramBox);
     m_mobCombo = new QComboBox(paramBox);
@@ -235,7 +261,7 @@ void GrinderWidget::updateModeVisibility() {
     setRowVis(m_secondarySkillLabel, m_secondarySkillSpin, cfg.showSecondarySkill);
     setRowVis(m_tertiarySkillLabel, m_tertiarySkillSpin, cfg.showTertiarySkill);
     setRowVis(m_toolQlLabel, m_toolQlSpin, cfg.showToolQl);
-    setRowVis(m_difficultyLabel, m_difficultySpin, cfg.showDifficulty);
+    setRowVis(m_difficultyLabel, m_difficultyContainer, cfg.showDifficulty);
     setRowVis(m_mobLabel, m_mobCombo, cfg.showMob);
     setRowVis(m_materialQlLabel, m_materialQlSpin, cfg.showMaterialQl);
     setRowVis(m_startQlLabel, m_startQlSpin, cfg.showStartQl);
@@ -260,9 +286,69 @@ void GrinderWidget::updateModeVisibility() {
     runSimulation();
 }
 
-void GrinderWidget::onActionChanged(int) {
+void GrinderWidget::onActionChanged(int index) {
     if (!m_initialized) return;
+    auto mode = static_cast<ActionMode>(index);
+    populateDifficultyPresets(mode);
     updateModeVisibility();
+}
+
+void GrinderWidget::populateDifficultyPresets(ActionMode mode) {
+    if (!m_difficultyCombo || !m_difficultySpin) return;
+
+    auto presets = DifficultyProvider::getPresetsForMode(mode);
+    m_difficultyCombo->blockSignals(true);
+    m_difficultyCombo->clear();
+    m_difficultyCombo->addItem("Custom", QVariant());
+    for (const auto& [name, diff] : presets) {
+        m_difficultyCombo->addItem(QString("%1 (%2)").arg(name).arg(diff), diff);
+    }
+
+    if (!presets.empty()) {
+        m_difficultyCombo->setCurrentIndex(1);
+        double diff = presets.front().difficulty;
+        m_difficultySpin->blockSignals(true);
+        m_difficultySpin->setValue(diff);
+        m_difficultySpin->blockSignals(false);
+    } else {
+        m_difficultyCombo->setCurrentIndex(0);
+    }
+    m_difficultyCombo->blockSignals(false);
+}
+
+void GrinderWidget::onDifficultyPresetChanged(int index) {
+    if (!m_initialized || !m_difficultyCombo || !m_difficultySpin) return;
+
+    if (index <= 0) {
+        return;
+    }
+
+    QVariant data = m_difficultyCombo->itemData(index);
+    if (data.isValid()) {
+        double val = data.toDouble();
+        m_difficultySpin->blockSignals(true);
+        m_difficultySpin->setValue(val);
+        m_difficultySpin->blockSignals(false);
+        runSimulation();
+    }
+}
+
+void GrinderWidget::onDifficultySpinChanged(double val) {
+    if (!m_initialized || !m_difficultyCombo || !m_difficultySpin) return;
+
+    int matchIdx = 0;
+    for (int i = 1; i < m_difficultyCombo->count(); ++i) {
+        if (std::abs(m_difficultyCombo->itemData(i).toDouble() - val) < 0.001) {
+            matchIdx = i;
+            break;
+        }
+    }
+
+    m_difficultyCombo->blockSignals(true);
+    m_difficultyCombo->setCurrentIndex(matchIdx);
+    m_difficultyCombo->blockSignals(false);
+
+    runSimulation();
 }
 
 void GrinderWidget::onMobChanged(int) {
