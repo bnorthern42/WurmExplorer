@@ -22,7 +22,13 @@ int main(int argc, char *argv[]) {
     QApplication::setOrganizationName("WurmMods");
     QApplication::setApplicationVersion(treasure::core::getAppVersion());
     
-    QString iconSvg = treasure::core::resolveResourcePath("resources/wurmexplorer.svg");
+    QString iconSvg = treasure::core::resolveResourcePath("assets/icons/wurm_explorer.svg");
+    if (!QFile::exists(iconSvg)) {
+        iconSvg = QCoreApplication::applicationDirPath() + "/assets/icons/wurm_explorer.svg";
+    }
+    if (!QFile::exists(iconSvg)) {
+        iconSvg = treasure::core::resolveResourcePath("resources/wurmexplorer.svg");
+    }
     QIcon appIcon(iconSvg);
     if (appIcon.isNull()) {
         QString iconPng = treasure::core::resolveResourcePath("resources/icon.png");

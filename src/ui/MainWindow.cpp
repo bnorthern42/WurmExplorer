@@ -471,7 +471,13 @@ void MainWindow::setupUi() {
     mainHBox->addWidget(rightWidget, 1);
     
     setCentralWidget(centralWidget);
-    setWindowTitle(QString("WurmExplorer v%1").arg(treasure::core::getAppVersion()));
-    setWindowIcon(QIcon(treasure::core::resolveResourcePath("resources/wurmexplorer.svg")));
+    QString iconPath = treasure::core::resolveResourcePath("assets/icons/wurm_explorer.svg");
+    if (!QFile::exists(iconPath)) {
+        iconPath = QCoreApplication::applicationDirPath() + "/assets/icons/wurm_explorer.svg";
+    }
+    if (!QFile::exists(iconPath)) {
+        iconPath = treasure::core::resolveResourcePath("resources/wurmexplorer.svg");
+    }
+    setWindowIcon(QIcon(iconPath));
     statusBar()->showMessage("Ready");
 }

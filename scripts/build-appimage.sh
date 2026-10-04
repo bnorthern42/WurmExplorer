@@ -32,10 +32,12 @@ if [ -d "$ROOT_DIR/svrMaps" ]; then
 fi
 
 # Copy desktop file and icon
-cp "$ROOT_DIR/resources/wurmexplorer.desktop" "$APPDIR/wurmexplorer.desktop"
-cp "$ROOT_DIR/resources/wurmexplorer.desktop" "$APPDIR/usr/share/applications/wurmexplorer.desktop"
-cp "$ROOT_DIR/resources/wurmexplorer.svg" "$APPDIR/wurmexplorer.svg"
-cp "$ROOT_DIR/resources/wurmexplorer.svg" "$APPDIR/usr/share/icons/hicolor/scalable/apps/wurmexplorer.svg"
+cp "$ROOT_DIR/wurmexplorer.desktop" "$APPDIR/wurmexplorer.desktop"
+cp "$ROOT_DIR/wurmexplorer.desktop" "$APPDIR/usr/share/applications/wurmexplorer.desktop"
+cp "$ROOT_DIR/assets/icons/wurm_explorer.svg" "$APPDIR/wurm_explorer.svg"
+cp "$ROOT_DIR/assets/icons/wurm_explorer.svg" "$APPDIR/wurmexplorer.svg"
+cp "$ROOT_DIR/assets/icons/wurm_explorer.svg" "$APPDIR/usr/share/icons/hicolor/scalable/apps/wurm_explorer.svg"
+cp "$ROOT_DIR/assets/icons/wurm_explorer.svg" "$APPDIR/usr/share/icons/hicolor/scalable/apps/wurmexplorer.svg"
 
 # AppRun entry script
 cat <<'EOF' > "$APPDIR/AppRun"

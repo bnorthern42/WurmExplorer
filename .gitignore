@@ -57,6 +57,7 @@ Xanadu-classic-20250226.png
 Xanadu-terrain-20250226.png
 assets/*
 !assets/docs/
+!assets/icons/
 .idea/
 svrMaps/
 svrmaps/

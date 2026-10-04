@@ -213,3 +213,16 @@ test_tools = executable('test_tools',
 )
 test('tools', test_tools, suite: 'tools', workdir: meson.project_source_root())
 
+# Install desktop and icon integration
+install_data('assets/icons/wurm_explorer.svg',
+  install_dir: get_option('datadir') / 'icons/hicolor/scalable/apps',
+  rename: 'wurm_explorer.svg'
+)
+install_data('assets/icons/wurm_explorer.svg',
+  install_dir: get_option('datadir') / 'icons/hicolor/scalable/apps',
+  rename: 'wurmexplorer.svg'
+)
+install_data('wurmexplorer.desktop',
+  install_dir: get_option('datadir') / 'applications'
+)
+

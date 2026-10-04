@@ -81,10 +81,17 @@ if [ -d "configs" ]; then
     cp -n configs/*.json "$INSTALL_PREFIX/configs/" 2>/dev/null || true
 fi
 
+# Copy assets
+if [ -d "assets" ]; then
+    mkdir -p "$INSTALL_PREFIX/assets/icons"
+    cp -r "assets/icons/"* "$INSTALL_PREFIX/assets/icons/" 2>/dev/null || true
+fi
+
 # 4. Install Icons to hicolor theme
 echo "[4/5] Installing application icons..."
 mkdir -p "$ICON_DIR/scalable/apps"
-cp "resources/wurmexplorer.svg" "$ICON_DIR/scalable/apps/wurmexplorer.svg"
+cp "assets/icons/wurm_explorer.svg" "$ICON_DIR/scalable/apps/wurm_explorer.svg"
+cp "assets/icons/wurm_explorer.svg" "$ICON_DIR/scalable/apps/wurmexplorer.svg"
 
 # Render standard raster sizes if rsvg-convert or magick is available
 ICON_SIZES=(16 24 32 48 64 128 256 512)
@@ -92,10 +99,13 @@ for size in "${ICON_SIZES[@]}"; do
     TARGET_DIR="$ICON_DIR/${size}x${size}/apps"
     mkdir -p "$TARGET_DIR"
     if command -v rsvg-convert >/dev/null 2>&1; then
-        rsvg-convert -w "$size" -h "$size" "resources/wurmexplorer.svg" -o "$TARGET_DIR/wurmexplorer.png" 2>/dev/null || true
+        rsvg-convert -w "$size" -h "$size" "assets/icons/wurm_explorer.svg" -o "$TARGET_DIR/wurm_explorer.png" 2>/dev/null || true
+        rsvg-convert -w "$size" -h "$size" "assets/icons/wurm_explorer.svg" -o "$TARGET_DIR/wurmexplorer.png" 2>/dev/null || true
     elif command -v magick >/dev/null 2>&1; then
-        magick -background none -resize "${size}x${size}" "resources/wurmexplorer.svg" "$TARGET_DIR/wurmexplorer.png" 2>/dev/null || true
+        magick -background none -resize "${size}x${size}" "assets/icons/wurm_explorer.svg" "$TARGET_DIR/wurm_explorer.png" 2>/dev/null || true
+        magick -background none -resize "${size}x${size}" "assets/icons/wurm_explorer.svg" "$TARGET_DIR/wurmexplorer.png" 2>/dev/null || true
     elif [ -f "resources/icon.png" ] && [ "$size" -eq 256 ]; then
+        cp "resources/icon.png" "$TARGET_DIR/wurm_explorer.png"
         cp "resources/icon.png" "$TARGET_DIR/wurmexplorer.png"
     fi
 done
@@ -115,7 +125,7 @@ GenericName=Wurm Online Companion & Map
 Comment=Map, navigation, breeding, and skill tracking companion for Wurm Online
 Exec=$INSTALL_PREFIX/wurm_explorer %F
 Path=$INSTALL_PREFIX
-Icon=wurmexplorer
+Icon=wurm_explorer
 Terminal=false
 Categories=Utility;Game;
 Keywords=wurm;wurm online;map;companion;breeding;skills;cartography;explorer;
