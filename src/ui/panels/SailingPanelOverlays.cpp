@@ -111,8 +111,25 @@ void SailingPanel::buildOverlays() {
         QColor color = currentResult->mode == "regular" ? QColor(0, 255, 255) : QColor(255, 210, 76);
         
         OverlayLine line;
-        line.points.push_back(srcPx);
-        line.points.push_back(dstPx);
+        if (currentResult->path.size() > 2) {
+            line.points.push_back(srcPx);
+            for (size_t i = 1; i + 1 < currentResult->path.size(); ++i) {
+                const auto& midName = currentResult->path[i];
+                if (layoutModel.servers.find(midName) != layoutModel.servers.end()) {
+                    const auto& midSrv = layoutModel.servers.at(midName);
+                    float midGx = midSrv.x0 + midSrv.size_tiles * 0.5f;
+                    float midGy = midSrv.y0 + midSrv.size_tiles * 0.5f;
+                    auto midPx = treasure::models::SailingLogic::globalToImagePx(midGx, midGy, *renderState);
+                    line.points.push_back(midPx);
+                    cachedOverlays.points.push_back(OverlayPoint{midPx.first, midPx.second, color});
+                    cachedOverlays.texts.push_back(OverlayText{midPx.first, midPx.second, QString("Via %1").arg(QString::fromStdString(midName)), color});
+                }
+            }
+            line.points.push_back(dstPx);
+        } else {
+            line.points.push_back(srcPx);
+            line.points.push_back(dstPx);
+        }
         line.color = color;
         line.width = 4;
         line.dashPattern = {6.0, 4.0};
@@ -224,7 +241,16 @@ void SailingPanel::recomputeCrossing() {
     
     if (currentResult) {
         pickLabel->setText(QString("Departure: %1 on %2 edge").arg(QString::fromStdString(currentResult->source_server), QString::fromStdString(currentResult->source_edge)));
-        arrivalLabel->setText(QString("Arrival: %1 on %2 edge").arg(QString::fromStdString(currentResult->dest_server), QString::fromStdString(currentResult->dest_edge)));
+        if (!currentResult->path.empty() && currentResult->path.size() > 1) {
+            QString routeStr;
+            for (size_t i = 0; i < currentResult->path.size(); ++i) {
+                if (i > 0) routeStr += " -> ";
+                routeStr += QString::fromStdString(currentResult->path[i]);
+            }
+            arrivalLabel->setText(QString("Arrival: %1 (Route: %2)").arg(QString::fromStdString(currentResult->dest_server), routeStr));
+        } else {
+            arrivalLabel->setText(QString("Arrival: %1 on %2 edge").arg(QString::fromStdString(currentResult->dest_server), QString::fromStdString(currentResult->dest_edge)));
+        }
     } else {
         pickLabel->setText("Departure: (Invalid route)");
         arrivalLabel->setText("Arrival: (none)");

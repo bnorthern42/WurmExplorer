@@ -9,6 +9,36 @@
 namespace treasure {
 namespace models {
 
+enum class Direction {
+    North,
+    East,
+    South,
+    West
+};
+
+Direction oppositeDirection(Direction dir);
+std::string directionToString(Direction dir);
+std::optional<Direction> stringToDirection(const std::string& str);
+
+struct ClusterEdge {
+    std::string toServer;
+    Direction direction;
+};
+
+class ClusterGraph {
+public:
+    ClusterGraph() = default;
+
+    void addEdge(const std::string& from, const std::string& to, Direction dir);
+    const std::vector<ClusterEdge>& getNeighbors(const std::string& server) const;
+    std::vector<std::string> findPath(const std::string& start, const std::string& goal) const;
+    bool hasServer(const std::string& server) const;
+    const std::map<std::string, std::vector<ClusterEdge>>& getAdjacencyList() const;
+
+private:
+    std::map<std::string, std::vector<ClusterEdge>> adj;
+};
+
 struct ClusterServer {
     std::string name;
     int size_tiles;
@@ -24,6 +54,7 @@ struct ClusterLayout {
     std::map<std::string, ClusterServer> servers;
     float width_tiles;
     float height_tiles;
+    ClusterGraph graph;
 };
 
 struct ClusterRenderState {
@@ -61,12 +92,17 @@ struct SailingResult {
     float source_global_tile_y;
     float dest_global_tile_x;
     float dest_global_tile_y;
+
+    std::vector<std::string> path;
 };
 
 class SailingLogic {
 public:
     static ClusterLayout buildLayout(const std::map<std::string, int>& serverSizes, const std::string& clusterName = "Southern");
     
+    static const ClusterGraph& getClusterGraph(const std::string& clusterName);
+    static std::vector<std::string> findRoute(const std::string& clusterName, const std::string& sourceServer, const std::string& destServer);
+
     static std::pair<float, float> globalToImagePx(float x, float y, const ClusterRenderState& render);
     static std::pair<float, float> imagePxToGlobal(float x, float y, const ClusterRenderState& render);
     

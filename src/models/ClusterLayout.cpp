@@ -2,6 +2,8 @@
 #include <cmath>
 #include <algorithm>
 #include <iostream>
+#include <queue>
+#include <set>
 #include <QPainter>
 #include <QPen>
 #include <QColor>
@@ -9,6 +11,143 @@
 
 namespace treasure {
 namespace models {
+
+Direction oppositeDirection(Direction dir) {
+    if (dir == Direction::North) return Direction::South;
+    if (dir == Direction::South) return Direction::North;
+    if (dir == Direction::East) return Direction::West;
+    return Direction::East;
+}
+
+std::string directionToString(Direction dir) {
+    if (dir == Direction::North) return "north";
+    if (dir == Direction::East) return "east";
+    if (dir == Direction::South) return "south";
+    return "west";
+}
+
+std::optional<Direction> stringToDirection(const std::string& str) {
+    if (str == "north") return Direction::North;
+    if (str == "east") return Direction::East;
+    if (str == "south") return Direction::South;
+    if (str == "west") return Direction::West;
+    return std::nullopt;
+}
+
+void ClusterGraph::addEdge(const std::string& from, const std::string& to, Direction dir) {
+    auto addUnique = [](std::vector<ClusterEdge>& edges, const std::string& target, Direction d) {
+        for (const auto& e : edges) { if (e.toServer == target && e.direction == d) return; }
+        edges.push_back(ClusterEdge{target, d});
+    };
+    addUnique(adj[from], to, dir);
+    addUnique(adj[to], from, oppositeDirection(dir));
+}
+
+const std::vector<ClusterEdge>& ClusterGraph::getNeighbors(const std::string& server) const {
+    static const std::vector<ClusterEdge> empty;
+    auto it = adj.find(server);
+    return (it != adj.end()) ? it->second : empty;
+}
+
+bool ClusterGraph::hasServer(const std::string& server) const {
+    return adj.find(server) != adj.end();
+}
+
+const std::map<std::string, std::vector<ClusterEdge>>& ClusterGraph::getAdjacencyList() const {
+    return adj;
+}
+
+std::vector<std::string> ClusterGraph::findPath(const std::string& start, const std::string& goal) const {
+    if (start.empty() || goal.empty()) return {};
+    if (adj.find(start) == adj.end() && start != goal) return {};
+    if (start == goal) return {start};
+
+    std::queue<std::string> q;
+    std::map<std::string, std::string> parent;
+    std::set<std::string> visited;
+
+    q.push(start);
+    visited.insert(start);
+
+    bool found = false;
+    while (!q.empty()) {
+        std::string current = q.front();
+        q.pop();
+
+        if (current == goal) {
+            found = true;
+            break;
+        }
+
+        auto it = adj.find(current);
+        if (it != adj.end()) {
+            for (const auto& edge : it->second) {
+                if (visited.find(edge.toServer) == visited.end()) {
+                    visited.insert(edge.toServer);
+                    parent[edge.toServer] = current;
+                    q.push(edge.toServer);
+                }
+            }
+        }
+    }
+
+    if (!found) return {};
+
+    std::vector<std::string> path;
+    for (std::string curr = goal; curr != start; curr = parent[curr]) {
+        path.push_back(curr);
+    }
+    path.push_back(start);
+    std::reverse(path.begin(), path.end());
+    return path;
+}
+
+static std::map<std::string, ClusterGraph> initClusterGraphs() {
+    std::map<std::string, ClusterGraph> clusterGraphs;
+
+    // Epic cluster routing: set Elevation as central node.
+    // Bidirectional connections: Elevation to Desertion (West), Serenity (East), and Affliction (South).
+    clusterGraphs["Epic"].addEdge("Elevation", "Desertion", Direction::West);
+    clusterGraphs["Epic"].addEdge("Elevation", "Serenity", Direction::East);
+    clusterGraphs["Epic"].addEdge("Elevation", "Affliction", Direction::South);
+
+    // Northern cluster routing: set Harmony as central node.
+    // Bidirectional connections: Harmony to Cadence (West), Defiance (East), and Melody (South).
+    clusterGraphs["Northern"].addEdge("Harmony", "Cadence", Direction::West);
+    clusterGraphs["Northern"].addEdge("Harmony", "Defiance", Direction::East);
+    clusterGraphs["Northern"].addEdge("Harmony", "Melody", Direction::South);
+
+    // Southern cluster routing: preserve existing connections
+    clusterGraphs["Southern"].addEdge("Independence", "Deliverance", Direction::South);
+    clusterGraphs["Southern"].addEdge("Deliverance", "Exodus", Direction::South);
+    clusterGraphs["Southern"].addEdge("Exodus", "Celebration", Direction::South);
+    clusterGraphs["Southern"].addEdge("Independence", "Xanadu", Direction::East);
+    clusterGraphs["Southern"].addEdge("Deliverance", "Xanadu", Direction::East);
+    clusterGraphs["Southern"].addEdge("Exodus", "Xanadu", Direction::East);
+    clusterGraphs["Southern"].addEdge("Celebration", "Xanadu", Direction::East);
+    clusterGraphs["Southern"].addEdge("Xanadu", "Pristine", Direction::East);
+    clusterGraphs["Southern"].addEdge("Xanadu", "Release", Direction::East);
+    clusterGraphs["Southern"].addEdge("Chaos", "Independence", Direction::East);
+
+    return clusterGraphs;
+}
+
+static const std::map<std::string, ClusterGraph>& getClusterGraphs() {
+    static const std::map<std::string, ClusterGraph> s_graphs = initClusterGraphs();
+    return s_graphs;
+}
+
+const ClusterGraph& SailingLogic::getClusterGraph(const std::string& clusterName) {
+    const auto& graphs = getClusterGraphs();
+    auto it = graphs.find(clusterName);
+    if (it != graphs.end()) return it->second;
+    static const ClusterGraph emptyGraph;
+    return emptyGraph;
+}
+
+std::vector<std::string> SailingLogic::findRoute(const std::string& clusterName, const std::string& sourceServer, const std::string& destServer) {
+    return getClusterGraph(clusterName).findPath(sourceServer, destServer);
+}
 
 const std::map<std::string, std::string> OPPOSITE_EDGE = {
     {"north", "south"},
@@ -30,10 +169,10 @@ const std::map<std::string, std::pair<float, float>> SOUTHERN_CLUSTER_LAYOUT = {
 };
 
 const std::map<std::string, std::pair<float, float>> NORTHERN_CLUSTER_LAYOUT = {
-    {"Harmony", {0.0f, 0.0f}},
-    {"Cadence", {4096.0f, 0.0f}},
-    {"Melody", {0.0f, 4096.0f}},
-    {"Defiance", {4096.0f, 4096.0f}}
+    {"Cadence", {0.0f, 0.0f}},
+    {"Harmony", {4096.0f, 0.0f}},
+    {"Defiance", {8192.0f, 0.0f}},
+    {"Melody", {4096.0f, 4096.0f}}
 };
 
 const std::map<std::string, std::pair<float, float>> EPIC_CLUSTER_LAYOUT = {
@@ -92,6 +231,7 @@ ClusterLayout SailingLogic::buildLayout(const std::map<std::string, int>& server
     
     layout.width_tiles = maxX;
     layout.height_tiles = maxY;
+    layout.graph = getClusterGraph(layout.name);
     return layout;
 }
 
@@ -200,13 +340,16 @@ std::optional<SailingResult> SailingLogic::resolvePlotCourse(const ClusterLayout
     auto src_global = serverTileToGlobal(src, src_tile.first, src_tile.second);
     auto dst_global = serverTileToGlobal(dst, dst_tile.first, dst_tile.second);
     
+    auto path = layout.graph.findPath(source_server, dest_server);
+    
     return SailingResult{
         "plot_course",
         src.name, source_edge, std::max(0.0f, std::min(1.0f, source_norm)),
         src_tile.first, src_tile.second,
         dst.name, dest_edge, dst_tile.first, dst_tile.second,
         src_global.first, src_global.second,
-        dst_global.first, dst_global.second
+        dst_global.first, dst_global.second,
+        path
     };
 }
 
@@ -219,49 +362,16 @@ std::optional<SailingResult> SailingLogic::resolveRegularCrossing(const ClusterL
     const ClusterServer* chosen = nullptr;
     std::string dest_edge;
     
-    if (source_edge == "east") {
-        float y = src_global.second;
-        float x = src.x1();
-        for (const auto& pair : layout.servers) {
-            if (pair.second.name == src.name) continue;
-            if (std::abs(pair.second.x0 - x) <= eps && pair.second.y0 - eps <= y && y <= pair.second.y1() + eps) {
-                chosen = &pair.second;
-                dest_edge = "west";
-                break;
-            }
-        }
-    } else if (source_edge == "west") {
-        float y = src_global.second;
-        float x = src.x0;
-        for (const auto& pair : layout.servers) {
-            if (pair.second.name == src.name) continue;
-            if (std::abs(pair.second.x1() - x) <= eps && pair.second.y0 - eps <= y && y <= pair.second.y1() + eps) {
-                chosen = &pair.second;
-                dest_edge = "east";
-                break;
-            }
-        }
-    } else if (source_edge == "north") {
-        float x = src_global.first;
-        float y = src.y0;
-        for (const auto& pair : layout.servers) {
-            if (pair.second.name == src.name) continue;
-            if (std::abs(pair.second.y1() - y) <= eps && pair.second.x0 - eps <= x && x <= pair.second.x1() + eps) {
-                chosen = &pair.second;
-                dest_edge = "south";
-                break;
-            }
-        }
-    } else if (source_edge == "south") {
-        float x = src_global.first;
-        float y = src.y1();
-        for (const auto& pair : layout.servers) {
-            if (pair.second.name == src.name) continue;
-            if (std::abs(pair.second.y0 - y) <= eps && pair.second.x0 - eps <= x && x <= pair.second.x1() + eps) {
-                chosen = &pair.second;
-                dest_edge = "north";
-                break;
-            }
+    for (const auto& [_, srv] : layout.servers) {
+        if (srv.name == src.name) continue;
+        if (source_edge == "east" && std::abs(srv.x0 - src.x1()) <= eps && srv.y0 - eps <= src_global.second && src_global.second <= srv.y1() + eps) {
+            chosen = &srv; dest_edge = "west"; break;
+        } else if (source_edge == "west" && std::abs(srv.x1() - src.x0) <= eps && srv.y0 - eps <= src_global.second && src_global.second <= srv.y1() + eps) {
+            chosen = &srv; dest_edge = "east"; break;
+        } else if (source_edge == "north" && std::abs(srv.y1() - src.y0) <= eps && srv.x0 - eps <= src_global.first && src_global.first <= srv.x1() + eps) {
+            chosen = &srv; dest_edge = "south"; break;
+        } else if (source_edge == "south" && std::abs(srv.y0 - src.y1()) <= eps && srv.x0 - eps <= src_global.first && src_global.first <= srv.x1() + eps) {
+            chosen = &srv; dest_edge = "north"; break;
         }
     }
     
@@ -279,13 +389,17 @@ std::optional<SailingResult> SailingLogic::resolveRegularCrossing(const ClusterL
     auto dst_global = serverTileToGlobal(*chosen, dst_tile.first, dst_tile.second);
     auto src_tile = _normToTile(src, source_edge, std::max(0.0f, std::min(1.0f, source_norm)));
     
+    auto path = layout.graph.findPath(src.name, chosen->name);
+    if (path.empty()) path = {src.name, chosen->name};
+    
     return SailingResult{
         "regular",
         src.name, source_edge, std::max(0.0f, std::min(1.0f, source_norm)),
         src_tile.first, src_tile.second,
         chosen->name, dest_edge, dst_tile.first, dst_tile.second,
         src_global.first, src_global.second,
-        dst_global.first, dst_global.second
+        dst_global.first, dst_global.second,
+        path
     };
 }
 
@@ -310,8 +424,15 @@ ClusterRenderState SailingLogic::renderClusterMap(const ClusterLayout& layout, c
     
     std::vector<std::string> serverOrder = {
         "Independence", "Deliverance", "Exodus", "Celebration", 
-        "Pristine", "Release", "Xanadu", "Chaos"
+        "Pristine", "Release", "Xanadu", "Chaos",
+        "Harmony", "Melody", "Cadence", "Defiance",
+        "Elevation", "Desertion", "Serenity", "Affliction"
     };
+    for (const auto& [name, _] : layout.servers) {
+        if (std::find(serverOrder.begin(), serverOrder.end(), name) == serverOrder.end()) {
+            serverOrder.push_back(name);
+        }
+    }
     
     for (const auto& name : serverOrder) {
         if (layout.servers.find(name) == layout.servers.end()) continue;
@@ -328,7 +449,6 @@ ClusterRenderState SailingLogic::renderClusterMap(const ClusterLayout& layout, c
             if (reader.canRead()) {
                 QImage mapImg = reader.read();
                 if (!mapImg.isNull()) {
-                    // scale
                     QImage scaled = mapImg.scaled(std::max(1, x1 - x0), std::max(1, y1 - y0), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
                     p.drawImage(x0, y0, scaled);
                     imageDrawn = true;

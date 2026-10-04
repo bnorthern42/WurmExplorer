@@ -111,6 +111,42 @@ private slots:
         }
     }
 
+    void testNorthernClusterRouting() {
+        auto route = treasure::models::SailingLogic::findRoute("Northern", "Cadence", "Defiance");
+        std::vector<std::string> expected = {"Cadence", "Harmony", "Defiance"};
+        QCOMPARE(route, expected);
+
+        auto reverseRoute = treasure::models::SailingLogic::findRoute("Northern", "Defiance", "Cadence");
+        std::vector<std::string> expectedReverse = {"Defiance", "Harmony", "Cadence"};
+        QCOMPARE(reverseRoute, expectedReverse);
+
+        auto southRoute = treasure::models::SailingLogic::findRoute("Northern", "Cadence", "Melody");
+        std::vector<std::string> expectedSouth = {"Cadence", "Harmony", "Melody"};
+        QCOMPARE(southRoute, expectedSouth);
+    }
+
+    void testEpicClusterRouting() {
+        auto route = treasure::models::SailingLogic::findRoute("Epic", "Desertion", "Serenity");
+        std::vector<std::string> expected = {"Desertion", "Elevation", "Serenity"};
+        QCOMPARE(route, expected);
+
+        auto reverseRoute = treasure::models::SailingLogic::findRoute("Epic", "Serenity", "Desertion");
+        std::vector<std::string> expectedReverse = {"Serenity", "Elevation", "Desertion"};
+        QCOMPARE(reverseRoute, expectedReverse);
+
+        auto southRoute = treasure::models::SailingLogic::findRoute("Epic", "Desertion", "Affliction");
+        std::vector<std::string> expectedSouth = {"Desertion", "Elevation", "Affliction"};
+        QCOMPARE(southRoute, expectedSouth);
+    }
+
+    void testDisconnectedClusterRouting() {
+        auto route = treasure::models::SailingLogic::findRoute("Northern", "Cadence", "Chaos");
+        QVERIFY(route.empty());
+
+        auto routeUnknown = treasure::models::SailingLogic::findRoute("Epic", "Elevation", "NonExistentServer");
+        QVERIFY(routeUnknown.empty());
+    }
+
     void cleanupTestCase() {}
 };
 
