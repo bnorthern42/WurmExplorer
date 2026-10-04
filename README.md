@@ -1,5 +1,10 @@
 # WurmExplorer
 
+![C++23](https://img.shields.io/badge/C%2B%2B-23-blue.svg)
+![Qt6](https://img.shields.io/badge/Qt-6.6%2B-41CD52.svg)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Build](https://img.shields.io/badge/build-passing-brightgreen.svg)
+
 A high-performance desktop map and companion tool for Wurm Online written in modern C++ with Qt6.
 
 Features include:
@@ -350,4 +355,15 @@ cp configs/servers.example.yaml configs/servers.yaml
 ```
 
 Local saved data such as drawings, annotations, artifacts, styles, and kingdoms is stored in configs/*.json and is ignored by Git.
+
+## Acknowledgments & Data Sourcing
+
+All game data, skill rates, item difficulties, and mechanics formulas are derived strictly from public, crowdsourced community resources, specifically crediting [Wurmpedia](https://www.wurmpedia.com/).
+
+* The **Mechanics Grinder Simulator** is heavily inspired by the original web-based [Dreamsleeve Grinder](https://www.dreamsleeve.org/wurm/grinder/).
+* Sincere appreciation to the generations of Wurm Online players and cartographers whose public research, tool development, and community documentation paved the way for this project.
+
+## Disclaimer
+
+WurmExplorer is a community-driven, third-party tool. It is strictly unofficial and is **not associated with, endorsed by, or affiliated with GameThrill AB, Code Club AB**, or any of their partners or subsidiaries. All game titles, registered trademarks, logos, and game assets are the property of their respective owners.
 
