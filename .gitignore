@@ -19,6 +19,7 @@ python/
 .idea/
 build/
 builddir/
+compile_commands.json
 out_debug/
 out_debug_locate/
 examples/Xanadu-topo-20250226.png

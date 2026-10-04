@@ -18,7 +18,7 @@ const std::map<std::string, std::string> OPPOSITE_EDGE = {
 };
 
 // Global cluster tile coordinates. Sized so contiguous edges line up by global position.
-const std::map<std::string, std::pair<float, float>> DEFAULT_CLUSTER_LAYOUT = {
+const std::map<std::string, std::pair<float, float>> SOUTHERN_CLUSTER_LAYOUT = {
     {"Chaos", {0.0f, 3072.0f}},
     {"Independence", {4096.0f, 0.0f}},
     {"Deliverance", {6144.0f, 4096.0f}},
@@ -29,25 +29,63 @@ const std::map<std::string, std::pair<float, float>> DEFAULT_CLUSTER_LAYOUT = {
     {"Release", {16384.0f, 7168.0f}}
 };
 
-ClusterLayout SailingLogic::buildLayout(const std::map<std::string, int>& serverSizes) {
+const std::map<std::string, std::pair<float, float>> NORTHERN_CLUSTER_LAYOUT = {
+    {"Harmony", {0.0f, 0.0f}},
+    {"Cadence", {4096.0f, 0.0f}},
+    {"Melody", {0.0f, 4096.0f}},
+    {"Defiance", {4096.0f, 4096.0f}}
+};
+
+const std::map<std::string, std::pair<float, float>> EPIC_CLUSTER_LAYOUT = {
+    {"Desertion", {0.0f, 0.0f}},
+    {"Elevation", {2048.0f, 0.0f}},
+    {"Serenity", {4096.0f, 0.0f}},
+    {"Affliction", {2048.0f, 2048.0f}}
+};
+
+ClusterLayout SailingLogic::buildLayout(const std::map<std::string, int>& serverSizes, const std::string& clusterName) {
     ClusterLayout layout;
-    layout.name = "Southern Freedom Isles";
+    layout.name = clusterName.empty() ? "Southern" : clusterName;
+    
+    const std::map<std::string, std::pair<float, float>>* baseLayout = &SOUTHERN_CLUSTER_LAYOUT;
+    if (layout.name.find("Northern") != std::string::npos || 
+        serverSizes.find("Cadence") != serverSizes.end() ||
+        serverSizes.find("Harmony") != serverSizes.end()) {
+        baseLayout = &NORTHERN_CLUSTER_LAYOUT;
+    } else if (layout.name.find("Epic") != std::string::npos ||
+               serverSizes.find("Elevation") != serverSizes.end() ||
+               serverSizes.find("Affliction") != serverSizes.end()) {
+        baseLayout = &EPIC_CLUSTER_LAYOUT;
+    }
     
     float maxX = 1.0f;
     float maxY = 1.0f;
     
-    for (const auto& pair : DEFAULT_CLUSTER_LAYOUT) {
+    for (const auto& pair : *baseLayout) {
         if (serverSizes.find(pair.first) == serverSizes.end()) continue;
         
         ClusterServer server;
         server.name = pair.first;
         server.size_tiles = serverSizes.at(pair.first);
         server.x0 = pair.second.first;
-        server.y0 = pair.second.first; // BUG IN ORIGINAL PYTHON: Wait, pair.second.second is y! Let me fix this.
         server.y0 = pair.second.second;
         
         layout.servers[server.name] = server;
-        
+        if (server.x1() > maxX) maxX = server.x1();
+        if (server.y1() > maxY) maxY = server.y1();
+    }
+    
+    // Add any remaining servers not in the pre-defined layout
+    float fallbackX = maxX;
+    for (const auto& [name, size] : serverSizes) {
+        if (layout.servers.find(name) != layout.servers.end()) continue;
+        ClusterServer server;
+        server.name = name;
+        server.size_tiles = size;
+        server.x0 = fallbackX;
+        server.y0 = 0.0f;
+        layout.servers[server.name] = server;
+        fallbackX += size;
         if (server.x1() > maxX) maxX = server.x1();
         if (server.y1() > maxY) maxY = server.y1();
     }

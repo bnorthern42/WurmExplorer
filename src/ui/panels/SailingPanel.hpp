@@ -30,7 +30,7 @@ public:
     explicit SailingPanel(std::shared_ptr<treasure::models::ClusterDrawingStore> drawingStore, QWidget* parent = nullptr);
     ~SailingPanel() override = default;
 
-    void setContext(const std::map<std::string, std::shared_ptr<treasure::core::ServerConfig>>& allConfigs, const std::string& currentMapType, const std::map<std::string, std::string>& mapImages);
+    void setContext(const std::map<std::string, std::shared_ptr<treasure::core::ServerConfig>>& allConfigs, const std::string& currentMapType, const std::map<std::string, std::string>& mapImages, const std::string& clusterName = "Southern");
     
     // Will return the stitched cluster map QImage
     QImage getDisplayImage() const;

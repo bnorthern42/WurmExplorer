@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=WurmExplorer
+GenericName=Wurm Online Companion & Map
+Comment=Map, navigation, breeding, and skill tracking companion for Wurm Online
+Exec=wurm_explorer %F
+Icon=wurmexplorer
+Terminal=false
+Categories=Utility;Game;
+Keywords=wurm;wurm online;map;companion;breeding;skills;cartography;explorer;
+StartupWMClass=WurmExplorer

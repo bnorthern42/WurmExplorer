@@ -1,4 +1,5 @@
 #include "TopControlBar.hpp"
+#include "../ThemeTokens.hpp"
 
 #include <QHBoxLayout>
 #include <QLabel>
@@ -10,8 +11,10 @@ TopControlBar::TopControlBar(QWidget *parent) : QWidget(parent) {
     connect(clusterCombo, &QComboBox::currentTextChanged, this, &TopControlBar::clusterChanged);
     connect(serverCombo, &QComboBox::currentTextChanged, this, &TopControlBar::serverChanged);
     connect(mapTypeCombo, &QComboBox::currentTextChanged, this, &TopControlBar::mapTypeChanged);
+    connect(settingsButton, &QPushButton::clicked, this, &TopControlBar::settingsRequested);
     connect(exitButton, &QPushButton::clicked, this, &TopControlBar::quitRequested);
 }
+
 
 void TopControlBar::setClusters(const std::vector<std::string>& clusters) {
     QString current = clusterCombo->currentText();
@@ -63,41 +66,99 @@ void TopControlBar::setMapTypeEnabled(bool enabled) {
     mapTypeCombo->setEnabled(enabled);
 }
 
+void TopControlBar::setMapControlsVisible(bool visible) {
+    if (mapTypeLabel) mapTypeLabel->setVisible(visible);
+    if (mapTypeCombo) mapTypeCombo->setVisible(visible);
+}
+
 void TopControlBar::blockAllSignals(bool block) {
     clusterCombo->blockSignals(block);
     serverCombo->blockSignals(block);
     mapTypeCombo->blockSignals(block);
 }
 
+void TopControlBar::setContextBreadcrumb(const QString& domain, const QString& title) {
+    if (breadcrumbDomainLabel) breadcrumbDomainLabel->setText(domain.toUpper());
+    if (breadcrumbTitleLabel) breadcrumbTitleLabel->setText(title);
+}
+
 void TopControlBar::setupUi() {
+    using namespace treasure::ui::theme;
     auto* layout = new QHBoxLayout(this);
-    layout->setContentsMargins(16, 12, 16, 12);
-    layout->setSpacing(16);
+    layout->setContentsMargins(16, 8, 16, 8);
+    layout->setSpacing(12);
 
-    // Styling to make it look like a distinct top bar
     setObjectName("TopControlBar");
-    setStyleSheet("#TopControlBar { background-color: #1e1e2e; border-bottom: 1px solid #313244; }");
+    setStyleSheet(QString("#TopControlBar { background-color: %1; border-bottom: 1px solid %2; min-height: 44px; }").arg(SURFACE_DARK, BORDER_MUTED));
 
-    auto* titleLabel = new QLabel("WurmExplorer", this);
-    titleLabel->setStyleSheet("font-weight: bold; font-size: 16px; color: #8aadf4;");
-    layout->addWidget(titleLabel);
+    // Dynamic Breadcrumb Widget
+    auto* breadcrumbContainer = new QWidget(this);
+    auto* bLayout = new QHBoxLayout(breadcrumbContainer);
+    bLayout->setContentsMargins(0, 0, 0, 0);
+    bLayout->setSpacing(6);
 
-    layout->addSpacerItem(new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum));
+    breadcrumbDomainLabel = new QLabel("CARTOGRAPHY", breadcrumbContainer);
+    breadcrumbDomainLabel->setStyleSheet(QString("color: %1; font-weight: 700; font-size: 11px; letter-spacing: 0.5px;").arg(TEXT_SECONDARY));
 
-    auto* clusterLabel = new QLabel("Cluster:", this);
-    clusterLabel->setStyleSheet("color: #a6adc8;");
+    auto* sepLabel = new QLabel("/", breadcrumbContainer);
+    sepLabel->setStyleSheet(QString("color: %1; font-weight: 400; font-size: 12px;").arg(BORDER_MUTED));
+
+    breadcrumbTitleLabel = new QLabel("Treasure Locator", breadcrumbContainer);
+    breadcrumbTitleLabel->setStyleSheet(QString("color: %1; font-weight: 600; font-size: 13px;").arg(TEXT_PRIMARY));
+
+    bLayout->addWidget(breadcrumbDomainLabel);
+    bLayout->addWidget(sepLabel);
+    bLayout->addWidget(breadcrumbTitleLabel);
+    layout->addWidget(breadcrumbContainer);
+
+    layout->addSpacerItem(new QSpacerItem(20, 20, QSizePolicy::Expanding, QSizePolicy::Minimum));
+
+    // Dropdown Pill Styling
+    QString comboStyle = QString(R"(
+        QComboBox {
+            background-color: %1;
+            border: 1px solid %2;
+            border-radius: 6px;
+            color: %3;
+            padding: 3px 8px;
+            font-size: 12px;
+            font-weight: 500;
+            min-height: 24px;
+        }
+        QComboBox:hover {
+            border-color: %4;
+            background-color: %5;
+        }
+        QComboBox::drop-down {
+            border: none;
+            width: 14px;
+        }
+        QComboBox QAbstractItemView {
+            background-color: %1;
+            color: %3;
+            selection-background-color: %6;
+            selection-color: #ffffff;
+            border: 1px solid %2;
+        }
+    )").arg(SURFACE_CARD, BORDER_MUTED, TEXT_PRIMARY, ACCENT_EMERALD, SURFACE_HOVER, ACCENT_TINT);
+
+    clusterLabel = new QLabel("Cluster:", this);
+    clusterLabel->setStyleSheet(QString("color: %1; font-weight: 500; font-size: 12px;").arg(TEXT_SECONDARY));
     clusterCombo = new QComboBox(this);
     clusterCombo->setObjectName("clusterCombo");
+    clusterCombo->setStyleSheet(comboStyle);
 
-    auto* serverLabel = new QLabel("Server:", this);
-    serverLabel->setStyleSheet("color: #a6adc8;");
+    serverLabel = new QLabel("Server:", this);
+    serverLabel->setStyleSheet(QString("color: %1; font-weight: 500; font-size: 12px;").arg(TEXT_SECONDARY));
     serverCombo = new QComboBox(this);
     serverCombo->setObjectName("serverCombo");
+    serverCombo->setStyleSheet(comboStyle);
 
-    auto* mapTypeLabel = new QLabel("Map Type:", this);
-    mapTypeLabel->setStyleSheet("color: #a6adc8;");
+    mapTypeLabel = new QLabel("Layer:", this);
+    mapTypeLabel->setStyleSheet(QString("color: %1; font-weight: 500; font-size: 12px;").arg(TEXT_SECONDARY));
     mapTypeCombo = new QComboBox(this);
     mapTypeCombo->setObjectName("mapTypeCombo");
+    mapTypeCombo->setStyleSheet(comboStyle);
 
     layout->addWidget(clusterLabel);
     layout->addWidget(clusterCombo);
@@ -106,7 +167,46 @@ void TopControlBar::setupUi() {
     layout->addWidget(mapTypeLabel);
     layout->addWidget(mapTypeCombo);
 
-    exitButton = new QPushButton("Exit", this);
-    exitButton->setStyleSheet("color: #ed8796; font-weight: bold; border: none;");
+    settingsButton = new QPushButton("⚙ Settings", this);
+    settingsButton->setCursor(Qt::PointingHandCursor);
+    settingsButton->setStyleSheet(QString(R"(
+        QPushButton {
+            color: %1;
+            font-weight: 600;
+            font-size: 12px;
+            border: 1px solid %2;
+            background-color: %3;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+        QPushButton:hover {
+            background-color: %4;
+            color: #ffffff;
+            border-color: %5;
+        }
+    )").arg(TEXT_SECONDARY, BORDER_MUTED, SURFACE_CARD, SURFACE_HOVER, ACCENT_EMERALD));
+    layout->addWidget(settingsButton);
+
+    exitButton = new QPushButton("✕", this);
+    exitButton->setToolTip("Exit Application");
+    exitButton->setCursor(Qt::PointingHandCursor);
+    exitButton->setStyleSheet(QString(R"(
+        QPushButton {
+            color: %1;
+            font-weight: 700;
+            border: 1px solid %2;
+            background-color: %3;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 11px;
+        }
+        QPushButton:hover {
+            background-color: %1;
+            color: #ffffff;
+            border-color: %1;
+        }
+    )").arg(STATUS_DANGER, BORDER_MUTED, SURFACE_CARD));
     layout->addWidget(exitButton);
 }
+
+

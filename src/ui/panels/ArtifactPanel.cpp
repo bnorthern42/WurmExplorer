@@ -1,4 +1,5 @@
 #include "ArtifactPanel.hpp"
+#include "../ThemeTokens.hpp"
 #include <QVBoxLayout>
 #include <QHBoxLayout>
 #include <QGridLayout>
@@ -35,11 +36,11 @@ ArtifactPanel::ArtifactPanel(std::shared_ptr<models::ArtifactStore> store, QWidg
 
 void ArtifactPanel::setupUi() {
     casterLabel = new QLabel("Caster: (not set)");
-    casterLabel->setStyleSheet("font-weight: bold;");
+    casterLabel->setStyleSheet(QString("font-weight: bold; color: %1;").arg(theme::TEXT_PRIMARY));
     helperLabel = new QLabel("Place the caster, then add cast clues.");
     helperLabel->setWordWrap(true);
     selectionLabel = new QLabel("Selected artifact: none");
-    selectionLabel->setStyleSheet("font-weight: bold;");
+    selectionLabel->setStyleSheet(QString("font-weight: bold; color: %1;").arg(theme::ACCENT_MINT));
     
     toolGroup = new QButtonGroup(this);
     panBtn = new QRadioButton("Pan");
@@ -79,7 +80,7 @@ void ArtifactPanel::setupUi() {
     toolsLayout->addLayout(toolRow);
     toolsLayout->addWidget(casterLabel);
     QLabel* note = new QLabel("Assumes north or up by default. Use facing to model 'in front of you'.");
-    note->setStyleSheet("color: #a5adce;"); // muted text
+    note->setStyleSheet(QString("color: %1;").arg(theme::TEXT_SECONDARY)); // muted text
     note->setWordWrap(true);
     toolsLayout->addWidget(note);
     outer->addWidget(tools);
@@ -100,10 +101,12 @@ void ArtifactPanel::setupUi() {
     
     QGridLayout* btns = new QGridLayout();
     QPushButton* addCastBtn = new QPushButton("Add Cast");
+    addCastBtn->setStyleSheet(QString("background-color: %1; color: %2; font-weight: bold; border-radius: 4px; padding: 6px;").arg(theme::ACCENT_EMERALD, theme::TEXT_ON_ACCENT));
     connect(addCastBtn, &QPushButton::clicked, this, &ArtifactPanel::onAddCast);
     QPushButton* addLogBtn = new QPushButton("Add From Log");
     connect(addLogBtn, &QPushButton::clicked, this, &ArtifactPanel::onAddFromLog);
     QPushButton* delBtn = new QPushButton("Delete Clue");
+    delBtn->setStyleSheet(QString("background-color: %1; color: %2; font-weight: bold; border-radius: 4px; padding: 6px;").arg(theme::STATUS_DANGER, theme::TEXT_PRIMARY));
     connect(delBtn, &QPushButton::clicked, this, &ArtifactPanel::onDeleteClue);
     QPushButton* clearOneBtn = new QPushButton("Clear Artifact");
     connect(clearOneBtn, &QPushButton::clicked, this, &ArtifactPanel::onClearArtifact);
@@ -123,7 +126,7 @@ void ArtifactPanel::setupUi() {
     QVBoxLayout* notesLayout = new QVBoxLayout(notesGroup);
     notesLayout->addWidget(helperLabel);
     QLabel* footer = new QLabel("Selected artifact uses stippled fill. Others are outline only.");
-    footer->setStyleSheet("color: #a5adce;");
+    footer->setStyleSheet(QString("color: %1;").arg(theme::TEXT_SECONDARY));
     notesLayout->addWidget(footer);
     outer->addWidget(notesGroup);
 }

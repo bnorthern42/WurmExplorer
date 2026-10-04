@@ -1,4 +1,5 @@
 #include <QApplication>
+#include <QIcon>
 #include <vips/vips8>
 #include "ui/MainWindow.hpp"
 #include "ui/Theme.hpp"
@@ -14,6 +15,12 @@ int main(int argc, char *argv[]) {
     // Set up application metadata
     QApplication::setApplicationName("WurmExplorer");
     QApplication::setOrganizationName("WurmMods");
+    
+    QIcon appIcon("resources/wurmexplorer.svg");
+    if (appIcon.isNull()) {
+        appIcon = QIcon("resources/icon.png");
+    }
+    app.setWindowIcon(appIcon);
     
     QFontDatabase::addApplicationFont("resources/fonts/MaterialIcons-Regular.ttf");
     

@@ -1,4 +1,5 @@
 #include "AnnotationPanel.hpp"
+#include "../ThemeTokens.hpp"
 #include <QHBoxLayout>
 #include <algorithm>
 #include <QUuid>
@@ -78,7 +79,7 @@ void AnnotationPanel::createToolGroup() {
     
     QLabel* hint = new QLabel("Left click adds points. Right click exits draw mode. Ctrl snaps segments.");
     hint->setWordWrap(true);
-    hint->setStyleSheet("color: #a6adc8; font-size: 11px;"); // Muted hint
+    hint->setStyleSheet(QString("color: %1; font-size: 11px;").arg(theme::TEXT_SECONDARY)); // Muted hint
     layout->addWidget(hint);
 }
 
@@ -119,9 +120,9 @@ void AnnotationPanel::createEditorGroup() {
     QVBoxLayout* mainLayout = new QVBoxLayout(editor);
     
     selectionLabel = new QLabel("New annotation");
-    selectionLabel->setStyleSheet("font-weight: bold; color: #8aadf4; font-size: 14px;");
+    selectionLabel->setStyleSheet(QString("font-weight: bold; color: %1; font-size: 14px;").arg(theme::ACCENT_MINT));
     posLabel = new QLabel("Position: (Not selected)");
-    posLabel->setStyleSheet("color: #a6adc8; font-size: 12px;");
+    posLabel->setStyleSheet(QString("color: %1; font-size: 12px;").arg(theme::TEXT_SECONDARY));
     
     mainLayout->addWidget(selectionLabel);
     mainLayout->addWidget(posLabel);
@@ -173,11 +174,13 @@ void AnnotationPanel::createEditorGroup() {
     
     // Action Buttons
     saveBtn = new QPushButton("Save Annotation");
-    saveBtn->setStyleSheet("background-color: #a6da95; color: #11111b; font-weight: bold;"); // Green accent
+    saveBtn->setStyleSheet(QString("background-color: %1; color: %2; font-weight: bold; border-radius: 4px; padding: 6px;").arg(theme::ACCENT_EMERALD, theme::TEXT_ON_ACCENT));
     undoBtn = new QPushButton("Undo Point");
+    undoBtn->setStyleSheet(QString("background-color: %1; color: %2; border: 1px solid %3; border-radius: 4px; padding: 6px;").arg(theme::SURFACE_CARD, theme::TEXT_PRIMARY, theme::BORDER_MUTED));
     newBtn = new QPushButton("New / Clear");
+    newBtn->setStyleSheet(QString("background-color: %1; color: %2; border: 1px solid %3; border-radius: 4px; padding: 6px;").arg(theme::SURFACE_CARD, theme::TEXT_PRIMARY, theme::BORDER_MUTED));
     deleteBtn = new QPushButton("Delete");
-    deleteBtn->setStyleSheet("background-color: #ed8796; color: #11111b; font-weight: bold;"); // Red accent
+    deleteBtn->setStyleSheet(QString("background-color: %1; color: %2; font-weight: bold; border-radius: 4px; padding: 6px;").arg(theme::STATUS_DANGER, theme::TEXT_PRIMARY));
     
     QGridLayout* btnGrid = new QGridLayout();
     btnGrid->addWidget(saveBtn, 0, 0);
@@ -200,23 +203,26 @@ QPushButton* AnnotationPanel::createToolButton(const QString& text, const QStrin
     btn->setChecked(checked);
     
     // Segmented button styling
-    btn->setStyleSheet(R"(
+    btn->setStyleSheet(QString(R"(
         QPushButton {
-            background-color: #313244;
+            background-color: %1;
+            border: 1px solid %2;
             border-radius: 6px;
-            color: #cdd6f4;
+            color: %3;
             font-size: 12px;
             padding: 6px 4px;
         }
         QPushButton:hover {
-            background-color: #45475a;
+            background-color: %4;
+            border: 1px solid %5;
         }
         QPushButton:checked {
-            background-color: #8aadf4;
-            color: #11111b;
+            background-color: %6;
+            color: %7;
+            border: 1px solid %8;
             font-weight: bold;
         }
-    )");
+    )").arg(theme::SURFACE_CARD, theme::BORDER_MUTED, theme::TEXT_PRIMARY, theme::SURFACE_HOVER, theme::ACCENT_EMERALD, theme::ACCENT_TINT, theme::ACCENT_MINT, theme::ACCENT_EMERALD));
     
     toolGroup->addButton(btn);
     connect(btn, &QPushButton::toggled, this, [this](bool isChecked){

@@ -1,4 +1,5 @@
 #include "MapDataPanel.hpp"
+#include "../ThemeTokens.hpp"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -79,7 +80,7 @@ void MapDataPanel::setupUi() {
     footer->addWidget(countLabel);
 
     auto* note = new QLabel("Select to center on map.", this);
-    note->setStyleSheet("color: gray;");
+    note->setStyleSheet(QString("color: %1;").arg(theme::TEXT_SECONDARY));
     footer->addWidget(note, 1, Qt::AlignRight);
     
     browserLayout->addLayout(footer);

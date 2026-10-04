@@ -1,4 +1,4 @@
-project('wurm_locator', 'cpp',
+project('wurm_explorer', 'cpp',
   version : '0.1',
   default_options : ['warning_level=3', 'cpp_std=c++23'])
 
@@ -20,6 +20,7 @@ incdir = include_directories('src')
 sources = [
   'src/main.cpp',
   'src/engine/ZoomMapCanvas.cpp',
+  'src/engine/ZoomMapCanvasEvents.cpp',
   'src/ui/MainWindow.cpp',
   'src/ui/Theme.cpp',
   'src/ui/components/TopControlBar.cpp',
@@ -30,6 +31,7 @@ sources = [
   'src/ui/panels/ArtifactPanel.cpp',
   'src/ui/panels/MapDataPanel.cpp',
   'src/ui/panels/SailingPanel.cpp',
+  'src/ui/panels/SailingPanelOverlays.cpp',
   'src/models/ClusterDrawingStore.cpp',
   'src/models/ClusterLayout.cpp',
   'src/models/AnnotationStore.cpp',
@@ -41,6 +43,25 @@ sources = [
   'src/engine/cv/Ocr.cpp',
   'src/core/Config.cpp',
   'src/core/MapVariants.cpp',
+  'src/ui/MainWindowLocate.cpp',
+  'src/features/granger/GrangerTraits.cpp',
+  'src/features/granger/BreedingEvaluator.cpp',
+  'src/features/granger/GrangerStore.cpp',
+  'src/features/granger/GrangerPanel.cpp',
+  'src/features/granger/TraitSelectionDialog.cpp',
+  'src/features/skills/SkillLogParser.cpp',
+  'src/features/skills/SkillTracker.cpp',
+  'src/features/skills/SkillPathResolver.cpp',
+  'src/features/skills/SkillsPanel.cpp',
+  'src/ui/dialogs/SettingsDialog.cpp',
+  'src/features/tools/ImpCalculator.cpp',
+  'src/features/tools/BridgePillarCalculator.cpp',
+  'src/features/tools/GrinderEngine.cpp',
+  'src/features/tools/ImpCalculatorWidget.cpp',
+  'src/features/tools/BridgePillarWidget.cpp',
+  'src/features/tools/GrinderChartWidget.cpp',
+  'src/features/tools/GrinderWidget.cpp',
+  'src/features/tools/ToolsPanel.cpp',
 ]
 
 # Qt6 preprocessing (MOC)
@@ -54,15 +75,26 @@ moc_headers = [
   'src/features/drawing/DrawingPanel.hpp',
   'src/ui/panels/ArtifactPanel.hpp',
   'src/ui/panels/MapDataPanel.hpp',
-  'src/ui/panels/SailingPanel.hpp'
+  'src/ui/panels/SailingPanel.hpp',
+  'src/features/granger/GrangerPanel.hpp',
+  'src/features/granger/TraitSelectionDialog.hpp',
+  'src/features/skills/SkillsPanel.hpp',
+  'src/ui/dialogs/SettingsDialog.hpp',
+  'src/features/tools/ImpCalculatorWidget.hpp',
+  'src/features/tools/BridgePillarWidget.hpp',
+  'src/features/tools/GrinderChartWidget.hpp',
+  'src/features/tools/GrinderWidget.hpp',
+  'src/features/tools/ToolsPanel.hpp',
 ]
+
+
 
 processed = qt6.preprocess(
   moc_headers : moc_headers,
   dependencies: qt6_dep
 )
 
-executable('wurm_locator',
+executable('wurm_explorer',
   processed,
   sources,
   include_directories: incdir,
@@ -74,13 +106,13 @@ test_cv = executable('test_cv',
   ['tests/test_cv.cpp', 'src/engine/cv/ImageOps.cpp', 'src/engine/cv/Extractor.cpp', 'src/engine/cv/Matcher.cpp'],
   dependencies: [opencv_dep, omp_dep]
 )
-test('cv', test_cv)
+test('cv', test_cv, workdir: meson.project_source_root())
 
 test_store = executable('test_store',
   ['tests/test_store.cpp', 'src/models/AnnotationStore.cpp', 'src/models/ArtifactStore.cpp', 'src/models/DrawingStore.cpp'],
   dependencies: [json_dep]
 )
-test('store', test_store)
+test('store', test_store, workdir: meson.project_source_root())
 
 test_ui_src = [
   'tests/test_ui.cpp',
@@ -102,4 +134,57 @@ test_ui = executable('test_ui',
   test_ui_src, test_ui_moc,
   dependencies: [qt6_dep, json_dep, opencv_dep]
 )
-test('ui', test_ui)
+test('ui', test_ui, workdir: meson.project_source_root(), env: ['QT_QPA_PLATFORM=offscreen'])
+
+test_granger = executable('test_granger',
+  ['tests/test_granger.cpp',
+   'src/features/granger/GrangerTraits.cpp',
+   'src/features/granger/BreedingEvaluator.cpp',
+   'src/features/granger/GrangerStore.cpp'],
+  dependencies: [json_dep],
+  include_directories: incdir
+)
+test('granger', test_granger, workdir: meson.project_source_root())
+
+test_skills = executable('test_skills',
+  ['tests/test_skills.cpp',
+   'src/features/skills/SkillLogParser.cpp',
+   'src/features/skills/SkillTracker.cpp',
+   'src/features/skills/SkillPathResolver.cpp'],
+  dependencies: [json_dep],
+  include_directories: incdir
+)
+test('skills', test_skills, workdir: meson.project_source_root())
+
+test_sailing_src = [
+  'tests/test_sailing.cpp',
+  'src/models/ClusterLayout.cpp',
+  'src/models/ClusterDrawingStore.cpp',
+  'src/models/DrawingStore.cpp',
+  'src/models/AnnotationStore.cpp',
+  'src/ui/panels/SailingPanel.cpp',
+  'src/ui/panels/SailingPanelOverlays.cpp'
+]
+
+test_sailing_moc = qt6.preprocess(
+  moc_sources: ['tests/test_sailing.cpp'],
+  moc_headers: ['src/ui/panels/SailingPanel.hpp'],
+  dependencies: qt6_dep
+)
+
+test_sailing = executable('test_sailing',
+  test_sailing_src, test_sailing_moc,
+  dependencies: [qt6_dep, json_dep],
+  include_directories: incdir
+)
+test('sailing', test_sailing, workdir: meson.project_source_root(), env: ['QT_QPA_PLATFORM=offscreen'])
+
+test_tools = executable('test_tools',
+  ['tests/test_tools.cpp',
+   'src/features/tools/ImpCalculator.cpp',
+   'src/features/tools/BridgePillarCalculator.cpp',
+   'src/features/tools/GrinderEngine.cpp'],
+  include_directories: incdir
+)
+test('tools', test_tools, suite: 'tools', workdir: meson.project_source_root())
+

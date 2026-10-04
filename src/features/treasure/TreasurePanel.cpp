@@ -1,4 +1,5 @@
 #include "TreasurePanel.hpp"
+#include "../../ui/ThemeTokens.hpp"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -98,17 +99,18 @@ void TreasurePanel::setMatchResults(const std::vector<treasure::cv::MatchResult>
 }
 
 void TreasurePanel::setupUi() {
+    using namespace treasure::ui;
     auto* layout = new QVBoxLayout(this);
     layout->setContentsMargins(20, 20, 20, 20);
     layout->setSpacing(16);
 
     auto* titleLabel = new QLabel("Treasure Locator", this);
-    titleLabel->setStyleSheet("font-size: 20px; font-weight: bold; color: #cdd6f4;");
+    titleLabel->setStyleSheet(QString("font-size: 20px; font-weight: bold; color: %1;").arg(theme::ACCENT_MINT));
     layout->addWidget(titleLabel);
 
     auto* instructionLabel = new QLabel("Select a screenshot of your prospect result to locate the treasure.", this);
     instructionLabel->setWordWrap(true);
-    instructionLabel->setStyleSheet("color: #a6adc8;");
+    instructionLabel->setStyleSheet(QString("color: %1;").arg(theme::TEXT_SECONDARY));
     layout->addWidget(instructionLabel);
 
     // Screenshot Selection Row
@@ -125,21 +127,22 @@ void TreasurePanel::setupUi() {
     // Locate Action
     locateButton = new QPushButton("Locate Treasure", this);
     locateButton->setMinimumHeight(44);
-    locateButton->setStyleSheet(R"(
+    locateButton->setStyleSheet(QString(R"(
         QPushButton {
-            background-color: #a6da95; /* Catppuccin Green */
-            color: #11111b;
+            background-color: %1;
+            color: %2;
             font-weight: bold;
             font-size: 14px;
             border-radius: 8px;
+            border: none;
         }
         QPushButton:hover {
-            background-color: #8bd5ca; /* Catppuccin Teal */
+            background-color: %3;
         }
         QPushButton:pressed {
-            background-color: #94e2d5;
+            background-color: %4;
         }
-    )");
+    )").arg(theme::ACCENT_EMERALD, theme::TEXT_ON_ACCENT, theme::ACCENT_MINT, theme::ACCENT_PRESSED));
     
     auto* actionLayout = new QVBoxLayout();
     
@@ -160,7 +163,7 @@ void TreasurePanel::setupUi() {
     
     matchListView = new QListWidget(this);
     matchListView->setMaximumHeight(100);
-    matchListView->setStyleSheet("background-color: #1e1e2e; color: #a6adc8; border-radius: 4px;");
+    matchListView->setStyleSheet(QString("background-color: %1; color: %2; border: 1px solid %3; border-radius: 6px;").arg(theme::SURFACE_CARD, theme::TEXT_PRIMARY, theme::BORDER_MUTED));
     layout->addWidget(matchListView);
 
     // Advanced Options Group
@@ -199,7 +202,7 @@ void TreasurePanel::setupUi() {
     
     debugArea = new QTextEdit(this);
     debugArea->setReadOnly(true);
-    debugArea->setStyleSheet("background-color: #1e1e2e; color: #a6adc8; font-family: monospace;");
+    debugArea->setStyleSheet(QString("background-color: %1; color: %2; border: 1px solid %3; border-radius: 6px; font-family: monospace;").arg(theme::SURFACE_CARD, theme::TEXT_SECONDARY, theme::BORDER_MUTED));
     layout->addWidget(debugArea);
 
     // Spacer

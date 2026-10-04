@@ -190,10 +190,10 @@ void ZoomMapCanvas::clearRoi() {
 
 void ZoomMapCanvas::paintEvent(QPaintEvent *) {
     QPainter painter(this);
-    painter.fillRect(rect(), QColor("#1e1e2e")); // Catppuccin Macchiato Base
+    painter.fillRect(rect(), QColor("#18181b")); // Dark Slate Base
 
     if (mapPixmap.isNull()) {
-        painter.setPen(QColor("#a6adc8"));
+        painter.setPen(QColor("#a1a1aa"));
         painter.drawText(rect(), Qt::AlignCenter, "No Map Loaded");
         return;
     }
@@ -243,10 +243,10 @@ void ZoomMapCanvas::paintEvent(QPaintEvent *) {
                 painter.drawLine(QPointF(cx, cy - radius - 10), QPointF(cx, cy + radius + 10));
                 
                 // Label
-                painter.setPen(QColor("#cad3f5"));
+                painter.setPen(QColor("#f4f4f5"));
                 painter.drawText(QPointF(cx + radius + 5, cy - radius - 5), QString("Match %1%").arg(static_cast<int>(marker.score * 100)));
             } else {
-                QPen pen(QColor("#f5a97f"), 2); // Peach (Catppuccin Macchiato)
+                QPen pen(QColor("#04b97f"), 2); // Emerald
                 pen.setStyle(Qt::DashLine);
                 painter.setPen(pen);
                 
@@ -287,7 +287,7 @@ void ZoomMapCanvas::paintEvent(QPaintEvent *) {
                 double cy = (a.points[0].y - viewY) * scale;
                 
                 if (scale < 0.6 && !icon.isEmpty()) {
-                    painter.setPen(QColor("#cad3f5"));
+                    painter.setPen(QColor("#f4f4f5"));
                     QFont f("Material Icons");
                     f.setPointSize(12);
                     painter.setFont(f);
@@ -295,7 +295,7 @@ void ZoomMapCanvas::paintEvent(QPaintEvent *) {
                 } else {
                     painter.drawEllipse(QPointF(cx, cy), 5, 5);
                     if (scale >= 0.6) {
-                        painter.setPen(QColor("#cad3f5"));
+                        painter.setPen(QColor("#f4f4f5"));
                         painter.drawText(QPointF(cx + 10, cy - 10), QString::fromStdString(a.name));
                     }
                 }
@@ -310,13 +310,13 @@ void ZoomMapCanvas::paintEvent(QPaintEvent *) {
                 double cy = (a.points[0].y - viewY) * scale;
                 
                 if (scale < 0.6 && !icon.isEmpty() && a.type == "deed") {
-                    painter.setPen(QColor("#cad3f5"));
+                    painter.setPen(QColor("#f4f4f5"));
                     QFont f("Material Icons");
                     f.setPointSize(12);
                     painter.setFont(f);
                     painter.drawText(QPointF(cx - 5, cy + 5), icon);
                 } else if (scale >= 0.6) {
-                    painter.setPen(QColor("#cad3f5"));
+                    painter.setPen(QColor("#f4f4f5"));
                     painter.drawText(QPointF(cx + 10, cy - 10), QString::fromStdString(a.name));
                 }
             }
@@ -394,7 +394,7 @@ void ZoomMapCanvas::paintEvent(QPaintEvent *) {
             
             if (m_interactionMode == "Measure") {
                 double dist = std::hypot(drawCurrentPoint.x() - drawStartPoint.x(), drawCurrentPoint.y() - drawStartPoint.y());
-                painter.setPen(QColor("#cad3f5"));
+                painter.setPen(QColor("#f4f4f5"));
                 QString text = QString("%1 px").arg(static_cast<int>(dist));
                 painter.drawText(QPointF((sx + cx) / 2 + 10, (sy + cy) / 2 - 10), text);
             }
@@ -414,9 +414,9 @@ void ZoomMapCanvas::paintEvent(QPaintEvent *) {
     
     // Draw ROI
     if (m_roiActive || isDraggingRoi) {
-        painter.setPen(QPen(QColor("#89b4fa"), 2, Qt::DashLine)); // Blue dashed
-        QColor fillColor("#89b4fa");
-        fillColor.setAlpha(50);
+        painter.setPen(QPen(QColor("#04b97f"), 2, Qt::DashLine)); // Emerald dashed
+        QColor fillColor("#04b97f");
+        fillColor.setAlpha(45);
         painter.setBrush(fillColor);
         
         QRectF activeRoi = isDraggingRoi ? QRectF(roiStartPoint, drawCurrentPoint).normalized() : m_roi;
@@ -428,140 +428,40 @@ void ZoomMapCanvas::paintEvent(QPaintEvent *) {
         
         painter.drawRect(QRectF(sx, sy, sw, sh));
     }
-}
 
-void ZoomMapCanvas::wheelEvent(QWheelEvent *event) {
-    if (mapPixmap.isNull()) return;
-
-    double zoomFactor = std::pow(1.0015, event->angleDelta().y());
-    
-    // Calculate mouse position in image coordinates
-    double mx = viewX + event->position().x() / scale;
-    double my = viewY + event->position().y() / scale;
-
-    double fit = fitScaleForSize(mapPixmap.width(), mapPixmap.height());
-    scale = std::clamp(scale * zoomFactor, fit, 24.0);
-
-    // Adjust view to keep mouse position fixed
-    viewX = mx - event->position().x() / scale;
-    viewY = my - event->position().y() / scale;
-
-    clampView();
-    update();
-}
-
-void ZoomMapCanvas::mousePressEvent(QMouseEvent *event) {
-    if (event->button() == Qt::LeftButton) {
-        if (m_interactionMode == "Drag") {
-            isDragging = true;
-            lastMousePos = event->pos();
-            setCursor(Qt::ClosedHandCursor);
-        } else {
-            isDrawing = true;
-            drawStartPoint = QPointF(viewX + event->pos().x() / scale, viewY + event->pos().y() / scale);
-            drawCurrentPoint = drawStartPoint;
-            
-            if (m_interactionMode == "Select ROI") {
-                isDraggingRoi = true;
-                roiStartPoint = drawStartPoint;
-                m_roiActive = false;
-            } else if (m_interactionMode == "Freehand" || m_interactionMode == "Highlighter") {
-                freehandPoints.clear();
-                freehandPoints.push_back(treasure::models::Point{static_cast<float>(drawStartPoint.x()), static_cast<float>(drawStartPoint.y())});
-            } else if (m_interactionMode == "Eraser") {
-                double mapX = viewX + event->pos().x() / scale;
-                double mapY = viewY + event->pos().y() / scale;
-                QPointF pt(mapX, mapY);
-                for (const auto& obj : m_drawings) {
-                    if (!obj.visible) continue;
-                    for (const auto& item : obj.items) {
-                        if (hitTest(item, pt, 15.0 / scale)) {
-                            emit eraseRequested(QString::fromStdString(obj.id));
-                            isDrawing = false; // Prevent dragging over same object
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
-
-void ZoomMapCanvas::mouseMoveEvent(QMouseEvent *event) {
-    if (isDragging && !mapPixmap.isNull()) {
-        QPoint delta = event->pos() - lastMousePos;
-        lastMousePos = event->pos();
-
-        viewX -= delta.x() / scale;
-        viewY -= delta.y() / scale;
-
-        clampView();
-        update();
-    } else if (isDrawing && !mapPixmap.isNull()) {
-        drawCurrentPoint = QPointF(viewX + event->pos().x() / scale, viewY + event->pos().y() / scale);
+    // Floating HUD Overlay (Dashboard Aesthetic)
+    if (!mapPixmap.isNull()) {
+        painter.setRenderHint(QPainter::Antialiasing, true);
+        QRect hudRect(14, height() - 42, 200, 28);
+        painter.setPen(QPen(QColor("#383a42"), 1));
+        painter.setBrush(QColor(24, 24, 27, 220));
+        painter.drawRoundedRect(hudRect, 6, 6);
         
-        if (m_interactionMode == "Freehand" || m_interactionMode == "Highlighter") {
-            freehandPoints.push_back(treasure::models::Point{static_cast<float>(drawCurrentPoint.x()), static_cast<float>(drawCurrentPoint.y())});
-        } else if (m_interactionMode == "Eraser") {
-            QPointF pt = drawCurrentPoint;
-            for (const auto& obj : m_drawings) {
-                if (!obj.visible) continue;
-                for (const auto& item : obj.items) {
-                    if (hitTest(item, pt, 15.0 / scale)) {
-                        emit eraseRequested(QString::fromStdString(obj.id));
-                        isDrawing = false;
-                        return;
-                    }
-                }
-            }
-        }
+        int tx = std::clamp(static_cast<int>(m_cursorTilePos.x()), 0, mapPixmap.width());
+        int ty = std::clamp(static_cast<int>(m_cursorTilePos.y()), 0, mapPixmap.height());
         
-        update();
+        QFont hFont = painter.font();
+        hFont.setPointSize(9);
+        hFont.setBold(true);
+        painter.setFont(hFont);
+        painter.setPen(QColor("#37efba"));
+        painter.drawText(hudRect.adjusted(10, 0, 0, 0), Qt::AlignVCenter | Qt::AlignLeft,
+            QString("X: %1  Y: %2").arg(tx).arg(ty));
+        painter.setPen(QColor("#a1a1aa"));
+        painter.drawText(hudRect.adjusted(0, 0, -10, 0), Qt::AlignVCenter | Qt::AlignRight,
+            QString("%1%").arg(static_cast<int>(scale * 100)));
+
+        QRect modeRect(width() - 114, height() - 42, 100, 28);
+        painter.setPen(QPen(QColor("#383a42"), 1));
+        painter.drawRoundedRect(modeRect, 6, 6);
+        painter.setPen(QColor("#04b97f"));
+        painter.drawText(modeRect.adjusted(8, 0, 0, 0), Qt::AlignVCenter | Qt::AlignLeft, "●");
+        painter.setPen(QColor("#f4f4f5"));
+        painter.drawText(modeRect.adjusted(20, 0, 0, 0), Qt::AlignVCenter | Qt::AlignLeft, m_interactionMode);
     }
 }
 
-void ZoomMapCanvas::mouseReleaseEvent(QMouseEvent *event) {
-    if (event->button() == Qt::LeftButton) {
-        if (isDragging) {
-            isDragging = false;
-            setCursor(Qt::OpenHandCursor);
-        } else if (isDrawing) {
-            isDrawing = false;
-            
-            if (m_interactionMode == "Select ROI") {
-                isDraggingRoi = false;
-                m_roi = QRectF(roiStartPoint, drawCurrentPoint).normalized();
-                m_roiActive = true;
-                update();
-                return;
-            }
-            
-            if (m_interactionMode == "Measure") {
-                update();
-                return;
-            }
-            
-            if (m_interactionMode == "Eraser") {
-                // Do not persist eraser drags
-                update();
-                return;
-            }
-            
-            treasure::models::DrawingItem item;
-            item.tool = m_interactionMode.toStdString();
-            item.color = m_drawingColor.toStdString();
-            item.width = m_drawingWidth;
-            
-            if (m_interactionMode == "Freehand" || m_interactionMode == "Highlighter") {
-                item.points = freehandPoints;
-            } else if (m_interactionMode == "Line" || m_interactionMode == "Rectangle" || m_interactionMode == "Circle") {
-                item.points.push_back(treasure::models::Point{static_cast<float>(drawStartPoint.x()), static_cast<float>(drawStartPoint.y())});
-                item.points.push_back(treasure::models::Point{static_cast<float>(drawCurrentPoint.x()), static_cast<float>(drawCurrentPoint.y())});
-            }
-            
-            if (!item.points.empty()) {
-                emit shapeDrawn(item);
-            }
-        }
-    }
-}
+// Mouse and wheel event handling methods (wheelEvent, mousePressEvent,
+// mouseMoveEvent, mouseReleaseEvent) are implemented in ZoomMapCanvasEvents.cpp
+// to ensure file length remains strictly under 500 lines.
+

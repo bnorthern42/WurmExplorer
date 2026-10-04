@@ -1,15 +1,16 @@
-# wurm-locator (Python)
+# WurmExplorer
 
-A desktop map tool for Wurm Online.
+A high-performance desktop map and companion tool for Wurm Online written in modern C++ with Qt6.
 
-It started as a treasure-map locator and has grown into a multi-purpose map application with:
+Features include:
+- Treasure map locating and screenshot template matching
+- Map annotation and imported data layers
+- Vector drawing and route planning tools
+- Artifact search triangulation
+- Animal husbandry, breeding compatibility, and Granger trait evaluator
+- Live skill gain tracker tailing client log files in real-time
+- Kingdom and guard tower influence overlays
 
-- treasure map matching
-- manual annotations
-- imported map data layers
-- artifact search overlays
-- kingdom-aware guard tower support on PvP-enabled servers
-- a general-purpose drawing/planning tab for vector map markup
 
 ## Features
 
@@ -28,7 +29,7 @@ The matcher is designed to still work when the in-game map is stylized with blur
 
 ### Desktop GUI
 
-The GUI is built with PyQt6 and includes these tabs:
+The GUI is built with modern C++ and Qt6 and includes these tabs:
 
 - **Annotations**
   - add and edit manual deeds, roads, bridges, and tunnels
@@ -77,6 +78,11 @@ The GUI is built with PyQt6 and includes these tabs:
   - set a manual hint
   - review top candidate matches
 
+- **Tools**
+  - **Imp & Skill Calculator**: Bidirectional QL <-> Skill calculations with imbue enhancement bonuses and quick lookup reference matrix.
+  - **Bridge Pillar Calculator**: 2D elevation grid heatmap, slope falloff modeling, corner height computation, and dirt crate requirements for terraforming bridge foundations.
+  - **Grinder Engine**: Real-time Monte Carlo skill check and action mechanics simulator (5,000 iterations in milliseconds) modeling Gaussian distributions, item effective skill, mining QL, and multi-step blacksmithing.
+
 - **Settings**
   - adjust layer colors
   - adjust widths
@@ -119,18 +125,59 @@ Supported imported sheets include:
 
 Imported data is kept separate from manual annotations in the GUI.
 
-## Install
+## Installation & Running
+
+### Option 1: Native Desktop Install (Recommended)
+
+Run the automated installer script:
 
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
+./install.sh
 ```
 
-If `PyQt6` is not already included in your requirements file, install it manually:
+This compiles the release binary with Meson/Ninja and deploys `wurm_explorer` to `~/.local/bin/` with desktop menu icons and `.desktop` launcher.
+
+To launch from terminal:
+```bash
+wurm_explorer
+```
+
+### Option 2: Standalone AppImage
+
+Download `WurmExplorer-x86_64.AppImage` from GitHub Releases (or build locally):
 
 ```bash
-pip install PyQt6
+chmod +x scripts/build-appimage.sh
+./scripts/build-appimage.sh
+
+# Run AppImage
+chmod +x builddir/WurmExplorer-x86_64.AppImage
+./builddir/WurmExplorer-x86_64.AppImage
+```
+
+### Option 3: Docker & Podman Container
+
+Run seamlessly in a container without installing local development dependencies. The launcher automatically detects Podman or Docker, forwards X11/GPU, and mounts client logs:
+
+```bash
+chmod +x run-container.sh
+./run-container.sh
+```
+
+Or manually:
+
+```bash
+# Build
+podman build -t wurmexplorer .
+
+# Run with GUI display forwarding
+podman run --rm -it \
+  --net=host \
+  --ipc=host \
+  -e DISPLAY=$DISPLAY \
+  -v /tmp/.X11-unix:/tmp/.X11-unix:ro \
+  -v ~/.config/wurm:/root/.config/wurm:rw \
+  wurmexplorer:latest
 ```
 
 ## Project layout
@@ -184,60 +231,28 @@ servers:
     guard_tower_influence_radius_tiles: 50
 ```
 
-## Run
+## Build & Run
 
-### GUI
-
-```bash
-python run_locator.py gui --config configs/servers.yaml
-```
-
-### Treasure locate from CLI
+### Quick Start
 
 ```bash
-python run_locator.py locate \
-  --config configs/servers.yaml \
-  --server Xanadu \
-  --screenshot /path/to/Screenshot_input.jpeg \
-  --debug-dir out_debug
+./run.sh
 ```
 
-Optional hint arguments:
+### Build with Meson
 
 ```bash
-python run_locator.py locate \
-  --config configs/servers.yaml \
-  --server Xanadu \
-  --screenshot /path/to/Screenshot_input.jpeg \
-  --hint-x 4000 \
-  --hint-y 2500 \
-  --hint-radius 300 \
-  --debug-dir out_debug
+meson setup builddir
+meson compile -C builddir
+./builddir/wurm_explorer
 ```
 
-### Import map data from `window.sheetData`
-
-Dry run:
+### Installation
 
 ```bash
-python run_locator.py import-sheetdata \
-  --config configs/servers.yaml \
-  --server Xanadu \
-  --input /path/to/xanadu.html \
-  --source-name yaga-xanadu \
-  --dry-run
+./install.sh
 ```
-
-Real import:
-
-```bash
-python run_locator.py import-sheetdata \
-  --config configs/servers.yaml \
-  --server Xanadu \
-  --input /path/to/xanadu.html \
-  --source-name yaga-xanadu \
-  --replace-existing
-```
+This builds and installs WurmExplorer into `~/MyApps/WurmExplorer`, symlinks `~/.local/bin/wurm_explorer`, installs vector and raster icons to standard `~/.local/share/icons/hicolor/` directories, and registers `~/.local/share/applications/wurmexplorer.desktop`.
 
 ## Imported map data behavior
 
@@ -320,13 +335,9 @@ Inside the Drawing tab:
 This project is actively evolving beyond treasure matching into a broader Wurm Online desktop map tool.
 
 
-## Note on the codebase
+## Architecture
 
-I do not particularly care for Python, and this project is very much a practical tool rather than a polished Python showcase.
-
-Most of it was vibe coded with Gemini and ChatGPT, then iterated until it became useful. The focus here is getting features working for Wurm map tooling, not writing the prettiest or most idiomatic Python on earth.
-
-So if parts of the code feel a little stitched together, that is because they are. The goal was speed, utility, and experimentation.
+WurmExplorer is written in modern C++ (C++20/C++23) with Qt6 for native desktop performance. Multi-gigapixel server maps are handled with libvips and OpenCV for high-throughput image rendering, pyramid caching, and normalized computer vision template matching. Local state is managed with modern JSON and YAML serialization.
 
 ## Local config
 

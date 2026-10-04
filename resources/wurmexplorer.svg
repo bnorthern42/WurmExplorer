@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141e2e"/>
+      <stop offset="50%" stop-color="#0e1724"/>
+      <stop offset="100%" stop-color="#070c14"/>
+    </linearGradient>
+
+    <!-- Bezel Ring Gradient -->
+    <linearGradient id="bezelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6d365"/>
+      <stop offset="25%" stop-color="#d4af37"/>
+      <stop offset="60%" stop-color="#aa820a"/>
+      <stop offset="100%" stop-color="#543d04"/>
+    </linearGradient>
+
+    <!-- Inner Dial Gradient -->
+    <radialGradient id="dialGrad" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1b2838"/>
+      <stop offset="70%" stop-color="#101824"/>
+      <stop offset="100%" stop-color="#080d15"/>
+    </radialGradient>
+
+    <!-- Gold Compass Points (Light & Dark halves for 3D look) -->
+    <linearGradient id="goldLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff2b2"/>
+      <stop offset="100%" stop-color="#e5b83b"/>
+    </linearGradient>
+    <linearGradient id="goldDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b8860b"/>
+      <stop offset="100%" stop-color="#7c5804"/>
+    </linearGradient>
+
+    <!-- North Needle (Crimson / Ruby Highlight) -->
+    <linearGradient id="northLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6b6b"/>
+      <stop offset="100%" stop-color="#ee3838"/>
+    </linearGradient>
+    <linearGradient id="northDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c91818"/>
+      <stop offset="100%" stop-color="#800b0b"/>
+    </linearGradient>
+
+    <!-- Center Jewel Radial Gradient -->
+    <radialGradient id="centerJewel" cx="35%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#60c5ff"/>
+      <stop offset="40%" stop-color="#0984e3"/>
+      <stop offset="85%" stop-color="#054b88"/>
+      <stop offset="100%" stop-color="#022446"/>
+    </radialGradient>
+
+    <!-- Drop Shadows -->
+    <filter id="shadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#000000" flood-opacity="0.6"/>
+    </filter>
+    <filter id="needleGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- App Squircle Base with Deep Shadow -->
+  <rect x="24" y="24" width="464" height="464" rx="108" fill="url(#bgGrad)" filter="url(#shadow)" stroke="#2b394e" stroke-width="3"/>
+
+  <!-- Subtle Topographic Contour Elevation Lines -->
+  <g fill="none" stroke="#d4af37" stroke-width="1.5" opacity="0.22">
+    <!-- Contour Loop 1 -->
+    <path d="M 60 160 C 120 130, 160 200, 220 180 C 280 160, 310 100, 370 120 C 420 140, 440 210, 460 250"/>
+    <!-- Contour Loop 2 -->
+    <path d="M 50 240 C 110 220, 140 280, 210 260 C 270 240, 330 290, 400 270 C 430 260, 450 280, 465 310"/>
+    <!-- Contour Loop 3 -->
+    <path d="M 70 340 C 130 310, 180 370, 250 350 C 310 330, 370 380, 440 350"/>
+    <!-- Contour Loop 4 (Elevation Peak Upper Right) -->
+    <path d="M 330 90 C 370 70, 410 80, 430 110 C 445 135, 430 170, 395 175 C 365 180, 340 160, 330 130 Z"/>
+    <path d="M 355 105 C 375 95, 395 100, 405 115 C 415 130, 400 150, 385 152 C 370 155, 355 140, 355 125 Z"/>
+    <!-- Contour Loop 5 (Elevation Basin Lower Left) -->
+    <path d="M 80 380 C 120 360, 160 380, 175 410 C 190 440, 160 460, 120 460 C 90 460, 70 430, 80 380 Z"/>
+  </g>
+
+  <!-- Outer Golden Compass Bezel -->
+  <circle cx="256" cy="256" r="196" fill="none" stroke="url(#bezelGrad)" stroke-width="6" opacity="0.95"/>
+  <circle cx="256" cy="256" r="186" fill="url(#dialGrad)" stroke="#1a2536" stroke-width="2"/>
+  <circle cx="256" cy="256" r="182" fill="none" stroke="#d4af37" stroke-width="1.2" stroke-dasharray="2 6" opacity="0.7"/>
+
+  <!-- Compass Graduations / Degree Ticks (Every 30 degrees) -->
+  <g stroke="#d4af37" stroke-width="2" opacity="0.75">
+    <!-- North -->
+    <line x1="256" y1="74" x2="256" y2="86"/>
+    <!-- 30 deg -->
+    <line x1="347" y1="98" x2="341" y2="108"/>
+    <!-- 60 deg -->
+    <line x1="414" y1="165" x2="404" y2="171"/>
+    <!-- East (90 deg) -->
+    <line x1="438" y1="256" x2="426" y2="256"/>
+    <!-- 120 deg -->
+    <line x1="414" y1="347" x2="404" y2="341"/>
+    <!-- 150 deg -->
+    <line x1="347" y1="414" x2="341" y2="404"/>
+    <!-- South (180 deg) -->
+    <line x1="256" y1="438" x2="256" y2="426"/>
+    <!-- 210 deg -->
+    <line x1="165" y1="414" x2="171" y2="404"/>
+    <!-- 240 deg -->
+    <line x1="98" y1="347" x2="108" y2="341"/>
+    <!-- West (270 deg) -->
+    <line x1="74" y1="256" x2="86" y2="256"/>
+    <!-- 300 deg -->
+    <line x1="98" y1="165" x2="108" y2="171"/>
+    <!-- 330 deg -->
+    <line x1="165" y1="98" x2="171" y2="108"/>
+  </g>
+
+  <!-- Cardinal Letter Indicators -->
+  <g font-family="sans-serif" font-weight="bold" font-size="16" fill="#ffd166" text-anchor="middle" dominant-baseline="central" opacity="0.9">
+    <text x="256" y="98">N</text>
+    <text x="414" y="256">E</text>
+    <text x="256" y="414">S</text>
+    <text x="98" y="256">W</text>
+  </g>
+
+  <!-- Compass Star - Secondary Points (NW, NE, SE, SW) -->
+  <g filter="url(#needleGlow)">
+    <!-- NE Point -->
+    <polygon points="256,256 256,236 366,146" fill="url(#goldLight)" opacity="0.8"/>
+    <polygon points="256,256 276,256 366,146" fill="url(#goldDark)" opacity="0.8"/>
+    <!-- SE Point -->
+    <polygon points="256,256 276,256 366,366" fill="url(#goldLight)" opacity="0.8"/>
+    <polygon points="256,256 256,276 366,366" fill="url(#goldDark)" opacity="0.8"/>
+    <!-- SW Point -->
+    <polygon points="256,256 256,276 146,366" fill="url(#goldLight)" opacity="0.8"/>
+    <polygon points="256,256 236,256 146,366" fill="url(#goldDark)" opacity="0.8"/>
+    <!-- NW Point -->
+    <polygon points="256,256 236,256 146,146" fill="url(#goldLight)" opacity="0.8"/>
+    <polygon points="256,256 256,236 146,146" fill="url(#goldDark)" opacity="0.8"/>
+  </g>
+
+  <!-- Primary Compass Points (Large Faceted 3D Star) -->
+  <g filter="url(#needleGlow)">
+    <!-- South Point -->
+    <polygon points="256,256 230,256 256,420" fill="url(#goldLight)"/>
+    <polygon points="256,256 282,256 256,420" fill="url(#goldDark)"/>
+
+    <!-- East Point -->
+    <polygon points="256,256 256,230 420,256" fill="url(#goldLight)"/>
+    <polygon points="256,256 256,282 420,256" fill="url(#goldDark)"/>
+
+    <!-- West Point -->
+    <polygon points="256,256 256,282 92,256" fill="url(#goldLight)"/>
+    <polygon points="256,256 256,230 92,256" fill="url(#goldDark)"/>
+
+    <!-- North Point (Vibrant Crimson & Ruby with Gold Accent) -->
+    <polygon points="256,256 230,256 256,82" fill="url(#northLight)"/>
+    <polygon points="256,256 282,256 256,82" fill="url(#northDark)"/>
+    <!-- Fine Golden Center Ridge on North Needle -->
+    <line x1="256" y1="256" x2="256" y2="82" stroke="#ffe082" stroke-width="1.5" opacity="0.85"/>
+  </g>
+
+  <!-- Inner Golden Ring Over Needles -->
+  <circle cx="256" cy="256" r="38" fill="none" stroke="url(#bezelGrad)" stroke-width="4"/>
+  <circle cx="256" cy="256" r="34" fill="#101926" stroke="#25354d" stroke-width="1.5"/>
+
+  <!-- Center Jewel / Compass Hub Pivot -->
+  <circle cx="256" cy="256" r="22" fill="url(#centerJewel)" stroke="#f6d365" stroke-width="2.5" filter="url(#needleGlow)"/>
+  <!-- Specular Reflection Highlight on Jewel -->
+  <ellipse cx="250" cy="248" rx="8" ry="4" transform="rotate(-30 250 248)" fill="#ffffff" opacity="0.75"/>
+</svg>

@@ -84,4 +84,5 @@ private:
     bool m_roiActive = false;
     bool isDraggingRoi = false;
     QPointF roiStartPoint;
+    QPointF m_cursorTilePos;
 };

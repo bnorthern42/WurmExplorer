@@ -1,4 +1,5 @@
 #include "DrawingPanel.hpp"
+#include "../../ui/ThemeTokens.hpp"
 
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -18,12 +19,13 @@ DrawingPanel::DrawingPanel(std::shared_ptr<treasure::models::DrawingStore> store
 }
 
 void DrawingPanel::setupUi() {
+    using namespace treasure::ui::theme;
     auto* layout = new QVBoxLayout(this);
     layout->setContentsMargins(10, 10, 10, 10);
     layout->setSpacing(12);
 
     auto* titleLabel = new QLabel("Drawing Tools", this);
-    titleLabel->setStyleSheet("font-size: 16px; font-weight: bold; color: #8aadf4;");
+    titleLabel->setStyleSheet(QString("font-size: 16px; font-weight: bold; color: %1;").arg(ACCENT_MINT));
     layout->addWidget(titleLabel);
 
     // --- 1. Tool Palette ---
@@ -63,21 +65,24 @@ void DrawingPanel::setupUi() {
         btn->setToolTip(tool.name);
         btn->setProperty("toolName", tool.name);
         
-        btn->setStyleSheet(R"(
+        btn->setStyleSheet(QString(R"(
             QPushButton {
-                background-color: #313244;
+                background-color: %1;
+                border: 1px solid %2;
                 border-radius: 8px;
-                color: #cdd6f4;
+                color: %3;
                 font-size: 20px;
             }
             QPushButton:hover {
-                background-color: #45475a;
+                background-color: %4;
+                border: 1px solid %5;
             }
             QPushButton:checked {
-                background-color: #8aadf4;
-                color: #11111b;
+                background-color: %6;
+                color: %7;
+                border: 1px solid %8;
             }
-        )");
+        )").arg(SURFACE_CARD, BORDER_MUTED, TEXT_PRIMARY, SURFACE_HOVER, ACCENT_EMERALD, ACCENT_TINT, ACCENT_MINT, ACCENT_EMERALD));
         
         toolGroup->addButton(btn);
         grid->addWidget(btn, row, col);
@@ -135,8 +140,8 @@ void DrawingPanel::setupUi() {
     auto* delBtn = new QPushButton("Delete Selected", this);
     auto* clearBtn = new QPushButton("Clear All", this);
     
-    delBtn->setStyleSheet("background-color: #ed8796; color: #11111b; font-weight: bold;");
-    clearBtn->setStyleSheet("background-color: #45475a; color: #cdd6f4;");
+    delBtn->setStyleSheet(QString("background-color: %1; color: %2; font-weight: bold; border-radius: 4px; padding: 6px;").arg(STATUS_DANGER, TEXT_PRIMARY));
+    clearBtn->setStyleSheet(QString("background-color: %1; color: %2; border: 1px solid %3; border-radius: 4px; padding: 6px;").arg(SURFACE_CARD, TEXT_SECONDARY, BORDER_MUTED));
     
     btnRow->addWidget(delBtn);
     btnRow->addWidget(clearBtn);

@@ -65,7 +65,7 @@ struct SailingResult {
 
 class SailingLogic {
 public:
-    static ClusterLayout buildLayout(const std::map<std::string, int>& serverSizes);
+    static ClusterLayout buildLayout(const std::map<std::string, int>& serverSizes, const std::string& clusterName = "Southern");
     
     static std::pair<float, float> globalToImagePx(float x, float y, const ClusterRenderState& render);
     static std::pair<float, float> imagePxToGlobal(float x, float y, const ClusterRenderState& render);

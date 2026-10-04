@@ -34,6 +34,19 @@ class SailingPanel;
 }
 }
 
+namespace granger {
+class GrangerPanel;
+class GrangerStore;
+}
+
+namespace skills {
+class SkillsPanel;
+}
+
+namespace tools {
+class ToolsPanel;
+}
+
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
@@ -60,6 +73,7 @@ private:
     void setupShortcuts();
     void refreshActiveCanvas();
     void refreshStatusBar();
+    void updateSailingContext();
 
     TopControlBar* topBar;
     NavigationBar* navBar;
@@ -72,11 +86,17 @@ private:
     treasure::ui::ArtifactPanel* artifactPanel = nullptr;
     treasure::ui::MapDataPanel* mapDataPanel = nullptr;
     treasure::ui::SailingPanel* sailingPanel = nullptr;
+    granger::GrangerPanel* grangerPanel = nullptr;
+    skills::SkillsPanel* skillsPanel = nullptr;
+    tools::ToolsPanel* toolsPanel = nullptr;
+
     
     std::shared_ptr<treasure::models::AnnotationStore> annotStore;
     std::shared_ptr<treasure::models::ArtifactStore> artifactStore;
     std::shared_ptr<treasure::models::DrawingStore> drawingStore;
     std::shared_ptr<treasure::models::ClusterDrawingStore> clusterDrawingStore;
+    std::shared_ptr<granger::GrangerStore> grangerStore;
+
     
     QFutureWatcher<std::vector<treasure::cv::MatchResult>> watcher;
     std::vector<treasure::cv::MatchResult> m_lastResults;

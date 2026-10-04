@@ -17,10 +17,6 @@ private slots:
     void initTestCase() {}
     
     void testArtifactPanel() {
-        int argc = 0;
-        char** argv = nullptr;
-        QApplication app(argc, argv);
-        
         auto store = std::make_shared<treasure::models::ArtifactStore>("configs/artifacts.json");
         treasure::ui::ArtifactPanel panel(store);
         
