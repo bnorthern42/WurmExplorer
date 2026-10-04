@@ -36,6 +36,32 @@ private slots:
         QVERIFY(layout.height_tiles > 0.0f);
     }
 
+    void testCenterAlignedServerLayout() {
+        std::map<std::string, int> serverSizes = {
+            {"Cadence", 4096},
+            {"Harmony", 4096},
+            {"Melody", 2048},
+            {"Defiance", 4096}
+        };
+
+        auto layout = treasure::models::SailingLogic::buildLayout(serverSizes, "Northern");
+        const auto& harmony = layout.servers.at("Harmony");
+        const auto& melody = layout.servers.at("Melody");
+
+        // Melody (2048) should be center-aligned under Harmony (4096)
+        // childX = parentX + (parentWidth - childWidth) / 2.0 = 4096 + (4096 - 2048) / 2.0 = 5120
+        float expectedMelodyX = harmony.x0 + (harmony.size_tiles - melody.size_tiles) / 2.0f;
+        QCOMPARE(melody.x0, expectedMelodyX);
+        QCOMPARE(melody.x0, 5120.0f);
+        QCOMPARE(melody.y0, harmony.y1());
+
+        // Same size servers must align perfectly without drifting
+        const auto& cadence = layout.servers.at("Cadence");
+        const auto& defiance = layout.servers.at("Defiance");
+        QCOMPARE(cadence.y0, harmony.y0);
+        QCOMPARE(defiance.y0, harmony.y0);
+    }
+
     void testEpicClusterLayout() {
         std::map<std::string, int> serverSizes = {
             {"Elevation", 2048},

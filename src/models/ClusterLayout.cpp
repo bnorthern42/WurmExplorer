@@ -15,15 +15,13 @@ namespace models {
 Direction oppositeDirection(Direction dir) {
     if (dir == Direction::North) return Direction::South;
     if (dir == Direction::South) return Direction::North;
-    if (dir == Direction::East) return Direction::West;
-    return Direction::East;
+    return (dir == Direction::East) ? Direction::West : Direction::East;
 }
 
 std::string directionToString(Direction dir) {
     if (dir == Direction::North) return "north";
     if (dir == Direction::East) return "east";
-    if (dir == Direction::South) return "south";
-    return "west";
+    return (dir == Direction::South) ? "south" : "west";
 }
 
 std::optional<Direction> stringToDirection(const std::string& str) {
@@ -118,16 +116,15 @@ static std::map<std::string, ClusterGraph> initClusterGraphs() {
     clusterGraphs["Northern"].addEdge("Harmony", "Melody", Direction::South);
 
     // Southern cluster routing: preserve existing connections
-    clusterGraphs["Southern"].addEdge("Independence", "Deliverance", Direction::South);
-    clusterGraphs["Southern"].addEdge("Deliverance", "Exodus", Direction::South);
-    clusterGraphs["Southern"].addEdge("Exodus", "Celebration", Direction::South);
-    clusterGraphs["Southern"].addEdge("Independence", "Xanadu", Direction::East);
-    clusterGraphs["Southern"].addEdge("Deliverance", "Xanadu", Direction::East);
-    clusterGraphs["Southern"].addEdge("Exodus", "Xanadu", Direction::East);
-    clusterGraphs["Southern"].addEdge("Celebration", "Xanadu", Direction::East);
-    clusterGraphs["Southern"].addEdge("Xanadu", "Pristine", Direction::East);
-    clusterGraphs["Southern"].addEdge("Xanadu", "Release", Direction::East);
-    clusterGraphs["Southern"].addEdge("Chaos", "Independence", Direction::East);
+    for (const auto& [f, t, d] : std::vector<std::tuple<std::string, std::string, Direction>>{
+        {"Independence", "Deliverance", Direction::South}, {"Deliverance", "Exodus", Direction::South},
+        {"Exodus", "Celebration", Direction::South}, {"Independence", "Xanadu", Direction::East},
+        {"Deliverance", "Xanadu", Direction::East}, {"Exodus", "Xanadu", Direction::East},
+        {"Celebration", "Xanadu", Direction::East}, {"Xanadu", "Pristine", Direction::East},
+        {"Xanadu", "Release", Direction::East}, {"Chaos", "Independence", Direction::East}
+    }) {
+        clusterGraphs["Southern"].addEdge(f, t, d);
+    }
 
     return clusterGraphs;
 }
@@ -150,41 +147,47 @@ std::vector<std::string> SailingLogic::findRoute(const std::string& clusterName,
 }
 
 const std::map<std::string, std::string> OPPOSITE_EDGE = {
-    {"north", "south"},
-    {"south", "north"},
-    {"east", "west"},
-    {"west", "east"}
+    {"north", "south"}, {"south", "north"}, {"east", "west"}, {"west", "east"}
 };
 
 // Global cluster tile coordinates. Sized so contiguous edges line up by global position.
 const std::map<std::string, std::pair<float, float>> SOUTHERN_CLUSTER_LAYOUT = {
-    {"Chaos", {0.0f, 3072.0f}},
-    {"Independence", {4096.0f, 0.0f}},
-    {"Deliverance", {6144.0f, 4096.0f}},
-    {"Exodus", {6144.0f, 6144.0f}},
-    {"Celebration", {6144.0f, 8192.0f}},
-    {"Xanadu", {8192.0f, 2048.0f}},
-    {"Pristine", {16384.0f, 3072.0f}},
-    {"Release", {16384.0f, 7168.0f}}
+    {"Chaos", {0.0f, 3072.0f}}, {"Independence", {4096.0f, 0.0f}},
+    {"Deliverance", {6144.0f, 4096.0f}}, {"Exodus", {6144.0f, 6144.0f}},
+    {"Celebration", {6144.0f, 8192.0f}}, {"Xanadu", {8192.0f, 2048.0f}},
+    {"Pristine", {16384.0f, 3072.0f}}, {"Release", {16384.0f, 7168.0f}}
 };
 
 const std::map<std::string, std::pair<float, float>> NORTHERN_CLUSTER_LAYOUT = {
-    {"Cadence", {0.0f, 0.0f}},
-    {"Harmony", {4096.0f, 0.0f}},
-    {"Defiance", {8192.0f, 0.0f}},
-    {"Melody", {4096.0f, 4096.0f}}
+    {"Cadence", {0.0f, 0.0f}}, {"Harmony", {4096.0f, 0.0f}},
+    {"Defiance", {8192.0f, 0.0f}}, {"Melody", {4096.0f, 4096.0f}}
 };
 
 const std::map<std::string, std::pair<float, float>> EPIC_CLUSTER_LAYOUT = {
-    {"Desertion", {0.0f, 0.0f}},
-    {"Elevation", {2048.0f, 0.0f}},
-    {"Serenity", {4096.0f, 0.0f}},
-    {"Affliction", {2048.0f, 2048.0f}}
+    {"Desertion", {0.0f, 0.0f}}, {"Elevation", {2048.0f, 0.0f}},
+    {"Serenity", {4096.0f, 0.0f}}, {"Affliction", {2048.0f, 2048.0f}}
 };
+
+static void alignConnectedServer(ClusterServer& child, const ClusterServer& parent, Direction dir, float padding = 0.0f) {
+    if (dir == Direction::South) {
+        child.x0 = parent.x0 + (parent.size_tiles - child.size_tiles) / 2.0f;
+        child.y0 = parent.y1() + padding;
+    } else if (dir == Direction::North) {
+        child.x0 = parent.x0 + (parent.size_tiles - child.size_tiles) / 2.0f;
+        child.y0 = parent.y0 - child.size_tiles - padding;
+    } else if (dir == Direction::East) {
+        child.x0 = parent.x1() + padding;
+        child.y0 = parent.y0 + (parent.size_tiles - child.size_tiles) / 2.0f;
+    } else if (dir == Direction::West) {
+        child.x0 = parent.x0 - child.size_tiles - padding;
+        child.y0 = parent.y0 + (parent.size_tiles - child.size_tiles) / 2.0f;
+    }
+}
 
 ClusterLayout SailingLogic::buildLayout(const std::map<std::string, int>& serverSizes, const std::string& clusterName) {
     ClusterLayout layout;
     layout.name = clusterName.empty() ? "Southern" : clusterName;
+    layout.graph = getClusterGraph(layout.name);
     
     const std::map<std::string, std::pair<float, float>>* baseLayout = &SOUTHERN_CLUSTER_LAYOUT;
     if (layout.name.find("Northern") != std::string::npos || 
@@ -197,21 +200,40 @@ ClusterLayout SailingLogic::buildLayout(const std::map<std::string, int>& server
         baseLayout = &EPIC_CLUSTER_LAYOUT;
     }
     
-    float maxX = 1.0f;
-    float maxY = 1.0f;
-    
     for (const auto& pair : *baseLayout) {
         if (serverSizes.find(pair.first) == serverSizes.end()) continue;
-        
         ClusterServer server;
         server.name = pair.first;
         server.size_tiles = serverSizes.at(pair.first);
         server.x0 = pair.second.first;
         server.y0 = pair.second.second;
-        
         layout.servers[server.name] = server;
-        if (server.x1() > maxX) maxX = server.x1();
-        if (server.y1() > maxY) maxY = server.y1();
+    }
+    
+    // Dynamically center-align connected servers relative to parent/central nodes
+    std::vector<std::string> centralNodes;
+    if (layout.name.find("Northern") != std::string::npos || layout.servers.find("Harmony") != layout.servers.end()) {
+        centralNodes.push_back("Harmony");
+    }
+    if (layout.name.find("Epic") != std::string::npos || layout.servers.find("Elevation") != layout.servers.end()) {
+        centralNodes.push_back("Elevation");
+    }
+    for (const auto& centerName : centralNodes) {
+        if (layout.servers.find(centerName) != layout.servers.end()) {
+            const auto& parent = layout.servers.at(centerName);
+            for (const auto& edge : layout.graph.getNeighbors(centerName)) {
+                if (layout.servers.find(edge.toServer) != layout.servers.end()) {
+                    alignConnectedServer(layout.servers.at(edge.toServer), parent, edge.direction);
+                }
+            }
+        }
+    }
+    
+    float maxX = 1.0f;
+    float maxY = 1.0f;
+    for (const auto& [_, srv] : layout.servers) {
+        if (srv.x1() > maxX) maxX = srv.x1();
+        if (srv.y1() > maxY) maxY = srv.y1();
     }
     
     // Add any remaining servers not in the pre-defined layout
@@ -231,23 +253,16 @@ ClusterLayout SailingLogic::buildLayout(const std::map<std::string, int>& server
     
     layout.width_tiles = maxX;
     layout.height_tiles = maxY;
-    layout.graph = getClusterGraph(layout.name);
     return layout;
 }
 
 std::pair<float, float> SailingLogic::globalToImagePx(float x, float y, const ClusterRenderState& render) {
-    return {
-        render.margin_px + x * render.scale_px_per_tile,
-        render.margin_px + y * render.scale_px_per_tile
-    };
+    return {render.margin_px + x * render.scale_px_per_tile, render.margin_px + y * render.scale_px_per_tile};
 }
 
 std::pair<float, float> SailingLogic::imagePxToGlobal(float x, float y, const ClusterRenderState& render) {
     float scale = std::max(1e-9f, render.scale_px_per_tile);
-    return {
-        (x - render.margin_px) / scale,
-        (y - render.margin_px) / scale
-    };
+    return {(x - render.margin_px) / scale, (y - render.margin_px) / scale};
 }
 
 std::pair<float, float> SailingLogic::globalToServerTile(const ClusterServer& server, float gx, float gy) {
@@ -282,14 +297,12 @@ std::optional<EdgePick> SailingLogic::pickServerEdge(const ClusterLayout& layout
         std::vector<Candidate> candidates;
         
         if (server.x0 <= gx && gx <= server.x1()) {
-            float tx = gx - server.x0;
-            float size = std::max(1.0f, (float)server.size_tiles);
+            float tx = gx - server.x0, size = std::max(1.0f, (float)server.size_tiles);
             candidates.push_back({"north", std::abs(gy - server.y0), tx / size, tx, 0.0f, gx, server.y0});
             candidates.push_back({"south", std::abs(gy - server.y1()), tx / size, tx, (float)server.size_tiles, gx, server.y1()});
         }
         if (server.y0 <= gy && gy <= server.y1()) {
-            float ty = gy - server.y0;
-            float size = std::max(1.0f, (float)server.size_tiles);
+            float ty = gy - server.y0, size = std::max(1.0f, (float)server.size_tiles);
             candidates.push_back({"west", std::abs(gx - server.x0), ty / size, 0.0f, ty, server.x0, gy});
             candidates.push_back({"east", std::abs(gx - server.x1()), ty / size, (float)server.size_tiles, ty, server.x1(), gy});
         }
@@ -297,13 +310,7 @@ std::optional<EdgePick> SailingLogic::pickServerEdge(const ClusterLayout& layout
         for (const auto& c : candidates) {
             if (c.dist <= tolerance_tiles && c.dist < best_dist) {
                 best_dist = c.dist;
-                best = EdgePick{
-                    server.name,
-                    c.edge,
-                    std::max(0.0f, std::min(1.0f, c.norm)),
-                    c.tx, c.ty,
-                    c.global_pt_x, c.global_pt_y
-                };
+                best = EdgePick{server.name, c.edge, std::max(0.0f, std::min(1.0f, c.norm)), c.tx, c.ty, c.global_pt_x, c.global_pt_y};
             }
         }
     }
@@ -312,8 +319,7 @@ std::optional<EdgePick> SailingLogic::pickServerEdge(const ClusterLayout& layout
 }
 
 static std::pair<float, float> _normToTile(const ClusterServer& server, const std::string& edge, float norm) {
-    float t = std::max(0.0f, std::min(1.0f, norm));
-    float size = server.size_tiles;
+    float t = std::max(0.0f, std::min(1.0f, norm)), size = server.size_tiles;
     if (edge == "north") return {t * size, 0.0f};
     if (edge == "south") return {t * size, size};
     if (edge == "west") return {0.0f, t * size};
@@ -326,9 +332,9 @@ static std::pair<float, float> _tileToGlobal(const ClusterServer& server, const 
 }
 
 std::optional<SailingResult> SailingLogic::resolvePlotCourse(const ClusterLayout& layout, const std::string& source_server, const std::string& source_edge, float source_norm, const std::string& dest_server) {
-    if (layout.servers.find(source_server) == layout.servers.end()) return std::nullopt;
-    if (layout.servers.find(dest_server) == layout.servers.end()) return std::nullopt;
-    if (OPPOSITE_EDGE.find(source_edge) == OPPOSITE_EDGE.end()) return std::nullopt;
+    if (layout.servers.find(source_server) == layout.servers.end() ||
+        layout.servers.find(dest_server) == layout.servers.end() ||
+        OPPOSITE_EDGE.find(source_edge) == OPPOSITE_EDGE.end()) return std::nullopt;
     
     const auto& src = layout.servers.at(source_server);
     const auto& dst = layout.servers.at(dest_server);
@@ -336,10 +342,8 @@ std::optional<SailingResult> SailingLogic::resolvePlotCourse(const ClusterLayout
     
     auto src_tile = _normToTile(src, source_edge, source_norm);
     auto dst_tile = _normToTile(dst, dest_edge, source_norm);
-    
     auto src_global = serverTileToGlobal(src, src_tile.first, src_tile.second);
     auto dst_global = serverTileToGlobal(dst, dst_tile.first, dst_tile.second);
-    
     auto path = layout.graph.findPath(source_server, dest_server);
     
     return SailingResult{
@@ -423,10 +427,8 @@ ClusterRenderState SailingLogic::renderClusterMap(const ClusterLayout& layout, c
     p.drawText(18, 24, QString("%1 - %2").arg(QString::fromStdString(layout.name), QString::fromStdString(mapType)));
     
     std::vector<std::string> serverOrder = {
-        "Independence", "Deliverance", "Exodus", "Celebration", 
-        "Pristine", "Release", "Xanadu", "Chaos",
-        "Harmony", "Melody", "Cadence", "Defiance",
-        "Elevation", "Desertion", "Serenity", "Affliction"
+        "Independence", "Deliverance", "Exodus", "Celebration", "Pristine", "Release", "Xanadu", "Chaos",
+        "Harmony", "Melody", "Cadence", "Defiance", "Elevation", "Desertion", "Serenity", "Affliction"
     };
     for (const auto& [name, _] : layout.servers) {
         if (std::find(serverOrder.begin(), serverOrder.end(), name) == serverOrder.end()) {
@@ -467,26 +469,15 @@ ClusterRenderState SailingLogic::renderClusterMap(const ClusterLayout& layout, c
         
         // label
         QString label = QString("%1 - %2").arg(QString::fromStdString(name)).arg(srv.size_tiles);
-        int text_w = label.length() * 8; // approx
-        int text_h = 20;
-        
         p.setPen(Qt::NoPen);
         p.setBrush(QColor(20, 20, 22, 180));
-        p.drawRoundedRect(x0 + 8, y0 + 8, text_w, text_h, 6, 6);
-        
+        p.drawRoundedRect(x0 + 8, y0 + 8, label.length() * 8, 20, 6, 6);
         p.setPen(QColor(245, 245, 245));
         p.drawText(x0 + 14, y0 + 22, label);
     }
     
     p.end();
-    
-    return ClusterRenderState{
-        canvas,
-        scale,
-        margin_px,
-        width_px,
-        height_px
-    };
+    return ClusterRenderState{canvas, scale, margin_px, width_px, height_px};
 }
 
 } // namespace models
