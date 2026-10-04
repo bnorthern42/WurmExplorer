@@ -40,16 +40,16 @@ void testBridgePillarCalculator() {
     assert(res1.spreadRadius == 6); // ceil(1800 / 300) = 6
     assert(res1.baseW == 1 + 2 * 6); // 13
     assert(res1.baseL == 2 + 2 * 6); // 14
-    assert(res1.cornerW == 14);
-    assert(res1.cornerL == 15);
+    assert(res1.cornerW == 13);
+    assert(res1.cornerL == 14);
     assert(res1.totalDirt > 0);
     assert(res1.crates == (res1.totalDirt + 299) / 300);
 
     // Verify plateau corners are at target height
-    assert(res1.cornerGrid.size() == 15);
-    assert(res1.cornerGrid[0].size() == 14);
+    assert(res1.cornerGrid.size() == 14);
+    assert(res1.cornerGrid[0].size() == 13);
     assert(res1.cornerGrid[6][6] == 1800);
-    assert(res1.cornerGrid[8][7] == 1800);
+    assert(res1.cornerGrid[7][6] == 1800);
     assert(res1.cornerGrid[0][0] == 0); // Far corner reaches 0
 
     // Verify tile grid dimensions and plateau
@@ -278,8 +278,8 @@ void testBridgePillarSlopeAndDigSkillLimit() {
     assert(resSkill20.spreadRadius == 30); // 1800 / 60 = 30
     assert(resSkill20.baseW == 1 + 2 * 30); // 61
     assert(resSkill20.baseL == 2 + 2 * 30); // 62
-    assert(resSkill20.cornerW == 62);
-    assert(resSkill20.cornerL == 63);
+    assert(resSkill20.cornerW == 61);
+    assert(resSkill20.cornerL == 62);
 
     // Test with fractional digging skill 20.7:
     // floor(20.7 * 3) = floor(62.1) = 62 (NOT 62.1!)
@@ -321,14 +321,14 @@ int main() {
 }
 
 void testBridgePillarPlateauDimensions() {
-    std::cout << "Testing BridgePillar plateau tile-to-corner mapping..." << std::endl;
+    std::cout << "Testing BridgePillar plateau dimensions..." << std::endl;
 
-    // Plateau size: 1x2 tiles -> exactly (1+1)x(2+1) = 2x3 corners at target height
+    // Plateau size: 1x2 -> exactly 1x2 corners at target height
     auto res = BridgePillarCalculator::calculate(1, 2, 1800, std::nullopt);
     assert(res.topW == 1);
     assert(res.topL == 2);
-    assert(res.plateauCornersX == 2);
-    assert(res.plateauCornersY == 3);
+    assert(res.plateauCornersX == 1);
+    assert(res.plateauCornersY == 2);
 
     // Count corners at target height in cornerGrid
     int maxHeightCorners = 0;
@@ -345,15 +345,15 @@ void testBridgePillarPlateauDimensions() {
             }
         }
     }
-    // Must be exactly 2 columns and 3 rows = 6 corners
-    assert(maxHeightCorners == 6);
-    assert((maxPlateauX - minPlateauX + 1) == 2);
-    assert((maxPlateauY - minPlateauY + 1) == 3);
+    // Must be exactly 1 column and 2 rows = 2 corners
+    assert(maxHeightCorners == 2);
+    assert((maxPlateauX - minPlateauX + 1) == 1);
+    assert((maxPlateauY - minPlateauY + 1) == 2);
 
-    // Footprint dimensions: baseCorners = plateauCorners + 2 * r
-    // r = 6 -> baseCornersX = 2 + 12 = 14, baseCornersY = 3 + 12 = 15
-    assert(res.cornerW == 14);
-    assert(res.cornerL == 15);
+    // Footprint dimensions: cornerW = topW + 2 * r, cornerL = topL + 2 * r
+    // r = 6 -> cornerW = 1 + 12 = 13, cornerL = 2 + 12 = 14
+    assert(res.cornerW == 13);
+    assert(res.cornerL == 14);
     assert(res.baseW == 13);
     assert(res.baseL == 14);
 
@@ -464,17 +464,17 @@ void testBridgePillarRgbColormapAndLoopBounds() {
     assert(style1800.tier == 6);
     assert(style1800.border.r > 200 && style1800.border.g < 100 && style1800.border.b < 100);
 
-    // 3. Test loop bounds: 2x2 tile plateau must produce exactly 3x3 max-height corners
+    // 3. Test loop bounds: 2x2 plateau must produce exactly 2x2 max-height corners
     auto res2x2 = BridgePillarCalculator::calculate(2, 2, 1800, std::nullopt);
-    assert(res2x2.plateauCornersX == 3);
-    assert(res2x2.plateauCornersY == 3);
+    assert(res2x2.plateauCornersX == 2);
+    assert(res2x2.plateauCornersY == 2);
     int count1800 = 0;
     for (int y = 0; y < res2x2.cornerL; ++y) {
         for (int x = 0; x < res2x2.cornerW; ++x) {
             if (res2x2.cornerGrid[y][x] == 1800) count1800++;
         }
     }
-    assert(count1800 == 9);
+    assert(count1800 == 4);
 
     std::cout << "BridgePillar RGB colormap and loop bounds tests passed!" << std::endl;
 }

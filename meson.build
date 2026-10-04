@@ -43,6 +43,7 @@ sources = [
   'src/engine/cv/Ocr.cpp',
   'src/core/Config.cpp',
   'src/core/MapVariants.cpp',
+  'src/core/CliOptions.cpp',
   'src/ui/MainWindowLocate.cpp',
   'src/ui/MainWindowCapture.cpp',
   'src/features/granger/GrangerTraits.cpp',
@@ -224,6 +225,32 @@ test_docs = executable('test_docs',
   include_directories: incdir
 )
 test('docs', test_docs, suite: 'docs', workdir: meson.project_source_root())
+
+test_bridge_pillar_moc = qt6.preprocess(
+  moc_sources: ['tests/test_bridge_pillar.cpp'],
+  moc_headers: ['src/features/tools/BridgePillarWidget.hpp'],
+  dependencies: qt6_dep
+)
+test_bridge_pillar = executable('test_bridge_pillar',
+  ['tests/test_bridge_pillar.cpp',
+   'src/features/tools/BridgePillarCalculator.cpp',
+   'src/features/tools/BridgePillarWidget.cpp',
+   test_bridge_pillar_moc],
+  dependencies: [qt6_dep],
+  include_directories: incdir
+)
+test('bridge_pillar', test_bridge_pillar, suite: 'tools', workdir: meson.project_source_root(), env: ['QT_QPA_PLATFORM=offscreen'])
+
+test_cli_moc = qt6.preprocess(
+  moc_sources: ['tests/test_cli.cpp'],
+  dependencies: qt6_dep
+)
+test_cli = executable('test_cli',
+  ['tests/test_cli.cpp', 'src/core/CliOptions.cpp', test_cli_moc],
+  dependencies: [qt6_dep],
+  include_directories: incdir
+)
+test('cli', test_cli, suite: 'cli', workdir: meson.project_source_root())
 
 # Install desktop and icon integration
 install_data('assets/icons/wurm_explorer.svg',

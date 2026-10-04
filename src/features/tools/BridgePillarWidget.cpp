@@ -191,14 +191,12 @@ void BridgePillarWidget::setupUi() {
     m_topWSpin = new QSpinBox(paramGroup);
     m_topWSpin->setRange(1, 40);
     m_topWSpin->setValue(1);
-    m_topWSpin->setSuffix(" tiles");
     connect(m_topWSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, &BridgePillarWidget::recalculate);
     paramForm->addRow("Top Width:", m_topWSpin);
 
     m_topLSpin = new QSpinBox(paramGroup);
     m_topLSpin->setRange(1, 40);
     m_topLSpin->setValue(2);
-    m_topLSpin->setSuffix(" tiles");
     connect(m_topLSpin, QOverload<int>::of(&QSpinBox::valueChanged), this, &BridgePillarWidget::recalculate);
     paramForm->addRow("Top Length:", m_topLSpin);
 
@@ -211,6 +209,7 @@ void BridgePillarWidget::setupUi() {
     paramForm->addRow("Target Height:", m_heightSpin);
 
     m_skillCheck = new QCheckBox("Limit by Digging Skill", paramGroup);
+    m_skillCheck->setObjectName("skillCheckBox");
     connect(m_skillCheck, &QCheckBox::toggled, this, [this](bool checked) {
         m_skillSpin->setEnabled(checked);
         recalculate();
@@ -218,35 +217,46 @@ void BridgePillarWidget::setupUi() {
     paramForm->addRow(m_skillCheck);
 
     m_skillSpin = new QDoubleSpinBox(paramGroup);
+    m_skillSpin->setObjectName("skillSpinBox");
     m_skillSpin->setRange(1.0, 100.0);
     m_skillSpin->setValue(50.0);
     m_skillSpin->setEnabled(false);
     connect(m_skillSpin, QOverload<double>::of(&QDoubleSpinBox::valueChanged), this, &BridgePillarWidget::recalculate);
     paramForm->addRow("Dig Skill:", m_skillSpin);
 
+    m_pvpCheck = new QCheckBox("PvP Server Rules", paramGroup);
+    m_pvpCheck->setObjectName("pvpCheckBox");
+    m_pvpCheck->setToolTip("Halves maximum dirt slope (capped at 150) in accordance with PvP rules");
+    connect(m_pvpCheck, &QCheckBox::toggled, this, &BridgePillarWidget::recalculate);
+    paramForm->addRow(m_pvpCheck);
+
     leftLayout->addWidget(paramGroup);
 
     // Results Summary Box
-    auto* resGroup = new QGroupBox("Dirt & Footprint Totals", leftCol);
+    auto* resGroup = new QGroupBox("Dirt && Footprint Totals", leftCol);
     auto* resLayout = new QVBoxLayout(resGroup);
     resLayout->setContentsMargins(12, 14, 12, 12);
     resLayout->setSpacing(8);
 
     m_totalDirtLabel = new QLabel(resGroup);
+    m_totalDirtLabel->setObjectName("totalDirtLabel");
     m_totalDirtLabel->setStyleSheet(QString("font-size: 20px; font-weight: bold; color: %1;").arg(theme::ACCENT_MINT));
     resLayout->addWidget(new QLabel("Required Dirt (Corner-Raises):", resGroup));
     resLayout->addWidget(m_totalDirtLabel);
 
     m_cratesLabel = new QLabel(resGroup);
+    m_cratesLabel->setObjectName("cratesLabel");
     m_cratesLabel->setStyleSheet(QString("font-size: 16px; font-weight: bold; color: %1;").arg(theme::ACCENT_EMERALD));
     resLayout->addWidget(new QLabel("Full Dirt Crates (300 dirt/ea):", resGroup));
     resLayout->addWidget(m_cratesLabel);
 
     m_radiusLabel = new QLabel(resGroup);
+    m_radiusLabel->setObjectName("radiusLabel");
     m_radiusLabel->setStyleSheet(QString("color: %1; font-weight: 500;").arg(theme::TEXT_PRIMARY));
     resLayout->addWidget(m_radiusLabel);
 
     m_footprintLabel = new QLabel(resGroup);
+    m_footprintLabel->setObjectName("footprintLabel");
     m_footprintLabel->setStyleSheet(QString("color: %1; font-weight: 500;").arg(theme::TEXT_PRIMARY));
     resLayout->addWidget(m_footprintLabel);
 
@@ -333,16 +343,17 @@ void BridgePillarWidget::recalculate() {
         digSkill = m_skillSpin->value();
     }
 
-    m_lastResult = BridgePillarCalculator::calculate(topW, topL, height, digSkill);
+    bool isPvp = m_pvpCheck && m_pvpCheck->isChecked();
+    m_lastResult = BridgePillarCalculator::calculate(topW, topL, height, digSkill, isPvp);
 
     QLocale locale;
     m_totalDirtLabel->setText(locale.toString(m_lastResult.totalDirt) + " dirt");
     m_cratesLabel->setText(locale.toString(m_lastResult.crates) + " crates");
-    m_radiusLabel->setText(QString("Plateau: %1x%2 corners | Radius: %3 tiles (Slope: %4)")
+    m_radiusLabel->setText(QString("Plateau: %1x%2 | Radius: %3 tiles (Slope: %4%5)")
         .arg(m_lastResult.plateauCornersX).arg(m_lastResult.plateauCornersY)
-        .arg(m_lastResult.spreadRadius).arg(m_lastResult.effectiveSlope));
-    m_footprintLabel->setText(QString("Base: %1x%2 tiles (%3x%4 corners)")
-        .arg(m_lastResult.baseW).arg(m_lastResult.baseL)
+        .arg(m_lastResult.spreadRadius).arg(m_lastResult.effectiveSlope)
+        .arg(m_lastResult.isPvp ? " [PvP]" : ""));
+    m_footprintLabel->setText(QString("Base Footprint: %1x%2 corners")
         .arg(m_lastResult.cornerW).arg(m_lastResult.cornerL));
 
     m_canvas->setResult(m_lastResult);
@@ -351,11 +362,9 @@ void BridgePillarWidget::recalculate() {
 
 void BridgePillarWidget::copyHeightmap() {
     QString out;
-    out += QString("Wurm Dirt Pillar (%1x%2 Top Tiles [%3x%4 Corners], %5 Height, Base: %6x%7 Tiles [%8x%9 Corners])\n")
+    out += QString("Wurm Dirt Pillar (%1x%2 Top, %3 Height, Base: %4x%5 Corners)\n")
         .arg(m_lastResult.topW).arg(m_lastResult.topL)
-        .arg(m_lastResult.plateauCornersX).arg(m_lastResult.plateauCornersY)
         .arg(m_lastResult.targetHeight)
-        .arg(m_lastResult.baseW).arg(m_lastResult.baseL)
         .arg(m_lastResult.cornerW).arg(m_lastResult.cornerL);
     out += QString("Total Dirt: %1 (%2 Crates)\n\n").arg(m_lastResult.totalDirt).arg(m_lastResult.crates);
 

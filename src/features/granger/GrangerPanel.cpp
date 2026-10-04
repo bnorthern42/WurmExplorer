@@ -43,25 +43,33 @@ void GrangerPanel::setupUi() {
 
 QWidget* GrangerPanel::createAnimalsTab() {
     auto* tab = new QWidget(this);
-    auto* layout = new QVBoxLayout(tab);
-    layout->setContentsMargins(6, 6, 6, 6);
-    layout->setSpacing(6);
+    auto* tabHBox = new QHBoxLayout(tab);
+    tabHBox->setContentsMargins(8, 8, 8, 8);
+    tabHBox->setSpacing(12);
 
-    m_animalSearchEdit = new QLineEdit(tab);
+    auto* leftCol = new QWidget(tab);
+    leftCol->setMinimumWidth(280);
+    leftCol->setMaximumWidth(400);
+    auto* leftLayout = new QVBoxLayout(leftCol);
+    leftLayout->setContentsMargins(0, 0, 0, 0);
+    leftLayout->setSpacing(6);
+
+    m_animalSearchEdit = new QLineEdit(leftCol);
     m_animalSearchEdit->setPlaceholderText("🔍 Search animals by name or trait...");
     connect(m_animalSearchEdit, &QLineEdit::textChanged, this, &GrangerPanel::onAnimalSearchChanged);
-    layout->addWidget(m_animalSearchEdit);
+    leftLayout->addWidget(m_animalSearchEdit);
 
-    m_animalList = new QListWidget(tab);
-    m_animalList->setMinimumHeight(150);
+    m_animalList = new QListWidget(leftCol);
     connect(m_animalList, &QListWidget::currentRowChanged, this, &GrangerPanel::onAnimalSelected);
-    layout->addWidget(m_animalList, 1);
+    leftLayout->addWidget(m_animalList, 1);
+    tabHBox->addWidget(leftCol, 1);
 
     auto* scrollArea = new QScrollArea(tab);
     scrollArea->setWidgetResizable(true);
     scrollArea->setFrameShape(QFrame::NoFrame);
 
     auto* formContainer = new QWidget(scrollArea);
+    formContainer->setMaximumWidth(800);
     auto* formLayout = new QFormLayout(formContainer);
     formLayout->setContentsMargins(4, 4, 4, 4);
     formLayout->setSpacing(6);
@@ -116,22 +124,31 @@ QWidget* GrangerPanel::createAnimalsTab() {
     formLayout->addRow(btnRow);
 
     scrollArea->setWidget(formContainer);
-    layout->addWidget(scrollArea, 1);
+    tabHBox->addWidget(scrollArea, 2);
 
     return tab;
 }
 
 QWidget* GrangerPanel::createBreedersTab() {
     auto* tab = new QWidget(this);
-    auto* layout = new QVBoxLayout(tab);
-    layout->setContentsMargins(6, 6, 6, 6);
-    layout->setSpacing(6);
+    auto* tabHBox = new QHBoxLayout(tab);
+    tabHBox->setContentsMargins(8, 8, 8, 8);
+    tabHBox->setSpacing(12);
 
-    m_breederList = new QListWidget(tab);
+    auto* leftCol = new QWidget(tab);
+    leftCol->setMinimumWidth(260);
+    leftCol->setMaximumWidth(360);
+    auto* leftLayout = new QVBoxLayout(leftCol);
+    leftLayout->setContentsMargins(0, 0, 0, 0);
+    leftLayout->setSpacing(6);
+
+    m_breederList = new QListWidget(leftCol);
     connect(m_breederList, &QListWidget::currentRowChanged, this, &GrangerPanel::onBreederSelected);
-    layout->addWidget(m_breederList, 1);
+    leftLayout->addWidget(m_breederList, 1);
+    tabHBox->addWidget(leftCol, 1);
 
     auto* formContainer = new QWidget(tab);
+    formContainer->setMaximumWidth(600);
     auto* formLayout = new QFormLayout(formContainer);
     formLayout->setContentsMargins(4, 4, 4, 4);
     formLayout->setSpacing(6);
@@ -165,7 +182,7 @@ QWidget* GrangerPanel::createBreedersTab() {
     btnRow->addWidget(m_deleteBreederBtn);
     formLayout->addRow(btnRow);
 
-    layout->addWidget(formContainer);
+    tabHBox->addWidget(formContainer, 2);
     return tab;
 }
 

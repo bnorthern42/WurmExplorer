@@ -54,6 +54,7 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow() override;
     void captureDocScreenshots(const QString& outputDir);
+    void selectInitialTab(int index);
 
 private slots:
     void onLocateRequested(const QString& screenshotPath);

@@ -2,7 +2,9 @@
 #include <QIcon>
 #include <QFontDatabase>
 #include <QFile>
+#include <iostream>
 #include "core/PathUtils.hpp"
+#include "core/CliOptions.hpp"
 #include "ui/MainWindow.hpp"
 #include "ui/Theme.hpp"
 #pragma push_macro("signals")
@@ -21,6 +23,23 @@ int main(int argc, char *argv[]) {
     QApplication::setApplicationName("WurmExplorer");
     QApplication::setOrganizationName("WurmMods");
     QApplication::setApplicationVersion(treasure::core::getAppVersion());
+
+    bool helpOrVersion = false;
+    QString cliError;
+    auto launchOpts = treasure::core::parseCommandLine(app.arguments(), &helpOrVersion, &cliError);
+
+    if (helpOrVersion) {
+        std::cout << treasure::core::getCommandLineHelp().toStdString() << std::endl;
+        vips_shutdown();
+        return 0;
+    }
+
+    if (!cliError.isEmpty()) {
+        std::cerr << "Error: " << cliError.toStdString() << std::endl;
+        std::cerr << "Run 'wurm_explorer --help' for available options." << std::endl;
+        vips_shutdown();
+        return 1;
+    }
     
     QString iconSvg = treasure::core::resolveResourcePath("assets/icons/wurm_explorer.svg");
     if (!QFile::exists(iconSvg)) {
@@ -42,16 +61,25 @@ int main(int argc, char *argv[]) {
     Theme::apply(app);
     
     MainWindow window;
-    window.resize(1200, 800);
 
-    if (argc > 1 && QString::fromUtf8(argv[1]) == "--capture-docs") {
-        QString outDir = (argc > 2) ? QString::fromUtf8(argv[2]) : "assets/docs";
-        window.captureDocScreenshots(outDir);
+    if (launchOpts.initialTab >= 0) {
+        window.selectInitialTab(launchOpts.initialTab);
+    }
+
+    if (launchOpts.captureDocs) {
+        window.captureDocScreenshots(launchOpts.captureDocsDir);
         vips_shutdown();
         return 0;
     }
 
-    window.show();
+    if (launchOpts.fullscreen) {
+        window.showFullScreen();
+    } else if (launchOpts.maximized) {
+        window.showMaximized();
+    } else {
+        window.resize(launchOpts.width, launchOpts.height);
+        window.show();
+    }
     
     int result = app.exec();
     vips_shutdown();

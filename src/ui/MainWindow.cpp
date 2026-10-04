@@ -411,7 +411,7 @@ void MainWindow::setupUi() {
     navBar->addTab("  Skills Monitor", 7);
 
     navBar->addSectionHeader("Workbench");
-    navBar->addTab("  Tools & Simulators", 8);
+    navBar->addTab("  Tools && Simulators", 8);
 
     connect(navBar, &NavigationBar::tabSelected, panelStack, &QStackedWidget::setCurrentIndex);
     connect(navBar, &NavigationBar::tabSelected, this, [this](int index) {
@@ -480,4 +480,10 @@ void MainWindow::setupUi() {
     }
     setWindowIcon(QIcon(iconPath));
     statusBar()->showMessage("Ready");
+}
+
+void MainWindow::selectInitialTab(int index) {
+    if (navBar && index >= 0) {
+        navBar->selectTab(index);
+    }
 }

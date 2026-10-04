@@ -62,21 +62,23 @@ void SailingPanel::setupUi() {
     // Cluster Plans
     auto* planBox = new QGroupBox("Cluster Plans", this);
     auto* planLayout = new QGridLayout(planBox);
+    planLayout->setContentsMargins(10, 12, 10, 10);
+    planLayout->setSpacing(6);
     
     planLayout->addWidget(new QLabel("Plan", this), 0, 0);
     planCb = new QComboBox(this);
     planCb->setEditable(true);
-    planLayout->addWidget(planCb, 0, 1);
+    planLayout->addWidget(planCb, 0, 1, 1, 2);
     
     auto* newPlanBtn = new QPushButton("New", this);
     auto* deletePlanBtn = new QPushButton("Delete Plan", this);
-    planLayout->addWidget(newPlanBtn, 0, 2);
-    planLayout->addWidget(deletePlanBtn, 0, 3);
+    planLayout->addWidget(newPlanBtn, 1, 1);
+    planLayout->addWidget(deletePlanBtn, 1, 2);
     
-    planLayout->addWidget(new QLabel("Layer Filter", this), 1, 0);
+    planLayout->addWidget(new QLabel("Layer Filter", this), 2, 0);
     layerFilterCb = new QComboBox(this);
     layerFilterCb->addItem("All Layers");
-    planLayout->addWidget(layerFilterCb, 1, 1, 1, 3);
+    planLayout->addWidget(layerFilterCb, 2, 1, 1, 2);
     
     outer->addWidget(planBox);
 

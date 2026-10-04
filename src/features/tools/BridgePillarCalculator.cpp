@@ -4,13 +4,7 @@
 
 namespace tools {
 
-static int distToInterval(int v, int lo, int hi) {
-    if (v < lo) return lo - v;
-    if (v > hi) return v - hi;
-    return 0;
-}
-
-PillarResult BridgePillarCalculator::calculate(int topW, int topL, int targetHeight, std::optional<double> digSkill) {
+PillarResult BridgePillarCalculator::calculate(int topW, int topL, int targetHeight, std::optional<double> digSkill, bool isPvp) {
     PillarResult res;
     if (topW <= 0 || topL <= 0 || targetHeight < 0) {
         return res;
@@ -19,20 +13,23 @@ PillarResult BridgePillarCalculator::calculate(int topW, int topL, int targetHei
     res.topW = topW;
     res.topL = topL;
     res.targetHeight = targetHeight;
+    res.isPvp = isPvp;
 
-    int maxSlope = 300;
+    int maxSlope = isPvp ? 150 : 300;
     if (digSkill.has_value()) {
-        maxSlope = static_cast<int>(std::floor(*digSkill * 3.0));
-        maxSlope = std::clamp(maxSlope, 1, 300);
+        double mult = isPvp ? 1.5 : 3.0;
+        int cap = isPvp ? 150 : 300;
+        maxSlope = static_cast<int>(std::floor(*digSkill * mult));
+        maxSlope = std::clamp(maxSlope, 1, cap);
     }
     res.effectiveSlope = static_cast<double>(maxSlope);
 
     const int r = (targetHeight + maxSlope - 1) / maxSlope;
     res.spreadRadius = r;
 
-    // Corner grid dimensions: plateau corners + 2 * r slope radius
-    const int plateauCols = topW + 1;
-    const int plateauRows = topL + 1;
+    // Plateau dimensions directly match topW and topL
+    const int plateauCols = topW;
+    const int plateauRows = topL;
     res.plateauCornersX = plateauCols;
     res.plateauCornersY = plateauRows;
 
@@ -41,8 +38,8 @@ PillarResult BridgePillarCalculator::calculate(int topW, int topL, int targetHei
 
     res.cornerW = baseCornersX;
     res.cornerL = baseCornersY;
-    res.baseW = baseCornersX - 1; // topW + 2 * r
-    res.baseL = baseCornersY - 1; // topL + 2 * r
+    res.baseW = baseCornersX;
+    res.baseL = baseCornersY;
 
     const int startX = r;
     const int startY = r;
@@ -54,9 +51,9 @@ PillarResult BridgePillarCalculator::calculate(int topW, int topL, int targetHei
     long long dirt = 0;
     for (int y = 0; y < res.cornerL; ++y) {
         for (int x = 0; x < res.cornerW; ++x) {
-            int dx = distToInterval(x, startX, endX);
-            int dy = distToInterval(y, startY, endY);
-            int d = dx + dy; // Manhattan distance from plateau corners
+            int dx = std::max({0, startX - x, x - endX});
+            int dy = std::max({0, startY - y, y - endY});
+            int d = std::max(dx, dy); // Chebyshev distance creates a square footprint
 
             int h = targetHeight - maxSlope * d;
             int hi = (h > 0) ? h : 0;
@@ -78,12 +75,10 @@ PillarResult BridgePillarCalculator::calculate(int topW, int topL, int targetHei
     res.tileGrid.assign(res.baseL, std::vector<int>(res.baseW, 0));
     for (int y = 0; y < res.baseL; ++y) {
         for (int x = 0; x < res.baseW; ++x) {
-            int t = std::max({
-                res.cornerGrid[y][x],
-                res.cornerGrid[y][x + 1],
-                res.cornerGrid[y + 1][x],
-                res.cornerGrid[y + 1][x + 1]
-            });
+            int t = res.cornerGrid[y][x];
+            if (x + 1 < res.cornerW) t = std::max(t, res.cornerGrid[y][x + 1]);
+            if (y + 1 < res.cornerL) t = std::max(t, res.cornerGrid[y + 1][x]);
+            if (y + 1 < res.cornerL && x + 1 < res.cornerW) t = std::max(t, res.cornerGrid[y + 1][x + 1]);
             res.tileGrid[y][x] = t;
         }
     }

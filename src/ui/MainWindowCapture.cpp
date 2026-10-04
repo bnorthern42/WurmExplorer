@@ -10,16 +10,20 @@
 #include <QDir>
 #include <QPixmap>
 #include <QStackedWidget>
+#include <QComboBox>
 #include <iostream>
 
 void MainWindow::captureDocScreenshots(const QString& outputDir) {
     QDir().mkpath(outputDir);
-    resize(1400, 900);
+    resize(2560, 1440);
+    showFullScreen();
     show();
-    qApp->processEvents();
+    for (int i = 0; i < 20; ++i) {
+        qApp->processEvents();
+    }
 
     auto capture = [this, &outputDir](const QString& filename) {
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 20; ++i) {
             qApp->processEvents();
         }
         QPixmap pm = grab();
@@ -33,7 +37,16 @@ void MainWindow::captureDocScreenshots(const QString& outputDir) {
     navBar->selectTab(0);
     capture("main_ui.png");
 
-    // 2. Sailing Routes & Cluster Navigator
+    // 2. Sailing Routes & Cluster Navigator (SFI / Southern Freedom Isles)
+    if (topBar) {
+        auto* clusterCombo = topBar->findChild<QComboBox*>("clusterCombo");
+        if (clusterCombo) {
+            int sfiIdx = clusterCombo->findText("Southern");
+            if (sfiIdx >= 0) {
+                clusterCombo->setCurrentIndex(sfiIdx);
+            }
+        }
+    }
     navBar->selectTab(5);
     updateSailingContext();
     capture("sailing_cluster.png");

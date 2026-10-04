@@ -19,6 +19,7 @@ struct PillarResult {
     int cornerL = 0;
     long long totalDirt = 0;
     long long crates = 0;
+    bool isPvp = false;
     std::vector<std::vector<int>> cornerGrid; // [CL][CW]
     std::vector<std::vector<int>> tileGrid;   // [baseL][baseW]
 };
@@ -38,7 +39,7 @@ struct ElevationStyle {
 
 class BridgePillarCalculator {
 public:
-    static PillarResult calculate(int topW, int topL, int targetHeight, std::optional<double> digSkill = std::nullopt);
+    static PillarResult calculate(int topW, int topL, int targetHeight, std::optional<double> digSkill = std::nullopt, bool isPvp = false);
     static int getElevationTier(int height);
     static ElevationStyle getElevationStyle(int height);
 };

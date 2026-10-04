@@ -55,6 +55,7 @@ private:
     QSpinBox* m_heightSpin = nullptr;
     QCheckBox* m_skillCheck = nullptr;
     QDoubleSpinBox* m_skillSpin = nullptr;
+    QCheckBox* m_pvpCheck = nullptr;
 
     QLabel* m_totalDirtLabel = nullptr;
     QLabel* m_cratesLabel = nullptr;

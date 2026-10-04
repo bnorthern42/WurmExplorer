@@ -146,14 +146,32 @@ void ImpCalculatorWidget::setupUi() {
     inputGrid->addWidget(imbueLabel, 4, 0);
     inputGrid->addWidget(m_imbueSpin, 4, 1);
 
-    mainLayout->addWidget(inputGroup);
+    auto* contentHBox = new QHBoxLayout();
+    contentHBox->setSpacing(16);
+
+    // Left Column: Parameters
+    auto* leftCol = new QWidget(this);
+    leftCol->setMinimumWidth(320);
+    leftCol->setMaximumWidth(390);
+    auto* leftLayout = new QVBoxLayout(leftCol);
+    leftLayout->setContentsMargins(0, 0, 0, 0);
+    leftLayout->setSpacing(12);
+    leftLayout->addWidget(inputGroup);
+    leftLayout->addStretch(1);
+    contentHBox->addWidget(leftCol);
+
+    // Right Column: Output Cards + Reference Milestones Table
+    auto* rightCol = new QWidget(this);
+    auto* rightLayout = new QVBoxLayout(rightCol);
+    rightLayout->setContentsMargins(0, 0, 0, 0);
+    rightLayout->setSpacing(14);
 
     // Results Display Cards (Two big cards side by side)
     auto* cardsRow = new QHBoxLayout();
     cardsRow->setSpacing(14);
 
     // Card 1: Max Imp QL
-    auto* card1 = new QFrame(this);
+    auto* card1 = new QFrame(rightCol);
     card1->setStyleSheet(QString(
         "QFrame { background-color: %1; border: 1px solid %2; border-radius: 8px; padding: 14px; }"
     ).arg(theme::SURFACE_CARD, theme::BORDER_MUTED));
@@ -163,7 +181,7 @@ void ImpCalculatorWidget::setupUi() {
     card1Title->setStyleSheet(QString("font-size: 11px; font-weight: bold; color: %1;").arg(theme::TEXT_SECONDARY));
     m_maxQlOutput = new QLabel("0.00", card1);
     m_maxQlOutput->setStyleSheet(QString("font-size: 28px; font-weight: bold; color: %1;").arg(theme::ACCENT_MINT));
-    auto* card1Desc = new QLabel("Maximum QL you can reach at this skill level", card1);
+    auto* card1Desc = new QLabel("Maximum QL reachable at this skill level", card1);
     card1Desc->setStyleSheet(QString("font-size: 11px; color: %1;").arg(theme::TEXT_SECONDARY));
     card1Layout->addWidget(card1Title);
     card1Layout->addWidget(m_maxQlOutput);
@@ -171,7 +189,7 @@ void ImpCalculatorWidget::setupUi() {
     cardsRow->addWidget(card1);
 
     // Card 2: Skill Needed
-    auto* card2 = new QFrame(this);
+    auto* card2 = new QFrame(rightCol);
     card2->setStyleSheet(QString(
         "QFrame { background-color: %1; border: 1px solid %2; border-radius: 8px; padding: 14px; }"
     ).arg(theme::SURFACE_CARD, theme::BORDER_MUTED));
@@ -188,20 +206,20 @@ void ImpCalculatorWidget::setupUi() {
     card2Layout->addWidget(card2Desc);
     cardsRow->addWidget(card2);
 
-    mainLayout->addLayout(cardsRow);
+    rightLayout->addLayout(cardsRow);
 
     // Quick Reference Table
-    auto* refGroup = new QGroupBox("Standard Skill Reference Milestones", this);
+    auto* refGroup = new QGroupBox("Standard Skill Reference Milestones", rightCol);
     auto* refLayout = new QVBoxLayout(refGroup);
 
-    m_refTable = new QTableWidget(this);
+    m_refTable = new QTableWidget(refGroup);
     m_refTable->setColumnCount(4);
     m_refTable->setHorizontalHeaderLabels({"Skill Level", "Max Imp QL", "Target QL", "Skill Required"});
     m_refTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     m_refTable->verticalHeader()->setVisible(false);
     m_refTable->setEditTriggers(QAbstractItemView::NoEditTriggers);
     m_refTable->setAlternatingRowColors(true);
-    m_refTable->setMaximumHeight(220);
+    m_refTable->setMaximumHeight(260);
 
     const std::vector<double> milestones = {20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 99.0};
     m_refTable->setRowCount(static_cast<int>(milestones.size()));
@@ -223,8 +241,10 @@ void ImpCalculatorWidget::setupUi() {
     }
 
     refLayout->addWidget(m_refTable);
-    mainLayout->addWidget(refGroup);
-    mainLayout->addStretch(1);
+    rightLayout->addWidget(refGroup, 1);
+    contentHBox->addWidget(rightCol, 1);
+
+    mainLayout->addLayout(contentHBox, 1);
 }
 
 void ImpCalculatorWidget::recalculate() {

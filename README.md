@@ -47,7 +47,7 @@ Whether you are sailing treacherous ocean borders, calculating exact dirt crates
 
 ![Bridge Dirt Pillar Calculator](assets/docs/bridge_pillar.png)
 
-- **(Width + 1) x (Length + 1) Corner Matrix:** Formulates the exact 2D elevation grid required to raise stable dirt plateaus for stone and marble bridges.
+- **Precision Heightmap Elevation Grid:** Formulates the exact 2D elevation grid required to raise stable dirt plateaus for stone and marble bridges with Chebyshev square drop-offs and PvP server slope rules.
 - **Digging Skill Constraint Modeling:** Applies maximum slope limits based on your character's Digging skill to prevent plateau collapse.
 - **Crate & Slope Falloff Calculations:** Computes the precise volume of dirt crates needed, step-by-step corner elevations, and visual slope heatmaps.
 
@@ -111,6 +111,7 @@ This compiles the release binary with Meson/Ninja and deploys `wurm_explorer` to
 Launch from your desktop application menu or run from terminal:
 ```bash
 wurm_explorer
+# See cli.md for window resizing (--size, --half-screen, --fullscreen) and CLI options
 ```
 
 ### Option 2: Standalone AppImage
@@ -182,6 +183,7 @@ External community map dumps (e.g. Google Sheets / `window.sheetData`) can be im
 WurmExplorer is built from the ground up for responsiveness and memory safety:
 - **Language:** ISO C++23 (`-std=c++23`)
 - **UI Framework:** Qt 6.6+ with custom Dark Slate & Emerald design system
+- **Large-Scale Image Processing:** `libvips` (`<vips/vips8>`) for zero-copy streaming, out-of-core I/O, and high-speed region extraction on massive 4K/8K cartographic maps
 - **Computer Vision:** OpenCV for high-throughput normalized template matching and morphological edge filtering
 - **Map Rendering:** High-performance QPainter & QImage pipeline with mipmap scaling and tiled pyramids
 - **Persistence:** Local JSON and YAML serialization
