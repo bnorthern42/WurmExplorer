@@ -1,4 +1,5 @@
 #include "CliOptions.hpp"
+#include "PathUtils.hpp"
 #include <QRegularExpression>
 
 namespace treasure::core {
@@ -123,7 +124,7 @@ WindowLaunchOptions parseCommandLine(const QStringList& arguments,
 
 QString getCommandLineHelp() {
     return QString(R"(
-WurmExplorer - Cartography, Sailing, Livestock & Workbench Suite for Wurm Online
+WurmExplorer v%1 - Cartography, Sailing, Livestock & Workbench Suite for Wurm Online
 
 Usage:
   wurm_explorer [options]
@@ -145,7 +146,7 @@ Navigation & Automation:
 General Options:
   -h, --help                          Show this help message and exit
   -v, --version                       Display application version information
-)");
+)").arg(getAppVersion());
 }
 
 } // namespace treasure::core

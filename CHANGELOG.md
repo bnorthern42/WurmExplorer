@@ -7,21 +7,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-10-04
+
 ### Added
-- Automated asset fetching script (`scripts/fetch_maps.py`) to download server map files from Google Drive.
-- Decoupled Difficulty Presets data provider and spreadsheet-backed dataset for the Mechanics Grinder simulator.
-- Character skill linking in Grinder widget for real-time player skill feedback.
-- Dark Slate & Emerald design system and ThemeTokens (`treasure::ui::theme`).
-- Community health, governance, and issue templates.
-- AppImage packaging and Docker container build workflows.
+- Live character skill syncing and fuzzy search in the Imp Calculator (`ImpCalculatorWidget`).
+- PvP Server Rules toggle in Bridge Pillar calculator to dynamically halve slope limits.
+- Epic and Northern cluster topologies for the sailing routing engine (`ClusterLayout`).
+- Custom Wurm-themed SVG application icon featuring an isometric terrain tile with tooling accents.
+- Automated `grim` Wayland screenshot script (`scripts/capture_docs.sh`) and headless capture CLI (`--capture-docs`).
+- Comprehensive README overhaul with feature-driven copy and high-resolution screenshot showcases.
+- CLI options for window geometry sizing (`--size`, `--half-screen`, `--fullscreen`, `--maximized`), direct tab launch (`--tab`), and command reference guide (`cli.md`).
+- Universal Linux dependency installation script (`scripts/install_dependencies.sh`) supporting Arch, Fedora/Ultramarine, Debian/Ubuntu, openSUSE, Void, Gentoo, and Nix, hooked into `install.sh`.
+- Full suite of open-source community health files (`LICENSE`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `SECURITY.md`, issue templates).
+- Attributed `libvips` (`<vips/vips8>`) in the Architecture & Tech Stack documentation.
 
 ### Changed
-- Refactored Grinder parameter layout to structured `QFormLayout` preventing control truncation and layout bleeding.
-- Restricted CI pipeline execution to trigger on releases, version tags, and manual dispatches only.
-- Restricted autonomous agent execution directives to local compilation and installation.
+- Google Drive map fetcher (`scripts/fetch_maps.py`) optimized to filter historical archives with `--target-year`, cutting download time drastically.
+- GitHub Actions CI pipeline restricted to trigger only on tagged releases and manual dispatches.
+- Redesigned Imp Calculator and Granger Livestock panels into responsive two-column master-detail views optimized for both half-screen tiling and 1440p fullscreen displays.
+- Sailing cluster plans interface restructured with side-by-side button grid eliminating control clipping.
 
 ### Fixed
-- Fixed plateau dimension calculation (tile-to-corner mapping) in Bridge Dirt Pillar calculator.
-- Corrected Bridge Dirt Pillar elevation grid cell overlap and enforced digging skill slope limits.
-- Fixed map scale and zoom bugs, ensuring accurate coordinate projection.
-- Purged large map files from repository history using `git-filter-repo`.
+- Bridge Pillar math refactored to use Chebyshev distance for accurate Wurm Online square pyramid footprints and correct tile-to-corner matrix sizing.
+- Sailing Map layout engine mathematically centers servers of differing dimensions (e.g., Melody vs Harmony).
+- Escaped keyboard mnemonic ampersands (`&`) across navigation tabs and group boxes to eliminate unwanted accelerator underlines.
+
+### Removed
+- Redundant quick-settings buttons from the Skills Monitor header.
+
+## [0.1.0] - 2026-10-04
+
+### Added
+- Initial project release with Computer Vision Treasure Locator, Map Drawing & Canvas, and Annotations Manager.
+- Mechanics Grinder Simulator with Monte Carlo probability simulation for 14 Wurm Online action modes.
+- Bridge Dirt Pillar Calculator and basic terraforming slope models.
+- Granger Livestock breeding evaluator and trait compatibility scoring.
+- Skills Tracker with real-time Wurm Online client log tailing and session gain statistics.
+- Dark Slate & Emerald design system and ThemeTokens.
+- AppImage packaging and Docker container build workflows.
+
+[Unreleased]: https://github.com/bnorthern42/WurmExplorer/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/bnorthern42/WurmExplorer/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/bnorthern42/WurmExplorer/releases/tag/v0.1.0
