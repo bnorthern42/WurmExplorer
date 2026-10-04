@@ -10,6 +10,8 @@ BIN_DIR="${HOME}/.local/bin"
 DESKTOP_DIR="${HOME}/.local/share/applications"
 ICON_DIR="${HOME}/.local/share/icons/hicolor"
 
+INSTALL_DEPS=""
+
 # Parse optional arguments
 while [[ $# -gt 0 ]]; do
     case "$1" in
@@ -17,12 +19,22 @@ while [[ $# -gt 0 ]]; do
             INSTALL_PREFIX="${1#*=}"
             shift
             ;;
+        --install-deps|-d)
+            INSTALL_DEPS="true"
+            shift
+            ;;
+        --no-deps)
+            INSTALL_DEPS="false"
+            shift
+            ;;
         --help|-h)
             echo "Usage: ./install.sh [OPTIONS]"
             echo ""
             echo "Options:"
-            echo "  --prefix=PATH   Installation directory (default: $INSTALL_PREFIX)"
-            echo "  --help, -h      Show this help message"
+            echo "  --prefix=PATH    Installation directory (default: $INSTALL_PREFIX)"
+            echo "  --install-deps   Install system dependencies before building"
+            echo "  --no-deps        Skip system dependencies prompt"
+            echo "  --help, -h       Show this help message"
             exit 0
             ;;
         *)
@@ -40,6 +52,21 @@ echo "Install prefix: $INSTALL_PREFIX"
 echo "Binary link:    $BIN_DIR/wurm_explorer"
 echo "Desktop entry:  $DESKTOP_DIR/wurmexplorer.desktop"
 echo "================================================="
+
+# Prompt or install dependencies
+if [ "$INSTALL_DEPS" = "true" ]; then
+    echo ""
+    echo "Installing system dependencies..."
+    bash scripts/install_dependencies.sh
+elif [ "$INSTALL_DEPS" = "false" ]; then
+    : # Explicitly skipped by user
+elif [ -t 0 ]; then
+    echo ""
+    read -r -p "Would you like to install system dependencies first? [y/N] " dep_choice
+    if [[ "$dep_choice" =~ ^[Yy]$ ]]; then
+        bash scripts/install_dependencies.sh
+    fi
+fi
 
 # 1. Compile project
 echo ""
