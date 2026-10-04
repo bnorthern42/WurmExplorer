@@ -10,8 +10,19 @@ namespace skills {
 
 std::string SkillPathResolver::getDefaultPlayersDir() {
     const char* home = std::getenv("HOME");
+    if (!home) {
+        home = std::getenv("USERPROFILE");
+    }
     if (!home) return "";
-    return std::string(home) + "/.config/wurm/players";
+
+    std::filesystem::path homePath(home);
+    std::filesystem::path p1 = homePath / ".config" / "wurm" / "players";
+    if (std::filesystem::exists(p1)) return p1.string();
+
+    std::filesystem::path p2 = homePath / "wurm" / "players";
+    if (std::filesystem::exists(p2)) return p2.string();
+
+    return p1.string();
 }
 
 std::vector<std::string> SkillPathResolver::getAvailablePlayers(const std::string& playersDir) {

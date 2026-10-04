@@ -4,6 +4,8 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QJsonArray>
+#include <QStandardPaths>
+#include <QCoreApplication>
 #include <mutex>
 
 namespace tools {
@@ -224,7 +226,12 @@ static std::unordered_map<ActionMode, std::vector<DifficultyPreset>> s_jsonPrese
 static std::once_flag s_once;
 
 static void loadJsonPresets() {
+    QString configDir = QStandardPaths::writableLocation(QStandardPaths::AppConfigLocation);
+    QString appDir = QCoreApplication::applicationDirPath();
     const QStringList candidates = {
+        configDir + "/difficulty_presets.json",
+        appDir + "/configs/difficulty_presets.json",
+        appDir + "/assets/difficulty_presets.json",
         "configs/difficulty_presets.json",
         "../configs/difficulty_presets.json",
         "../../configs/difficulty_presets.json"

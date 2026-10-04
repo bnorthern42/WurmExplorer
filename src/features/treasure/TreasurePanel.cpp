@@ -13,6 +13,7 @@
 #include <QApplication>
 #include <QClipboard>
 #include <QMimeData>
+#include <QStandardPaths>
 
 TreasurePanel::TreasurePanel(QWidget *parent) : QWidget(parent) {
     setupUi();
@@ -52,7 +53,8 @@ void TreasurePanel::onPasteClicked() {
                 appendDebug("Error: Pasted image is too large (" + QString::number(image.width()) + "x" + QString::number(image.height()) + "). Did you paste a full map instead of a screenshot?");
                 return;
             }
-            QString tempPath = "configs/clipboard_temp.png";
+            QString tempDir = QStandardPaths::writableLocation(QStandardPaths::TempLocation);
+            QString tempPath = tempDir + "/wurm_clipboard_temp.png";
             if (image.save(tempPath)) {
                 screenshotPathEdit->setText(tempPath);
                 appendDebug("Image pasted from clipboard and saved to " + tempPath);

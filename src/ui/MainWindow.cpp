@@ -33,6 +33,7 @@
 #include <QFuture>
 #include <QStatusBar>
 #include <QSettings>
+#include "../core/PathUtils.hpp"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), 
@@ -41,17 +42,17 @@ MainWindow::MainWindow(QWidget *parent)
       panelStack(new QStackedWidget(this)),
       mapCanvas(new ZoomMapCanvas(this)) {
           
-    annotStore = std::make_shared<treasure::models::AnnotationStore>("configs/annotations.json");
-    artifactStore = std::make_shared<treasure::models::ArtifactStore>("configs/artifacts.json");
-    drawingStore = std::make_shared<treasure::models::DrawingStore>("configs/drawings.json");
-    clusterDrawingStore = std::make_shared<treasure::models::ClusterDrawingStore>("configs/cluster_drawings.json");
-    grangerStore = std::make_shared<granger::GrangerStore>("configs/breeding.json");
+    annotStore = std::make_shared<treasure::models::AnnotationStore>(treasure::core::resolveStorePath("annotations.json"));
+    artifactStore = std::make_shared<treasure::models::ArtifactStore>(treasure::core::resolveStorePath("artifacts.json"));
+    drawingStore = std::make_shared<treasure::models::DrawingStore>(treasure::core::resolveStorePath("drawings.json"));
+    clusterDrawingStore = std::make_shared<treasure::models::ClusterDrawingStore>(treasure::core::resolveStorePath("cluster_drawings.json"));
+    grangerStore = std::make_shared<granger::GrangerStore>(treasure::core::resolveStorePath("breeding.json"));
 
     
     setupUi();
     
     // Attempt to load configs
-    if (configManager.loadConfig("configs/servers.yaml")) {
+    if (configManager.loadConfig(treasure::core::resolveServerConfigPath())) {
         auto clusters = configManager.getAvailableClusters();
         topBar->setClusters(clusters);
         
@@ -470,7 +471,7 @@ void MainWindow::setupUi() {
     mainHBox->addWidget(rightWidget, 1);
     
     setCentralWidget(centralWidget);
-    setWindowTitle("WurmExplorer");
-    setWindowIcon(QIcon("resources/wurmexplorer.svg"));
+    setWindowTitle(QString("WurmExplorer v%1").arg(treasure::core::getAppVersion()));
+    setWindowIcon(QIcon(treasure::core::resolveResourcePath("resources/wurmexplorer.svg")));
     statusBar()->showMessage("Ready");
 }

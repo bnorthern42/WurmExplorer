@@ -1,8 +1,8 @@
 project('wurm_explorer', 'cpp',
-  version : '0.1',
+  version : '0.1.0',
   default_options : ['warning_level=3', 'cpp_std=c++23'])
 
-add_project_arguments('-Wno-sfinae-incomplete', language: 'cpp')
+add_project_arguments('-Wno-sfinae-incomplete', '-DAPP_VERSION="' + meson.project_version() + '"', language: 'cpp')
 
 # Dependencies
 qt6 = import('qt6')

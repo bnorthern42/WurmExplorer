@@ -162,8 +162,12 @@ void SkillsPanel::reloadFile() {
     QString player = ui::SettingsDialog::getActivePlayer();
     std::filesystem::path p(m_currentFilePath.toStdString());
 
-    if (!std::filesystem::exists(p)) {
-        m_watchingLabel->setText(QString("Player: %1 | ⚠ File not found: %2").arg(player).arg(QString::fromStdString(p.filename().string())));
+    if (m_currentFilePath.isEmpty() || !std::filesystem::exists(p)) {
+        if (player.isEmpty()) {
+            m_watchingLabel->setText("No player or log file selected (Configure in ⚙ Settings)");
+        } else {
+            m_watchingLabel->setText(QString("Player: %1 | ⚠ Log not found: %2 (Configure in ⚙ Settings)").arg(player).arg(QString::fromStdString(p.filename().string())));
+        }
         updateTable();
         return;
     }

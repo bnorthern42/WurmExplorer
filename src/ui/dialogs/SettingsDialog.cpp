@@ -143,9 +143,6 @@ void SettingsDialog::refreshPlayersDropdown() {
     for (const auto& p : players) {
         m_playerCombo->addItem(QString::fromStdString(p));
     }
-    if (m_playerCombo->count() == 0) {
-        m_playerCombo->addItem("polarbear");
-    }
 }
 
 void SettingsDialog::refreshCustomLogDropdown() {
@@ -212,7 +209,7 @@ QString SettingsDialog::getActivePlayer() {
         return settings.value("wurmActivePlayer").toString();
     }
     QSettings legacy("WurmLocator", "Settings");
-    return legacy.value("wurmActivePlayer", "polarbear").toString();
+    return legacy.value("wurmActivePlayer", "").toString();
 }
 
 QString SettingsDialog::getLogMode() {

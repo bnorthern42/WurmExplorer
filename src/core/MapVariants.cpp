@@ -1,4 +1,5 @@
 #include "MapVariants.hpp"
+#include "PathUtils.hpp"
 #include <filesystem>
 #include <algorithm>
 
@@ -72,7 +73,7 @@ std::shared_ptr<ServerMapVariants> discoverServerMapVariants(const std::shared_p
     if (fs::exists(directory) && fs::is_directory(directory)) {
         searchDirs.push_back(directory);
     }
-    for (const auto& alt : {fs::path("assets/maps"), fs::path("../assets/maps"), fs::path("svrMaps"), fs::path("../svrMaps")}) {
+    for (const auto& alt : getMapSearchDirectories()) {
         if (fs::exists(alt) && fs::is_directory(alt) && std::find(searchDirs.begin(), searchDirs.end(), alt) == searchDirs.end()) {
             searchDirs.push_back(alt);
         }

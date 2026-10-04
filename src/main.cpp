@@ -1,6 +1,8 @@
 #include <QApplication>
 #include <QIcon>
 #include <QFontDatabase>
+#include <QFile>
+#include "core/PathUtils.hpp"
 #include "ui/MainWindow.hpp"
 #include "ui/Theme.hpp"
 #pragma push_macro("signals")
@@ -18,14 +20,18 @@ int main(int argc, char *argv[]) {
     // Set up application metadata
     QApplication::setApplicationName("WurmExplorer");
     QApplication::setOrganizationName("WurmMods");
+    QApplication::setApplicationVersion(treasure::core::getAppVersion());
     
-    QIcon appIcon("resources/wurmexplorer.svg");
+    QString iconSvg = treasure::core::resolveResourcePath("resources/wurmexplorer.svg");
+    QIcon appIcon(iconSvg);
     if (appIcon.isNull()) {
-        appIcon = QIcon("resources/icon.png");
+        QString iconPng = treasure::core::resolveResourcePath("resources/icon.png");
+        appIcon = QIcon(iconPng);
     }
     app.setWindowIcon(appIcon);
     
-    QFontDatabase::addApplicationFont("resources/fonts/MaterialIcons-Regular.ttf");
+    QString fontPath = treasure::core::resolveResourcePath("resources/fonts/MaterialIcons-Regular.ttf");
+    QFontDatabase::addApplicationFont(fontPath);
     
     Theme::apply(app);
     
