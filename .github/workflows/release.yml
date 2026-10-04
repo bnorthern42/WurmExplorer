@@ -2,11 +2,12 @@ name: CI/CD & AppImage Build
 
 on:
   push:
-    branches: [main, master]
-    tags: ['v*']
-  pull_request:
-    branches: [main, master]
+    tags:
+      - 'v*.*.*'
+  release:
+    types: [published]
   workflow_dispatch:
+    # Keep manual triggers available
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
