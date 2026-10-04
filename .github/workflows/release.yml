@@ -91,7 +91,7 @@ jobs:
           MAP_FOLDER_ID: "0B6J_aGQ6URL8UURFN2VadWxtSWs"
         run: |
           pip3 install --break-system-packages gdown requests || pip install gdown requests
-          python3 scripts/fetch_maps.py --folder-id $MAP_FOLDER_ID --dest assets/maps/
+          python3 scripts/fetch_maps.py --folder-id $MAP_FOLDER_ID --dest assets/maps/ --target-year 2026
 
       - name: Build AppImage
         env:

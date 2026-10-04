@@ -31,7 +31,7 @@ COPY . .
 ENV MAP_FOLDER_ID="0B6J_aGQ6URL8UURFN2VadWxtSWs"
 
 RUN pip3 install --no-cache-dir --break-system-packages gdown requests \
-    && python3 scripts/fetch_maps.py --folder-id "${MAP_FOLDER_ID}" --dest assets/maps/
+    && python3 scripts/fetch_maps.py --folder-id "${MAP_FOLDER_ID}" --dest assets/maps/ --target-year 2026
 
 RUN meson setup builddir --buildtype=release \
     && ninja -C builddir

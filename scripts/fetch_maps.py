@@ -35,6 +35,139 @@ def extract_date_key(filename_or_path: str) -> int:
     return 0
 
 
+def should_skip(name: str, target_year: int) -> bool:
+    """
+    Check if a folder or file name belongs to an archive prior to target_year.
+    Returns True if a 4-digit year < target_year is found in the string.
+    """
+    match = re.search(r"(201\d|202\d)", name)
+    if match:
+        found_year = int(match.group(1))
+        if found_year < target_year:
+            return True
+    return False
+
+
+class DriveItem:
+    def __init__(self, id: str, path: str, local_path: str):
+        self.id = id
+        self.path = path
+        self.local_path = local_path
+
+
+def crawl_drive_folder(
+    folder_id: str,
+    target_year: int,
+    dest_dir: Path,
+    current_rel_path: str = "",
+    session=None,
+    quiet: bool = False,
+) -> list[DriveItem]:
+    """
+    Recursively crawl Google Drive folder structure, filtering out historical
+    archive folders and files prior to target_year before descending.
+    """
+    import requests
+
+    if session is None:
+        session = requests.Session()
+        session.headers.update({"User-Agent": "Mozilla/5.0"})
+
+    url = f"https://drive.google.com/embeddedfolderview?id={folder_id}"
+    try:
+        resp = session.get(url, timeout=20)
+        resp.raise_for_status()
+    except Exception as e:
+        if not quiet:
+            print(f"Warning: Failed to fetch folder {folder_id} ({current_rel_path}): {e}", file=sys.stderr)
+        return []
+
+    raw_html = resp.text
+    entries = []
+    try:
+        import bs4
+        soup = bs4.BeautifulSoup(raw_html, "html.parser")
+        for a in soup.find_all("a"):
+            href = a.get("href", "")
+            name = a.get_text(strip=True)
+            if not name:
+                continue
+            mf = re.search(r"drive/folders/([-\w]+)", href)
+            if mf:
+                entries.append(("folder", mf.group(1), name))
+                continue
+            mfile = re.search(r"file/d/([-\w]+)", href)
+            if mfile:
+                entries.append(("file", mfile.group(1), name))
+    except ImportError:
+        for m in re.finditer(r'href="[^"]*drive/folders/([-\w]+)[^"]*"[^>]*>([^<]+)</a>', raw_html):
+            entries.append(("folder", m.group(1), m.group(2).strip()))
+        for m in re.finditer(r'href="[^"]*file/d/([-\w]+)[^"]*"[^>]*>([^<]+)</a>', raw_html):
+            entries.append(("file", m.group(1), m.group(2).strip()))
+
+    discovered: list[DriveItem] = []
+    for item_type, item_id, name in entries:
+        if should_skip(name, target_year):
+            print(f"Skipping {name}")
+            continue
+
+        item_rel_path = f"{current_rel_path}/{name}" if current_rel_path else name
+        if item_type == "folder":
+            sub_items = crawl_drive_folder(
+                folder_id=item_id,
+                target_year=target_year,
+                dest_dir=dest_dir,
+                current_rel_path=item_rel_path,
+                session=session,
+                quiet=quiet,
+            )
+            discovered.extend(sub_items)
+        else:
+            local_path = dest_dir / item_rel_path
+            discovered.append(DriveItem(id=item_id, path=item_rel_path, local_path=str(local_path)))
+
+    return discovered
+
+
+def download_drive_file(file_id: str, output_path: Path, quiet: bool = False) -> bool:
+    """Download file from Google Drive, bypassing large-file virus scan warnings."""
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        import gdown
+        res = gdown.download(id=file_id, output=str(output_path), quiet=quiet, resume=True)
+        if res and Path(res).exists() and Path(res).stat().st_size > 0:
+            return True
+    except Exception:
+        pass
+
+    import requests
+    session = requests.Session()
+    session.headers.update({"User-Agent": "Mozilla/5.0"})
+    url = "https://drive.google.com/uc"
+    params = {"id": file_id, "export": "download"}
+    response = session.get(url, params=params, stream=True, timeout=60)
+
+    token = None
+    for k, v in response.cookies.items():
+        if k.startswith("download_warning"):
+            token = v
+            break
+    if not token and ("confirm=" in response.text if response.encoding else False):
+        m = re.search(r'confirm=([0-9A-Za-z_-]+)', response.text)
+        if m:
+            token = m.group(1)
+
+    if token:
+        params["confirm"] = token
+        response = session.get(url, params=params, stream=True, timeout=60)
+
+    with open(output_path, "wb") as f:
+        for chunk in response.iter_content(chunk_size=65536):
+            if chunk:
+                f.write(chunk)
+    return output_path.exists() and output_path.stat().st_size > 0
+
+
 def ensure_archive_extracted(file_path: Path, dest_dir: Path) -> bool:
     """Extract file if it is a zip or tar archive."""
     if zipfile.is_zipfile(file_path):
@@ -137,17 +270,21 @@ def fetch_maps(
     fetch_all: bool = False,
     path_filter: str | None = None,
     quiet: bool = False,
+    target_year: int = 2026,
 ) -> int:
     """Main map download and staging routine."""
     try:
-        import gdown
+        import requests
     except ImportError:
-        msg = "Error: 'gdown' package is required. Install via: pip install gdown"
-        if strict:
-            print(msg, file=sys.stderr)
-            return 1
-        print(f"Warning: {msg}. Skipping map asset download.", file=sys.stderr)
-        return 0
+        try:
+            import gdown
+        except ImportError:
+            msg = "Error: 'requests' package is required. Install via: pip install requests"
+            if strict:
+                print(msg, file=sys.stderr)
+                return 1
+            print(f"Warning: {msg}. Skipping map asset download.", file=sys.stderr)
+            return 0
 
     dest_dir = Path(dest).resolve()
     dest_dir.mkdir(parents=True, exist_ok=True)
@@ -164,6 +301,7 @@ def fetch_maps(
     print(f"=== Fetching Map Assets ===")
     print(f"Target: {'ID ' + target_id if target_id else target_url}")
     print(f"Destination: {dest_dir}")
+    print(f"Target Year: {target_year}")
     if staging_dir:
         print(f"Staging dir: {staging_dir}")
 
@@ -176,30 +314,29 @@ def fetch_maps(
         if is_file_link:
             print("Downloading map asset archive/file...")
             out_file = dest_dir / "downloaded_map_asset"
-            downloaded = gdown.download(
-                url=target_url,
-                id=target_id,
-                output=str(out_file),
+            downloaded = download_drive_file(
+                file_id=target_id or "",
+                output_path=out_file,
                 quiet=quiet,
-                resume=True,
             )
             if not downloaded:
                 raise RuntimeError("Failed to download file from Google Drive.")
-            extracted = ensure_archive_extracted(Path(downloaded), dest_dir)
-            if extracted and Path(downloaded).exists():
-                Path(downloaded).unlink(missing_ok=True)
+            extracted = ensure_archive_extracted(out_file, dest_dir)
+            if extracted and out_file.exists():
+                out_file.unlink(missing_ok=True)
         else:
-            # Query folder structure first
+            # Query folder structure with historical archive filtering
             print("Retrieving remote folder structure...")
-            folder_arg = target_url if target_url and "/folders/" in target_url else None
-            id_arg = target_id if not folder_arg else None
+            folder_target_id = target_id
+            if not folder_target_id and target_url:
+                m_folder = re.search(r"folders/([-\w]+)", target_url)
+                if m_folder:
+                    folder_target_id = m_folder.group(1)
 
-            # Retrieve file list with skip_download=True
-            drive_files = gdown.download_folder(
-                url=folder_arg,
-                id=id_arg,
-                output=str(dest_dir),
-                skip_download=True,
+            drive_files = crawl_drive_folder(
+                folder_id=folder_target_id,
+                target_year=target_year,
+                dest_dir=dest_dir,
                 quiet=quiet,
             )
 
@@ -230,12 +367,9 @@ def fetch_maps(
                     print(f"[{idx}/{len(to_download)}] Downloading: {item.path}")
 
                 try:
-                    gdown.download(
-                        id=item.id,
-                        output=str(out_path),
-                        quiet=quiet,
-                        resume=True,
-                    )
+                    success = download_drive_file(item.id, out_path, quiet=quiet)
+                    if not success:
+                        raise RuntimeError("Download produced empty or missing file.")
                 except Exception as file_err:
                     print(f"Warning: Failed to download {item.path}: {file_err}", file=sys.stderr)
                     failed_items.append(item.path)
@@ -291,6 +425,12 @@ def main():
         help="Fetch all historical map versions (default: fetch latest release per server)",
     )
     parser.add_argument(
+        "--target-year",
+        type=int,
+        default=int(os.environ.get("MAP_TARGET_YEAR", 2026)),
+        help="Only download maps for this year or newer (default: 2026)",
+    )
+    parser.add_argument(
         "--filter",
         default=None,
         help="Regex pattern to filter map file paths to download",
@@ -311,6 +451,7 @@ def main():
         fetch_all=args.all,
         path_filter=args.filter,
         quiet=args.quiet,
+        target_year=args.target_year,
     )
     sys.exit(rc)
 
