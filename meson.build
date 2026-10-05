@@ -1,5 +1,5 @@
 project('wurm_explorer', 'cpp',
-  version : '0.2.4',
+  version : '0.2.5',
   default_options : ['warning_level=3', 'cpp_std=c++23'])
 
 add_project_arguments('-Wno-sfinae-incomplete', '-DAPP_VERSION="' + meson.project_version() + '"', language: 'cpp')
@@ -8,7 +8,10 @@ add_project_arguments('-Wno-sfinae-incomplete', '-DAPP_VERSION="' + meson.projec
 qt6 = import('qt6')
 qt6_dep = dependency('qt6', modules: ['Core', 'Gui', 'Widgets', 'Concurrent', 'Test'])
 vips_dep = dependency('vips-cpp')
-opencv_dep = dependency('opencv4', required: true)
+opencv_dep = dependency('opencv4', required: false)
+if not opencv_dep.found()
+  opencv_dep = dependency('opencv')
+endif
 yaml_dep = dependency('yaml-cpp', required: true)
 json_dep = dependency('nlohmann_json', required: true)
 tesseract_dep = dependency('tesseract', required: true)
