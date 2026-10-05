@@ -184,13 +184,15 @@ WurmExplorer can be compiled natively on macOS (Apple Silicon & Intel) using [Ho
 
 ### Windows
 
-WurmExplorer can be compiled on Windows using [MSYS2](https://www.msys2.org/) with the modern **UCRT64** toolchain (providing full ISO C++23 and GCC 13+ support).
+WurmExplorer can be compiled on Windows using [MSYS2](https://www.msys2.org/) with either the modern **UCRT64** (Recommended) or classic **MINGW64** environment.
 
 1. **Install MSYS2**:
    Download and install MSYS2 from [https://www.msys2.org/](https://www.msys2.org/).
 
-2. **Open the UCRT64 Terminal**:
-   From your Windows Start menu, launch **MSYS2 UCRT64** (or run `ucrt64.exe` from your MSYS2 installation folder).
+2. **Open the Terminal**:
+   From your Windows Start menu, launch either:
+   - **MSYS2 UCRT64** (Recommended for C++23 runtime)
+   - **MSYS2 MINGW64** (Standard MinGW64 toolchain)
 
 3. **Clone the Repository**:
    ```bash
@@ -198,10 +200,11 @@ WurmExplorer can be compiled on Windows using [MSYS2](https://www.msys2.org/) wi
    cd WurmExplorer
    ```
 
-4. **Install UCRT64 Dependencies**:
+4. **Install Dependencies**:
    ```bash
    bash scripts/install_dependencies_windows.sh
    ```
+   *The script automatically detects whether you are running in UCRT64 (`mingw-w64-ucrt-x86_64-*`) or MINGW64 (`mingw-w64-x86_64-*`) and installs the corresponding GCC, Meson, Ninja, Qt6, OpenCV, libvips, Tesseract, nlohmann-json, and yaml-cpp packages.*
 
 5. **Build and Run**:
    ```bash
