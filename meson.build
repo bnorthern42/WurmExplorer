@@ -12,7 +12,7 @@ opencv_dep = dependency('opencv4', required: true)
 yaml_dep = dependency('yaml-cpp', required: true)
 json_dep = dependency('nlohmann_json', required: true)
 tesseract_dep = dependency('tesseract', required: true)
-omp_dep = dependency('openmp', required: true)
+omp_dep = dependency('openmp', required: false)
 
 incdir = include_directories('src')
 

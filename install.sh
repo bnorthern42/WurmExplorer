@@ -68,6 +68,16 @@ elif [ -t 0 ]; then
     fi
 fi
 
+# On macOS, export Homebrew Qt6 prefix for Meson CMake/pkg-config discovery
+if [ "$(uname -s)" = "Darwin" ] && command -v brew >/dev/null 2>&1; then
+    QT6_PREFIX="$(brew --prefix qt6 2>/dev/null || true)"
+    if [ -n "$QT6_PREFIX" ]; then
+        export CMAKE_PREFIX_PATH="${QT6_PREFIX}:${CMAKE_PREFIX_PATH:-}"
+        export PKG_CONFIG_PATH="${QT6_PREFIX}/lib/pkgconfig:${PKG_CONFIG_PATH:-}"
+        export PATH="${QT6_PREFIX}/bin:${PATH}"
+    fi
+fi
+
 # 1. Compile project
 echo ""
 echo "[1/5] Building WurmExplorer..."

@@ -22,6 +22,28 @@ for arg in "$@"; do
     esac
 done
 
+# macOS Detection (Homebrew)
+if [ "$(uname -s)" = "Darwin" ]; then
+    echo "================================================="
+    echo " WurmExplorer Universal Dependency Installer"
+    echo "================================================="
+    echo "Detected OS: macOS (Darwin)"
+    echo "================================================="
+
+    if ! command -v brew >/dev/null 2>&1; then
+        echo "Warning: Homebrew ('brew') is not installed or not in your PATH." >&2
+        echo "Please install Homebrew from https://brew.sh/ and re-run this script." >&2
+        exit 1
+    fi
+
+    echo "Installing dependencies for macOS using Homebrew..."
+    brew install gcc meson ninja qt6 opencv vips tesseract nlohmann-json yaml-cpp
+
+    echo ""
+    echo "Dependencies installation completed successfully."
+    exit 0
+fi
+
 if [ -f /etc/os-release ]; then
     . /etc/os-release
     OS="${ID:-}"

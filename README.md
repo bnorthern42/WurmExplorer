@@ -98,11 +98,21 @@ Whether you are sailing treacherous ocean borders, calculating exact dirt crates
 
 ## Installation & Running
 
-### Option 1: Native Desktop Install (Recommended)
+WurmExplorer supports cross-platform compilation on **Linux**, **macOS**, and **Windows**. Choose your operating system below:
 
-Run the automated installer script:
+### Linux
+
+#### Option 1: Native Desktop Install (Recommended)
+
+WurmExplorer includes an automated universal installer that detects your distribution (Arch, Fedora/Ultramarine, Ubuntu/Debian, openSUSE, Void, Gentoo, Nix) and configures the environment:
 
 ```bash
+./install.sh
+```
+
+To install dependencies explicitly prior to building:
+```bash
+bash scripts/install_dependencies.sh
 ./install.sh
 ```
 
@@ -114,7 +124,7 @@ wurm_explorer
 # See cli.md for window resizing (--size, --half-screen, --fullscreen) and CLI options
 ```
 
-### Option 2: Standalone AppImage
+#### Option 2: Standalone AppImage
 
 Build and run a self-contained AppImage:
 
@@ -126,7 +136,7 @@ chmod +x scripts/build-appimage.sh
 ./builddir/WurmExplorer-x86_64.AppImage
 ```
 
-### Option 3: Docker & Podman Container
+#### Option 3: Docker & Podman Container
 
 Run seamlessly in a container without installing local development dependencies. The launcher automatically detects Podman or Docker, forwards X11/GPU, and mounts client logs:
 
@@ -135,13 +145,70 @@ chmod +x run-container.sh
 ./run-container.sh
 ```
 
-### Option 4: Manual Build with Meson
+#### Option 4: Manual Build with Meson
 
 ```bash
 meson setup builddir
 meson compile -C builddir
 ./builddir/wurm_explorer
 ```
+
+---
+
+### macOS
+
+WurmExplorer can be compiled natively on macOS (Apple Silicon & Intel) using [Homebrew](https://brew.sh/).
+
+1. **Install Homebrew** (if not already installed):
+   ```bash
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   ```
+
+2. **Run Installer**:
+   ```bash
+   ./install.sh
+   ```
+   *The installer script automatically detects macOS, installs all dependencies (`gcc`, `meson`, `ninja`, `qt6`, `opencv`, `vips`, `tesseract`, `nlohmann-json`, `yaml-cpp`) via Homebrew, configures Qt6 paths, and builds the application.*
+
+3. **Manual Build Alternative**:
+   ```bash
+   bash scripts/install_dependencies.sh
+   export CMAKE_PREFIX_PATH="$(brew --prefix qt6):$CMAKE_PREFIX_PATH"
+   export PKG_CONFIG_PATH="$(brew --prefix qt6)/lib/pkgconfig:$PKG_CONFIG_PATH"
+   meson setup builddir
+   ninja -C builddir
+   ./builddir/wurm_explorer
+   ```
+
+---
+
+### Windows
+
+WurmExplorer can be compiled on Windows using [MSYS2](https://www.msys2.org/) with the modern **UCRT64** toolchain (providing full ISO C++23 and GCC 13+ support).
+
+1. **Install MSYS2**:
+   Download and install MSYS2 from [https://www.msys2.org/](https://www.msys2.org/).
+
+2. **Open the UCRT64 Terminal**:
+   From your Windows Start menu, launch **MSYS2 UCRT64** (or run `ucrt64.exe` from your MSYS2 installation folder).
+
+3. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/bnorthern42/WurmExplorer.git
+   cd WurmExplorer
+   ```
+
+4. **Install UCRT64 Dependencies**:
+   ```bash
+   bash scripts/install_dependencies_windows.sh
+   ```
+
+5. **Build and Run**:
+   ```bash
+   meson setup builddir
+   ninja -C builddir
+   ./builddir/wurm_explorer.exe
+   ```
 
 ---
 
