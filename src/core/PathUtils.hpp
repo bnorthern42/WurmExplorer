@@ -18,7 +18,7 @@ inline QString getAppVersion() {
 #ifdef APP_VERSION
         ver = QString::fromUtf8(APP_VERSION);
 #else
-        ver = "0.2.2";
+        ver = "0.2.3";
 #endif
     }
     return ver;

@@ -61,7 +61,7 @@ pacman -S --needed $AUTO_YES \
     "${PREFIX}-qt6-svg" \
     "${PREFIX}-opencv" \
     "${PREFIX}-libvips" \
-    "${PREFIX}-tesseract" \
+    "${PREFIX}-tesseract-ocr" \
     "${PREFIX}-nlohmann-json" \
     "${PREFIX}-yaml-cpp"
 
