@@ -101,8 +101,7 @@ mkdir -p "$DESKTOP_DIR"
 
 # 3. Copy application binary and resources
 echo "[3/5] Installing application files..."
-cp "builddir/wurm_explorer" "$INSTALL_PREFIX/wurm_explorer"
-chmod +x "$INSTALL_PREFIX/wurm_explorer"
+install -m 755 "builddir/wurm_explorer" "$INSTALL_PREFIX/wurm_explorer"
 
 # Symlink to ~/.local/bin
 ln -sf "$INSTALL_PREFIX/wurm_explorer" "$BIN_DIR/wurm_explorer"

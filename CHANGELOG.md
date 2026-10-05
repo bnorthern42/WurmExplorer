@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.3] - 2026-10-04
+
+### Changed
+- Streamlined automated GitHub Actions CI release matrix to Ubuntu Linux runners.
+- Updated README badges and documentation to reflect current Linux deployment targets.
+- Refined AI model acknowledgments in project documentation.
+
+### Fixed
+- Fixed `install.sh` binary replacement failure when application is actively running.
+
 ## [1.0.2] - 2026-10-04
 
 ### Fixed
@@ -34,7 +44,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CLI interface with window geometry sizing (`--size`, `--half-screen`, `--fullscreen`, `--maximized`), direct tab launch (`--tab`), and headless docs capture (`--capture-docs`).
 - Full project documentation, community health guidelines, AppImage packaging, and container support.
 
-[Unreleased]: https://github.com/bnorthern42/WurmExplorer/compare/v1.0.2...HEAD
+[Unreleased]: https://github.com/bnorthern42/WurmExplorer/compare/v1.0.3...HEAD
+[1.0.3]: https://github.com/bnorthern42/WurmExplorer/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/bnorthern42/WurmExplorer/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/bnorthern42/WurmExplorer/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/bnorthern42/WurmExplorer/releases/tag/v1.0.0
