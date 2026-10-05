@@ -98,6 +98,9 @@ Whether you are sailing treacherous ocean borders, calculating exact dirt crates
 
 ## Installation & Running
 
+> [!NOTE]
+> **Platform Support & Community Testing:** While Linux (x86_64 AppImage and native package managers) is our primary Tier-1 deployment target, native support for **Windows (MSYS2 UCRT64 / MINGW64)** and **macOS (Homebrew)** has been added. We actively welcome community testing, feedback, and issue reports on Windows and macOS platforms!
+
 WurmExplorer supports cross-platform compilation on **Linux**, **macOS**, and **Windows**. Choose your operating system below:
 
 ### Linux

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-10-04
+
+### Added
+- Cross-platform multi-OS build matrix in GitHub Actions (Windows, macOS, Ubuntu).
+- Universal `scripts/install_dependencies.sh` script for macOS (Homebrew) and major Linux distributions.
+- Windows-specific `scripts/install_dependencies_windows.sh` with smart MSYS2 environment detection (UCRT64 and MINGW64).
+- Platform support disclaimer in the README calling for community testing on Windows and macOS.
+
 ## [0.2.1] - 2026-10-04
 
 ### Fixed
@@ -51,7 +59,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dark Slate & Emerald design system and ThemeTokens.
 - AppImage packaging and Docker container build workflows.
 
-[Unreleased]: https://github.com/bnorthern42/WurmExplorer/compare/v0.2.1...HEAD
+[Unreleased]: https://github.com/bnorthern42/WurmExplorer/compare/v0.2.2...HEAD
+[0.2.2]: https://github.com/bnorthern42/WurmExplorer/compare/v0.2.1...v0.2.2
 [0.2.1]: https://github.com/bnorthern42/WurmExplorer/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/bnorthern42/WurmExplorer/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/bnorthern42/WurmExplorer/releases/tag/v0.1.0
