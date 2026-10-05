@@ -277,7 +277,7 @@ All game data, skill rates, item difficulties, and mechanics formulas are derive
 WurmExplorer's **Treasure Map Locator** and cartography tools are built entirely on publicly available data and clean-room development. The locator's accuracy is the culmination of a couple of months of rigorous debugging, AI-assisted computer vision algorithms, public map dumps, and extensive cross-referencing with in-game screenshots. No internal server data, memory reading, or exploits are utilized.
 
 ### 🤖 AI Acknowledgments
-The development of WurmExplorer (specifically the complex map helpers, computer vision algorithms, and UI/UX design) was heavily accelerated by AI. Huge thanks to **Gemini (3.1 Pro, 3.5 Flash, 3.8 Flash)**, including **Gemini 3.1 Pro**, **Gemini 3.5 Flash**, and **Gemini 3.8 Flash**, as well as **Grok** and **ChatGPT** for their extensive assistance with map helpers and UI/UX design throughout the engineering process.
+The development of WurmExplorer (specifically the complex map helpers, computer vision algorithms, and UI/UX design) was heavily accelerated by AI. Huge thanks to **Gemini (3.1 Pro, 3.5 Flash, 3.8 Flash)**, **Grok (Grok 2)**, and **ChatGPT (GPT-3, GPT-4)** for their extensive assistance with map helpers and UI/UX design throughout the engineering process.
 
 ---
 
