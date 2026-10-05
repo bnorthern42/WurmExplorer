@@ -1,5 +1,5 @@
 project('wurm_explorer', 'cpp',
-  version : '1.0.1',
+  version : '1.0.2',
   default_options : ['warning_level=3', 'cpp_std=c++23'])
 
 add_project_arguments('-Wno-sfinae-incomplete', '-DAPP_VERSION="' + meson.project_version() + '"', language: 'cpp')

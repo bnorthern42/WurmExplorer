@@ -75,3 +75,20 @@ echo "  meson setup builddir"
 echo "  ninja -C builddir"
 echo "  ./builddir/wurm_explorer.exe"
 echo "================================================="
+
+# Polyfill for MSYS2 missing opencv4 pkg-config file
+echo "Polyfilling opencv4.pc to bypass Meson CMake bugs..."
+mkdir -p "${MINGW_PREFIX}/lib/pkgconfig"
+cat <<EOF> "${MINGW_PREFIX}/lib/pkgconfig/opencv4.pc"
+prefix=${MINGW_PREFIX}
+exec_prefix=\${prefix}
+libdir=\${exec_prefix}/lib
+includedir=\${prefix}/include/opencv4
+
+Name: OpenCV
+Description: Open Source Computer Vision Library (Polyfill)
+Version: 4.10.0
+Libs: -L\${libdir} -lopencv_core -lopencv_imgproc -lopencv_imgcodecs -lopencv_highgui -lopencv_videoio -lopencv_features2d
+Cflags: -I\${includedir}
+EOF
+echo "Polyfill complete."
