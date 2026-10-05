@@ -59,15 +59,23 @@ jobs:
           QT_QPA_PLATFORM: offscreen
         run: meson test -C builddir --verbose
 
-  appimage:
-    name: Build AppImage Package
+  build:
+    name: Build & Release (${{ matrix.os }})
     needs: test
-    runs-on: ubuntu-24.04
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
 
-      - name: Install Build Dependencies
+      # -----------------------------------------------------------
+      # Linux Build (AppImage)
+      # -----------------------------------------------------------
+      - name: Install Linux Build Dependencies
+        if: runner.os == 'Linux'
         run: |
           sudo apt-get update
           sudo apt-get install -y --no-install-recommends \
@@ -89,32 +97,87 @@ jobs:
             curl \
             file
 
-      - name: Fetch Map Assets
+      - name: Fetch Map Assets (Linux AppImage)
+        if: runner.os == 'Linux'
         env:
           MAP_FOLDER_ID: "0B6J_aGQ6URL8UURFN2VadWxtSWs"
         run: |
           pip3 install --break-system-packages gdown requests || pip install gdown requests
           python3 scripts/fetch_maps.py --folder-id $MAP_FOLDER_ID --dest assets/maps/ --target-year 2026
 
-      - name: Build AppImage
+      - name: Build AppImage (Linux)
+        if: runner.os == 'Linux'
         env:
           APPIMAGE_EXTRACT_AND_RUN: 1
         run: |
           chmod +x scripts/build-appimage.sh
           ./scripts/build-appimage.sh
 
-      - name: Upload AppImage Artifact
+      # -----------------------------------------------------------
+      # macOS Build (Homebrew)
+      # -----------------------------------------------------------
+      - name: Install macOS Dependencies
+        if: runner.os == 'macOS'
+        run: |
+          bash scripts/install_dependencies.sh
+
+      - name: Build macOS Binary
+        if: runner.os == 'macOS'
+        run: |
+          QT6_PREFIX="$(brew --prefix qt6)"
+          export CMAKE_PREFIX_PATH="${QT6_PREFIX}:${CMAKE_PREFIX_PATH:-}"
+          export PKG_CONFIG_PATH="${QT6_PREFIX}/lib/pkgconfig:${PKG_CONFIG_PATH:-}"
+          export PATH="${QT6_PREFIX}/bin:${PATH}"
+          meson setup builddir --buildtype=release
+          ninja -C builddir
+          cp builddir/wurm_explorer builddir/WurmExplorer-macos
+          chmod +x builddir/WurmExplorer-macos
+
+      # -----------------------------------------------------------
+      # Windows Build (MSYS2 UCRT64)
+      # -----------------------------------------------------------
+      - name: Setup MSYS2 (Windows)
+        if: runner.os == 'Windows'
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+
+      - name: Install Windows Dependencies
+        if: runner.os == 'Windows'
+        shell: msys2 {0}
+        run: bash scripts/install_dependencies_windows.sh -y
+
+      - name: Build Windows Binary
+        if: runner.os == 'Windows'
+        shell: msys2 {0}
+        run: |
+          meson setup builddir --buildtype=release
+          ninja -C builddir
+
+      # -----------------------------------------------------------
+      # Artifact Uploads
+      # -----------------------------------------------------------
+      - name: Upload Build Artifacts
         uses: actions/upload-artifact@v6
         with:
-          name: WurmExplorer-x86_64.AppImage
-          path: builddir/WurmExplorer-x86_64.AppImage
+          name: WurmExplorer-${{ matrix.os }}
+          path: |
+            builddir/*.AppImage
+            builddir/*.exe
+            builddir/WurmExplorer-macos
+          if-no-files-found: ignore
           retention-days: 14
 
       - name: Publish GitHub Release
         if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: builddir/WurmExplorer-x86_64.AppImage
+          files: |
+            builddir/WurmExplorer-x86_64.AppImage
+            builddir/wurm_explorer.exe
+            builddir/WurmExplorer-macos
+          fail_on_unmatched_files: false
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
