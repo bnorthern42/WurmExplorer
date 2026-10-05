@@ -65,7 +65,7 @@ COPY --from=builder /app/builddir/wurm_explorer /app/wurm_explorer
 COPY --from=builder /app/resources /app/resources
 COPY --from=builder /app/configs /app/configs
 COPY --from=builder /app/assets /app/assets
-COPY --from=builder /app/svrMaps /app/svrMaps
+RUN mkdir -p assets/maps
 
 ENV PATH="/app:${PATH}"
 
