@@ -270,6 +270,9 @@ All game data, skill rates, item difficulties, and mechanics formulas are derive
 * The **Mechanics Grinder Simulator** is heavily inspired by the original web-based [Dreamsleeve Grinder](https://www.dreamsleeve.org/wurm/grinder/).
 * Sincere appreciation to the generations of Wurm Online players and cartographers whose public research, tool development, and community documentation paved the way for this project.
 
+### 🗺️ Methodology & Transparency
+WurmExplorer's **Treasure Map Locator** and cartography tools are built entirely on publicly available data and clean-room development. The locator's accuracy is the culmination of a couple of months of rigorous debugging, AI-assisted computer vision algorithms, public map dumps, and extensive cross-referencing with in-game screenshots. No internal server data, memory reading, or exploits are utilized.
+
 ---
 
 ## Disclaimer
