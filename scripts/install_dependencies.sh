@@ -37,7 +37,7 @@ if [ "$(uname -s)" = "Darwin" ]; then
     fi
 
     echo "Installing dependencies for macOS using Homebrew..."
-    brew install gcc meson ninja qt6 opencv vips tesseract nlohmann-json yaml-cpp
+    brew install gcc cmake meson ninja qt6 opencv vips tesseract nlohmann-json yaml-cpp
 
     echo ""
     echo "Dependencies installation completed successfully."
@@ -75,7 +75,7 @@ if [[ "$OS" == "arch" || "$OS" == "endeavouros" || "$OS" == "manjaro" || "$OS" =
         PACMAN_CONFIRM="--noconfirm"
     fi
     $SUDO pacman -S --needed $PACMAN_CONFIRM \
-        gcc meson ninja pkgconf \
+        gcc cmake meson ninja pkgconf \
         qt6-base qt6-svg \
         opencv libvips \
         tesseract tesseract-data-eng \
@@ -84,7 +84,7 @@ if [[ "$OS" == "arch" || "$OS" == "endeavouros" || "$OS" == "manjaro" || "$OS" =
 elif [[ "$OS" == "fedora" || "$OS" == "ultramarine" || "$OS_LIKE" == *"fedora"* || "$OS_LIKE" == *"rhel"* ]]; then
     echo "Installing dependencies for Fedora / Ultramarine / RHEL family using dnf..."
     $SUDO dnf install $AUTO_YES \
-        gcc-c++ meson ninja-build pkgconf-pkg-config \
+        gcc-c++ cmake meson ninja-build pkgconf-pkg-config \
         qt6-qtbase-devel qt6-qtsvg-devel \
         opencv-devel vips-devel \
         tesseract-devel \
@@ -94,7 +94,7 @@ elif [[ "$OS" == "ubuntu" || "$OS" == "debian" || "$OS" == "linuxmint" || "$OS" 
     echo "Installing dependencies for Debian / Ubuntu family using apt-get..."
     $SUDO apt-get update
     $SUDO apt-get install $AUTO_YES \
-        build-essential g++ meson ninja-build pkg-config \
+        build-essential g++ cmake meson ninja-build pkg-config \
         qt6-base-dev qt6-base-dev-tools libqt6svg6-dev \
         libopencv-dev libvips-dev \
         libtesseract-dev tesseract-ocr-eng \
@@ -103,7 +103,7 @@ elif [[ "$OS" == "ubuntu" || "$OS" == "debian" || "$OS" == "linuxmint" || "$OS" 
 elif [[ "$OS" == "opensuse"* || "$OS" == "suse" || "$OS_LIKE" == *"suse"* || "$OS_LIKE" == *"opensuse"* ]]; then
     echo "Installing dependencies for openSUSE / SUSE family using zypper..."
     $SUDO zypper install $AUTO_YES \
-        gcc-c++ meson ninja pkg-config \
+        gcc-c++ cmake meson ninja pkg-config \
         qt6-base-devel qt6-svg-devel \
         opencv-devel libvips-devel \
         tesseract-ocr-devel \
@@ -116,7 +116,7 @@ elif [[ "$OS" == "void" || "$OS_LIKE" == *"void"* ]]; then
         XBPS_YES="-y"
     fi
     $SUDO xbps-install -S $XBPS_YES \
-        base-devel gcc meson ninja pkg-config \
+        base-devel gcc cmake meson ninja pkg-config \
         qt6-base-devel qt6-svg-devel \
         opencv-devel libvips-devel \
         tesseract-ocr-devel \
@@ -129,7 +129,7 @@ elif [[ "$OS" == "gentoo" || "$OS_LIKE" == *"gentoo"* ]]; then
         GENTOO_ASK=""
     fi
     $SUDO emerge $GENTOO_ASK --verbose \
-        dev-build/meson dev-build/ninja dev-util/pkgconf \
+        dev-build/cmake dev-build/meson dev-build/ninja dev-util/pkgconf \
         dev-qt/qtbase:6 dev-qt/qtsvg:6 \
         media-libs/opencv media-libs/vips \
         app-text/tesseract \
@@ -139,7 +139,7 @@ elif [[ "$OS" == "nixos" || "$OS_LIKE" == *"nix"* || -d "/nix" ]]; then
     echo "Nix / NixOS detected."
     echo ""
     echo "To enter a shell with all required WurmExplorer dependencies, run:"
-    echo "  nix-shell -p gcc meson ninja pkg-config qt6.qtbase qt6.qtsvg opencv vips tesseract nlohmann_json yaml-cpp"
+    echo "  nix-shell -p gcc cmake meson ninja pkg-config qt6.qtbase qt6.qtsvg opencv vips tesseract nlohmann_json yaml-cpp"
     echo ""
     echo "Or if you have a local shell.nix:"
     echo "  nix-shell"
@@ -147,7 +147,7 @@ elif [[ "$OS" == "nixos" || "$OS_LIKE" == *"nix"* || -d "/nix" ]]; then
     if [ -t 0 ] && [ -z "$AUTO_YES" ]; then
         read -r -p "Launch nix-shell now? [y/N] " launch_nix
         if [[ "$launch_nix" =~ ^[Yy]$ ]]; then
-            exec nix-shell -p gcc meson ninja pkg-config qt6.qtbase qt6.qtsvg opencv vips tesseract nlohmann_json yaml-cpp
+            exec nix-shell -p gcc cmake meson ninja pkg-config qt6.qtbase qt6.qtsvg opencv vips tesseract nlohmann_json yaml-cpp
         fi
     fi
 

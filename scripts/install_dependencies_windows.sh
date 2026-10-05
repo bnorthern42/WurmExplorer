@@ -55,6 +55,7 @@ echo "Installing dependencies via pacman..."
 
 pacman -S --needed $AUTO_YES \
     "${PREFIX}-gcc" \
+    "${PREFIX}-cmake" \
     "${PREFIX}-meson" \
     "${PREFIX}-ninja" \
     "${PREFIX}-qt6-base" \
