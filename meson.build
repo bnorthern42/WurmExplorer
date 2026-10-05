@@ -1,5 +1,5 @@
 project('wurm_explorer', 'cpp',
-  version : '1.0.0',
+  version : '1.0.1',
   default_options : ['warning_level=3', 'cpp_std=c++23'])
 
 add_project_arguments('-Wno-sfinae-incomplete', '-DAPP_VERSION="' + meson.project_version() + '"', language: 'cpp')
@@ -10,7 +10,8 @@ qt6_dep = dependency('qt6', modules: ['Core', 'Gui', 'Widgets', 'Concurrent', 'T
 vips_dep = dependency('vips-cpp')
 opencv_dep = dependency('opencv4', required: false)
 if not opencv_dep.found()
-  opencv_dep = dependency('opencv')
+  # CMake on MSYS2/OpenCV5 requires explicit module targets
+  opencv_dep = dependency('opencv', modules: ['opencv_core', 'opencv_imgproc', 'opencv_imgcodecs', 'opencv_highgui', 'opencv_videoio', 'opencv_features2d'])
 endif
 yaml_dep = dependency('yaml-cpp', required: true)
 json_dep = dependency('nlohmann_json', required: true)

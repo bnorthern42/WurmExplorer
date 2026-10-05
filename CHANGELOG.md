@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-10-04
+
+### Fixed
+- Explicitly defined CMake modules for OpenCV 5 fallback to resolve target guessing failures on MSYS2 and macOS.
+
 ## [1.0.0] - 2026-10-04
 
 ### Added
@@ -24,5 +29,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CLI interface with window geometry sizing (`--size`, `--half-screen`, `--fullscreen`, `--maximized`), direct tab launch (`--tab`), and headless docs capture (`--capture-docs`).
 - Full project documentation, community health guidelines, AppImage packaging, and container support.
 
-[Unreleased]: https://github.com/bnorthern42/WurmExplorer/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/bnorthern42/WurmExplorer/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/bnorthern42/WurmExplorer/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/bnorthern42/WurmExplorer/releases/tag/v1.0.0
