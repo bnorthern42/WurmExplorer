@@ -2,8 +2,6 @@
 
 [![CI Build](https://github.com/bnorthern42/WurmExplorer/actions/workflows/build.yml/badge.svg)](https://github.com/bnorthern42/WurmExplorer/actions/workflows/build.yml)
 ![Linux](https://img.shields.io/badge/Linux-Supported-FCC624?logo=linux&logoColor=black)
-![Windows](https://img.shields.io/badge/Windows-Supported-0078D6?logo=windows&logoColor=white)
-![macOS](https://img.shields.io/badge/macOS-Supported-000000?logo=apple&logoColor=white)
 ![C++23](https://img.shields.io/badge/C%2B%2B-23-blue.svg)
 ![Qt6](https://img.shields.io/badge/Qt-6.6%2B-41CD52.svg)
 ![License](https://img.shields.io/badge/License-MIT-yellow.svg)
