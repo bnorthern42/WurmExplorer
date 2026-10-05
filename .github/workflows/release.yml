@@ -6,6 +6,9 @@ on:
   workflow_dispatch:
     # Keep manual triggers available
 
+permissions:
+  contents: write
+
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
